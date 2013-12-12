@@ -4,14 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include <GL/glut.h>
-
-#ifndef IGL_H
 #include "interfaceGL.h"
-#endif
-
-//#include "interfaceGL.h"
-//#include "teste3.h"
-//InterfaceGL * jogoAtual;
 #include "teste.h"
 #include "Cubo.h"
 
@@ -35,12 +28,10 @@ void Key(unsigned char key, int x, int y) {
 void main(int argc, char **argv)
 {
 	jogoAtual = new Cubo();
-
-
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("OpenGL");
-	jogoAtual->Run(argc, argv);
+	jogoAtual->Run();
 	
 	
 	/*glutGameModeString("1024x768:32@75");
@@ -71,6 +62,13 @@ void main(int argc, char **argv)
 	glutTimerFunc(estado.delay, Timer, 0);*/
 		printf("teste22324234234");
 	glutMainLoop();
+
+	jogoAtual = new Teste2();
+	jogoAtual->Run();
+	glutMainLoop();
+
+	while(1){
 	printf("testeR");
+	}
 }
 

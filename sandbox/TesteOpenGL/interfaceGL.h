@@ -13,7 +13,7 @@ public:
 	virtual void Draw(void){}
 
 	// Substitui o que definimos na main
-	virtual void Run(int argc, char **argv){}
+	virtual void Run(){}
 
 	// Callback para interacção via teclado (carregar na tecla)
 	virtual void Key(unsigned char key, int x, int y){}

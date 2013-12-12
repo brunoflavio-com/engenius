@@ -1,6 +1,4 @@
-#ifndef IGL_H
-#include "interfaceGL.h"
-#endif
+
 #ifndef M_PI
 #define M_PI 3.1415926535897932384626433832795
 #endif
@@ -208,7 +206,7 @@ public:
 		glEnd();
 
 		glFlush();
-		if (estado.doubleBuffer)
+		if (estado1.doubleBuffer)
 			glutSwapBuffers();
 	}
 
@@ -344,16 +342,16 @@ public:
 
 	}
 
-	void Run(int argc, char **argv){
+	void Run(){
 		// colocar a GL_TRUE para ligar o Double Buffer
-		estado.doubleBuffer=GL_TRUE;
+		estado1.doubleBuffer=GL_TRUE;
 		/*glutInit(&argc, argv);
 		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 		glutCreateWindow("OpenGL");*/
 		Init();
-		glutReshapeFunc(NULL);
-		glutDisplayFunc(NULL);
-		glutKeyboardFunc(NULL);
-		glutTimerFunc(estado1.delay, NULL, 0);
+		glutReshapeFunc(Reshape);
+		glutDisplayFunc(Draw);
+		glutKeyboardFunc(Key);
+		glutTimerFunc(estado1.delay, Timer, 0);
 	}
 };

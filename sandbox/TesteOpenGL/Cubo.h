@@ -1,6 +1,4 @@
-#ifndef IGL_H
-#include "interfaceGL.h"
-#endif
+
 #ifndef M_PI
 #define M_PI 3.1415926535897932384626433832795
 #endif
@@ -45,9 +43,16 @@ class Cubo : public InterfaceGL{
 public:
 	Cubo(){}
 	void static change(){
-		glutReshapeFunc(NULL);
-		glutDisplayFunc(NULL);
-		glutTimerFunc(1, NULL, 0);
+		InterfaceGL * change;
+		//glutReshapeFunc(NULL);
+		//glutDisplayFunc(NULL);
+		//glutTimerFunc(1, NULL, 0);
+		change = new Teste2();
+		change->Reshape(300,300);
+		glutPostRedisplay();
+		change->Run();
+		glutPostRedisplay();
+		glutMainLoop();
 	}
 /* Inicialização do ambiente OPENGL */
 void static inicia_modelo()
@@ -486,7 +491,7 @@ void static Mouse(int button, int state, int x, int y)
   if(DEBUG)
     printf("Mouse button:%d state:%d coord:%d %d\n",button,state,x,y);
 }
-void Run(int argc, char **argv)
+void Run()
 {
   //char str[]=" makefile MAKEFILE Makefile ";
 
@@ -516,6 +521,6 @@ void Run(int argc, char **argv)
 
   
   /* COMECAR... */
-//  glutMainLoop();
+  //glutMainLoop();
 }
 };
