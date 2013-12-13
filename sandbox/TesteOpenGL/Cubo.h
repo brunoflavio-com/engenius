@@ -42,18 +42,11 @@ Modelo modelo;
 class Cubo : public InterfaceGL{
 public:
 	Cubo(){}
-	void static change(){
-		InterfaceGL * change;
-		//glutReshapeFunc(NULL);
-		//glutDisplayFunc(NULL);
-		//glutTimerFunc(1, NULL, 0);
-		change = new Teste2();
-		change->Reshape(300,300);
-		glutPostRedisplay();
-		change->Run();
-		glutPostRedisplay();
-		glutMainLoop();
-	}
+		void static change(int programa){
+		glutMouseFunc(NULL);
+		glDisable(GL_DEPTH_TEST);
+		glutTimerFunc(estado.delayMovimento,NULL,0);
+		jogoAtual[programa]->Run();	}
 /* Inicialização do ambiente OPENGL */
 void static inicia_modelo()
 {
@@ -320,7 +313,18 @@ void static Key(unsigned char key, int x, int y)
     case 27:
       exit(1);
     /* ... accoes sobre outras teclas ... */
-
+	case '1' :
+			change(0);
+			break;
+		case '2' :
+			change(1);
+			break;
+		case '3' :
+			change(2);
+			break;
+		case '4' :
+			printf("ola\n");
+			break;
     case 'h' :
     case 'H' :
                 imprime_ajuda();
@@ -340,12 +344,6 @@ void static Key(unsigned char key, int x, int y)
               glutPostRedisplay();
             }
           break;
-
-		  case 'q' :
-    case 'Q' :
-		change();
-          break;
-
     case 'i' :
     case 'I' :
             inicia_modelo();
@@ -494,7 +492,6 @@ void static Mouse(int button, int state, int x, int y)
 void Run()
 {
   //char str[]=" makefile MAKEFILE Makefile ";
-
   estado.doubleBuffer=1;
   Init();
   imprime_ajuda();

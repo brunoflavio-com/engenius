@@ -29,4 +29,7 @@ public:
 
 	// Callback para interacção do rato
 	virtual void Mouse(int btn, int state, int x, int y){} 
+
+	//Alterar de programa
+
 };
