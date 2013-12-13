@@ -26,7 +26,6 @@ typedef struct {
 	Horas       hora;
 }Modelo1;
 
-
 Estado1 estado1;
 Modelo1 modelo1;
 
@@ -36,7 +35,7 @@ public:
 	void static change(int programa){
 		glutMouseFunc(NULL);
 		glDisable(GL_DEPTH_TEST);
-		glutTimerFunc(estado1.delay,NULL,0);
+		glutTimerFunc(0,NULL,0);
 		jogoAtual[programa]->Run();	}
 	virtual void Init(void)
 	{
