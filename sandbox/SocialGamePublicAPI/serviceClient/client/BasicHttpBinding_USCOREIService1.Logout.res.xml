@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:ns3="http://schemas.datacontract.org/2004/07/WcfCustomAuthSession"
+  xmlns:ns1="http://wvm008.dei.isep.ipp.pt/graphService">
+ <SOAP-ENV:Body>
+  <ns1:LogoutResponse>
+  </ns1:LogoutResponse>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
