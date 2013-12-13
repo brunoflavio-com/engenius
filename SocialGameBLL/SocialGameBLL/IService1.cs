@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialGameBLL.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -20,6 +21,10 @@ namespace SocialGameBLL
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here
+        [OperationContract]
+        User RegisterUser(string Email, string Password);
+        [OperationContract]
+        User LoginUser(string Email, string Password);
     }
 
 

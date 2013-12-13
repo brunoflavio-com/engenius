@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SocialGameBLL.Entities;
+using SocialGameBLL.Security;
+using SocialGameBLL.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -28,6 +31,39 @@ namespace SocialGameBLL
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        public User RegisterUser(string Email, string Password)
+        {
+            SocialGameBLLDbContext db = new SocialGameBLLDbContext();
+            UserEntity UserEntity = new UserEntity
+            {
+                Email = Email,
+                HumourStatusID = 1
+            };
+
+            db.Users.Add(UserEntity);
+            db.SaveChanges();
+
+            SecurityService.RegisterUser(UserEntity, Password);
+            
+            return new User
+            {
+                Email = UserEntity.Email
+            };
+        }
+
+        public User LoginUser(string Email, string Password)
+        {
+            SocialGameBLLDbContext db = new SocialGameBLLDbContext();
+            User User = new User();
+
+            if (SecurityService.LoginUser(Email, Password))
+            {
+                UserEntity UserEntity = db.Users.Find(Email);
+                User.Email = UserEntity.Email;
+            }
+            return User;
         }
     }
 }

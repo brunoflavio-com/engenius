@@ -9,7 +9,9 @@ namespace SocialGameBLL.Entities
 {
     public class UserSecurity
     {
+        [Required]
         [Key]
+        [ForeignKey("User")]
         public string UserEmail { get; set; }
 
         public byte[] Password { get; set; }

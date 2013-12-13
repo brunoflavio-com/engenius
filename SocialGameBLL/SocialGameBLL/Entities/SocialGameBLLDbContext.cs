@@ -8,13 +8,16 @@ namespace SocialGameBLL.Entities
 {
     public class SocialGameBLLDbContext : DbContext
     {
-        DbSet<UserEntity> Users { get; set; }
-        DbSet<UserSecurity> Passwords { get; set; }
-        DbSet<RelationshipEntity> Relationships { get; set; }
-        DbSet<RelationshipRequestEntity> RelationshipsRequests { get; set; }
-        DbSet<InterestEntity> Interests { get; set; }
-        DbSet<HumourStatusEntity> HumourStatus { get; set; }
-        DbSet<RelationTagEntity> RelationTags {get; set;}
+        public SocialGameBLLDbContext() : base("DefaultConnection") { }
+
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<UserSecurity> Passwords { get; set; }
+        public DbSet<SimpleModeScoreEntity> Scores { get; set; }
+        public DbSet<RelationshipEntity> Relationships { get; set; }
+        public DbSet<RelationshipRequestEntity> RelationshipsRequests { get; set; }
+        public DbSet<InterestEntity> Interests { get; set; }
+        public DbSet<HumourStatusEntity> HumourStatus { get; set; }
+        public DbSet<RelationTagEntity> RelationTags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
