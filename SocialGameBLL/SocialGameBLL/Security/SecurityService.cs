@@ -10,11 +10,26 @@ namespace SocialGameBLL.Security
     public static class SecurityService
     {
 
-        public static void RegisterUser(UserEntity User, string Password)
+        public static UserEntity RegisterUser(string Email, string Password)
         {
             byte[] PasswordBytes = GetBytesFromString(Password);
             byte[] SaltBytes = new byte[128];
             SocialGameBLLDbContext db = new SocialGameBLLDbContext();
+
+            UserEntity UserEntity = db.Users.Find(Email);
+
+            if (UserEntity != null)
+            {
+                throw new Exception("Already Exists a user with the same email address");
+            }
+
+            UserEntity = new UserEntity
+            {
+                Email = Email,
+                HumourStatusID = 1
+            };
+
+            db.Users.Add(UserEntity);
 
             RNGCryptoServiceProvider CryptoProvider = new RNGCryptoServiceProvider();
             CryptoProvider.GetBytes(SaltBytes);
@@ -23,19 +38,26 @@ namespace SocialGameBLL.Security
 
             UserSecurity UserSecurity = new UserSecurity
             {
-                UserEmail = User.Email,
+                UserEmail = UserEntity.Email,
                 Password = PasswordHash,
                 Salt = SaltBytes
             };
 
             db.Passwords.Add(UserSecurity);
             db.SaveChanges();
+            return UserEntity;
         }
 
-        public static bool LoginUser(string UserEmail, string Challenge)
+        public static UserEntity LoginUser(string UserEmail, string Challenge)
         {
             SocialGameBLLDbContext db = new SocialGameBLLDbContext();
             UserSecurity PasswordForEmail = db.Passwords.Find(UserEmail);
+
+            if (PasswordForEmail == null)
+            {
+                throw new Exception("No user with email " + UserEmail);
+            }
+
             byte[] ChallengeBytes = GetBytesFromString(Challenge);
 
             byte[] PasswordHash = PasswordForEmail.Password;
@@ -43,7 +65,14 @@ namespace SocialGameBLL.Security
 
             byte[] ChallengeHash = GenerateHash(ChallengeBytes, Salt);
 
-            return ChallengeHash.SequenceEqual(PasswordHash);
+            if (ChallengeHash.SequenceEqual(PasswordHash))
+            {
+                return db.Users.Find(UserEmail);
+            }
+            else
+            {
+                throw new Exception("Wrong Password");
+            }
 
         }
 
