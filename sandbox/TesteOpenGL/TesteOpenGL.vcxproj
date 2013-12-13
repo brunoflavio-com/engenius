@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClInclude Include="Cubo.h" />
     <ClInclude Include="interfaceGL.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="newItem.h" />
     <ClInclude Include="teste.h" />
     <ClInclude Include="teste2.h" />

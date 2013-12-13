@@ -5,35 +5,22 @@
 #include <time.h>
 #include <GL/glut.h>
 #include "interfaceGL.h"
+InterfaceGL * jogoAtual[3];
 #include "teste.h"
 #include "Cubo.h"
+#include "Main.h"
 
-InterfaceGL * jogoAtual;
 
-/*void Timer(int t) {
-	glutTimerFunc(estado.delay, Timer, 0);
-	jogoAtual->Timer(t);
-}
-
-void Reshape(int width, int height) {
-	jogoAtual->Reshape(width,height);
-}
-void Draw(void) {
-	jogoAtual->Draw();
-}
-void Key(unsigned char key, int x, int y) {
-	jogoAtual->Key(key,x,y);
-}*/
 
 void main(int argc, char **argv)
 {
-	jogoAtual = new Cubo();
+	jogoAtual[3] = new InterfaceGL();
+	jogoAtual[0] = new Main();
+	jogoAtual[1] = new Cubo();
+	jogoAtual[2] = new Teste();
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("OpenGL");
-	jogoAtual->Run();
-	
-	
 	/*glutGameModeString("1024x768:32@75");
 	// 1º teste
 	if
@@ -54,21 +41,7 @@ void main(int argc, char **argv)
 			glutCreateWindow("OpenGL");
 		}
 	}*/
-	
-	/*jogoAtual->Init();
-	glutReshapeFunc(Reshape);
-	glutDisplayFunc(Draw);
-	glutKeyboardFunc(Key);
-	glutTimerFunc(estado.delay, Timer, 0);*/
-		printf("teste22324234234");
+	jogoAtual[0]->Run();
 	glutMainLoop();
-
-	jogoAtual = new Teste2();
-	jogoAtual->Run();
-	glutMainLoop();
-
-	while(1){
-	printf("testeR");
-	}
 }
 

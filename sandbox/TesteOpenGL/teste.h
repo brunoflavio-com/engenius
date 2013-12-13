@@ -30,9 +30,14 @@ typedef struct {
 Estado1 estado1;
 Modelo1 modelo1;
 
-class Teste2 : public InterfaceGL{
+class Teste : public InterfaceGL{
 public:
-	Teste2(){}
+	Teste(){}
+	void static change(int programa){
+		glutMouseFunc(NULL);
+		glDisable(GL_DEPTH_TEST);
+		glutTimerFunc(estado1.delay,NULL,0);
+		jogoAtual[programa]->Run();	}
 	virtual void Init(void)
 	{
 		
@@ -58,6 +63,7 @@ public:
 		glEnable(GL_POINT_SMOOTH);
 		glEnable(GL_LINE_SMOOTH);
 		glEnable(GL_POLYGON_SMOOTH);
+		glDisable(GL_DEPTH_TEST);
 
 	}
 
@@ -274,6 +280,18 @@ public:
 			//case 'H' :
 			//           imprime_ajuda();
 			//      break;
+		case '1' :
+			change(0);
+			break;
+		case '2' :
+			change(1);
+			break;
+		case '3' :
+			change(2);
+			break;
+		case '4' :
+			printf("ola\n");
+			break;
 		case '+' :
 			if(modelo1.numLados<40)
 			{
