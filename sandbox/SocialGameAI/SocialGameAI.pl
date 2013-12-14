@@ -25,6 +25,11 @@ insert(X,Y):-assertz(conn(X,Y)).
 :- use_module(library(http/http_dispatch)). % execução de pedidos ao servidor.
 :- use_module(library(http/http_parameters)). % processamento de parâmetros enviados via métodos GET e POST 
 :- use_module(library(http/http_session)). 
+:- use_module(library(http/http_json)).
+:- use_module(library(http/json)).
+:- use_module(library(http/json_convert)).
+:- use_module(library(http/http_error)).
+
 
 % HTTP Server					
 server(Port) :-						
@@ -34,7 +39,7 @@ server(Port) :-
 % Handlers:
 %%		
 		
-:- http_handler('/register_lig', register_lig, []).
+:- http_handler('/parsejson', handle, []).
 :- http_handler('/register_lig1', register_lig1, []).
 :- http_handler('/register_lig2', register_lig2, []).
 
@@ -42,15 +47,29 @@ server(Port) :-
 %%
 % Predicates
 %%
-register_lig(Request) :-
-    http_parameters(Request,
-                    [ ori(Origin, [between(1,10)]),
-                      dest(Destination, [between(1,10)])
-                    ]),
-    insert(Origin, Destination),
-	%format('L: ~w~n',R),
-    format('Content-type: text/plain~n~n'),
-    format('conn(~w,~w)~n',[Origin,Destination]).
+:- json_object 
+	insert(ori:integer, des:integer) + [type=insert].
+
+handle(Request) :-	
+	http_read_json(Request, JSONIn),	
+	json_to_prolog(JSONIn, X), 
+	format('Content-type: text/plain~n~n'),
+        format('JSONIn: ~w ~nX: ~w ~n',[JSONIn,X]).
+	%call(X),
+	%prolog_to_json(X, JSONOut),
+	%reply_json(JSONOut).
+	
+	
+ 
+%register_lig(Request) :-
+%    	http_parameters(Request,
+%	                JSONIn),
+%
+%	json_to_prolog(JSONIn, PrologIn),
+%
+%	%format('L: ~w~n',R),
+%    	format('Content-type: text/plain~n~n').
+%    	format('json:( ~w )~n',[JSONIn]).
 	
 register_lig1(Request) :-
     http_parameters(Request,
@@ -77,4 +96,6 @@ create_fact([],[]).
 create_fact([A|TA], [B|TB]):-
 	assertz(conn(A,B)),
 	create_fact(TA,TB).
-	
+
+%incializar o servidor:
+:-server(5000).	
