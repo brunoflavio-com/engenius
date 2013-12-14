@@ -26,6 +26,8 @@ namespace SocialGameBLL
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         User LoginUser(string Email, string Password);
+        [OperationContract]
+        ICollection<RelationshipTag> GetRelationshipTags();
     }
 
 

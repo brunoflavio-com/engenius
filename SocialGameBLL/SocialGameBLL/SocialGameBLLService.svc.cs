@@ -57,5 +57,11 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public ICollection<RelationshipTag> GetRelationshipTags()
+        {
+            RelationshipsController Controller = new RelationshipsController();
+            return Controller.GetRelationshipTags();
+        }
     }
 }

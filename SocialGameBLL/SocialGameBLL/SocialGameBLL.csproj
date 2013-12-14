@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\RelationshipsController.cs" />
     <Compile Include="Entities\HumourStatusEntity.cs" />
     <Compile Include="Entities\InterestEntity.cs" />
     <Compile Include="Entities\RelationshipEntity.cs" />
@@ -96,6 +97,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\SecurityService.cs" />
+    <Compile Include="Service\RelationshipTag.cs" />
+    <Compile Include="Service\UserNode.cs" />
     <Compile Include="SocialGameBLLService.svc.cs">
       <DependentUpon>SocialGameBLLService.svc</DependentUpon>
     </Compile>
@@ -110,6 +113,8 @@
     <Content Include="packages.config" />
     <Content Include="Documentation\RegisterUser.sequencediagram" />
     <Content Include="Documentation\LoginUser.sequencediagram" />
+    <Content Include="Documentation\GetUserRelationships.sequencediagram" />
+    <Content Include="Documentation\GetRelationshipTags.sequencediagram" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,6 +123,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Documentation\GetRelationshipTags.sequencediagram.layout">
+      <DependentUpon>GetRelationshipTags.sequencediagram</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Documentation\GetUserRelationships.sequencediagram.layout">
+      <DependentUpon>GetUserRelationships.sequencediagram</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Documentation\LoginUser.sequencediagram.layout">
       <DependentUpon>LoginUser.sequencediagram</DependentUpon>
     </EmbeddedResource>
