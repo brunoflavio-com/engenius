@@ -6,18 +6,18 @@
 %      \-------------> 6
 
 :-dynamic(conn/2).
-conn(1,2).
-conn(2,3).
-conn(3,4).
-conn(3,5).
-conn(2,5).
-conn(5,6).
-conn(2,6).
 
 path(X,Y,[conn(X,Y)]) :- conn(X,Y).
 path(X,Y,[conn(X,Z)|C]) :- conn(X,Z),path(Z,Y,C).
 
 insert(X,Y):-assertz(conn(X,Y)).
+
+insert([]).
+insert([Conn|R]):-
+	Conn=json([ori=Ori,des=Des]),
+	insert(Ori,Des),
+	format('Inserted connection: ~w => ~w ~n', [Ori,Des]),
+	insert(R).
 
 %%
 % Libraries
@@ -54,12 +54,19 @@ handle(Request) :-
 	http_read_json(Request, JSONIn),	
 	json_to_prolog(JSONIn, X), 
 	format('Content-type: text/plain~n~n'),
-        format('JSONIn: ~w ~nX: ~w ~n',[JSONIn,X]).
-	%call(X),
-	%prolog_to_json(X, JSONOut),
+	evaluate(X).
+	%format('Conns: ~w ~n',[Conns]).
+	%prolog_to_json(Conns, JSONOut),
 	%reply_json(JSONOut).
 	
-	
+
+evaluate(PrologIn) :-
+        PrologIn = json([conn=Conns,method=insert]),	
+        MethodName = insert,
+	format('Method: OK~n'),
+        insert(Conns),
+	%format('Conns: ~w~n', [Conns]),
+	format('done.~n').
  
 %register_lig(Request) :-
 %    	http_parameters(Request,
