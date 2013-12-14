@@ -11,7 +11,7 @@ namespace SocialGameBLL
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IService1
+    public interface ISocialGameBLLService
     {
 
         [OperationContract]
@@ -24,6 +24,7 @@ namespace SocialGameBLL
         [OperationContract]
         User RegisterUser(string Email, string Password);
         [OperationContract]
+        [FaultContract(typeof(FaultException))]
         User LoginUser(string Email, string Password);
     }
 
