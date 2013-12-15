@@ -97,8 +97,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\SecurityService.cs" />
+    <Compile Include="Service\Graph.cs" />
+    <Compile Include="Service\Relationship.cs" />
+    <Compile Include="Service\RelationshipRequest.cs" />
     <Compile Include="Service\RelationshipTag.cs" />
-    <Compile Include="Service\UserNode.cs" />
     <Compile Include="SocialGameBLLService.svc.cs">
       <DependentUpon>SocialGameBLLService.svc</DependentUpon>
     </Compile>
@@ -114,7 +116,6 @@
     <Content Include="Documentation\RegisterUser.sequencediagram" />
     <Content Include="Documentation\LoginUser.sequencediagram" />
     <Content Include="Documentation\GetUserRelationships.sequencediagram" />
-    <Content Include="Documentation\GetRelationshipTags.sequencediagram" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -123,9 +124,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Documentation\GetRelationshipTags.sequencediagram.layout">
-      <DependentUpon>GetRelationshipTags.sequencediagram</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Documentation\GetUserRelationships.sequencediagram.layout">
       <DependentUpon>GetUserRelationships.sequencediagram</DependentUpon>
     </EmbeddedResource>

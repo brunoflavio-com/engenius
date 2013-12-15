@@ -28,6 +28,8 @@ namespace SocialGameBLL
         User LoginUser(string Email, string Password);
         [OperationContract]
         ICollection<RelationshipTag> GetRelationshipTags();
+        [OperationContract]
+        Graph GetRelationships(User User);
     }
 
 

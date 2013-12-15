@@ -29,5 +29,22 @@ namespace SocialGameBLL.Entities
         public virtual ICollection<RelationshipRequestEntity> RequestsReceived { get; set; }
 
         public virtual ICollection<InterestEntity> Interests { get; set; }
+
+        public ICollection<RelationshipEntity> GetAllUsersRelationships()
+        {
+            ICollection<RelationshipEntity> AllReltionships = new List<RelationshipEntity>();
+
+            foreach (RelationshipEntity Relationship in UserRelationships)
+            {
+                AllReltionships.Add(Relationship);
+            }
+
+            foreach (RelationshipEntity Relationship in RelationshipsWithUser)
+            {
+                AllReltionships.Add(Relationship);
+            }
+
+            return AllReltionships;
+        }
     }
 }
