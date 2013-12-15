@@ -1,0 +1,78 @@
+Sent object:{
+    "conn": [
+        {
+            "ori": "bmflavio@gmail.com",
+            "des": "id@email.pt"
+        },
+        {
+            "ori": "1",
+            "des": "98"
+        },
+        {
+            "ori": "2",
+            "des": "101"
+        },
+        {
+            "ori": "3",
+            "des": "98"
+        },
+        {
+            "ori": "4",
+            "des": "1001"
+        },
+        {
+            "ori": "99",
+            "des": "989"
+        },
+        {
+            "ori": "100",
+            "des": "1801"
+        },
+        {
+            "ori": "939",
+            "des": "978"
+        },
+        {
+            "ori": "1010",
+            "des": "1601"
+        },
+        {
+            "ori": "909",
+            "des": "985"
+        },
+        {
+            "ori": "10110",
+            "des": "1401"
+        },
+        {
+            "ori": "969",
+            "des": "983"
+        },
+        {
+            "ori": "1070",
+            "des": "1021"
+        },
+        {
+            "ori": "939",
+            "des": "981"
+        }
+    ],
+    "method": "insert"
+}
+
+Method: OK
+Inserted connection: bmflavio@gmail.com => id@email.pt 
+Inserted connection: 1 => 98 
+Inserted connection: 2 => 101 
+Inserted connection: 3 => 98 
+Inserted connection: 4 => 1001 
+Inserted connection: 99 => 989 
+Inserted connection: 100 => 1801 
+Inserted connection: 939 => 978 
+Inserted connection: 1010 => 1601 
+Inserted connection: 909 => 985 
+Inserted connection: 10110 => 1401 
+Inserted connection: 969 => 983 
+Inserted connection: 1070 => 1021 
+Inserted connection: 939 => 981 
+done.
