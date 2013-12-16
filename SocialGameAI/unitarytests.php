@@ -1,4 +1,6 @@
 <?php
+require_once 'HTTP/Request2.php';
+require_once 'HTTP/Request2/CookieJar.php';
 
 function testUserGraph() {
   // The data to send to the API
@@ -57,33 +59,37 @@ function testUserGraph() {
       )
   );
 
-  // Setup cURL
-  $ch = curl_init('http://localhost:5000/loadusergraph');
-  curl_setopt_array($ch, array(
-      CURLOPT_POST => TRUE,
-      CURLOPT_RETURNTRANSFER => TRUE,
-      CURLOPT_HTTPHEADER => array(
-	  'Content-Type: application/json'
-      ),
-      CURLOPT_POSTFIELDS => json_encode($userGraph, JSON_PRETTY_PRINT)
-  ));
+  $cookieJar = new HTTP_Request2_CookieJar();
+  
+  $request = new HTTP_Request2('http://localhost:5000/loadusergraph');
+  $request->setMethod(HTTP_Request2::METHOD_POST)
+    ->setHeader('Content-Type: application/json')
+    ->setBody(json_encode($userGraph, JSON_PRETTY_PRINT));
+  $request->setCookieJar($cookieJar);
 
   echo "Sent object:" . json_encode($userGraph, JSON_PRETTY_PRINT) . "\n\n";
   // Send the request
-  $response = curl_exec($ch);
+  $response = $request->send();  
 
-  // Check for errors
-  if($response === FALSE){
-      die(curl_error($ch));
+  echo $response->getBody();
+
+  echo "Requesting the user graph:\n";
+  $request2 = new HTTP_Request2('http://localhost:5000/getusergraph');
+  $request2->setMethod(HTTP_Request2::METHOD_GET);
+  $request2->setCookieJar($cookieJar);
+  $response2 = $request2->send();
+  $rcvUserGraph = json_decode($response2->getBody());
+  
+  echo json_encode($rcvUserGraph, JSON_PRETTY_PRINT)."\n";
+  
+  echo "#################################################\n";
+  echo "Check if received array matches the one sent:";
+  if(json_encode($userGraph, JSON_PRETTY_PRINT) 
+          === json_encode($rcvUserGraph, JSON_PRETTY_PRINT)) {
+      echo "YES!\n";
+  } else {
+      echo "NO <------------\n";
   }
-
-  echo $response;
-
-  // Decode the response
-  $responseData = json_decode($response, TRUE);
-
-  // Print the date from the response
-  print_r( $responseData );
 }
 
 testUserGraph();
