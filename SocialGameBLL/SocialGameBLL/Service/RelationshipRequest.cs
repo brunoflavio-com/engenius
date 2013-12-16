@@ -7,7 +7,9 @@ namespace SocialGameBLL.Service
 {
     public class RelationshipRequest
     {
-        public User Requester { get; set; }
-        public User Requested { get; set; }
+        public string RequesterEmail { get; set; }
+        public string RequestedEmail { get; set; }
+        public int RelationshipTagId { get; set; }
+        public int Strength { get; set; }
     }
 }

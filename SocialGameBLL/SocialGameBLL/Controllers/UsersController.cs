@@ -1,5 +1,4 @@
 ﻿using SocialGameBLL.Entities;
-using SocialGameBLL.Security;
 using SocialGameBLL.Service;
 using System;
 using System.Collections.Generic;
@@ -8,16 +7,17 @@ using System.Web;
 
 namespace SocialGameBLL.Controllers
 {
-    public class AuthenticationController
+    public class UsersController
     {
-        public User RegisterUser(string Email, string Password)
-        {
-            SocialGameBLLDbContext db = new SocialGameBLLDbContext();
+        SocialGameBLLDbContext db = new SocialGameBLLDbContext();
 
+        public User UpdateUser(User User)
+        {
             try
             {
-                UserEntity UserEntity = SecurityService.RegisterUser(Email, Password);
-
+                UserEntity UserEntity = db.Users.Find(User.Email);
+                UpdateUserEntity(UserEntity, User);
+                db.SaveChanges();
                 return ConvertUserEntityToUser(UserEntity);
             }
             catch (Exception e)
@@ -26,16 +26,33 @@ namespace SocialGameBLL.Controllers
             }
         }
 
-        public User LoginUser(string Email, string Password)
+        private void UpdateUserEntity(UserEntity UserEntity, User User)
         {
-            try
+            UserEntity.Name = User.Name;
+            UserEntity.Surname = User.Surname;
+            if (User.Birthdate != null)
             {
-                UserEntity UserEntity = SecurityService.LoginUser(Email, Password);
-                return ConvertUserEntityToUser(UserEntity);
+                UserEntity.Birthdate = (DateTime?)UserEntity.Birthdate;
             }
-            catch (Exception e)
+            UserEntity.HumourStatusID = User.HumourStatusId;
+            UserEntity.PhoneNumber = User.PhoneNumber;
+            UserEntity.FacebookProfile = User.FacebookProfile;
+            UserEntity.LinkedInProfile = User.LinkedInProfile;
+            UpdateInterests(UserEntity.Interests, User.InterestsIDs);
+        }
+
+        private void UpdateInterests(ICollection<InterestEntity> Interests, ICollection<int> InterestIDs)
+        {
+            if (InterestIDs != null)
             {
-                throw new Exception(e.Message);
+                foreach (int InterestID in InterestIDs)
+                {
+                    InterestEntity Interest = db.Interests.Find(InterestID);
+                    if(!Interests.Contains(Interest))
+                    {
+                        Interests.Add(Interest);
+                    }
+                }
             }
         }
 

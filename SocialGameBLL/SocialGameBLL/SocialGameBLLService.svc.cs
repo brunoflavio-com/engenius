@@ -69,5 +69,18 @@ namespace SocialGameBLL
             RelationshipsController Controller = new RelationshipsController();
             return Controller.GetRalationships(User);
         }
+
+        public User UpdateUser(User User)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.UpdateUser(User);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }
