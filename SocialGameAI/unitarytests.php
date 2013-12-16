@@ -5,19 +5,19 @@ function testUserGraph() {
   $userGraph = array(
       'Relationships' => array(
 	  array('RelationshipTagId' => 1,
-		'Strenght' => 2,
+		'Strength' => 2,
 		'UserAEmail' => 'test@test.com',
 		'UserBEmail' => 'test3@test.com'
 		),
 	  array('RelationshipTagId' => 2,
-		'Strenght' => 5,
+		'Strength' => 5,
 		'UserAEmail' => 'test2@test.com',
-		'UserAEmail' => 'test3@test.com'
+		'UserBEmail' => 'test3@test.com'
 		),
 	  array('RelationshipTagId' => 1,
-		'Strenght' => 5,
+		'Strength' => 5,
 		'UserAEmail' => 'test@test.com',
-		'UserAEmail' => 'test2@test.com'
+		'UserBEmail' => 'test2@test.com'
 		),
 	  ), 
       'Users'=> array(
@@ -25,7 +25,7 @@ function testUserGraph() {
 		'Email' => 'test3@test.com',
 		'FacebookProfile' => null,
 		'HumourStatusId'  => 1,
-		'InterestsIDs' => array (
+		'InterestsIDs' => array (1,2,3,4
 		    ),
 		'LinkedInProfile' => null,
 		'Name' => null,

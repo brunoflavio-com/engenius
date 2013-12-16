@@ -24,14 +24,8 @@
 %    }
 %
 % Prolog fact:
-% user(Email, Name, Surname, Birthdate, PhoneNumber, HumourStatusID, FacebookProfile, LinkedInProfile)
-:-dynamic(user/8).
-
-%%
-% User Interests:
-%
-% interest(Email, InterestID).
-:-dynamic(interest/2).
+% user(Email, Name, Surname, Birthdate, PhoneNumber, InterestsList, HumourStatusID, FacebookProfile, LinkedInProfile)
+:-dynamic(user/9).
 
 %%
 % Relationship:

@@ -26,16 +26,23 @@
 load_user_graph(Request) :-	
 	http_read_json(Request, JSONIn),	
 	json_to_prolog(JSONIn, UserGraph), 
-	format('Content-type: text/plain~n~n'),
+	format('Content-type: text/plain~n~n'),	
+	%format('UserGraph: ~w~n', [UserGraph]),	
 	load_user_graph_action(UserGraph).
 
 %%
 % Compute:
 load_user_graph_action(UserGraph) :-
-        UserGraph = json([relationships=RelationshipsJSON,users=UsersJSON]),       
+        UserGraph = json(
+		      [
+			'Relationships'=RelationshipsJSON,
+			'Users'=UsersJSON
+		      ]
+		    ),  
+		    
 	format('Loading Graph~n'),
         insert_users(UsersJSON),
-        %insert_relationships(RelationshipsJSON),
+        insert_relationships(RelationshipsJSON),
 	format('done.~n').
 
 %%
@@ -46,5 +53,38 @@ insert_users([UserJSON | T]):-
 	insert_users(T).
 
 insert_user(UserJSON):-
-	UserJSON = json([birthdate=Birthdate, emails=Email, facebookprofile=FacebookProfile, humourstatusid=HumourStatusID, interestsids=InterestsJSON, linkedinprofile=LinkedInProfile, name=Name, phonenumber=PhoneNumber, surname=Surname]),    
-	assert(user(Email, Name, Surname, Birthdate, PhoneNumber, HumourStatusID, FacebookProfile, LinkedInProfile)).
+	UserJSON = json(
+		    [
+		      'Birthdate'= Birthdate,
+		      'Email'= Email,
+		      'FacebookProfile'= FacebookProfile,
+		      'HumourStatusId'= HumourStatusID,
+		      'InterestsIDs'= Interests,
+		      'LinkedInProfile'= LinkedInProfile,
+		      'Name'= Name,
+		      'PhoneNumber'= PhoneNumber,
+		      'Surname'= Surname
+		    ]
+		  ),	
+	assert(user(Email, Name, Surname, Birthdate, PhoneNumber, Interests, HumourStatusID, FacebookProfile, LinkedInProfile)),
+	format('*Created user ~w.~n', [Email]).
+
+%%
+% Process relationships:
+insert_relationships([]).
+insert_relationships([RelationshipJSON | T]):-
+	insert_relationship(RelationshipJSON),
+	insert_relationships(T).
+	
+insert_relationship(RelationshipJSON):-
+	RelationshipJSON = json(
+			      [
+				'RelationshipTagId'= TagID,
+				'Strength'=Strength,
+				'UserAEmail'=UserA,
+				'UserBEmail'=UserB
+			      ]
+			  ),
+	assert(relationship(UserA, UserB, TagID, Strength)),
+	format('*Created relationship between ~w and ~w.~n', [UserA, UserB]).
+	
