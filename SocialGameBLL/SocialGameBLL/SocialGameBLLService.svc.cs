@@ -64,10 +64,10 @@ namespace SocialGameBLL
             return Controller.GetRelationshipTags();
         }
 
-        public Graph GetRelationships(User User)
+        public Graph GetRelationships(User User, int Depth)
         {
             RelationshipsController Controller = new RelationshipsController();
-            return Controller.GetRalationships(User);
+            return Controller.GetRelationships(User, Depth);
         }
 
         public User UpdateUser(User User)

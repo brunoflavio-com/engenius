@@ -7,6 +7,22 @@ using System.Web;
 
 namespace SocialGameBLL.Controllers
 {
+    struct Node
+    {
+        public UserEntity User { get; set; }
+        public int Level { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Node)
+            {
+                Node Other = (Node)obj;
+                return this.User.Equals(Other.User);
+            }
+            return false;
+        }
+    }
+
     public class RelationshipsController
     {
         SocialGameBLLDbContext db = new SocialGameBLLDbContext();
@@ -19,43 +35,87 @@ namespace SocialGameBLL.Controllers
             return RelationshipTags;
         }
 
-        public Graph GetRalationships(User User)
+        public Graph GetRelationships(User User, int Depth)
         {
-            UserEntity FirstNode = db.Users.Find(User.Email);
-            IList<UserEntity> ListOfNodes = new List<UserEntity>();
+            Node FirstNode = new Node
+            {
+                User = db.Users.Find(User.Email),
+                Level = 0
+            };
+
+            IList<Node> ListOfNodes = new List<Node>();
             IList<RelationshipEntity> ListOfArcs = new List<RelationshipEntity>();
+            IList<InterestEntity> Interests = new List<InterestEntity>();
+            IList<RelationTagEntity> RelationTags = new List<RelationTagEntity>();
+            IList<HumourStatusEntity> HumourStatus = new List<HumourStatusEntity>();
             ListOfNodes.Add(FirstNode);
 
-            GetRelatedUsers(0, ListOfNodes, ListOfArcs);
-
-            ICollection<User> Users = ConvertUserEntitiesToUser(ListOfNodes);
-            ICollection<Relationship> Relationships = ConvertRelationshipEntitiesToRelationships(ListOfArcs);
+            GetRelatedUsers(0, ListOfNodes, ListOfArcs, Interests, RelationTags, HumourStatus, Depth);
 
             return new Graph
             {
-                Users = Users,
-                Relationships = Relationships
+                Users = ConvertNodeToUser(ListOfNodes),
+                Relationships = ConvertRelationshipEntitiesToRelationships(ListOfArcs),
+                Interests = ConvertToInterestFromInterestEntities(Interests),
+                RelationshipTags = ConvertToRelationshipTagsFromRelationTagEntities(RelationTags),
+                HumourStatus = ConvertToHumourStatusFromHumourStatusEntities(HumourStatus)
             };
         }
 
-        private void GetRelatedUsers(int Position, IList<UserEntity> Users, IList<RelationshipEntity> Relationships)
+        private void GetRelatedUsers(int Position, IList<Node> Nodes, IList<RelationshipEntity> Relationships
+                                     , IList<InterestEntity> Interests, IList<RelationTagEntity> RelationTags
+                                     , IList<HumourStatusEntity> HumourStatus, int Depth)
         {
-            if (Users.Count <= Position)
+            if (Nodes.Count <= Position || Nodes[Position].Level >= Depth)
                 return;
 
-            UserEntity CurrentNode = Users[Position];
-            ICollection<RelationshipEntity> UserRelationships = CurrentNode.GetAllUsersRelationships();
+            UserEntity CurrentNodeUser = Nodes[Position].User;
+            foreach(InterestEntity InterestEntity in CurrentNodeUser.Interests)
+            {
+                if(!Interests.Contains(InterestEntity))
+                {
+                    Interests.Add(InterestEntity);
+                }
+            }
+
+            if (!HumourStatus.Contains(CurrentNodeUser.HumourStatus))
+            {
+                HumourStatus.Add(CurrentNodeUser.HumourStatus);
+            }
+
+            ICollection<RelationshipEntity> UserRelationships = CurrentNodeUser.GetAllUsersRelationships();
             foreach (RelationshipEntity Relationship in UserRelationships)
             {
                 if (!Relationships.Contains(Relationship))
                 {
                     Relationships.Add(Relationship);
-                    if (!Users.Contains(Relationship.User)) Users.Add(Relationship.User);
-                    if (!Users.Contains(Relationship.Friend)) Users.Add(Relationship.Friend);
+                    if(!RelationTags.Contains(Relationship.RelationTag))
+                    {
+                        RelationTags.Add(Relationship.RelationTag);
+                    }
+                    Node User = new Node
+                    {
+                        User = Relationship.User,
+                        Level = 1 + Nodes[Position].Level
+                    };
+
+                    Node Friend = new Node
+                    {
+                        User = Relationship.Friend,
+                        Level = 1 + Nodes[Position].Level
+                    };
+                    if (!Nodes.Contains(User))
+                    {
+                        Nodes.Add(User);
+                    }
+                    if (!Nodes.Contains(Friend))
+                    {
+                        Nodes.Add(Friend);
+                    }
                 }
             }
 
-            GetRelatedUsers(++Position, Users, Relationships);
+            GetRelatedUsers(++Position, Nodes, Relationships, Interests, RelationTags, HumourStatus, Depth);
 
         }
 
@@ -73,11 +133,12 @@ namespace SocialGameBLL.Controllers
             return RelationshipTags;
         }
 
-        private ICollection<User> ConvertUserEntitiesToUser(IList<UserEntity> UserEntities)
+        private ICollection<User> ConvertNodeToUser(IList<Node> Nodes)
         {
             ICollection<User> Users = new List<User>();
-            foreach (UserEntity UserEntity in UserEntities)
+            foreach (Node Node in Nodes)
             {
+                UserEntity UserEntity = Node.User;
                 Users.Add(new User
                 {
                      Email = UserEntity.Email,
@@ -121,6 +182,48 @@ namespace SocialGameBLL.Controllers
                 }
             }
             return InterestsIDs;
+        }
+
+        private ICollection<RelationshipTag> ConvertToRelationshipTagsFromRelationTagEntities(ICollection<RelationTagEntity> RelationTagEntities)
+        {
+            ICollection<RelationshipTag> RelationshipTags = new List<RelationshipTag>();
+            foreach (RelationTagEntity RelationTagEntity in RelationTagEntities)
+            {
+                RelationshipTags.Add(new RelationshipTag
+                {
+                    Id = RelationTagEntity.ID,
+                    Name = RelationTagEntity.Name
+                });
+            }
+            return RelationshipTags;
+        }
+
+        private ICollection<Interest> ConvertToInterestFromInterestEntities(ICollection<InterestEntity> InterestEntities)
+        {
+            ICollection<Interest> Interests = new List<Interest>();
+            foreach (InterestEntity InterestEntity in InterestEntities)
+            {
+                Interests.Add(new Interest
+                {
+                    Id = InterestEntity.ID,
+                    Name = InterestEntity.Name
+                });
+            }
+            return Interests;
+        }
+
+        private ICollection<HumourStatus> ConvertToHumourStatusFromHumourStatusEntities(ICollection<HumourStatusEntity> HumourStatusEntities)
+        {
+            ICollection<HumourStatus> HumourStatus = new List<HumourStatus>();
+            foreach (HumourStatusEntity HumourStatusEntity in HumourStatusEntities)
+            {
+                HumourStatus.Add(new HumourStatus
+                {
+                    Id = HumourStatusEntity.ID,
+                    Name = HumourStatusEntity.Name
+                });
+            }
+            return HumourStatus;
         }
     }
 }
