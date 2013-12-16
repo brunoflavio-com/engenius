@@ -26,6 +26,12 @@ namespace SocialGameBLL
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         User LoginUser(string Email, string Password);
+        [OperationContract]
+        User UpdateUser(User User);
+        [OperationContract]
+        ICollection<RelationshipTag> GetRelationshipTags();
+        [OperationContract]
+        Graph GetRelationships(User User, int Depth);
     }
 
 

@@ -220,14 +220,14 @@
               <lifelineMoniker Id="8070a535-c4fd-40ac-9ece-ffdf22bc0d19" LastKnownName="&lt;&lt;static&gt;&gt; AuthenticationController" />
             </covered>
           </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="38d5829c-4b4d-4bcd-8d3b-2423647f94c9" name="MessageOccurrenceSpecification">
-            <covered>
-              <lifelineMoniker Id="2ecb5ad2-86e0-4a00-a6cb-8287401eb418" LastKnownName="SocialGameBLLDbContex" />
-            </covered>
-          </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="a7cbbeb2-cf3b-4acb-bb0f-29add5253b77" name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker Id="8070a535-c4fd-40ac-9ece-ffdf22bc0d19" LastKnownName="&lt;&lt;static&gt;&gt; AuthenticationController" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="38d5829c-4b4d-4bcd-8d3b-2423647f94c9" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="2ecb5ad2-86e0-4a00-a6cb-8287401eb418" LastKnownName="SocialGameBLLDbContex" />
             </covered>
           </messageOccurrenceSpecification>
           <executionOccurrenceSpecification Id="b5ff7048-d199-4d23-80a3-cd9a508ca898" name="ExecutionOccurrenceSpecification">
@@ -320,14 +320,14 @@
               <lifelineMoniker Id="2ecb5ad2-86e0-4a00-a6cb-8287401eb418" LastKnownName="SocialGameBLLDbContex" />
             </covered>
           </executionOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="e8d634c9-d7c9-482d-9a97-f0165bdbfd2c" name="MessageOccurrenceSpecification">
-            <covered>
-              <lifelineMoniker Id="2ecb5ad2-86e0-4a00-a6cb-8287401eb418" LastKnownName="SocialGameBLLDbContex" />
-            </covered>
-          </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="6e11f8cb-2fd1-41a0-9846-4ca9a6a3f694" name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker Id="8070a535-c4fd-40ac-9ece-ffdf22bc0d19" LastKnownName="&lt;&lt;static&gt;&gt; AuthenticationController" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="e8d634c9-d7c9-482d-9a97-f0165bdbfd2c" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="2ecb5ad2-86e0-4a00-a6cb-8287401eb418" LastKnownName="SocialGameBLLDbContex" />
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="138296fc-76b7-478f-bb93-4526efcf462d" name="MessageOccurrenceSpecification">
@@ -370,14 +370,14 @@
               <lifelineMoniker Id="8070a535-c4fd-40ac-9ece-ffdf22bc0d19" LastKnownName="&lt;&lt;static&gt;&gt; AuthenticationController" />
             </covered>
           </executionOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="e0d439ab-8b5c-4904-b0d3-dc3af48aba84" name="MessageOccurrenceSpecification">
-            <covered>
-              <lifelineMoniker Id="dad607e8-f3f5-4d1a-853a-b5bbf716d3d8" LastKnownName="SocialGameBLLService" />
-            </covered>
-          </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="e7b49df7-6219-48e7-8a12-74904887576b" name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker Id="f0a01776-5f47-4064-a6c9-372d4aaded8f" LastKnownName="AuthenticationController" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="e0d439ab-8b5c-4904-b0d3-dc3af48aba84" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="dad607e8-f3f5-4d1a-853a-b5bbf716d3d8" LastKnownName="SocialGameBLLService" />
             </covered>
           </messageOccurrenceSpecification>
           <executionOccurrenceSpecification Id="3c007ba9-5894-44fb-a324-e4e33023664d" name="ExecutionOccurrenceSpecification">
@@ -390,14 +390,14 @@
               <lifelineMoniker Id="f0a01776-5f47-4064-a6c9-372d4aaded8f" LastKnownName="AuthenticationController" />
             </covered>
           </executionOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="dc3adcec-934c-4be9-b43f-fb986cf6b03b" name="MessageOccurrenceSpecification">
-            <covered>
-              <lifelineMoniker Id="dad607e8-f3f5-4d1a-853a-b5bbf716d3d8" LastKnownName="SocialGameBLLService" />
-            </covered>
-          </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="5f44b716-0a9b-4860-a64e-3cda998786a6" name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker Id="b572e752-396c-4049-913b-7500e6b43d86" LastKnownName="ExternalService" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="dc3adcec-934c-4be9-b43f-fb986cf6b03b" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="dad607e8-f3f5-4d1a-853a-b5bbf716d3d8" LastKnownName="SocialGameBLLService" />
             </covered>
           </messageOccurrenceSpecification>
           <executionOccurrenceSpecification Id="70a99472-1512-4870-94fa-18939d99c11a" name="ExecutionOccurrenceSpecification">

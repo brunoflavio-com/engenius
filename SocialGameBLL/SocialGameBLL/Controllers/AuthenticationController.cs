@@ -18,10 +18,7 @@ namespace SocialGameBLL.Controllers
             {
                 UserEntity UserEntity = SecurityService.RegisterUser(Email, Password);
 
-                return new User
-                {
-                    Email = UserEntity.Email
-                };
+                return ConvertUserEntityToUser(UserEntity);
             }
             catch (Exception e)
             {
@@ -31,18 +28,44 @@ namespace SocialGameBLL.Controllers
 
         public User LoginUser(string Email, string Password)
         {
-            User User = new User();
-
             try
             {
                 UserEntity UserEntity = SecurityService.LoginUser(Email, Password);
-                User.Email = UserEntity.Email;
+                return ConvertUserEntityToUser(UserEntity);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return User;
+        }
+
+        private User ConvertUserEntityToUser(UserEntity UserEntity)
+        {
+            return new User
+            {
+                Email = UserEntity.Email,
+                Name = UserEntity.Name,
+                Surname = UserEntity.Surname,
+                Birthdate = (UserEntity.Birthdate != null) ? (DateTime)UserEntity.Birthdate : DateTime.MinValue,
+                HumourStatusId = UserEntity.HumourStatusID,
+                InterestsIDs = GetInterestsIdsFromInterests(UserEntity.Interests),
+                FacebookProfile = UserEntity.FacebookProfile,
+                LinkedInProfile = UserEntity.LinkedInProfile,
+                PhoneNumber = UserEntity.PhoneNumber
+            };
+        }
+
+        private ICollection<int> GetInterestsIdsFromInterests(ICollection<InterestEntity> Interests)
+        {
+            ICollection<int> InterestsIDs = new List<int>();
+            if (Interests != null)
+            {
+                foreach (InterestEntity Interest in Interests)
+                {
+                    InterestsIDs.Add(Interest.ID);
+                }
+            }
+            return InterestsIDs;
         }
     }
 }

@@ -18,7 +18,9 @@ namespace SocialGameBLL.Service
         [DataMember]
         public DateTime Birthdate { get; set; }
         [DataMember]
-        public string HoumorStatus { get; set; }
+        public int HumourStatusId { get; set; }
+        [DataMember]
+        public ICollection<int> InterestsIDs { get; set; }
         [DataMember]
         public string PhoneNumber { get; set; }
         [DataMember]
