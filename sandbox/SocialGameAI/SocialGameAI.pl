@@ -21,6 +21,7 @@ insert([Conn|R]):-
 
 %%
 % Libraries
+%%
 :- use_module(library(http/thread_httpd)). % servidor http
 :- use_module(library(http/http_dispatch)). % execução de pedidos ao servidor.
 :- use_module(library(http/http_parameters)). % processamento de parâmetros enviados via métodos GET e POST 
@@ -30,8 +31,9 @@ insert([Conn|R]):-
 :- use_module(library(http/json_convert)).
 :- use_module(library(http/http_error)).
 
-
+%%
 % HTTP Server					
+%%
 server(Port) :-						
         http_server(http_dispatch, [port(Port)]).
 
@@ -84,7 +86,6 @@ register_lig1(Request) :-
                       dest(Destination, [between(1,10)])
                     ]),
     http_session_assert(conn(Origin,Destination)),
-	%format('L: ~w~n',R),
     format('Content-type: text/plain~n~n'),
     format('conn(~w,~w)~n',[Origin,Destination]).
 	
@@ -104,5 +105,5 @@ create_fact([A|TA], [B|TB]):-
 	assertz(conn(A,B)),
 	create_fact(TA,TB).
 
-%incializar o servidor:
+%inicializar o servidor:
 :-server(5000).	
