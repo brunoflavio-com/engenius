@@ -66,7 +66,7 @@ insert_user(UserJSON):-
 		      'Surname'= Surname
 		    ]
 		  ),	
-	assert(user(Email, Name, Surname, Birthdate, PhoneNumber, Interests, HumourStatusID, FacebookProfile, LinkedInProfile)),
+	http_session_assert(user(Email, Name, Surname, Birthdate, PhoneNumber, Interests, HumourStatusID, FacebookProfile, LinkedInProfile)),
 	format('*Created user ~w.~n', [Email]).
 
 %%
@@ -85,6 +85,6 @@ insert_relationship(RelationshipJSON):-
 				'UserBEmail'=UserB
 			      ]
 			  ),
-	assert(relationship(UserA, UserB, TagID, Strength)),
+	http_session_assert(relationship(UserA, UserB, TagID, Strength)),
 	format('*Created relationship between ~w and ~w.~n', [UserA, UserB]).
 	
