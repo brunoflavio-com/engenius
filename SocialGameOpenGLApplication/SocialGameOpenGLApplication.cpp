@@ -9,6 +9,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	SocialGamePublicAPIClient * client = new SocialGamePublicAPIClient();
 	std::future<boolean> login1 = client->asyncLogin("xiko","qwerty");
 
+
+
 	getchar();
 	return 0;
 }
