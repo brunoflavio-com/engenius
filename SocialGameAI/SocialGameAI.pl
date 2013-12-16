@@ -1,5 +1,5 @@
 %
-% FILE: SocialGameAI.conf.pl
+% FILE: SocialGameAI.pl
 %
 
 %
