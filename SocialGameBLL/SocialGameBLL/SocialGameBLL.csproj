@@ -110,7 +110,7 @@
     </Compile>
     <Compile Include="ISocialGameBLLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\EntitieServiceConvert.cs" />
+    <Compile Include="Util\EntityServiceConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,7 +19,7 @@ namespace SocialGameBLL.Controllers
                 UserEntity UserEntity = db.Users.Find(User.Email);
                 UpdateUserEntity(UserEntity, User);
                 db.SaveChanges();
-                return EntitieServiceConvert.ConvertUserEntityToUser(UserEntity);
+                return EntityServiceConverter.ConvertUserEntityToUser(UserEntity);
             }
             catch (Exception e)
             {

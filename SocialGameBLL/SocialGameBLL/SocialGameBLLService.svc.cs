@@ -82,5 +82,18 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.MakeRelationshipRequest(Me, Other, RelationshipTagId, Strength);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }

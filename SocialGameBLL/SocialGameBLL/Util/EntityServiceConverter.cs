@@ -7,7 +7,7 @@ using System.Web;
 
 namespace SocialGameBLL.Util
 {
-    public static class EntitieServiceConvert
+    public static class EntityServiceConverter
     {
         public static ICollection<RelationshipTag> ConvertRelationTagEntitiesToRelationshipTag(ICollection<RelationTagEntity> Entities)
         {
@@ -108,6 +108,17 @@ namespace SocialGameBLL.Util
                 }
             }
             return InterestsIDs;
+        }
+
+        public static RelationshipRequest ConvertToRelationshipRequestFromRelationshipRequestEntity(RelationshipRequestEntity RequestEntity)
+        {
+            return new RelationshipRequest 
+            { 
+                RequesterEmail = RequestEntity.UserEmail,
+                RequestedEmail = RequestEntity.FriendEmail,
+                RelationshipTagId = RequestEntity.RelationTagID,
+                Strength = RequestEntity.Strength
+            };
         }
     }
 }

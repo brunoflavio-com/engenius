@@ -19,7 +19,7 @@ namespace SocialGameBLL.Controllers
             {
                 UserEntity UserEntity = SecurityService.RegisterUser(Email, Password);
 
-                return EntitieServiceConvert.ConvertUserEntityToUser(UserEntity);
+                return EntityServiceConverter.ConvertUserEntityToUser(UserEntity);
             }
             catch (Exception e)
             {
@@ -32,7 +32,7 @@ namespace SocialGameBLL.Controllers
             try
             {
                 UserEntity UserEntity = SecurityService.LoginUser(Email, Password);
-                return EntitieServiceConvert.ConvertUserEntityToUser(UserEntity);
+                return EntityServiceConverter.ConvertUserEntityToUser(UserEntity);
             }
             catch (Exception e)
             {

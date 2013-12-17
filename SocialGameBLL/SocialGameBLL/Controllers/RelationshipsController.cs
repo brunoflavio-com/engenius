@@ -32,7 +32,7 @@ namespace SocialGameBLL.Controllers
         {            
             ICollection<RelationTagEntity> RelationTagEntities = db.RelationTags.ToList();
 
-            ICollection<RelationshipTag> RelationshipTags = EntitieServiceConvert.ConvertRelationTagEntitiesToRelationshipTag(RelationTagEntities);
+            ICollection<RelationshipTag> RelationshipTags = EntityServiceConverter.ConvertRelationTagEntitiesToRelationshipTag(RelationTagEntities);
             return RelationshipTags;
         }
 
@@ -56,11 +56,35 @@ namespace SocialGameBLL.Controllers
             return new Graph
             {
                 Users = ConvertNodeToUser(ListOfNodes),
-                Relationships = EntitieServiceConvert.ConvertRelationshipEntitiesToRelationships(ListOfArcs),
-                Interests = EntitieServiceConvert.ConvertToInterestFromInterestEntities(Interests),
-                RelationshipTags = EntitieServiceConvert.ConvertToRelationshipTagsFromRelationTagEntities(RelationTags),
-                HumourStatus = EntitieServiceConvert.ConvertToHumourStatusFromHumourStatusEntities(HumourStatus)
+                Relationships = EntityServiceConverter.ConvertRelationshipEntitiesToRelationships(ListOfArcs),
+                Interests = EntityServiceConverter.ConvertToInterestFromInterestEntities(Interests),
+                RelationshipTags = EntityServiceConverter.ConvertToRelationshipTagsFromRelationTagEntities(RelationTags),
+                HumourStatus = EntityServiceConverter.ConvertToHumourStatusFromHumourStatusEntities(HumourStatus)
             };
+        }
+
+        public RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                UserEntity OtherEntity = db.Users.Find(Other.Email);
+                RelationTagEntity TagEntity = db.RelationTags.Find(RelationshipTagId);
+                db.RelationshipsRequests.Add(new RelationshipRequestEntity
+                    {
+                        UserEmail = MyEntity.Email,
+                        FriendEmail = OtherEntity.Email,
+                        RelationTagID = TagEntity.ID,
+                        Strength = Strength
+                    });
+                db.SaveChanges();
+                RelationshipRequestEntity RequestEntityCreated = db.RelationshipsRequests.Find(MyEntity.Email, OtherEntity.Email);
+                return EntityServiceConverter.ConvertToRelationshipRequestFromRelationshipRequestEntity(RequestEntityCreated);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         private void GetRelatedUsers(int Position, IList<Node> Nodes, IList<RelationshipEntity> Relationships
@@ -133,7 +157,7 @@ namespace SocialGameBLL.Controllers
                      Surname = UserEntity.Surname,
                      Birthdate = (UserEntity.Birthdate != null) ? (DateTime)UserEntity.Birthdate : DateTime.MinValue,
                      HumourStatusId = UserEntity.HumourStatusID,
-                     InterestsIDs = EntitieServiceConvert.GetInterestsIdsFromInterests(UserEntity.Interests),
+                     InterestsIDs = EntityServiceConverter.GetInterestsIdsFromInterests(UserEntity.Interests),
                      FacebookProfile = UserEntity.FacebookProfile,
                      LinkedInProfile = UserEntity.LinkedInProfile,
                      PhoneNumber = UserEntity.PhoneNumber
