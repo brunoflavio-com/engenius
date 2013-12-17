@@ -37,6 +37,12 @@ get_user_graph_action(UserGraph) :-
         
         UserGraph = json(
 		      [
+			%not used:
+		        'HumourStatus'=[],
+		        %not used:
+			'Interests'=[],
+			
+			%the information we have:
 			'Relationships'=RelationshipsJSON,
 			'Users'=UsersJSON
 		      ]

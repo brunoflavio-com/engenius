@@ -1,63 +1,97 @@
-"{
+{
+  "HumourStatus": [
+    {
+      "Id": 1,
+      "Name": "Normal"
+    }
+  ],
+  "Interests": [],
+  "RelationshipTags": [
+    {
+      "Id": 1,
+      "Name": "Family"
+    },
+    {
+      "Id": 2,
+      "Name": "Friend"
+    }
+  ],
   "Relationships": [
     {
       "RelationshipTagId": 1,
-      "Strength": 2,
+      "Strength": 4,
+      "UserAEmail": "test@test.com",
+      "UserBEmail": "test2@test.com"
+    },
+    {
+      "RelationshipTagId": 2,
+      "Strength": 3,
       "UserAEmail": "test@test.com",
       "UserBEmail": "test3@test.com"
     },
     {
       "RelationshipTagId": 2,
-      "Strength": 5,
-      "UserAEmail": "test2@test.com",
-      "UserBEmail": "test3@test.com"
+      "Strength": 4,
+      "UserAEmail": "test3@test.com",
+      "UserBEmail": "test2@test.com"
+    },
+    {
+      "RelationshipTagId": 2,
+      "Strength": 6,
+      "UserAEmail": "test4@test.com",
+      "UserBEmail": "test2@test.com"
     },
     {
       "RelationshipTagId": 1,
-      "Strength": 3,
-      "UserAEmail": "test@test.com",
-      "UserBEmail": "test2@test.com"
+      "Strength": 4,
+      "UserAEmail": "test3@test.com",
+      "UserBEmail": "test4@test.com"
     }
   ],
   "Users": [
     {
-      "Birthdate": "0001-01-01T00: 00: 00",
-      "Email": "test3@test.com",
+      "Birthdate": "0001-01-01T00:00:00",
+      "Email": "test@test.com",
       "FacebookProfile": null,
       "HumourStatusId": 1,
-      "InterestsIDs": [
-        
-      ],
+      "InterestsIDs": [],
       "LinkedInProfile": null,
       "Name": "Luis",
       "PhoneNumber": null,
       "Surname": null
     },
     {
-      "Birthdate": "0001-01-01T00: 00: 00",
-      "Email": "test@test.com",
+      "Birthdate": "0001-01-01T00:00:00",
+      "Email": "test2@test.com",
       "FacebookProfile": null,
       "HumourStatusId": 1,
-      "InterestsIDs": [
-        1
-      ],
+      "InterestsIDs": [],
       "LinkedInProfile": null,
       "Name": null,
       "PhoneNumber": null,
       "Surname": null
     },
     {
-      "Birthdate": "0001-01-01T00: 00: 00",
-      "Email": "test2@test.com",
+      "Birthdate": "0001-01-01T00:00:00",
+      "Email": "test3@test.com",
       "FacebookProfile": null,
       "HumourStatusId": 1,
-      "InterestsIDs": [
-        
-      ],
+      "InterestsIDs": [],
+      "LinkedInProfile": null,
+      "Name": null,
+      "PhoneNumber": null,
+      "Surname": null
+    },
+    {
+      "Birthdate": "0001-01-01T00:00:00",
+      "Email": "test4@test.com",
+      "FacebookProfile": null,
+      "HumourStatusId": 1,
+      "InterestsIDs": [],
       "LinkedInProfile": null,
       "Name": null,
       "PhoneNumber": null,
       "Surname": null
     }
   ]
-}"
+}

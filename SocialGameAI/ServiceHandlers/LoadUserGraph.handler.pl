@@ -35,6 +35,12 @@ load_user_graph(Request) :-
 load_user_graph_action(UserGraph) :-
         UserGraph = json(
 		      [
+			%not used:
+		        'HumourStatus'=_,
+		        %not used:
+			'Interests'=_,
+			
+			%the lists we'll need:
 			'Relationships'=RelationshipsJSON,
 			'Users'=UsersJSON
 		      ]

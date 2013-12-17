@@ -5,6 +5,15 @@ require_once 'HTTP/Request2/CookieJar.php';
 function testUserGraph() {
   // The data to send to the API
   $userGraph = array(
+      'HumourStatus' => array(
+			  array(
+			      'Id' => 1,
+			      'Name' => 'Normal'
+			      )
+		     ),
+		     
+      'Interests' => array(),
+      
       'Relationships' => array(
 	  array('RelationshipTagId' => 1,
 		'Strength' => 2,
@@ -22,6 +31,7 @@ function testUserGraph() {
 		'UserBEmail' => 'test2@test.com'
 		),
 	  ), 
+	  
       'Users'=> array(
 	  array('Birthdate' => '0001-01-01T00:00:00',
 		'Email' => 'test3@test.com',
@@ -82,8 +92,11 @@ function testUserGraph() {
   
   echo json_encode($rcvUserGraph, JSON_PRETTY_PRINT)."\n";
   
-  echo "#################################################\n";
-  echo "Check if received array matches the one sent:";
+  echo "#######################################################\n";
+  echo "Check if received userGraph matches the one we expect:";
+  $userGraph['HumourStatus'] = array();
+  $userGraph['Interests'] = array();
+  
   if(json_encode($userGraph, JSON_PRETTY_PRINT) 
           === json_encode($rcvUserGraph, JSON_PRETTY_PRINT)) {
       echo "YES!\n";
