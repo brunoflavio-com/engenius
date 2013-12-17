@@ -8,7 +8,7 @@
 typedef	GLdouble Vertice[3];
 
 typedef struct Camera{
-	GLfloat fov;
+	GLfloat height;
 	GLdouble dir_lat;
 	GLdouble dir_long;
 	GLfloat dist;
@@ -19,3 +19,8 @@ typedef struct Camera{
 typedef struct special_Key{
   GLboolean   up,down,left,right;
 }special_Key;
+
+typedef struct Mouse_State{
+	GLint        xMouse;
+    GLint        yMouse;
+}Mouse_State;
