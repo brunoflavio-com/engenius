@@ -28,7 +28,7 @@ namespace SocialGamePublicAPI.Model
         public string Token { get; set; }
         
         [Required]
-        public string Email { get; set; }
+        public string JsonUser { get; set; }
 
         [MaxLength]
         public string JsonGraph {get; set;}

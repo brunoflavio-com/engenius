@@ -67,18 +67,31 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DatabaseName.mdf" />
-    <Content Include="App_Data\DatabaseName_log.ldf" />
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService.disco" />
+    <None Include="Service References\SocialGameBLLService\configuration91.svcinfo" />
+    <None Include="Service References\SocialGameBLLService\configuration.svcinfo" />
+    <None Include="Service References\SocialGameBLLService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="SocialGameAPI.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201312141545514_I.cs" />
-    <Compile Include="Migrations\201312141545514_I.Designer.cs">
-      <DependentUpon>201312141545514_I.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Session.cs" />
+    <Compile Include="Service References\SocialGameBLLService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service\Graph.cs" />
+    <Compile Include="Service\HumourStatus.cs" />
+    <Compile Include="Service\Interest.cs" />
+    <Compile Include="Service\Relationship.cs" />
+    <Compile Include="Service\RelationshipTag.cs" />
+    <Compile Include="Service\ServiceConverter.cs" />
+    <Compile Include="Service\User.cs" />
     <Compile Include="SocialGameAPI.svc.cs">
       <DependentUpon>SocialGameAPI.svc</DependentUpon>
     </Compile>
@@ -88,6 +101,40 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\SocialGamePublicAPI.pubxml" />
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService.wsdl" />
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\SocialGameBLLService\SocialGamePublicAPI.SocialGameBLLService.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SocialGameBLLService\SocialGamePublicAPI.SocialGameBLLService.Graph.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SocialGameBLLService\SocialGamePublicAPI.SocialGameBLLService.RelationshipTag.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SocialGameBLLService\SocialGamePublicAPI.SocialGameBLLService.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -96,9 +143,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201312141545514_I.resx">
-      <DependentUpon>201312141545514_I.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SocialGameBLLService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
