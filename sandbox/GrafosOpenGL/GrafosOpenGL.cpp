@@ -10,11 +10,12 @@
 
 Camera cam;
 special_Key KeyStatus;
+Mouse_State MouseStatus;
 
 void StartCam(){
 	cam.dir_lat = M_PI/4;
 	cam.dir_long = -M_PI/4;
-	cam.fov = 0;
+	cam.height = 0;
 	cam.dist = 10;
 	cam.center[0] = 0;
 	cam.center[1] = 0;
@@ -26,7 +27,11 @@ void CamLookAt(){
 	eye[0]=cam.center[0]+cam.dist*cos(cam.dir_long)*cos(cam.dir_lat);
 	eye[1]=cam.center[1]+cam.dist*sin(cam.dir_long)*cos(cam.dir_lat);
 	eye[2]=cam.center[2]+cam.dist*sin(cam.dir_lat);
-	gluLookAt(eye[0],eye[1],eye[2],cam.center[0],cam.center[1],cam.center[2],0,0,1);
+	gluLookAt(
+		eye[0],eye[1],eye[2]+cam.height,
+		cam.center[0],cam.center[1],cam.center[2]+cam.height,
+		0,0,1
+		);
 }
 void Init(){
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -44,6 +49,30 @@ void Init(){
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel (GL_SMOOTH);
 	StartCam();
+}
+
+void MotionMouse(int x, int y)
+{
+	float newx = RAD(MouseStatus.xMouse - x);
+	float newy = RAD(MouseStatus.yMouse - y);
+	cam.dir_long += newx;
+	if(cam.dir_lat - newy < M_PI/4 && cam.dir_lat - newy > -M_PI/4)
+		cam.dir_lat -= newy;
+	MouseStatus.xMouse = x;
+	MouseStatus.yMouse = y;
+}
+
+void Mouse(int button, int state, int x, int y){
+	if(button == GLUT_LEFT_BUTTON){
+		if(state == GLUT_DOWN){
+			MouseStatus.xMouse = x;
+			MouseStatus.yMouse = y;
+			glutMotionFunc(MotionMouse);
+
+		} else{
+			glutMotionFunc(NULL);
+		}
+	}
 }
 
 void Reshape(int width, int height){
@@ -111,6 +140,16 @@ void Key(unsigned char key, int x, int y){
 	case 27:
 		exit(1);
 		break;
+	case 'q':
+	case 'Q':
+		cam.height+=0.1;
+		glutPostRedisplay();
+		break;
+	case 'a':
+	case 'A':
+		cam.height-=0.1;
+		glutPostRedisplay();
+		break;
 	}
 }
 
@@ -155,5 +194,6 @@ void main(int argc, char **argv)
 	glutKeyboardFunc(Key);
 	glutSpecialFunc(SpecialKey);
 	glutSpecialUpFunc(SpecialKeyUp);
+	glutMouseFunc(Mouse);
 	glutMainLoop();
 }

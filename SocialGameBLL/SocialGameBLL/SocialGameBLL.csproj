@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="ISocialGameBLLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\EntitieServiceConvert.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -120,6 +121,7 @@
     <Content Include="Documentation\LoginUser.sequencediagram" />
     <Content Include="Documentation\GetUserRelationships.sequencediagram" />
     <Content Include="Documentation\GetRelationshipTags.sequencediagram" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
