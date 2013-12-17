@@ -15,69 +15,70 @@ namespace SocialGamePublicAPI
     {
         private SessionContext db = new SessionContext();
 
+        private SocialGameBLLService.SocialGameBLLServiceClient BLLClient = new SocialGameBLLService.SocialGameBLLServiceClient();
+
         public string Login(string IEmail, string Password)
         {
-            if (validateLogin(IEmail,Password))
+            Service.User User;
+            try
             {
+                User = validateLogin(IEmail, Password);
+            }
+            catch (FaultException e)
+            {
+                return "";
+            }
                 string Token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                string json = new JavaScriptSerializer().Serialize(User);
                 db.Sessions.Add(new Session
                 {
                     Token = Token,
-                    Email = IEmail
+                    JsonUser = json 
                 });
                 db.SaveChangesAsync();
-                
                 return Token;
-            }
-            else
-            {
-                throw new FaultException("Wrong Username/Password");
-            }
-
         }
-        public void Logout(string Token) {
+        
+        public void Logout(string Token)
+        {
             Session Session = getSession(Token);
 
             db.Sessions.Remove(Session);
-            
+
             db.SaveChangesAsync();
         }
 
-        public UserContract GetGraph(string Token, string UserName, int graphDepth) {
-            //TestData - TODO Integrate with BLL
-
-            Session session = getSession("1");
-
-            JavaScriptSerializer jser = new JavaScriptSerializer();
-            UserContract User = jser.Deserialize<UserContract>(session.JsonGraph);
-            return User;
+        public Service.Graph GetGraph(string Token, string Email, int graphDepth) {
+            
+            Session Session = getSession(Token);
+            JavaScriptSerializer jsonSerializer =  new JavaScriptSerializer();
+            SocialGameBLLService.User User = new SocialGameBLLService.User
+            {
+                Email = Email
+            };
+            SocialGameBLLService.Graph BLLGraph =  BLLClient.GetRelationships(User, graphDepth);
+            return Service.ServiceConverter.convertGraph(BLLGraph);
         }
 
-        private bool validateLogin(string Email, string Password)
+        private Service.User validateLogin(string Email, string Password)
         {
-            
-            //TODO Integrate with BLL
-            if (Email == "xiko" && Password == "qwerty")
-            {
-                return true;
-            }
-            else {
-                return false;
-            }
+             
+            SocialGameBLLService.User BLLUser =  BLLClient.LoginUser(Email, Password);
+            return  Service.ServiceConverter.convertUser(BLLUser);
         }
 
         private Session getSession(string Token)
         {
             Session Session = db.Sessions.Find(Token);
 
-            if (Session == null )
+            if (Session == null)
             {
                 throw new FaultException("Token not reconized");
             }
 
             Session.LastConnectionTime = System.DateTime.Now;
             return Session;
-        }  
+        }
     }
-    
+
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="50bbb291-501e-4b6b-86cc-4ddfcec33c44" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SocialGameBLLService.xsd" MetadataType="Schema" ID="8679562e-17c5-4056-a398-b2060bbd9fcb" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SocialGameBLLService1.xsd" MetadataType="Schema" ID="c09e8283-c584-49f4-aa60-5b5c9937dfae" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SocialGameBLLService2.xsd" MetadataType="Schema" ID="7b22ca36-9aa5-4bfe-b128-bb047b432c06" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd4" />
+    <MetadataFile FileName="SocialGameBLLService3.xsd" MetadataType="Schema" ID="92cbabf0-47b5-46ac-8059-0b35d64304da" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd6" />
+    <MetadataFile FileName="SocialGameBLLService4.xsd" MetadataType="Schema" ID="324f6a38-70b7-4b41-bcaa-07e7415dce08" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SocialGameBLLService.wsdl" MetadataType="Wsdl" ID="fa7775e6-59ef-4544-ba26-bfb7771fe3ba" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?wsdl" />
+    <MetadataFile FileName="SocialGameBLLService5.xsd" MetadataType="Schema" ID="2b80aa0b-71ee-4b5e-8ec3-d0a2f1200c2e" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd5" />
+    <MetadataFile FileName="SocialGameBLLService6.xsd" MetadataType="Schema" ID="27363a37-7ff9-4c90-9d94-20ce3f2ef2bd" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SocialGameBLLService.disco" MetadataType="Disco" ID="72fbe8b4-5387-4a30-83c7-eecc205d2c33" SourceId="1" SourceUrl="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
