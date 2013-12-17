@@ -3,6 +3,8 @@
 
 User::User()
 {
+	userTags = new vector<UserTag * >();
+	relationships = new vector<Relationship *>();
 }
 
 
