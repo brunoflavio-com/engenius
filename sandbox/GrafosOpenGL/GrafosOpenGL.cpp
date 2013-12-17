@@ -15,7 +15,7 @@ void StartCam(){
 	cam.dir_lat = M_PI/4;
 	cam.dir_long = -M_PI/4;
 	cam.fov = 0;
-	cam.dist = 2;
+	cam.dist = 10;
 	cam.center[0] = 0;
 	cam.center[1] = 0;
 	cam.center[2] = 0;
@@ -50,12 +50,7 @@ void Reshape(int width, int height){
 	glViewport(0, 0, (GLint) width, (GLint) height);  
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
-	if (width < height)
-		glOrtho(-5, 5, -5*(GLdouble)height/width, 5*(GLdouble)height/width,-10,10);
-	else
-		glOrtho(-5*(GLdouble)width/height, 5*(GLdouble)width/height,-5, 5, -10,10);
-
+	gluPerspective( 65.0, (GLdouble) width / height, 1.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -63,14 +58,10 @@ void Reshape(int width, int height){
 void Draw(){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	CamLookAt();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	/*	gluLookAt(0,-4, 2,
-	0,0,0,
-	0,0,1);*/
-
+	CamLookAt();
 
 	glBegin(GL_POLYGON);
 
@@ -82,7 +73,9 @@ void Draw(){
 	glTranslatef(2,0,2);
 	glColor3f(0,0,1);
 	gluSphere(quadric,1,30,10);
+	glRotatef(-135,0,1,0);
 	gluCylinder(quadric,.5,.5,2,30,10);
+
 	glEnd();
 
 	glutSwapBuffers();
@@ -91,19 +84,33 @@ void Draw(){
 
 void Timer(int value){
 	glutTimerFunc(1,Timer,0);
+	if(KeyStatus.up){
+		cam.dist-=0.01;
+	}
+	if(KeyStatus.down){
+		cam.dist+=0.01;
+	}
+	if(KeyStatus.left){
+		cam.dir_long+=M_PI*0.001;
+	}
+	if(KeyStatus.right){
+		cam.dir_long-=M_PI*0.001;
+	}
+	glutPostRedisplay();
 }
 
 void PrintKeys(){
-	printf("Up/Down - avancar/recuar\n");
-	printf("Left/Right - virar para a esquerda/direita\n");
+	printf("Up/Down - Zoom in/out\n");
+	printf("Left/Right - rodar para a esquerda/direita\n");
 	printf("Q/q/A/a - subir/descer\n");
+	printf("ESC - Sair\n");
 }
 
 void Key(unsigned char key, int x, int y){
 	switch (key) {
-		case 27:
-			exit(1);
-			break;
+	case 27:
+		exit(1);
+		break;
 	}
 }
 
@@ -122,29 +129,29 @@ void SpecialKey(int key, int x, int y){
 
 void SpecialKeyUp(int key, int x, int y){
 	switch (key) {
-    case GLUT_KEY_UP: KeyStatus.up =GL_FALSE;
-            break;
-    case GLUT_KEY_DOWN: KeyStatus.down =GL_FALSE;
-            break;
-    case GLUT_KEY_LEFT: KeyStatus.left =GL_FALSE;
-            break;
-    case GLUT_KEY_RIGHT: KeyStatus.right =GL_FALSE;
-            break;
-  }
+	case GLUT_KEY_UP: KeyStatus.up =GL_FALSE;
+		break;
+	case GLUT_KEY_DOWN: KeyStatus.down =GL_FALSE;
+		break;
+	case GLUT_KEY_LEFT: KeyStatus.left =GL_FALSE;
+		break;
+	case GLUT_KEY_RIGHT: KeyStatus.right =GL_FALSE;
+		break;
+	}
 }
 
 void main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(640, 480);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Grafo Social");
 	PrintKeys();
 	Init();
+	glutTimerFunc(1,Timer,0);
 	glutReshapeFunc(Reshape);
 	glutDisplayFunc(Draw);
-	glutTimerFunc(1,Timer,0);
 	glutKeyboardFunc(Key);
 	glutSpecialFunc(SpecialKey);
 	glutSpecialUpFunc(SpecialKeyUp);
