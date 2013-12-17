@@ -78,7 +78,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\RelationshipsController.cs" />
-    <Compile Include="Controllers\UsersControllers.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Entities\HumourStatusEntity.cs" />
     <Compile Include="Entities\InterestEntity.cs" />
     <Compile Include="Entities\RelationshipEntity.cs" />
@@ -98,6 +98,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\SecurityService.cs" />
+    <Compile Include="Service\HumourStatus.cs" />
+    <Compile Include="Service\Interest.cs" />
     <Compile Include="Service\Graph.cs" />
     <Compile Include="Service\Relationship.cs" />
     <Compile Include="Service\RelationshipRequest.cs" />
