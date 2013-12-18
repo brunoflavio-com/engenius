@@ -7,7 +7,6 @@ class User;
 class Relationship
 {
 	public:
-	int id;
 	User * user;
 	int strength;
 	RelationshipTag * relationshipTag;

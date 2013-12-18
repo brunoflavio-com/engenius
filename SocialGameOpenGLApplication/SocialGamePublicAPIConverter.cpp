@@ -65,6 +65,7 @@ User * SocialGamePublicAPIConverter::convertGraph(ns5__Graph * graph, string ema
 	User * userB = getUser(*ns5__relationship->UserBEmail);
 	RelationshipTag * relationshipTag = getRelationshipTag(*ns5__relationship->RelationshipTagId);
 	relationship->user = userB;
+	relationship->strength = *ns5__relationship->Strength;
 	relationship->relationshipTag = relationshipTag;
 	userA->relationships->push_back(relationship);
 	}

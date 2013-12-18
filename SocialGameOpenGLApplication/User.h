@@ -10,6 +10,7 @@ using namespace std;
 class User
 {
 public:
+	int graphLevel;
 	string * email;
 	string * name;
 	string * surname;
