@@ -95,5 +95,18 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public ICollection<User> GetShortestPath(User Me, User Goal, int Depth)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.GetShortestPath(Me, Goal, Depth);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }
