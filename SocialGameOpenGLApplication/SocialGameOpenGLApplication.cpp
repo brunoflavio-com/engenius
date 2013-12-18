@@ -4,8 +4,9 @@
 #include "SocialGamePublicAPIClient.h"
 #include "User.h"
 #include <exception>
+#include "GraphOpenGL.h"
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain(int argc, char* argv[])
 {
 	SocialGamePublicAPIClient * client = new SocialGamePublicAPIClient();
 	std::cout << "Start";
@@ -22,8 +23,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::cout << "Not True";
 	}
 	User * user = client->getGraph("test@test.com", 2);
+	InterfaceGL * jogo = new GraphOpenGL();// apartir daqui
 
-
+	jogo->Run(argc,argv);
 
 	getchar();
 	return 0;
