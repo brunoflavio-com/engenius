@@ -6,7 +6,11 @@ SOAP_NMAC struct Namespace namespaces[] =
 	{"SOAP-ENC", "http://schemas.xmlsoap.org/soap/encoding/", "http://www.w3.org/*/soap-encoding", NULL},
 	{"xsi", "http://www.w3.org/2001/XMLSchema-instance", "http://www.w3.org/*/XMLSchema-instance", NULL},
 	{"xsd", "http://www.w3.org/2001/XMLSchema", "http://www.w3.org/*/XMLSchema", NULL},
-	{"ns3", "http://schemas.datacontract.org/2004/07/SocialGamePublicAPI", NULL, NULL},
+	{"ns4", "http://schemas.datacontract.org/2004/07/System", NULL, NULL},
+	{"ns5", "http://schemas.datacontract.org/2004/07/SocialGamePublicAPI.Service", NULL, NULL},
+	{"arr", "http://schemas.microsoft.com/2003/10/Serialization/Arrays", NULL, NULL},
+	{"ser", "http://schemas.microsoft.com/2003/10/Serialization/", NULL, NULL},
+	{"ns3", "http://schemas.datacontract.org/2004/07/System.ServiceModel", NULL, NULL},
 	{"ns1", "http://wvm008.dei.isep.ipp.pt", NULL, NULL},
 	{NULL, NULL, NULL, NULL}
 };

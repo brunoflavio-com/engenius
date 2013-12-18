@@ -1,13 +1,14 @@
 #pragma once
 #include <string>
-
 using namespace std;
-class UserTag
+
+class HumorStatus
 {
 public:
 	int id;
 	string name;
-	UserTag();
-	~UserTag();
+
+	HumorStatus();
+	~HumorStatus();
 };
 

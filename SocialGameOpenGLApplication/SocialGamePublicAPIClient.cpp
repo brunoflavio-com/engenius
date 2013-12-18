@@ -1,6 +1,6 @@
 #include "SocialGamePublicAPIClient.h"
 #include "gsoapAPIClient\BasicHttpBinding_USCOREISocialGameService.nsmap"
-
+#include "SocialGamePublicAPIConverter.h"
 
 SocialGamePublicAPIClient::SocialGamePublicAPIClient()
 {
@@ -26,7 +26,6 @@ std::future<boolean> SocialGamePublicAPIClient::asyncLogin(std::string email, st
 boolean SocialGamePublicAPIClient::Login(std::string email, std::string password){
 	ready = false;
 	_ns1__Login login;
-
 	login.Email = &email;
 	login.Password = &password;
 
@@ -34,10 +33,17 @@ boolean SocialGamePublicAPIClient::Login(std::string email, std::string password
 
 	if (proxy.Login(&login, &loginResponse) == SOAP_OK){
 		std::string * Token = loginResponse.LoginResult;
-		this->token = *Token;
-		LoggedIn = true;
-		ready = true;
-		return true;
+
+		if (!Token->empty()){
+			this->token = *Token;
+			LoggedIn = true;
+			ready = true;
+			return true;
+		}
+		else{
+			ready = true;
+			return false;
+		}
 	}
 	else{
 		ready = true;
@@ -45,13 +51,13 @@ boolean SocialGamePublicAPIClient::Login(std::string email, std::string password
 	}
 }
 
-std::future<boolean> SocialGamePublicAPIClient::asyncGetGraph(std::string email, int depth){
+std::future<User * > SocialGamePublicAPIClient::asyncGetGraph(std::string email, int depth){
 	if (ready){
 		return std::async(&SocialGamePublicAPIClient::getGraph, this, email, depth);
 	}
 }
 
-boolean SocialGamePublicAPIClient::getGraph(std::string email, int depth){
+User * SocialGamePublicAPIClient::getGraph(std::string email, int depth){
 	if (ready && LoggedIn){
 		ready = false;
 		_ns1__GetGraph getGraph;
@@ -60,8 +66,11 @@ boolean SocialGamePublicAPIClient::getGraph(std::string email, int depth){
 		getGraph.Email = &email;
 		_ns1__GetGraphResponse response;
 		proxy.GetGraph(&getGraph, &response);
-		ns3__UserContract * user = response.GetGraphResult;
+		ns5__Graph * graph = response.GetGraphResult;
+		SocialGamePublicAPIConverter * converter = new SocialGamePublicAPIConverter();
+		User * user = converter->convertGraph(graph, email);
 		ready = true;
+		return user;
 	}
 	else{
 

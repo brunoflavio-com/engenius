@@ -23,7 +23,7 @@
 
 %%
 % Request Handler:
-get_user_graph(Request) :-			
+get_user_graph(_) :-			
 	get_user_graph_action(UserGraph),
 	prolog_to_json(UserGraph, UserGraphJSON),
 	reply_json(UserGraphJSON).
@@ -37,14 +37,14 @@ get_user_graph_action(UserGraph) :-
         
         UserGraph = json(
 		      [
-			%not used:
-		        'HumourStatus'=[],
-		        %not used:
-			'Interests'=[],
-			
-			%the information we have:
+			%the lists we'll need:			
+			'Users'=UsersJSON,
 			'Relationships'=RelationshipsJSON,
-			'Users'=UsersJSON
+			
+			%not used:
+			'Interests'=[],			
+			'RelationshipTags'=[],
+		        'HumourStatus'=[]
 		      ]
 		    ).
 
@@ -56,15 +56,15 @@ get_users(UsersJSON):-
 	  %output
 	  json(
 		    [
-		      'Birthdate'= Birthdate,
 		      'Email'= Email,
-		      'FacebookProfile'= FacebookProfile,
+		      'Name'= Name,
+		      'Surname'= Surname,
+		      'Birthdate'= Birthdate,
 		      'HumourStatusId'= HumourStatusID,
 		      'InterestsIDs'= Interests,
-		      'LinkedInProfile'= LinkedInProfile,
-		      'Name'= Name,
 		      'PhoneNumber'= PhoneNumber,
-		      'Surname'= Surname
+		      'LinkedInProfile'= LinkedInProfile,
+		      'FacebookProfile'= FacebookProfile
 		    ]
 	  ),
 	  %search
@@ -80,10 +80,10 @@ get_relationships(RelationshipsJSON):-
 	  %output
 	  json(
 		[
-		  'RelationshipTagId'= TagID,
-		  'Strength'=Strength,
 		  'UserAEmail'=UserA,
-		  'UserBEmail'=UserB
+		  'UserBEmail'=UserB,
+		  'RelationshipTagId'= TagID,
+		  'Strength'=Strength
 		]
 	  ),
 	  %search
