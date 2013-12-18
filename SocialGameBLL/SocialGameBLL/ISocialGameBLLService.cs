@@ -32,6 +32,8 @@ namespace SocialGameBLL
         ICollection<RelationshipTag> GetRelationshipTags();
         [OperationContract]
         Graph GetRelationships(User User, int Depth);
+        [OperationContract]
+        RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength);
     }
 
 

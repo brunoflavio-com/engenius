@@ -78,29 +78,31 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Connection.h" />
-    <ClInclude Include="ConnectionTag.h" />
+    <ClInclude Include="RelationShip.h" />
+    <ClInclude Include="RelationshipTag.h" />
     <ClInclude Include="gsoapAPIClient\Service1.h" />
     <ClInclude Include="gsoapAPIClient\soapBasicHttpBinding_USCOREISocialGameServiceProxy.h" />
     <ClInclude Include="gsoapAPIClient\soapH.h" />
     <ClInclude Include="gsoapAPIClient\soapStub.h" />
     <ClInclude Include="gsoapAPIClient\stdsoap2.h" />
-    <ClInclude Include="Humor.h" />
+    <ClInclude Include="HumorStatus.h" />
     <ClInclude Include="SocialGamePublicAPIClient.h" />
+    <ClInclude Include="SocialGamePublicAPIConverter.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserTag.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Connection.cpp" />
-    <ClCompile Include="ConnectionTag.cpp" />
+    <ClCompile Include="RelationShip.cpp" />
+    <ClCompile Include="RelationShipTag.cpp" />
     <ClCompile Include="gsoapAPIClient\soapBasicHttpBinding_USCOREISocialGameServiceProxy.cpp" />
     <ClCompile Include="gsoapAPIClient\soapC.cpp" />
     <ClCompile Include="gsoapAPIClient\stdsoap2.cpp" />
-    <ClCompile Include="Humor.cpp" />
+    <ClCompile Include="HumorStatus.cpp" />
     <ClCompile Include="SocialGameOpenGLApplication.cpp" />
     <ClCompile Include="SocialGamePublicAPIClient.cpp" />
+    <ClCompile Include="SocialGamePublicAPIConverter.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserTag.cpp" />

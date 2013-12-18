@@ -1,5 +1,6 @@
 ﻿using SocialGameBLL.Entities;
 using SocialGameBLL.Service;
+using SocialGameBLL.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace SocialGameBLL.Controllers
         {            
             ICollection<RelationTagEntity> RelationTagEntities = db.RelationTags.ToList();
 
-            ICollection<RelationshipTag> RelationshipTags = ConvertRelationTagEntitiesToRelationshipTag(RelationTagEntities);
+            ICollection<RelationshipTag> RelationshipTags = EntityServiceConverter.ConvertRelationTagEntitiesToRelationshipTag(RelationTagEntities);
             return RelationshipTags;
         }
 
@@ -55,11 +56,35 @@ namespace SocialGameBLL.Controllers
             return new Graph
             {
                 Users = ConvertNodeToUser(ListOfNodes),
-                Relationships = ConvertRelationshipEntitiesToRelationships(ListOfArcs),
-                Interests = ConvertToInterestFromInterestEntities(Interests),
-                RelationshipTags = ConvertToRelationshipTagsFromRelationTagEntities(RelationTags),
-                HumourStatus = ConvertToHumourStatusFromHumourStatusEntities(HumourStatus)
+                Relationships = EntityServiceConverter.ConvertRelationshipEntitiesToRelationships(ListOfArcs),
+                Interests = EntityServiceConverter.ConvertToInterestFromInterestEntities(Interests),
+                RelationshipTags = EntityServiceConverter.ConvertToRelationshipTagsFromRelationTagEntities(RelationTags),
+                HumourStatus = EntityServiceConverter.ConvertToHumourStatusFromHumourStatusEntities(HumourStatus)
             };
+        }
+
+        public RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                UserEntity OtherEntity = db.Users.Find(Other.Email);
+                RelationTagEntity TagEntity = db.RelationTags.Find(RelationshipTagId);
+                db.RelationshipsRequests.Add(new RelationshipRequestEntity
+                    {
+                        UserEmail = MyEntity.Email,
+                        FriendEmail = OtherEntity.Email,
+                        RelationTagID = TagEntity.ID,
+                        Strength = Strength
+                    });
+                db.SaveChanges();
+                RelationshipRequestEntity RequestEntityCreated = db.RelationshipsRequests.Find(MyEntity.Email, OtherEntity.Email);
+                return EntityServiceConverter.ConvertToRelationshipRequestFromRelationshipRequestEntity(RequestEntityCreated);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         private void GetRelatedUsers(int Position, IList<Node> Nodes, IList<RelationshipEntity> Relationships
@@ -119,20 +144,6 @@ namespace SocialGameBLL.Controllers
 
         }
 
-        private ICollection<RelationshipTag> ConvertRelationTagEntitiesToRelationshipTag(ICollection<RelationTagEntity> Entities)
-        {
-            ICollection<RelationshipTag> RelationshipTags = new List<RelationshipTag>();
-            foreach (RelationTagEntity Entity in Entities)
-            {
-                RelationshipTags.Add(new RelationshipTag
-                {
-                    Id = Entity.ID,
-                    Name = Entity.Name                    
-                });
-            }
-            return RelationshipTags;
-        }
-
         private ICollection<User> ConvertNodeToUser(IList<Node> Nodes)
         {
             ICollection<User> Users = new List<User>();
@@ -146,84 +157,13 @@ namespace SocialGameBLL.Controllers
                      Surname = UserEntity.Surname,
                      Birthdate = (UserEntity.Birthdate != null) ? (DateTime)UserEntity.Birthdate : DateTime.MinValue,
                      HumourStatusId = UserEntity.HumourStatusID,
-                     InterestsIDs = GetInterestsIdsFromInterests(UserEntity.Interests),
+                     InterestsIDs = EntityServiceConverter.GetInterestsIdsFromInterests(UserEntity.Interests),
                      FacebookProfile = UserEntity.FacebookProfile,
                      LinkedInProfile = UserEntity.LinkedInProfile,
                      PhoneNumber = UserEntity.PhoneNumber
                 });
             }
             return Users;
-        }
-
-        private ICollection<Relationship> ConvertRelationshipEntitiesToRelationships(IList<RelationshipEntity> RelationshipEntities)
-        {
-            ICollection<Relationship> Relationships = new List<Relationship>();
-            foreach (RelationshipEntity RelationshipEntity in RelationshipEntities)
-            {
-                Relationships.Add(new Relationship
-                {
-                    UserAEmail = RelationshipEntity.UserEmail,
-                    UserBEmail = RelationshipEntity.FriendEmail,
-                    Strength = RelationshipEntity.Strength,
-                    RelationshipTagId = RelationshipEntity.RelationTagID
-                });
-            }
-            return Relationships;
-        }
-
-        private ICollection<int> GetInterestsIdsFromInterests(ICollection<InterestEntity> Interests)
-        {
-            ICollection<int> InterestsIDs = new List<int>();
-            if (Interests != null)
-            {
-                foreach (InterestEntity Interest in Interests)
-                {
-                    InterestsIDs.Add(Interest.ID);
-                }
-            }
-            return InterestsIDs;
-        }
-
-        private ICollection<RelationshipTag> ConvertToRelationshipTagsFromRelationTagEntities(ICollection<RelationTagEntity> RelationTagEntities)
-        {
-            ICollection<RelationshipTag> RelationshipTags = new List<RelationshipTag>();
-            foreach (RelationTagEntity RelationTagEntity in RelationTagEntities)
-            {
-                RelationshipTags.Add(new RelationshipTag
-                {
-                    Id = RelationTagEntity.ID,
-                    Name = RelationTagEntity.Name
-                });
-            }
-            return RelationshipTags;
-        }
-
-        private ICollection<Interest> ConvertToInterestFromInterestEntities(ICollection<InterestEntity> InterestEntities)
-        {
-            ICollection<Interest> Interests = new List<Interest>();
-            foreach (InterestEntity InterestEntity in InterestEntities)
-            {
-                Interests.Add(new Interest
-                {
-                    Id = InterestEntity.ID,
-                    Name = InterestEntity.Name
-                });
-            }
-            return Interests;
-        }
-
-        private ICollection<HumourStatus> ConvertToHumourStatusFromHumourStatusEntities(ICollection<HumourStatusEntity> HumourStatusEntities)
-        {
-            ICollection<HumourStatus> HumourStatus = new List<HumourStatus>();
-            foreach (HumourStatusEntity HumourStatusEntity in HumourStatusEntities)
-            {
-                HumourStatus.Add(new HumourStatus
-                {
-                    Id = HumourStatusEntity.ID,
-                    Name = HumourStatusEntity.Name
-                });
-            }
-            return HumourStatus;
         }
     }
 }

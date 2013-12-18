@@ -9,10 +9,10 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <string>
-#include <vector>
-#include "User.h"
-#include "Connection.h"
-#include "ConnectionTag.h"
-#include "UserTag.h"
-#include "Humor.h"
+
+//#include "User.h"
+//#include "Connection.h"
+//#include "ConnectionTag.h"
+//#include "UserTag.h"
+//#include "Humor.h"
 // TODO: reference additional headers your program requires here

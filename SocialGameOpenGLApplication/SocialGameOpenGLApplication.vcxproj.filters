@@ -45,16 +45,19 @@
     <ClInclude Include="User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Connection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConnectionTag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="UserTag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Humor.h">
+    <ClInclude Include="RelationShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RelationshipTag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SocialGamePublicAPIConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HumorStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -80,16 +83,19 @@
     <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Connection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ConnectionTag.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UserTag.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Humor.cpp">
+    <ClCompile Include="RelationShip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RelationShipTag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SocialGamePublicAPIConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HumorStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
