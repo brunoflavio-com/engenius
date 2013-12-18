@@ -5,68 +5,63 @@ require_once 'HTTP/Request2/CookieJar.php';
 function testUserGraph() {
   // The data to send to the API
   $userGraph = array(
-      'HumourStatus' => array(
-			  array(
-			      'Id' => 1,
-			      'Name' => 'Normal'
-			      )
-		     ),
-		     
-      'Interests' => array(),
-      
-      'Relationships' => array(
-	  array('RelationshipTagId' => 1,
-		'Strength' => 2,
-		'UserAEmail' => 'test@test.com',
-		'UserBEmail' => 'test3@test.com'
-		),
-	  array('RelationshipTagId' => 2,
-		'Strength' => 5,
-		'UserAEmail' => 'test2@test.com',
-		'UserBEmail' => 'test3@test.com'
-		),
-	  array('RelationshipTagId' => 1,
-		'Strength' => 5,
-		'UserAEmail' => 'test@test.com',
-		'UserBEmail' => 'test2@test.com'
-		),
-	  ), 
-	  
       'Users'=> array(
-	  array('Birthdate' => '0001-01-01T00:00:00',
+	  array(
 		'Email' => 'test3@test.com',
-		'FacebookProfile' => null,
+		'Name' => null,
+		'Surname' => null,
+		'Birthdate' => '0001-01-01T00:00:00',
 		'HumourStatusId'  => 1,
 		'InterestsIDs' => array (1,2,3,4
 		    ),
-		'LinkedInProfile' => null,
-		'Name' => null,
 		'PhoneNumber' => null,
-		'Surname' => null
+		'LinkedInProfile' => null,
+		'FacebookProfile' => null,		
 		),
-	  array('Birthdate' => '0001-01-01T00:00:00',
+	array(
 		'Email' => 'test@test.com',
-		'FacebookProfile' => null,
-		'HumourStatusId'  => 1,
-		'InterestsIDs' => array ( 1
-		    ),
-		'LinkedInProfile' => null,
 		'Name' => null,
+		'Surname' => null,
+		'Birthdate' => '0001-01-01T00:00:00',
+		'HumourStatusId'  => 1,
+		'InterestsIDs' => array (1
+		    ),
 		'PhoneNumber' => null,
-		'Surname' => null
+		'LinkedInProfile' => null,
+		'FacebookProfile' => null,		
 		),
-	  array('Birthdate' => '0001-01-01T00:00:00',
+	array(
 		'Email' => 'test2@test.com',
-		'FacebookProfile' => null,
-		'HumourStatusId'  => 1,
-		'InterestsIDs' => array (
-		    ),
-		'LinkedInProfile' => null,
 		'Name' => null,
+		'Surname' => null,
+		'Birthdate' => '0001-01-01T00:00:00',
+		'HumourStatusId'  => 1,
+		'InterestsIDs' => array (),
 		'PhoneNumber' => null,
-		'Surname' => null
+		'LinkedInProfile' => null,
+		'FacebookProfile' => null,		
 		)
-      )
+      ),
+      'Relationships' => array(
+	  array('UserAEmail' => 'test@test.com',
+		'UserBEmail' => 'test3@test.com',
+		'RelationshipTagId' => 1,
+		'Strength' => 2
+		),
+	  array('UserAEmail' => 'test2@test.com',
+		'UserBEmail' => 'test3@test.com',
+		'RelationshipTagId' => 2,
+		'Strength' => 5
+		),
+	  array('UserAEmail' => 'test@test.com',
+		'UserBEmail' => 'test2@test.com',
+		'RelationshipTagId' => 1,
+		'Strength' => 5
+		),
+      ),
+      'Interests' => array(),
+      'RelationshipTags' => array(),
+      'HumourStatus' => array()
   );
 
   $cookieJar = new HTTP_Request2_CookieJar();

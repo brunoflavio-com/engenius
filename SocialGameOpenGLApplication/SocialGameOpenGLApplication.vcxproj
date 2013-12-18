@@ -78,8 +78,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="graphCoordWalker.h" />
-    <ClInclude Include="GraphWalker.h" />
+    <ClInclude Include="GraphOpenGL.h" />
+    <ClInclude Include="InterfaceGL.h" />
     <ClInclude Include="RelationShip.h" />
     <ClInclude Include="RelationshipTag.h" />
     <ClInclude Include="gsoapAPIClient\Service1.h" />
@@ -96,8 +96,7 @@
     <ClInclude Include="UserTag.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="graphCoordWalker.cpp" />
-    <ClCompile Include="GraphWalker.cpp" />
+    <ClCompile Include="GraphOpenGL.cpp" />
     <ClCompile Include="RelationShip.cpp" />
     <ClCompile Include="RelationShipTag.cpp" />
     <ClCompile Include="gsoapAPIClient\soapBasicHttpBinding_USCOREISocialGameServiceProxy.cpp" />

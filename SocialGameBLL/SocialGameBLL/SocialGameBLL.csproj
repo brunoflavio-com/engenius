@@ -46,6 +46,9 @@
       <HintPath>..\..\SocialGamePublicAPI\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.ServiceModel.Activities" />
@@ -111,6 +114,7 @@
     <Compile Include="ISocialGameBLLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\EntityServiceConverter.cs" />
+    <Compile Include="Util\PrologRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

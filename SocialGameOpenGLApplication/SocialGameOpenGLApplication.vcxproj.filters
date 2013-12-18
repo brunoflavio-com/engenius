@@ -60,10 +60,10 @@
     <ClInclude Include="HumorStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GraphWalker.h">
+    <ClInclude Include="InterfaceGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="graphCoordWalker.h">
+    <ClInclude Include="GraphOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,10 +104,7 @@
     <ClCompile Include="HumorStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GraphWalker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="graphCoordWalker.cpp">
+    <ClCompile Include="GraphOpenGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

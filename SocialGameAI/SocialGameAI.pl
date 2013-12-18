@@ -14,6 +14,8 @@
 :-format('###Loading the model.~n'),
     consult('Model.pl').
 
+:-format('###Loading the search methods.~n'),
+    consult('Search.methods.pl').
     
 %%TODO: load graph handling predicates
     

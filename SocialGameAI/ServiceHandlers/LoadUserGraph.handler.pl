@@ -35,14 +35,14 @@ load_user_graph(Request) :-
 load_user_graph_action(UserGraph) :-
         UserGraph = json(
 		      [
-			%not used:
-		        'HumourStatus'=_,
-		        %not used:
-			'Interests'=_,
-			
-			%the lists we'll need:
+			%the lists we'll need:			
+			'Users'=UsersJSON,
 			'Relationships'=RelationshipsJSON,
-			'Users'=UsersJSON
+			
+			%not used:
+			'Interests'=_,			
+			'RelationshipTags'=_,
+		        'HumourStatus'=_		        
 		      ]
 		    ),  
 		    
@@ -61,15 +61,15 @@ insert_users([UserJSON | T]):-
 insert_user(UserJSON):-
 	UserJSON = json(
 		    [
-		      'Birthdate'= Birthdate,
 		      'Email'= Email,
-		      'FacebookProfile'= FacebookProfile,
+		      'Name'= Name,
+		      'Surname'= Surname,
+		      'Birthdate'= Birthdate,
 		      'HumourStatusId'= HumourStatusID,
 		      'InterestsIDs'= Interests,
-		      'LinkedInProfile'= LinkedInProfile,
-		      'Name'= Name,
 		      'PhoneNumber'= PhoneNumber,
-		      'Surname'= Surname
+		      'LinkedInProfile'= LinkedInProfile,
+		      'FacebookProfile'= FacebookProfile
 		    ]
 		  ),	
 	http_session_assert(user(Email, Name, Surname, Birthdate, PhoneNumber, Interests, HumourStatusID, FacebookProfile, LinkedInProfile)),
@@ -85,10 +85,10 @@ insert_relationships([RelationshipJSON | T]):-
 insert_relationship(RelationshipJSON):-
 	RelationshipJSON = json(
 			      [
-				'RelationshipTagId'= TagID,
-				'Strength'=Strength,
 				'UserAEmail'=UserA,
-				'UserBEmail'=UserB
+				'UserBEmail'=UserB,
+				'RelationshipTagId'= TagID,
+				'Strength'=Strength
 			      ]
 			  ),
 	http_session_assert(relationship(UserA, UserB, TagID, Strength)),
