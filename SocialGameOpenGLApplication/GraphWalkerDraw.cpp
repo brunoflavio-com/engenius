@@ -38,18 +38,20 @@ void GraphWalkerDraw::walkVertice(User * userA){
 
 	
 
-	glBegin(GL_POLYGON);
+	
 
 	GLUquadricObj *quadric;
 	glPushMatrix();
-	
+	glTranslatef(userA->x, userA->y, userA->z);
+
+	glBegin(GL_POLYGON);
 	quadric = gluNewQuadric();
 	gluQuadricDrawStyle(quadric, GLU_FILL);
-	glTranslatef(userA->x, userA->y, userA->z);
 	gluSphere(quadric, 1, 30, 10);
-	glColor3f(1, 1, 0);
-	
+	glTranslatef(userA->x, userA->y, userA->z);
+	glColor3ub( rand()%255, rand()%255, rand()%255 );
 	//glTranslatef(2, 0, 2);
+	glEnd();
 	glPopMatrix();
 
 	//glColor3f(0, 0, 1);
@@ -57,5 +59,5 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	//glRotatef(-135, 0, 1, 0);
 	//gluCylinder(quadric, .5, .5, 2, 30, 10);
 
-	glEnd();
+	
 }

@@ -15,6 +15,12 @@ void graphCoordWalker::walk(User * graph){
 	graph->x = 0;
 	graph->y = 0;
 	graph->z = 0;
+	
+	std::cout << *graph->email << " | ";
+	std::cout << graph->x << " | ";
+	std::cout << graph->y << " | ";
+	std::cout << graph->z << " | ";
+	std::cout << graph->graphLevel << endl;
 	GraphWalker::walk(graph);
 }
 
@@ -28,17 +34,17 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 		User * userB = relationship->user;
 		float racio = position / (float)total;
 		
-		float sx = floorf(cos(2 * M_PI * racio) * 100) / 100 *2;
-		float sy = floorf(sin(2 * M_PI * racio) * 100) / 100 * 2;
+		float sx = floorf(cos(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
+		float sy = floorf(sin(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
 
 		userB->x= userA->x + sx;
 		userB->y = userA->y + sy;
 		userB->z = 0;
 
-		std::cout << *userB->email << endl;
-		std::cout << userB->x<<endl;
-		std::cout << userB->y << endl;
-		std::cout << userB->z << endl;
+		std::cout << *userB->email << " | ";
+		std::cout << userB->x << " | ";
+		std::cout << userB->y << " | ";
+		std::cout << userB->z << " | ";
 		std::cout << userB->graphLevel << endl;
 	}
 }
