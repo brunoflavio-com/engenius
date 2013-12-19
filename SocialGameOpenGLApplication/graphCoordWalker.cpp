@@ -1,6 +1,9 @@
 #include "graphCoordWalker.h"
 #include <iostream>
 
+#define MIN_DIST 5
+#define SPHERE_RADIUS 2
+
 graphCoordWalker::graphCoordWalker()
 {
 }
@@ -16,6 +19,10 @@ void graphCoordWalker::walk(User * graph){
 	graph->y = 0;
 	graph->z = 0;
 	
+	/*Reset Stats*/
+	maxStrenght = 0;
+	maxUserConnections = 0;
+
 	std::cout << *graph->email << " | ";
 	std::cout << graph->x << " | ";
 	std::cout << graph->y << " | ";
@@ -25,7 +32,10 @@ void graphCoordWalker::walk(User * graph){
 }
 
 void graphCoordWalker::walkVertice(User * user){
-
+	//Sets Height to the number of connections:
+	user->z = user->relationships->size();
+	/*Update Stats*/
+	maxUserConnections = user->z > maxUserConnections? user->z : maxUserConnections;
 }
 
 void graphCoordWalker::walkConnection(User * userA, Relationship * relationship, int position, int total){
@@ -33,13 +43,24 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 		relationship->user->graphLevel = userA->graphLevel + 1;
 		User * userB = relationship->user;
 		float racio = position / (float)total;
+		int totalRelationships = userA->relationships->size();
+
+		float distance = MIN_DIST - ((3 * 2 * SPHERE_RADIUS) + totalRelationships *(2 * SPHERE_RADIUS)) / 2 * M_PI;
+
+		float sx =((distance)*cos(2*M_PI*position / totalRelationships) );
+		float sy =((distance)*sin(2*M_PI*position / totalRelationships) );
 		
-		float sx = floorf(cos(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
-		float sy = floorf(sin(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
+		//float sx = floorf(cos(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
+		//float sy = floorf(sin(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
+		
+
+		/*Update Stats*/
+		maxStrenght = relationship->strength > maxStrenght ? relationship->strength : maxStrenght;
 
 		userB->x= userA->x + sx;
 		userB->y = userA->y + sy;
-		userB->z = 0;
+		//Z definido no walkVertice() 
+		//userB->z = 0;
 
 		std::cout << *userB->email << " | ";
 		std::cout << userB->x << " | ";
@@ -47,4 +68,12 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 		std::cout << userB->z << " | ";
 		std::cout << userB->graphLevel << endl;
 	}
+}
+
+int graphCoordWalker::getMaxConnectionStrenght() {
+	return maxStrenght;
+}
+
+int graphCoordWalker::getMaxUserConnections() {
+	return maxUserConnections;
 }

@@ -18,5 +18,8 @@ public:
 	void KeyUp(unsigned char key, int x, int y);
 	GraphScene(SocialGamePublicAPIClient *, string loginEmail);
 	~GraphScene();
+private:
+	int maxUserConnections;
+	int maxConnectionStrenght;
 };
 

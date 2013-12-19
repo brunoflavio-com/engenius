@@ -6,9 +6,12 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 {
 	apiClient = client;
 	email = loginEmail;
-	graph =	apiClient->getGraph(email,2);
+	graph =	apiClient->getGraph(email,5);
 	graphCoordWalker walker;
 	walker.walk(graph);
+
+	maxConnectionStrenght = walker.getMaxConnectionStrenght();
+	maxUserConnections = walker.getMaxUserConnections();
 }
 
 
@@ -19,7 +22,7 @@ GraphScene::~GraphScene()
 
 void GraphScene::Draw(void){
 	
-	GraphWalkerDraw drawWalker;
+	GraphWalkerDraw drawWalker(maxUserConnections, maxConnectionStrenght);
 	drawWalker.walk(graph);
 }
 

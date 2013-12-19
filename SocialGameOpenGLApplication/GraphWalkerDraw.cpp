@@ -1,13 +1,18 @@
 #include "GraphWalkerDraw.h"
+#include <iostream>
 
 #define M_PI 3.1415926535897932384626433832795
 #define RAD(x)          (M_PI*(x)/180)
 #define DEG(x)        (180*(x)/M_PI)
 
+#define SPHERE_RADIUS 1
+#define MAX_HEIGHT 5
 
 
-GraphWalkerDraw::GraphWalkerDraw()
+GraphWalkerDraw::GraphWalkerDraw(int maxUserConnections, int maxConnectionStrenght)
 {
+	this->maxUserConnections = maxUserConnections;
+	this->maxConnectionStrenght = maxConnectionStrenght;	
 }
 
 
@@ -17,12 +22,18 @@ GraphWalkerDraw::~GraphWalkerDraw()
 
 void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, int position, int total){
 	User * userB = relationship->user;
-	float cylinderRadius = relationship->strength * 0.1;
+
+	/*Adjust height to max_height*/
+	float Za = MAX_HEIGHT * userA->z / maxUserConnections;
+	float Zb = MAX_HEIGHT * userB->z / maxUserConnections;
+
+	/*Adjust cylinder radios to max_cylinder_radius*/
+	float cylinderRadius = SPHERE_RADIUS * 0.75 * relationship->strength / maxConnectionStrenght;
 	GLUquadricObj *quadric;
 
 	float deltaX = userB->x - userA->x;
 	float deltaY = userB->y - userA->y;
-	float deltaZ = userB->z - userA->z;
+	float deltaZ = Zb-Za;
 
 	float distance = sqrt(pow(deltaX, 2) + pow(deltaY, 2) + pow(deltaZ, 2));
 
@@ -62,15 +73,23 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 
 void GraphWalkerDraw::walkVertice(User * userA){
 
+	/*Adjust height to max_height*/
+	float Z = MAX_HEIGHT * userA->z / maxUserConnections;
+	
+
 	GLUquadricObj *quadric;
 	glPushMatrix();
 	glTranslatef(userA->x, userA->y, userA->z);
 
 	quadric = gluNewQuadric();
 	gluQuadricDrawStyle(quadric, GLU_FILL);
-	gluSphere(quadric, 1, 30, 10);
-	glTranslatef(userA->x, userA->y, userA->z);
+	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
+	glTranslatef(userA->x, userA->y, Z);
 	glColor3ub( rand()%255, rand()%255, rand()%255 );	
 
 	glPopMatrix();
+
+
+	/*DEBUG:*/
+	std::cout << "(" << userA->x << "," << userA->y << "," << userA->z << ")" << endl;
 }

@@ -13,5 +13,10 @@ public:
 	void walkConnection(User * userA, Relationship * relationship, int position, int total);
 	void walkVertice(User * userA);
 	void walk(User * graph);
+	int getMaxConnectionStrenght();
+	int getMaxUserConnections();
+private:
+	int maxStrenght;
+	int maxUserConnections;
 };
 
