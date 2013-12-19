@@ -95,44 +95,19 @@ namespace SocialGameBLL.Controllers
 
         public ICollection<User> GetShortestPath(User Me, User Goal, int Depth)
         {
+            /*Load Graph on to server*/
             Graph Graph = GetRelationships(Me, Depth);
             string JsonGraph = JsonConvert.SerializeObject(Graph, Formatting.Indented);
             string AIServiceUrl = ConfigurationManager.AppSettings["SocialGameAIUrl"];
-            
-            //HttpWebRequest Request = (HttpWebRequest)HttpWebRequest.Create(AIServiceUrl + "/loadusergraph");
-            //Request.Method = "POST";
-            //Request.CookieContainer = CookieJar;
-
-            //byte[] ByteArray = Encoding.UTF8.GetBytes(JsonGraph);
-            //Request.ContentType = "application/json";
-            //Request.ContentLength = ByteArray.Length;
-            //Stream Stream = Request.GetRequestStream();
-            //Stream.Write(ByteArray, 0, ByteArray.Length);
-            //Stream.Close();
-
-            //WebResponse Response = Request.GetResponse();
 
             CookieContainer CookieJar = new CookieContainer();
             string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, JsonGraph, CookieJar);
 
+            /*Ask Server For Shortest Path*/
             OrderedDictionary Params = new OrderedDictionary();
             Params["origin"] = Me.Email;
             Params["destination"] = Goal.Email;
             string GetResponse = PrologRequest.MakeJsonGetResquest(PrologRequest.GET_SHORTEST_PATH, Params, CookieJar);
-
-            //HttpWebRequest Request = (HttpWebRequest)HttpWebRequest.Create(AIServiceUrl + "/getshortestpath?origin=" + Me.Email + "&destination=" + Goal.Email);
-            //Request.Method = "GET";
-            //Request.CookieContainer = CookieJar;
-
-            //WebResponse Response = Request.GetResponse();
-            //Stream Stream = Response.GetResponseStream();
-
-            //StreamReader StreamR = new StreamReader(Stream);
-            //string Text = StreamR.ReadToEnd();
-            //StreamR.Close();
-            //Stream.Close();
-            //Response.Close();
-
 
             return null;
         }
