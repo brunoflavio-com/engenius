@@ -1,3 +1,5 @@
+#pragma once
+#include "SceneInterface.h"
 #ifndef M_PI
 #define M_PI 3.1415926535897932384626433832795
 #endif
@@ -20,7 +22,7 @@ public:
 	virtual void Draw(void){}
 
 	// Substitui o que definimos na main
-	virtual void Run(int argc, char **argv){}
+	virtual void Run(int argc, char **argv, InterfaceScene *){}
 
 	// Callback para interacção via teclado (carregar na tecla)
 	virtual void Key(unsigned char key, int x, int y){}

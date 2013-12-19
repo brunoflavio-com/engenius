@@ -14,7 +14,7 @@ SocialGamePublicAPIClient::~SocialGamePublicAPIClient()
 }
 
 
-std::future<boolean> SocialGamePublicAPIClient::asyncLogin(std::string email, std::string password){
+std::future<bool> SocialGamePublicAPIClient::asyncLogin(std::string email, std::string password){
 	if (ready){
 		return std::async(&SocialGamePublicAPIClient::Login, this, email, password);
 	}
@@ -23,7 +23,7 @@ std::future<boolean> SocialGamePublicAPIClient::asyncLogin(std::string email, st
 	}
 }
 
-boolean SocialGamePublicAPIClient::Login(std::string email, std::string password){
+bool SocialGamePublicAPIClient::Login(std::string email, std::string password){
 	ready = false;
 	_ns1__Login login;
 	login.Email = &email;

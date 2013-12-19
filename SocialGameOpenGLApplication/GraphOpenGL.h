@@ -7,9 +7,13 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <fstream>
+#include "SceneInterface.h"
+#include "GraphScene.h"
+
 
 class GraphOpenGL : public InterfaceGL{
-	
+private:
+	static InterfaceScene * graphScene;
 public:
 	GraphOpenGL();
 	~GraphOpenGL();
@@ -29,5 +33,5 @@ public:
 	void static Key(unsigned char key, int x, int y);
 	void static SpecialKey(int key, int x, int y);
 	void static SpecialKeyUp(int key, int x, int y);
-	void Run(int argc, char **argv);
+	void static Run(int argc, char **argv, InterfaceScene * scene);
 };

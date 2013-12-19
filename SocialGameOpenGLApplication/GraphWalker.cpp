@@ -11,8 +11,8 @@ GraphWalker::~GraphWalker()
 }
 
 void GraphWalker::walk(User * graph){
-	visitedUsers.clear();
-	users.clear();
+	vector<User *> visitedUsers;
+	vector<User *> users;
 
 	visitedUsers.push_back(graph);
 	users.push_back(graph);
@@ -23,7 +23,8 @@ void GraphWalker::walk(User * graph){
 		users.pop_back();
 		for (int i = 0; i<user->relationships->size(); i++){
 			User * tempUser = user->relationships->at(i)->user;
-			walkConnection(user, user->relationships->at(i));
+			walkConnection(user, user->relationships->at(i), i, user->relationships->size());
+
 			if (std::find(visitedUsers.begin(), visitedUsers.end(),tempUser) == visitedUsers.end()){
 				//User is not visited
 				visitedUsers.insert(visitedUsers.begin(), user->relationships->at(i)->user);

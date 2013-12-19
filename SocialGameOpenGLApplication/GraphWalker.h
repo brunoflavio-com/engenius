@@ -4,10 +4,9 @@
 class GraphWalker
 {
 private:
-	vector<User *> visitedUsers ;
-	vector<User *> users;
+	
 protected:
-	virtual void walkConnection(User * userA, Relationship * relationship) = 0;
+	virtual void walkConnection(User * userA, Relationship * relationship, int position, int total) = 0;
 	virtual void walkVertice(User * userA) = 0;
 public:
 

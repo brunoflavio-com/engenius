@@ -1,17 +1,14 @@
 #pragma once
-#ifndef M_PI
-#define M_PI 3.1415926535897932384626433832795
-#endif
-
 #include "GraphWalker.h"
-class graphCoordWalker :
+#include <gl\glut.h>
+
+class GraphWalkerDraw :
 	public GraphWalker
 {
 public:
-	graphCoordWalker();
-	~graphCoordWalker();
+	GraphWalkerDraw();
+	~GraphWalkerDraw();
 	void walkConnection(User * userA, Relationship * relationship, int position, int total);
 	void walkVertice(User * userA);
-	void walk(User * graph);
 };
 

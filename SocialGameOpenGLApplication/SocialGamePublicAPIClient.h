@@ -11,11 +11,11 @@ private:
 	BasicHttpBinding_USCOREISocialGameServiceProxy proxy;
 	std::string token;
 public:
-	std::atomic<boolean> ready;
-	std::atomic<boolean> LoggedIn;
+	std::atomic<bool> ready;
+	std::atomic<bool> LoggedIn;
 	SocialGamePublicAPIClient();
-	boolean Login(std::string userName, std::string Password);
-	std::future<boolean> asyncLogin(std::string userName, std::string Password);
+	bool Login(std::string userName, std::string Password);
+	std::future<bool> asyncLogin(std::string userName, std::string Password);
 	User * getGraph(std::string email, int depth);
 	std::future<User * > asyncGetGraph(std::string email, int depth);
 	~SocialGamePublicAPIClient();

@@ -1,4 +1,5 @@
 #include "GraphOpenGL.h"
+#include "GraphScene.h"
 
 #define GAP		25
 
@@ -33,7 +34,12 @@ Graphspecial_Key KeyStatus;
 GraphMouse_State MouseStatus;
 GraphWindows Window;
 
-GraphOpenGL::GraphOpenGL(){}
+
+GraphOpenGL::GraphOpenGL(){
+}
+
+InterfaceScene * GraphOpenGL::graphScene;
+
 
 GraphOpenGL::~GraphOpenGL(){}
 
@@ -70,6 +76,7 @@ void GraphOpenGL::TopCamLookAt(){
 }
 
 void GraphOpenGL::Init(){
+
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
@@ -166,20 +173,9 @@ void GraphOpenGL::Draw(){
 
 	CamLookAt();
 
-	glBegin(GL_POLYGON);
 
-	GLUquadricObj *quadric;
-	glColor3f(1, 0, 0);
-	quadric = gluNewQuadric();
-	gluQuadricDrawStyle(quadric, GLU_FILL);
-	gluSphere(quadric, 1, 30, 10);
-	glTranslatef(2, 0, 2);
-	glColor3f(0, 0, 1);
-	gluSphere(quadric, 1, 30, 10);
-	glRotatef(-135, 0, 1, 0);
-	gluCylinder(quadric, .5, .5, 2, 30, 10);
-
-	glEnd();
+	graphScene->Draw();
+	
 
 	glutSwapBuffers();
 	glFlush();
@@ -262,8 +258,9 @@ void GraphOpenGL::SpecialKeyUp(int key, int x, int y){
 	}
 }
 
-void GraphOpenGL::Run(int argc, char **argv)
+void GraphOpenGL::Run(int argc, char **argv, InterfaceScene * scene)
 {
+	graphScene = scene;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);

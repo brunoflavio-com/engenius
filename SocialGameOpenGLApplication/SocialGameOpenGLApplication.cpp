@@ -5,14 +5,21 @@
 #include "User.h"
 #include <exception>
 #include "GraphOpenGL.h"
+#include "graphCoordWalker.h"
+#include "GraphScene.h"
+#include "SceneInterface.h"
 
 int _tmain(int argc, char* argv[])
 {
+	
+
 	SocialGamePublicAPIClient * client = new SocialGamePublicAPIClient();
 	std::cout << "Start";
-	boolean login = client->Login("test@test.com","123456");
+	string email = "test@test.com";
+	string password = "123456";
+	boolean login = client->Login(email, password);
 	std::cout << "Loggin";
-	
+
 
 	if (login)
 	{
@@ -22,10 +29,11 @@ int _tmain(int argc, char* argv[])
 	{
 		std::cout << "Not True";
 	}
-	User * user = client->getGraph("test@test.com", 2);
-	InterfaceGL * jogo = new GraphOpenGL();// apartir daqui
+	
+	InterfaceScene * scene = new GraphScene(client, email);
+	std::cout << "Scene created";
 
-	jogo->Run(argc,argv);
+	GraphOpenGL::Run(argc, argv, scene);
 
 	getchar();
 	return 0;
