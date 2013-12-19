@@ -54,7 +54,7 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 	float rotY =  deltaX * deltaZ;
 
 	glPushMatrix();
-		glTranslatef(userA->x, userA->y, userA->z);
+		glTranslatef(userA->x, userA->y, Za);
 
 		if (fabs(deltaZ) <= 0.001)  {
 			glRotatef(90.0, 0 , 1, 0.0);
@@ -79,17 +79,17 @@ void GraphWalkerDraw::walkVertice(User * userA){
 
 	GLUquadricObj *quadric;
 	glPushMatrix();
-	glTranslatef(userA->x, userA->y, userA->z);
+	glTranslatef(userA->x, userA->y, Z);
 
 	quadric = gluNewQuadric();
 	gluQuadricDrawStyle(quadric, GLU_FILL);
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
-	glTranslatef(userA->x, userA->y, Z);
+	
 	glColor3ub( rand()%255, rand()%255, rand()%255 );	
 
 	glPopMatrix();
 
 
 	/*DEBUG:*/
-	std::cout << "(" << userA->x << "," << userA->y << "," << userA->z << ")" << endl;
+	//std::cout << "(" << userA->x << "," << userA->y << "," << userA->z << ")" << endl;
 }
