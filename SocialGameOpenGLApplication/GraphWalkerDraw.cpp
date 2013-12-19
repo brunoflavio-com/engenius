@@ -1,5 +1,10 @@
 #include "GraphWalkerDraw.h"
 
+#define M_PI 3.1415926535897932384626433832795
+#define RAD(x)          (M_PI*(x)/180)
+#define DEG(x)        (180*(x)/M_PI)
+
+
 
 GraphWalkerDraw::GraphWalkerDraw()
 {
@@ -11,26 +16,47 @@ GraphWalkerDraw::~GraphWalkerDraw()
 }
 
 void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, int position, int total){
-	//glBegin(GL_POLYGON);
+	User * userB = relationship->user;
+	float cylinderRadius = relationship->strength * 0.1;
+	GLUquadricObj *quadric;
 
-	//GLUquadricObj *quadric;
-	//glPushMatrix();
+	float deltaX = userB->x - userA->x;
+	float deltaY = userB->y - userA->y;
+	float deltaZ = userB->z - userA->z;
 
-	//quadric = gluNewQuadric();
-	//gluQuadricDrawStyle(quadric, GLU_FILL);
-	//
-	//
-	//gluCylinder(quadric, .5, .5, 2, 30, 10);
-	//glTranslatef(userA->x, userA->y, userA->z);
+	float distance = sqrt(pow(deltaX, 2) + pow(deltaY, 2) + pow(deltaZ, 2));
 
-	//glPopMatrix();
+	float rotAngle;
+	if (fabs(deltaZ) <= 0.001)  {
+			rotAngle = DEG(acos(deltaX / distance));
+			if (deltaY <= 0.0)
+				rotAngle *= -1;
 
-	////glColor3f(0, 0, 1);
-	////gluSphere(quadric, 1, 30, 10);
-	////glRotatef(-135, 0, 1, 0);
-	////gluCylinder(quadric, .5, .5, 2, 30, 10);
+	}
+	else {
+		rotAngle = DEG(acos(deltaZ / distance));
+		if (deltaZ <= 0.0)
+			rotAngle *= -1;
+	}
 
-	//glEnd();
+	float rotX = -deltaY * deltaZ;
+	float rotY =  deltaX * deltaZ;
+
+	glPushMatrix();
+		glTranslatef(userA->x, userA->y, userA->z);
+
+		if (fabs(deltaZ) <= 0.001)  {
+			glRotatef(90.0, 0 , 1, 0.0);
+			glRotatef(rotAngle, -1.0, 0.0, 0.0);
+		}
+		else {
+			glRotatef(rotAngle, rotX, rotY, 0.0);
+		}
+
+		quadric = gluNewQuadric();
+		gluQuadricDrawStyle(quadric, GLU_FILL);
+		gluCylinder(quadric, cylinderRadius, cylinderRadius, distance, 30,10);
+	glPopMatrix();
 
 }
 
