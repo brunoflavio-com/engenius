@@ -47,7 +47,7 @@ void GraphOpenGL::StartCam(){
 	PersonCam.dir_lat = M_PI / 4;
 	PersonCam.dir_long = -M_PI / 4;
 	PersonCam.height = 0;
-	PersonCam.dist = 10;
+	PersonCam.dist = 40;
 	PersonCam.center[0] = 0;
 	PersonCam.center[1] = 0;
 	PersonCam.center[2] = 0;
@@ -65,12 +65,12 @@ void GraphOpenGL::CamLookAt(){
 }
 
 void GraphOpenGL::TopCamLookAt(){
-	MinimapCam.eye[0] = PersonCam.eye[0];
-	MinimapCam.eye[1] = PersonCam.eye[1];
-	MinimapCam.eye[2] = 50;
+	MinimapCam.eye[0] = PersonCam.center[0];
+	MinimapCam.eye[1] = PersonCam.center[1];
+	MinimapCam.eye[2] = 60;
 	gluLookAt(
 		MinimapCam.eye[0], MinimapCam.eye[1], MinimapCam.eye[2],
-		PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2],
+		PersonCam.center[0], PersonCam.center[1], PersonCam.center[2],
 		0, 1, 0
 		);
 }
@@ -152,9 +152,7 @@ void GraphOpenGL::DrawMinimap(){
 
 	TopCamLookAt();
 
-	glDisable(GL_DEPTH);
 	graphScene->Draw();
-	glEnable(GL_DEPTH);
 
 	glutSwapBuffers();
 	glFlush();

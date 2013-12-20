@@ -5,7 +5,7 @@
 #define RAD(x)          (M_PI*(x)/180)
 #define DEG(x)        (180*(x)/M_PI)
 
-#define SPHERE_RADIUS 1
+#define SPHERE_RADIUS 2
 #define MAX_HEIGHT 5
 
 
