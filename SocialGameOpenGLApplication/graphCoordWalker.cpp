@@ -1,7 +1,7 @@
 #include "graphCoordWalker.h"
 #include <iostream>
 
-#define MIN_DIST 5
+#define MIN_DIST 7.5
 #define SPHERE_RADIUS 2
 
 graphCoordWalker::graphCoordWalker()
@@ -45,10 +45,10 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 		float racio = position / (float)total;
 		int totalRelationships = userA->relationships->size();
 
-		float distance = MIN_DIST - ((3 * 2 * SPHERE_RADIUS) + totalRelationships *(2 * SPHERE_RADIUS)) / 2 * M_PI;
+		float distance = MIN_DIST - ((3 * 2 * SPHERE_RADIUS) + totalRelationships *(2 * SPHERE_RADIUS)) / (2 * M_PI);
 
-		float sx =((distance)*cos(2*M_PI*position / totalRelationships) );
-		float sy =((distance)*sin(2*M_PI*position / totalRelationships) );
+		float sx = ((MIN_DIST+distance)*cos(2 * M_PI*position / totalRelationships));
+		float sy = ((MIN_DIST+distance)*sin(2 * M_PI*position / totalRelationships));
 		
 		//float sx = floorf(cos(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
 		//float sy = floorf(sin(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);

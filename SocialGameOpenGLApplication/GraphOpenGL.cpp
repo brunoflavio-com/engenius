@@ -67,7 +67,7 @@ void GraphOpenGL::CamLookAt(){
 void GraphOpenGL::TopCamLookAt(){
 	MinimapCam.eye[0] = PersonCam.center[0];
 	MinimapCam.eye[1] = PersonCam.center[1];
-	MinimapCam.eye[2] = 60;
+	MinimapCam.eye[2] = 50;
 	gluLookAt(
 		MinimapCam.eye[0], MinimapCam.eye[1], MinimapCam.eye[2],
 		PersonCam.center[0], PersonCam.center[1], PersonCam.center[2],
