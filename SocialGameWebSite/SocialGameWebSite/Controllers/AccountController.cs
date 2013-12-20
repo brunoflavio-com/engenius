@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using SocialGameWebSite.Models;
+using SocialGameWebSite.Authorization.AuthorizationUsers;
 
 namespace SocialGameWebSite.Controllers
 {
@@ -16,16 +17,16 @@ namespace SocialGameWebSite.Controllers
     public class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            : this(new SocialGameUserManager<SocialGameUser>(new UserStore<SocialGameUser>(new ApplicationDbContext())))
         {
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(SocialGameUserManager<SocialGameUser> userManager)
         {
             UserManager = userManager;
         }
 
-        public UserManager<ApplicationUser> UserManager { get; private set; }
+        public SocialGameUserManager<SocialGameUser> UserManager { get; private set; }
 
         //
         // GET: /Account/Login
@@ -78,7 +79,7 @@ namespace SocialGameWebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new SocialGameUser() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -265,7 +266,7 @@ namespace SocialGameWebSite.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new SocialGameUser() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -331,7 +332,14 @@ namespace SocialGameWebSite.Controllers
             }
         }
 
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        //private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        //{
+        //    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+        //    var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+        //    AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+        //}
+
+        private async Task SignInAsync(SocialGameUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
