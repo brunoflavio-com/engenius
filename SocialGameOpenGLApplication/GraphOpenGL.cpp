@@ -96,11 +96,17 @@ void GraphOpenGL::Init(){
 
 void GraphOpenGL::MotionMouse(int x, int y)
 {
-	float newx = RAD(MouseStatus.xMouse - x);
-	float newy = RAD(MouseStatus.yMouse - y);
-	PersonCam.dir_long += newx;
-	if (PersonCam.dir_lat - newy < M_PI / 4 && PersonCam.dir_lat - newy > -M_PI / 4)
-		PersonCam.dir_lat -= newy;
+	float newx = RAD((MouseStatus.xMouse - x)*0.1);
+	float newy = RAD((MouseStatus.yMouse - y)*0.1);
+	GLdouble latitude;
+	GLdouble longitude;
+	longitude = PersonCam.dir_long - newx;
+	latitude = PersonCam.dir_lat;
+	//if (PersonCam.dir_lat - newy < M_PI / 4 && PersonCam.dir_lat - newy > -M_PI / 4)
+	latitude += newy;
+	PersonCam.center[0] = PersonCam.eye[0] - PersonCam.dist*cos(longitude)*cos(latitude);
+	PersonCam.center[1] = PersonCam.eye[1] - PersonCam.dist*sin(longitude)*cos(latitude);
+	PersonCam.center[2] = PersonCam.eye[2] - PersonCam.dist*sin(latitude);
 	MouseStatus.xMouse = x;
 	MouseStatus.yMouse = y;
 }
@@ -146,20 +152,9 @@ void GraphOpenGL::DrawMinimap(){
 
 	TopCamLookAt();
 
-	glBegin(GL_POLYGON);
-
-	GLUquadricObj *quadric;
-	glColor3f(1, 0, 0);
-	quadric = gluNewQuadric();
-	gluQuadricDrawStyle(quadric, GLU_FILL);
-	gluSphere(quadric, 1, 30, 10);
-	glTranslatef(2, 0, 2);
-	glColor3f(0, 0, 1);
-	gluSphere(quadric, 1, 30, 10);
-	glRotatef(-135, 0, 1, 0);
-	gluCylinder(quadric, .5, .5, 2, 30, 10);
-
-	glEnd();
+	glDisable(GL_DEPTH);
+	graphScene->Draw();
+	glEnable(GL_DEPTH);
 
 	glutSwapBuffers();
 	glFlush();
