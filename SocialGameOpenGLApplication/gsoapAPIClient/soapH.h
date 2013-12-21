@@ -582,37 +582,8 @@ inline void soap_delete_ns3__FaultException_x002eFaultReasonData(struct soap *so
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns3__FaultException_x002eFaultReasonData(struct soap*, int, int, void*, size_t, const void*, size_t);
 
-#ifndef SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData
-#define SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData (20)
-#endif
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, const char*, int, const ns3__ArrayOfFaultException_x002eFaultCodeData *, const char*);
-SOAP_FMAC3 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC4 soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, const char*, ns3__ArrayOfFaultException_x002eFaultCodeData *, const char*);
-
-#ifndef soap_write_ns3__ArrayOfFaultException_x002eFaultCodeData
-#define soap_write_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || ((data)->soap_serialize(soap),0) || (data)->soap_put(soap, "ns3:ArrayOfFaultException.FaultCodeData", NULL) || soap_end_send(soap), (soap)->error )
-#endif
-
-SOAP_FMAC3 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC4 soap_get_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, ns3__ArrayOfFaultException_x002eFaultCodeData *, const char*, const char*);
-
-#ifndef soap_read_ns3__ArrayOfFaultException_x002eFaultCodeData
-#define soap_read_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, data) ( soap_begin_recv(soap) || !soap_get_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, data, NULL, NULL) || soap_end_recv(soap), (soap)->error )
-#endif
-
-SOAP_FMAC1 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC2 soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, int, const char*, const char*, size_t*);
-
-inline ns3__ArrayOfFaultException_x002eFaultCodeData * soap_new_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, int n = -1) { return soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, n, NULL, NULL, NULL); }
-
-inline ns3__ArrayOfFaultException_x002eFaultCodeData * soap_new_req_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap) { ns3__ArrayOfFaultException_x002eFaultCodeData *_p = soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, -1, NULL, NULL, NULL); if (_p) { _p->soap_default(soap); } return _p; }
-
-inline ns3__ArrayOfFaultException_x002eFaultCodeData * soap_new_set_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, std::vector<ns3__FaultException_x002eFaultCodeData * >& FaultException_x002eFaultCodeData) { ns3__ArrayOfFaultException_x002eFaultCodeData *_p = soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, -1, NULL, NULL, NULL); if (_p) { _p->soap_default(soap); _p->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData = FaultException_x002eFaultCodeData; } return _p; }
-
-inline void soap_delete_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, ns3__ArrayOfFaultException_x002eFaultCodeData *p) { soap_delete(soap, p); }
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, int, int, void*, size_t, const void*, size_t);
-
 #ifndef SOAP_TYPE_ns3__FaultException_x002eFaultCodeData
-#define SOAP_TYPE_ns3__FaultException_x002eFaultCodeData (19)
+#define SOAP_TYPE_ns3__FaultException_x002eFaultCodeData (20)
 #endif
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns3__FaultException_x002eFaultCodeData(struct soap*, const char*, int, const ns3__FaultException_x002eFaultCodeData *, const char*);
@@ -639,6 +610,35 @@ inline ns3__FaultException_x002eFaultCodeData * soap_new_set_ns3__FaultException
 inline void soap_delete_ns3__FaultException_x002eFaultCodeData(struct soap *soap, ns3__FaultException_x002eFaultCodeData *p) { soap_delete(soap, p); }
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns3__FaultException_x002eFaultCodeData(struct soap*, int, int, void*, size_t, const void*, size_t);
+
+#ifndef SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData
+#define SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData (19)
+#endif
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, const char*, int, const ns3__ArrayOfFaultException_x002eFaultCodeData *, const char*);
+SOAP_FMAC3 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC4 soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, const char*, ns3__ArrayOfFaultException_x002eFaultCodeData *, const char*);
+
+#ifndef soap_write_ns3__ArrayOfFaultException_x002eFaultCodeData
+#define soap_write_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, data) ( soap_free_temp(soap), soap_begin_send(soap) || ((data)->soap_serialize(soap),0) || (data)->soap_put(soap, "ns3:ArrayOfFaultException.FaultCodeData", NULL) || soap_end_send(soap), (soap)->error )
+#endif
+
+SOAP_FMAC3 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC4 soap_get_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, ns3__ArrayOfFaultException_x002eFaultCodeData *, const char*, const char*);
+
+#ifndef soap_read_ns3__ArrayOfFaultException_x002eFaultCodeData
+#define soap_read_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, data) ( soap_begin_recv(soap) || !soap_get_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, data, NULL, NULL) || soap_end_recv(soap), (soap)->error )
+#endif
+
+SOAP_FMAC1 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC2 soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, int, const char*, const char*, size_t*);
+
+inline ns3__ArrayOfFaultException_x002eFaultCodeData * soap_new_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, int n = -1) { return soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, n, NULL, NULL, NULL); }
+
+inline ns3__ArrayOfFaultException_x002eFaultCodeData * soap_new_req_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap) { ns3__ArrayOfFaultException_x002eFaultCodeData *_p = soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, -1, NULL, NULL, NULL); if (_p) { _p->soap_default(soap); } return _p; }
+
+inline ns3__ArrayOfFaultException_x002eFaultCodeData * soap_new_set_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, std::vector<ns3__FaultException_x002eFaultCodeData * >& FaultException_x002eFaultCodeData) { ns3__ArrayOfFaultException_x002eFaultCodeData *_p = soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, -1, NULL, NULL, NULL); if (_p) { _p->soap_default(soap); _p->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData = FaultException_x002eFaultCodeData; } return _p; }
+
+inline void soap_delete_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, ns3__ArrayOfFaultException_x002eFaultCodeData *p) { soap_delete(soap, p); }
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap*, int, int, void*, size_t, const void*, size_t);
 
 #ifndef SOAP_TYPE_ns3__CommunicationException
 #define SOAP_TYPE_ns3__CommunicationException (18)

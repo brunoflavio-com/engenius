@@ -11,6 +11,6 @@ SOAP_NMAC struct Namespace namespaces[] =
 	{"arr", "http://schemas.microsoft.com/2003/10/Serialization/Arrays", NULL, NULL},
 	{"ser", "http://schemas.microsoft.com/2003/10/Serialization/", NULL, NULL},
 	{"ns3", "http://schemas.datacontract.org/2004/07/System.ServiceModel", NULL, NULL},
-	{"ns1", "http://wvm008.dei.isep.ipp.pt", NULL, NULL},
+	{"ns1", "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI", NULL, NULL},
 	{NULL, NULL, NULL, NULL}
 };
