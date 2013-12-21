@@ -1,3 +1,5 @@
+#pragma once
+
 #include "InterfaceGL.h"
 #include <stdio.h>
 #include <string.h>
@@ -11,15 +13,14 @@
 #include "GraphScene.h"
 
 
-class GraphOpenGL : public InterfaceGL{
+class GraphOpenGL
+{
 private:
 	static InterfaceScene * graphScene;
+	static SubWindowSceneInterface * subgraphScene;
 public:
 	GraphOpenGL();
 	~GraphOpenGL();
-	void static StartCam();
-	void static CamLookAt();
-	void static TopCamLookAt();
 	void static Init();
 	void static MotionMouse(int x, int y);
 	void static Mouse(int button, int state, int x, int y);
@@ -33,5 +34,5 @@ public:
 	void static Key(unsigned char key, int x, int y);
 	void static SpecialKey(int key, int x, int y);
 	void static SpecialKeyUp(int key, int x, int y);
-	void static Run(int argc, char **argv, InterfaceScene * scene);
+	void static Run(int argc, char **argv, InterfaceScene * scene, SubWindowSceneInterface *);
 };

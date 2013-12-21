@@ -8,6 +8,7 @@
 #include "graphCoordWalker.h"
 #include "GraphScene.h"
 #include "SceneInterface.h"
+#include "SubWindowSceneInterface.h"
 
 int _tmain(int argc, char* argv[])
 {
@@ -30,10 +31,10 @@ int _tmain(int argc, char* argv[])
 		std::cout << "Not True";
 	}
 	
-	InterfaceScene * scene = new GraphScene(client, email);
+	GraphScene * scene = new GraphScene(client, email);
 	std::cout << "Scene created";
 
-	GraphOpenGL::Run(argc, argv, scene);
+	GraphOpenGL::Run(argc, argv, (InterfaceScene *)scene, (SubWindowSceneInterface *)scene);
 
 	getchar();
 	return 0;

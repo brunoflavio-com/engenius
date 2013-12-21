@@ -96,6 +96,7 @@
     <ClInclude Include="SocialGamePublicAPIClient.h" />
     <ClInclude Include="SocialGamePublicAPIConverter.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SubWindowSceneInterface.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserTag.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="SocialGamePublicAPIClient.cpp" />
     <ClCompile Include="SocialGamePublicAPIConverter.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="SubWindowSceneInterface.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserTag.cpp" />
   </ItemGroup>
