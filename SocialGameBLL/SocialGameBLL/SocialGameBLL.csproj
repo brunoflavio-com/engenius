@@ -40,10 +40,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
-      <HintPath>..\..\SocialGamePublicAPI\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\SocialGamePublicAPI\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -91,14 +91,6 @@
     <Compile Include="Entities\SocialGameBLLDbContext.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Entities\UserSecurity.cs" />
-    <Compile Include="Migrations\201312130244350_Create_DB.cs" />
-    <Compile Include="Migrations\201312130244350_Create_DB.Designer.cs">
-      <DependentUpon>201312130244350_Create_DB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201312131334514_Add_SimpleModeScore_Table.cs" />
-    <Compile Include="Migrations\201312131334514_Add_SimpleModeScore_Table.Designer.cs">
-      <DependentUpon>201312131334514_Add_SimpleModeScore_Table.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\SecurityService.cs" />
     <Compile Include="Service\HumourStatus.cs" />
@@ -145,12 +137,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Documentation\RegisterUser.sequencediagram.layout">
       <DependentUpon>RegisterUser.sequencediagram</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201312130244350_Create_DB.resx">
-      <DependentUpon>201312130244350_Create_DB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201312131334514_Add_SimpleModeScore_Table.resx">
-      <DependentUpon>201312131334514_Add_SimpleModeScore_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
