@@ -117,7 +117,7 @@
     <Content Include="Documentation\LoginUser.sequencediagram" />
     <Content Include="Documentation\GetUserRelationships.sequencediagram" />
     <Content Include="Documentation\GetRelationshipTags.sequencediagram" />
-    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\SocialGameBLL_WVM008.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
