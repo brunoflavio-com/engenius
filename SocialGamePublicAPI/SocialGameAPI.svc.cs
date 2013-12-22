@@ -10,7 +10,7 @@ using System.Web.Script.Serialization;
 
 namespace SocialGamePublicAPI
 {
-    [ServiceBehavior(Namespace = "http://wvm008.dei.isep.ipp.pt")]
+    [ServiceBehavior(Namespace = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI")]
     public class SocialGameService : ISocialGameService
     {
         private SessionContext db = new SessionContext();
