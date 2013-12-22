@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.ServiceModel" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.ServiceModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:complexType name="FaultException">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:CommunicationException" />
@@ -13,6 +13,12 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="CommunicationException" nillable="true" type="tns:CommunicationException" />
+  <xs:complexType name="ArrayOfFaultException.FaultCodeData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FaultException.FaultCodeData" nillable="true" type="tns:FaultException.FaultCodeData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFaultException.FaultCodeData" nillable="true" type="tns:ArrayOfFaultException.FaultCodeData" />
   <xs:complexType name="FaultException.FaultCodeData">
     <xs:sequence>
       <xs:element name="name" nillable="true" type="xs:string" />
@@ -20,12 +26,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FaultException.FaultCodeData" nillable="true" type="tns:FaultException.FaultCodeData" />
-  <xs:complexType name="ArrayOfFaultException.FaultReasonData">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="FaultException.FaultReasonData" nillable="true" type="tns:FaultException.FaultReasonData" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfFaultException.FaultReasonData" nillable="true" type="tns:ArrayOfFaultException.FaultReasonData" />
   <xs:complexType name="FaultException.FaultReasonData">
     <xs:sequence>
       <xs:element name="text" nillable="true" type="xs:string" />
@@ -33,10 +33,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FaultException.FaultReasonData" nillable="true" type="tns:FaultException.FaultReasonData" />
-  <xs:complexType name="ArrayOfFaultException.FaultCodeData">
+  <xs:complexType name="ArrayOfFaultException.FaultReasonData">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="FaultException.FaultCodeData" nillable="true" type="tns:FaultException.FaultCodeData" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FaultException.FaultReasonData" nillable="true" type="tns:FaultException.FaultReasonData" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfFaultException.FaultCodeData" nillable="true" type="tns:ArrayOfFaultException.FaultCodeData" />
+  <xs:element name="ArrayOfFaultException.FaultReasonData" nillable="true" type="tns:ArrayOfFaultException.FaultReasonData" />
 </xs:schema>

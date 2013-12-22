@@ -188,6 +188,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\SocialGameWebSite_WVM008.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -200,13 +201,13 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService.disco" />
     <None Include="Service References\SocialGameBLLService\configuration91.svcinfo" />
     <None Include="Service References\SocialGameBLLService\configuration.svcinfo" />
     <None Include="Service References\SocialGameBLLService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService1.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -232,28 +233,6 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService.wsdl" />
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SocialGameBLLService\SocialGameBLLService6.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Service References\SocialGameBLLService\SocialGameWebSite.SocialGameBLLService.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -264,6 +243,31 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\SocialGameBLLService\SocialGameWebSite.SocialGameBLLService.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService1.wsdl" />
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService71.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService72.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService73.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService74.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService75.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SocialGameBLLService\SocialGameBLLService76.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\SocialGameBLLService\SocialGameWebSite.SocialGameBLLService.RelationshipRequest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
   </ItemGroup>

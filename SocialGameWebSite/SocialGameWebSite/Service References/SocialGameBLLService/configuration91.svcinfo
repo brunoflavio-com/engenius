@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="2kyhb2t18UXzsY7ngIxJHrI7vyo=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="vFTH8b7SHtR+3GdXqMZ7Bl7WCe8=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_ISocialGameBLLService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_ISocialGameBLLService" contract="SocialGameBLLService.ISocialGameBLLService" bindingType="basicHttpBinding" address="http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc" bindingConfiguration="BasicHttpBinding_ISocialGameBLLService">
+    <endpoint name="BasicHttpBinding_ISocialGameBLLService" contract="SocialGameBLLService.ISocialGameBLLService" bindingType="basicHttpBinding" address="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc" bindingConfiguration="BasicHttpBinding_ISocialGameBLLService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://wvm095.dei.isep.ipp.pt:8000/SocialGameBLLService.svc</serializedValue>
+          <serializedValue>http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
