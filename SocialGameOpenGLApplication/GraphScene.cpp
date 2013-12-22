@@ -36,6 +36,7 @@ GraphMouse_State MouseStatus;
 
 GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 {
+	onGame = false;
 	apiClient = client;
 	email = loginEmail;
 	graph =	apiClient->getGraph(email,5);

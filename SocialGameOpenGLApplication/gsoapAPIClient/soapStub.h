@@ -11,8 +11,8 @@ compiling, linking, and/or using OpenSSL is allowed.
 #ifndef soapStub_H
 #define soapStub_H
 #include <vector>
-#define SOAP_NAMESPACE_OF_ns2	"http://wvm008.dei.isep.ipp.pt/Imports"
-#define SOAP_NAMESPACE_OF_ns1	"http://wvm008.dei.isep.ipp.pt"
+#define SOAP_NAMESPACE_OF_ns2	"http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/Imports"
+#define SOAP_NAMESPACE_OF_ns1	"http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI"
 #define SOAP_NAMESPACE_OF_ns3	"http://schemas.datacontract.org/2004/07/System.ServiceModel"
 #define SOAP_NAMESPACE_OF_ns4	"http://schemas.datacontract.org/2004/07/System"
 #define SOAP_NAMESPACE_OF_ns5	"http://schemas.datacontract.org/2004/07/SocialGamePublicAPI.Service"
@@ -193,38 +193,16 @@ public:
 };
 #endif
 
-#ifndef SOAP_TYPE_ns3__FaultException_x002eFaultCodeData
-#define SOAP_TYPE_ns3__FaultException_x002eFaultCodeData (19)
-/* ns3:FaultException.FaultCodeData */
-class SOAP_CMAC ns3__FaultException_x002eFaultCodeData
-{
-public:
-	std::string *name;	/* optional element of type xsd:string */
-	std::string *ns;	/* optional element of type xsd:string */
-	struct soap *soap;	/* transient */
-public:
-	virtual int soap_type() const { return 19; } /* = unique type id SOAP_TYPE_ns3__FaultException_x002eFaultCodeData */
-	virtual void soap_default(struct soap*);
-	virtual void soap_serialize(struct soap*) const;
-	virtual int soap_put(struct soap*, const char*, const char*) const;
-	virtual int soap_out(struct soap*, const char*, int, const char*) const;
-	virtual void *soap_get(struct soap*, const char*, const char*);
-	virtual void *soap_in(struct soap*, const char*, const char*);
-	         ns3__FaultException_x002eFaultCodeData() { ns3__FaultException_x002eFaultCodeData::soap_default(NULL); }
-	virtual ~ns3__FaultException_x002eFaultCodeData() { }
-};
-#endif
-
 #ifndef SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData
-#define SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData (20)
+#define SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData (19)
 /* ns3:ArrayOfFaultException.FaultCodeData */
 class SOAP_CMAC ns3__ArrayOfFaultException_x002eFaultCodeData
 {
 public:
-	std::vector<ns3__FaultException_x002eFaultCodeData * >FaultException_x002eFaultCodeData;	/* optional element of type ns3:FaultException.FaultCodeData */
+	std::vector<class ns3__FaultException_x002eFaultCodeData * >FaultException_x002eFaultCodeData;	/* optional element of type ns3:FaultException.FaultCodeData */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 20; } /* = unique type id SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData */
+	virtual int soap_type() const { return 19; } /* = unique type id SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -233,6 +211,28 @@ public:
 	virtual void *soap_in(struct soap*, const char*, const char*);
 	         ns3__ArrayOfFaultException_x002eFaultCodeData() { ns3__ArrayOfFaultException_x002eFaultCodeData::soap_default(NULL); }
 	virtual ~ns3__ArrayOfFaultException_x002eFaultCodeData() { }
+};
+#endif
+
+#ifndef SOAP_TYPE_ns3__FaultException_x002eFaultCodeData
+#define SOAP_TYPE_ns3__FaultException_x002eFaultCodeData (20)
+/* ns3:FaultException.FaultCodeData */
+class SOAP_CMAC ns3__FaultException_x002eFaultCodeData
+{
+public:
+	std::string *name;	/* optional element of type xsd:string */
+	std::string *ns;	/* optional element of type xsd:string */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 20; } /* = unique type id SOAP_TYPE_ns3__FaultException_x002eFaultCodeData */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         ns3__FaultException_x002eFaultCodeData() { ns3__FaultException_x002eFaultCodeData::soap_default(NULL); }
+	virtual ~ns3__FaultException_x002eFaultCodeData() { }
 };
 #endif
 
