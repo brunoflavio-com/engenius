@@ -1,4 +1,5 @@
 #include "GraphScene.h"
+#include "HangmanScene.h"
 
 
 #ifndef M_PI
@@ -45,6 +46,13 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 
 	maxConnectionStrenght = walker.getMaxConnectionStrenght();
 	maxUserConnections = walker.getMaxUserConnections();
+
+
+	//TO REMOVE AFTER - this will be called from a menu of some sort ****************
+	gameScene = new HangmanScene();
+	//onGame = true;
+	// ******************************************************************************
+
 }
 
 

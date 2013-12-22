@@ -84,6 +84,9 @@
     <ClInclude Include="SubWindowSceneInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HangmanScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -138,6 +141,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SubWindowSceneInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HangmanScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

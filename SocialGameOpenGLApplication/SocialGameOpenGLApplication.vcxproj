@@ -83,6 +83,7 @@
     <ClInclude Include="GraphScene.h" />
     <ClInclude Include="GraphWalker.h" />
     <ClInclude Include="GraphWalkerDraw.h" />
+    <ClInclude Include="HangmanScene.h" />
     <ClInclude Include="InterfaceGL.h" />
     <ClInclude Include="RelationShip.h" />
     <ClInclude Include="RelationshipTag.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="GraphScene.cpp" />
     <ClCompile Include="GraphWalker.cpp" />
     <ClCompile Include="GraphWalkerDraw.cpp" />
+    <ClCompile Include="HangmanScene.cpp" />
     <ClCompile Include="RelationShip.cpp" />
     <ClCompile Include="RelationShipTag.cpp" />
     <ClCompile Include="gsoapAPIClient\soapBasicHttpBinding_USCOREISocialGameServiceProxy.cpp" />
