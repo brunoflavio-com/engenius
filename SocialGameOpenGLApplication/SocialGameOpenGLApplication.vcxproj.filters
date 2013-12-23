@@ -87,6 +87,9 @@
     <ClInclude Include="HangmanScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HangmanPLEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -146,5 +149,13 @@
     <ClCompile Include="HangmanScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HangmanPLEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hangman.pl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

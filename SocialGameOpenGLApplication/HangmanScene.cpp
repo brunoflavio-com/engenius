@@ -1,18 +1,24 @@
 #include "HangmanScene.h"
-#include <gl/glut.h>
+#include <gl\freeglut.h>
+#include <ctype.h>
 
 
 HangmanScene::HangmanScene()
 {
 	//retrieve info (categories/words)
 
-	//initialize prolog
-	
+	//initialize game engine:
+	game = new HangmanPLEngine(3, "engenius");
+
 }
 
 HangmanScene::~HangmanScene()
 {
-
+	if (game != NULL)
+	{
+		delete game;
+	}
+	
 }
 
 // Initiate scene
@@ -51,13 +57,33 @@ void HangmanScene::Draw(void)
 	glutSolidTeapot(1);
 	glPopMatrix();
 
+	//Draw the game engine message:
+	glPushMatrix();
+		unsigned char msg[100];
+		strcpy((char*)msg, game->getMessage().c_str());
+
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
+		glEnable(GL_LIGHTING);
+		glPopMatrix();
+	glPopMatrix();
+
 	glutSwapBuffers();
 }
 
 // Keyboard callback
 void HangmanScene::Key(unsigned char key, int x, int y)
 {
+	switch (key) {
+	case 27:
+		//end game on ESC?
+		break;	
+	}
 
+	//pass letters to the game engine:
+	if (isalpha(key))
+	{
+		game->play(key);
+	}
 }
 
 // Special key callback

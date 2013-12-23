@@ -1,5 +1,7 @@
 #pragma once
 #include "SceneInterface.h"
+#include "HangmanPLEngine.h"
+
 class HangmanScene :
 	public InterfaceScene
 {
@@ -30,7 +32,8 @@ public:
 	void MotionMouse(int x, int y);
 
 private:
-	//Prolog engine:
+	//Game engine:
+	HangmanPLEngine * game;
 	//Soap Proxy to retrieve categories/words?
 	
 	//teapot example:
