@@ -191,7 +191,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\LocalHostSocialGameBLL\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SocialGameBLLService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -270,10 +276,54 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService.wsdl" />
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\LocalHostSocialGameBLL\SocialGameWebsite.LocalHostSocialGameBLL.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\LocalHostSocialGameBLL\SocialGameWebsite.LocalHostSocialGameBLL.Graph.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\LocalHostSocialGameBLL\SocialGameWebsite.LocalHostSocialGameBLL.RelationshipRequest.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\LocalHostSocialGameBLL\SocialGameWebsite.LocalHostSocialGameBLL.RelationshipTag.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\LocalHostSocialGameBLL\SocialGameWebsite.LocalHostSocialGameBLL.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\SocialGameBLLService\SocialGameBLLService.disco" />
     <None Include="Service References\SocialGameBLLService\configuration91.svcinfo" />
     <None Include="Service References\SocialGameBLLService\configuration.svcinfo" />
     <None Include="Service References\SocialGameBLLService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\LocalHostSocialGameBLL\SocialGameBLLService.disco" />
+    <None Include="Service References\LocalHostSocialGameBLL\configuration91.svcinfo" />
+    <None Include="Service References\LocalHostSocialGameBLL\configuration.svcinfo" />
+    <None Include="Service References\LocalHostSocialGameBLL\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -353,6 +403,7 @@
     <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Views\Home\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -364,6 +415,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\LocalHostSocialGameBLL\" />
     <WCFMetadataStorage Include="Service References\SocialGameBLLService\" />
   </ItemGroup>
   <PropertyGroup>

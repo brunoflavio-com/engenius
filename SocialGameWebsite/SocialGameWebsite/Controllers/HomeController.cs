@@ -3,15 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SocialGameWebsite.SocialGameBLLService;
 
 namespace SocialGameWebsite.Controllers
 {
     public class HomeController : Controller
     {
+        SocialGameBLLServiceClient Proxy = new SocialGameBLLServiceClient();
+        //LocalHostSocialGameBLL.SocialGameBLLServiceClient Proxy = new LocalHostSocialGameBLL.SocialGameBLLServiceClient();
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ViewProfile");
+            }
+            return View();
+        }
 
+        [Authorize]
+        public ActionResult ViewProfile()
+        {
             return View();
         }
 
