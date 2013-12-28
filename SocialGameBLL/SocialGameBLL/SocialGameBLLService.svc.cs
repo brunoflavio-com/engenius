@@ -70,6 +70,19 @@ namespace SocialGameBLL
             return Controller.GetRelationships(User, Depth);
         }
 
+        public User GetUser(string Email)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetUser(Email);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public User UpdateUser(User User)
         {
             try

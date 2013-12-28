@@ -12,6 +12,19 @@ namespace SocialGameBLL.Controllers
     {
         SocialGameBLLDbContext db = new SocialGameBLLDbContext();
 
+        public User GetUser(string Email)
+        {
+            try
+            {
+                UserEntity UserEntity = db.Users.Find(Email);
+                return EntityServiceConverter.ConvertUserEntityToUser(UserEntity);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         public User UpdateUser(User User)
         {
             try
@@ -23,7 +36,7 @@ namespace SocialGameBLL.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message, e);
             }
         }
 
