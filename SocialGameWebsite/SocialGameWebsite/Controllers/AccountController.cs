@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using SocialGameWebsite.Filters;
 using SocialGameWebsite.Models;
+using SocialGameWebsite.Authorization;
 
 namespace SocialGameWebsite.Controllers
 {
@@ -35,7 +36,7 @@ namespace SocialGameWebsite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && SocialGameWebSecurity.Login(model.UserName, model.Password, PersistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -79,8 +80,9 @@ namespace SocialGameWebsite.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    //WebSecurity.Login(model.UserName, model.Password);
+                    SocialGameWebSecurity.Register(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
