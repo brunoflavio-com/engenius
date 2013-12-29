@@ -1,14 +1,15 @@
-﻿using System;
+﻿using SocialGameWebsite.SocialGameBLLService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace SocialGameWebsite.Models
 {
-    public class User
+    public class UserViewModel
     {
         //public User(LocalHostSocialGameBLL.User BLLUser)
-        public User(SocialGameBLLService.User BLLUser)
+        internal UserViewModel(User BLLUser)
         {
             this.Email = BLLUser.Email;
             this.Name = BLLUser.Name;

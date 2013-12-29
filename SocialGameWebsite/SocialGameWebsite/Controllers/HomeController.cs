@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SocialGameWebsite.SocialGameBLLService;
+using SocialGameWebsite.Models;
 
 namespace SocialGameWebsite.Controllers
 {
@@ -23,7 +24,20 @@ namespace SocialGameWebsite.Controllers
         [Authorize]
         public ActionResult ViewProfile()
         {
+            SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
+            UserViewModel UserViewModel = new UserViewModel(ServiceUser);
+            ViewBag.Text = "Name: " + UserViewModel.Name;
             return View();
+        }
+
+        public ActionResult Header()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.Email = User.Identity.Name;
+                return PartialView();
+            }
+            return PartialView();
         }
 
         public ActionResult About()

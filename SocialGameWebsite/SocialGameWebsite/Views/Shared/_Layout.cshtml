@@ -10,11 +10,12 @@
     </head>
     <body>
         <header>
-            <div class="content-wrapper">
+            @*<div class="content-wrapper">
                 <div class="float-left">
                     <p class="site-title">@Html.ActionLink("SocialGame", "Index", "Home")</p>
                 </div>
-            </div>
+            </div>*@
+            @Html.Action("header","home")
         </header>
         <div id="body">
             @RenderSection("featured", required: false)
