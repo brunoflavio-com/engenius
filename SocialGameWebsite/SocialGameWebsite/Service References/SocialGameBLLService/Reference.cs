@@ -249,6 +249,67 @@ namespace SocialGameWebsite.SocialGameBLLService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="HumourStatus", Namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service")]
+    [System.SerializableAttribute()]
+    internal partial class HumourStatus : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="RelationshipTag", Namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service")]
     [System.SerializableAttribute()]
     internal partial class RelationshipTag : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -403,67 +464,6 @@ namespace SocialGameWebsite.SocialGameBLLService {
                 if ((object.ReferenceEquals(this.UsersField, value) != true)) {
                     this.UsersField = value;
                     this.RaisePropertyChanged("Users");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="HumourStatus", Namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service")]
-    [System.SerializableAttribute()]
-    internal partial class HumourStatus : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        internal string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -754,11 +754,23 @@ namespace SocialGameWebsite.SocialGameBLLService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/LoginUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/LoginUserResponse")]
         System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.User> LoginUserAsync(string Email, string Password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserResponse")]
+        SocialGameWebsite.SocialGameBLLService.User GetUser(string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserResponse")]
+        System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.User> GetUserAsync(string Email);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/UpdateUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/UpdateUserResponse")]
         SocialGameWebsite.SocialGameBLLService.User UpdateUser(SocialGameWebsite.SocialGameBLLService.User User);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/UpdateUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/UpdateUserResponse")]
         System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.User> UpdateUserAsync(SocialGameWebsite.SocialGameBLLService.User User);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetHumourStatusResponse")]
+        SocialGameWebsite.SocialGameBLLService.HumourStatus GetHumourStatus(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetHumourStatusResponse")]
+        System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.HumourStatus> GetHumourStatusAsync(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTags", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipTagsResponse")]
         SocialGameWebsite.SocialGameBLLService.RelationshipTag[] GetRelationshipTags();
@@ -844,12 +856,28 @@ namespace SocialGameWebsite.SocialGameBLLService {
             return base.Channel.LoginUserAsync(Email, Password);
         }
         
+        public SocialGameWebsite.SocialGameBLLService.User GetUser(string Email) {
+            return base.Channel.GetUser(Email);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.User> GetUserAsync(string Email) {
+            return base.Channel.GetUserAsync(Email);
+        }
+        
         public SocialGameWebsite.SocialGameBLLService.User UpdateUser(SocialGameWebsite.SocialGameBLLService.User User) {
             return base.Channel.UpdateUser(User);
         }
         
         public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.User> UpdateUserAsync(SocialGameWebsite.SocialGameBLLService.User User) {
             return base.Channel.UpdateUserAsync(User);
+        }
+        
+        public SocialGameWebsite.SocialGameBLLService.HumourStatus GetHumourStatus(int Id) {
+            return base.Channel.GetHumourStatus(Id);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.HumourStatus> GetHumourStatusAsync(int Id) {
+            return base.Channel.GetHumourStatusAsync(Id);
         }
         
         public SocialGameWebsite.SocialGameBLLService.RelationshipTag[] GetRelationshipTags() {
