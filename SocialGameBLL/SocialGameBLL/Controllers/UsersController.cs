@@ -40,6 +40,19 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public HumourStatus GetHumourStatus(int Id)
+        {
+            try
+            {
+                HumourStatusEntity HumourStatusEntity = db.HumourStatus.Find(Id);
+                return EntityServiceConverter.ConertToHumourStatusFromHumourStatusEntity(HumourStatusEntity);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         private void UpdateUserEntity(UserEntity UserEntity, User User)
         {
             UserEntity.Name = User.Name;

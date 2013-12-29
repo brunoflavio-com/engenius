@@ -96,6 +96,19 @@ namespace SocialGameBLL
             }
         }
 
+        public HumourStatus GetHumourStatus(int Id)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetHumourStatus(Id);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength)
         {
             try
