@@ -9,10 +9,14 @@ namespace SocialGameWebsite.Authorization
 {
     public class SocialGameWebSecurity
     {
-        public static void Register(string Username, string Password)
+        public static void Register(string Username, string Password, string Name, string Surname, DateTime Birthdate)
         {
             SocialGameBLLServiceClient Proxy = new SocialGameBLLServiceClient();
             User User = Proxy.RegisterUser(Username, Password);
+            User.Name = Name;
+            User.Surname = Surname;
+            User.Birthdate = Birthdate;
+            User = Proxy.UpdateUser(User);
             WebSecurity.CreateUserAndAccount(User.Email, Password);
             WebSecurity.Login(User.Email, Password);
         }
