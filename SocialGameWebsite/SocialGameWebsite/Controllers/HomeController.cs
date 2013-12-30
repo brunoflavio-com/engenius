@@ -26,8 +26,7 @@ namespace SocialGameWebsite.Controllers
         {
             SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
             UserViewModel UserViewModel = new UserViewModel(ServiceUser);
-            ViewBag.Text = "Name: " + UserViewModel.Name;
-            return View();
+            return View(UserViewModel);
         }
 
         public ActionResult Header()

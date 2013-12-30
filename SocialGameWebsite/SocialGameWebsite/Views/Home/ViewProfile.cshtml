@@ -1,6 +1,8 @@
-﻿@{
+﻿@model SocialGameWebsite.Models.UserViewModel
+@{
     ViewBag.Title = "Profile";
 }
 
-<h2>Profile</h2>
-<h3>@ViewBag.Text</h3>
+<h2>@Model.Name @Model.Surname</h2>
+<p>@Model.Email</p>
+
