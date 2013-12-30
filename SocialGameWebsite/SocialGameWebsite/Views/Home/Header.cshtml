@@ -10,7 +10,7 @@
             using (Html.BeginForm("login", "account", new { ReturnUrl = "/" })) {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                <ul id="header-login">
+                <ul class="header-login">
                     <li>
                         <div class="header-login-field">
                             @Html.LabelFor(m => m.Email)
@@ -31,11 +31,6 @@
                     </li>
                     <li>
                         <div class="header-login-field">
-                        
-                        </div>
-                    </li>
-                    <li>
-                        <div class="header-login-field">
                             <input type="submit" value="Log in" />
                         </div>
                 </li>
@@ -44,11 +39,21 @@
         }
         else
         {
-            @ViewBag.Email
-            using (Html.BeginForm("logoff", "account")) {
-                @Html.AntiForgeryToken()
-                <input type="submit" value="Log Out" />
-            }
+            <ul class="header-login">
+                <li class="header-login-field">
+                    @ViewBag.Email
+                </li>
+                <li class="header-login-field">
+                    @Html.ActionLink("Edit Profile", "EditProfile")
+                </li>
+                <li class="header-login-field">
+                    @using (Html.BeginForm("logoff", "account"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Log Out" />
+                    }
+                </li>
+            </ul>
         }
     </div>
 </div>

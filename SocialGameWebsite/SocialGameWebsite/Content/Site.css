@@ -142,7 +142,7 @@ footer {
 
 /* header login
 ----------------------------------------------------------*/
-#header-login {
+.header-login {
     list-style-type: none;
     font-size: xx-small;
     display: inline-flex;
@@ -159,11 +159,11 @@ footer {
         margin-right: 5px;
     }
 
-    #header-login input[type=text]{
+    .header-login input[type=text]{
         width: 150px;
     }
 
-    #header-login input[type=password]{
+    .header-login input[type=password]{
         width: 150px;
     }
 

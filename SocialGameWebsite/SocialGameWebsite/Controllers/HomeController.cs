@@ -29,6 +29,28 @@ namespace SocialGameWebsite.Controllers
             return View(UserViewModel);
         }
 
+        [Authorize]
+        public ActionResult EditProfile()
+        {
+            SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
+            UserViewModel UserViewModel = new UserViewModel(ServiceUser);
+            return View(UserViewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult EditProfile(UserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                UserViewModel UserViewModel = UpdateUserViewModel(model);
+                User BLLUser = UserViewModel.GetServiceUser();
+                Proxy.UpdateUser(BLLUser);
+                return RedirectToAction("ViewProfile");
+            }
+            return View(model);
+        }
+
         public ActionResult Header()
         {
             if (User.Identity.IsAuthenticated)
@@ -51,6 +73,22 @@ namespace SocialGameWebsite.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+
+        private UserViewModel UpdateUserViewModel(UserViewModel UpdatedUserViewModel)
+        {
+            SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
+            UserViewModel UserViewModel = new UserViewModel(ServiceUser);
+            UserViewModel.Email = UpdatedUserViewModel.Email;
+            UserViewModel.Name = UpdatedUserViewModel.Name;
+            UserViewModel.Surname = UpdatedUserViewModel.Surname;
+            UserViewModel.Birthdate = UpdatedUserViewModel.Birthdate;
+            UserViewModel.PhoneNumber = UpdatedUserViewModel.PhoneNumber;
+            UserViewModel.LinkedinProfile = UpdatedUserViewModel.LinkedinProfile;
+            UserViewModel.FacebookProfile = UpdatedUserViewModel.FacebookProfile;
+            if (UpdatedUserViewModel.HumourStatus != null) UserViewModel.HumourStatus = UpdatedUserViewModel.HumourStatus;
+            return UserViewModel;
         }
     }
 }
