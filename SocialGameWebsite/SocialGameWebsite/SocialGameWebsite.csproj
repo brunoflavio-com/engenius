@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -313,6 +314,9 @@
     <Content Include="Service References\LocalHostSocialGameBLL\SocialGameWebsite.LocalHostSocialGameBLL.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\LocalHostSocialGameBLL\SocialGameWebsite.LocalHostSocialGameBLL.HumourStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\SocialGameBLLService\SocialGameBLLService.disco" />
     <None Include="Service References\SocialGameBLLService\configuration91.svcinfo" />
     <None Include="Service References\SocialGameBLLService\configuration.svcinfo" />
@@ -403,7 +407,12 @@
     <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Home\ViewProfile.cshtml" />
+    <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.HumourStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Views\Home\Header.cshtml" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

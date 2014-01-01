@@ -6,7 +6,6 @@
 
 body {
     background-color: #00CDCD;
-    border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -131,6 +130,7 @@ footer {
     font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
     font-size: 2.3em;
     margin: 0;
+    vertical-align: middle;
 }
 
 .site-title a, .site-title a:hover, .site-title a:active {
@@ -140,6 +140,32 @@ footer {
     text-decoration: none;
 }
 
+/* header login
+----------------------------------------------------------*/
+.header-login {
+    list-style-type: none;
+    font-size: xx-small;
+    display: inline-flex;
+}
+
+    .header-login-field{
+        margin: 5px;
+        height: 30px;
+        vertical-align: middle;
+    }
+
+    .header-login-field label{
+        display: inline;
+        margin-right: 5px;
+    }
+
+    .header-login input[type=text]{
+        width: 150px;
+    }
+
+    .header-login input[type=password]{
+        width: 150px;
+    }
 
 /* login
 ----------------------------------------------------------*/

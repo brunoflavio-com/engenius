@@ -1,0 +1,59 @@
+﻿@model SocialGameWebsite.Models.LoginModel
+
+<div class="content-wrapper">
+    <div class="float-left">
+        <p class="site-title">@Html.ActionLink("SocialGame", "Index", "Home")</p>
+    </div>
+    <div class="float-right">
+        @if (ViewBag.Email == null)
+        {
+            using (Html.BeginForm("login", "account", new { ReturnUrl = "/" })) {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <ul class="header-login">
+                    <li>
+                        <div class="header-login-field">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email)
+                            @Html.ValidationMessageFor(m => m.Email)
+                        </div>
+                        <div class="header-login-field">
+                            @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="header-login-field">
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password)
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                    </li>
+                    <li>
+                        <div class="header-login-field">
+                            <input type="submit" value="Log in" />
+                        </div>
+                </li>
+                </ul>
+            }
+        }
+        else
+        {
+            <ul class="header-login">
+                <li class="header-login-field">
+                    @ViewBag.Email
+                </li>
+                <li class="header-login-field">
+                    @Html.ActionLink("Edit Profile", "EditProfile")
+                </li>
+                <li class="header-login-field">
+                    @using (Html.BeginForm("logoff", "account"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Log Out" />
+                    }
+                </li>
+            </ul>
+        }
+    </div>
+</div>

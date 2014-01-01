@@ -64,7 +64,7 @@ namespace SocialGameWebsite.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return PartialView();
         }
 
         //
@@ -82,8 +82,8 @@ namespace SocialGameWebsite.Controllers
                 {
                     //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     //WebSecurity.Login(model.UserName, model.Password);
-                    SocialGameWebSecurity.Register(model.Email, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    SocialGameWebSecurity.Register(model.Email, model.Password, model.Name, model.Surname, model.Birthdate);
+                    return RedirectToAction("ViewProfile", "Home");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -92,7 +92,7 @@ namespace SocialGameWebsite.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return PartialView(model);
         }
 
         //
