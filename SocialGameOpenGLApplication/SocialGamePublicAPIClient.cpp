@@ -1,6 +1,5 @@
 #include "SocialGamePublicAPIClient.h"
 #include "gsoapAPIClient\BasicHttpBinding_USCOREISocialGameService.nsmap"
-#include "SocialGamePublicAPIConverter.h"
 
 SocialGamePublicAPIClient::SocialGamePublicAPIClient()
 {
@@ -51,13 +50,13 @@ bool SocialGamePublicAPIClient::Login(std::string email, std::string password){
 	}
 }
 
-std::future<User * > SocialGamePublicAPIClient::asyncGetGraph(std::string email, int depth){
+std::future<ns5__Graph * > SocialGamePublicAPIClient::asyncGetGraph(std::string email, int depth){
 	if (ready){
 		return std::async(&SocialGamePublicAPIClient::getGraph, this, email, depth);
 	}
 }
 
-User * SocialGamePublicAPIClient::getGraph(std::string email, int depth){
+ns5__Graph * SocialGamePublicAPIClient::getGraph(std::string email, int depth){
 	if (ready && LoggedIn){
 		ready = false;
 		_ns1__GetGraph getGraph;
@@ -67,10 +66,8 @@ User * SocialGamePublicAPIClient::getGraph(std::string email, int depth){
 		_ns1__GetGraphResponse response;
 		proxy.GetGraph(&getGraph, &response);
 		ns5__Graph * graph = response.GetGraphResult;
-		SocialGamePublicAPIConverter * converter = new SocialGamePublicAPIConverter();
-		User * user = converter->convertGraph(graph, email);
 		ready = true;
-		return user;
+		return graph;
 	}
 	else{
 

@@ -81,6 +81,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdvanceModeGraphScene.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="graphCoordWalker.h" />
     <ClInclude Include="GraphOpenGL.h" />
     <ClInclude Include="GraphScene.h" />
@@ -88,7 +90,9 @@
     <ClInclude Include="GraphWalkerDraw.h" />
     <ClInclude Include="HangmanPLEngine.h" />
     <ClInclude Include="HangmanScene.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="InterfaceGL.h" />
+    <ClInclude Include="NormalModeGraphScene.h" />
     <ClInclude Include="RelationShip.h" />
     <ClInclude Include="RelationshipTag.h" />
     <ClInclude Include="gsoapAPIClient\Service1.h" />
@@ -97,16 +101,18 @@
     <ClInclude Include="gsoapAPIClient\soapStub.h" />
     <ClInclude Include="gsoapAPIClient\stdsoap2.h" />
     <ClInclude Include="HumorStatus.h" />
-    <ClInclude Include="SceneInterface.h" />
+    <ClInclude Include="IWindowScene.h" />
     <ClInclude Include="SocialGamePublicAPIClient.h" />
     <ClInclude Include="SocialGamePublicAPIConverter.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="SubWindowSceneInterface.h" />
+    <ClInclude Include="ISubWindowScene.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserTag.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AdvanceModeGraphScene.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="graphCoordWalker.cpp" />
     <ClCompile Include="GraphOpenGL.cpp" />
     <ClCompile Include="GraphScene.cpp" />
@@ -114,6 +120,7 @@
     <ClCompile Include="GraphWalkerDraw.cpp" />
     <ClCompile Include="HangmanPLEngine.cpp" />
     <ClCompile Include="HangmanScene.cpp" />
+    <ClCompile Include="NormalModeGraphScene.cpp" />
     <ClCompile Include="RelationShip.cpp" />
     <ClCompile Include="RelationShipTag.cpp" />
     <ClCompile Include="gsoapAPIClient\soapBasicHttpBinding_USCOREISocialGameServiceProxy.cpp" />
@@ -124,7 +131,6 @@
     <ClCompile Include="SocialGamePublicAPIClient.cpp" />
     <ClCompile Include="SocialGamePublicAPIConverter.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="SubWindowSceneInterface.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserTag.cpp" />
   </ItemGroup>

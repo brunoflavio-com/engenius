@@ -16,8 +16,8 @@ public:
 	SocialGamePublicAPIClient();
 	bool Login(std::string userName, std::string Password);
 	std::future<bool> asyncLogin(std::string userName, std::string Password);
-	User * getGraph(std::string email, int depth);
-	std::future<User * > asyncGetGraph(std::string email, int depth);
+	ns5__Graph * getGraph(std::string email, int depth);
+	std::future<ns5__Graph * > asyncGetGraph(std::string email, int depth);
 	~SocialGamePublicAPIClient();
 };
 

@@ -21,14 +21,14 @@ void GraphWalker::walk(User * graph){
 		User * user = users.back();
 		walkVertice(user);
 		users.pop_back();
-		for (int i = 0; i<user->relationships->size(); i++){
-			User * tempUser = user->relationships->at(i)->user;
-			walkConnection(user, user->relationships->at(i), i, user->relationships->size());
+		for (int i = 0; i<user->relationships.size(); i++){
+			User * tempUser = user->relationships.at(i)->user;
+			walkConnection(user, user->relationships.at(i), i, user->relationships.size());
 
 			if (std::find(visitedUsers.begin(), visitedUsers.end(),tempUser) == visitedUsers.end()){
 				//User is not visited
-				visitedUsers.insert(visitedUsers.begin(), user->relationships->at(i)->user);
-				users.insert(users.begin(), user->relationships->at(i)->user);
+				visitedUsers.insert(visitedUsers.begin(), user->relationships.at(i)->user);
+				users.insert(users.begin(), user->relationships.at(i)->user);
 			}
 		}
 	}	
