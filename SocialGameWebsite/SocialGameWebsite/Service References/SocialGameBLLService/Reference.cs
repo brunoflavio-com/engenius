@@ -772,6 +772,12 @@ namespace SocialGameWebsite.SocialGameBLLService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetHumourStatusResponse")]
         System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.HumourStatus> GetHumourStatusAsync(int Id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatusResponse")]
+        SocialGameWebsite.SocialGameBLLService.HumourStatus[] GetAllHumourStatus();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatusResponse")]
+        System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.HumourStatus[]> GetAllHumourStatusAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTags", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipTagsResponse")]
         SocialGameWebsite.SocialGameBLLService.RelationshipTag[] GetRelationshipTags();
         
@@ -878,6 +884,14 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.HumourStatus> GetHumourStatusAsync(int Id) {
             return base.Channel.GetHumourStatusAsync(Id);
+        }
+        
+        public SocialGameWebsite.SocialGameBLLService.HumourStatus[] GetAllHumourStatus() {
+            return base.Channel.GetAllHumourStatus();
+        }
+        
+        public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.HumourStatus[]> GetAllHumourStatusAsync() {
+            return base.Channel.GetAllHumourStatusAsync();
         }
         
         public SocialGameWebsite.SocialGameBLLService.RelationshipTag[] GetRelationshipTags() {

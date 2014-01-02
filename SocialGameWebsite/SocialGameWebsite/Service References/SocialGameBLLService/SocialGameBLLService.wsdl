@@ -56,6 +56,12 @@
   <wsdl:message name="ISocialGameBLLService_GetHumourStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetHumourStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetAllHumourStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHumourStatus" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetAllHumourStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHumourStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_GetRelationshipTags_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRelationshipTags" />
   </wsdl:message>
@@ -109,6 +115,10 @@
     <wsdl:operation name="GetHumourStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatus" message="tns:ISocialGameBLLService_GetHumourStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatusResponse" message="tns:ISocialGameBLLService_GetHumourStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHumourStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatus" message="tns:ISocialGameBLLService_GetAllHumourStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatusResponse" message="tns:ISocialGameBLLService_GetAllHumourStatus_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetRelationshipTags">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTags" message="tns:ISocialGameBLLService_GetRelationshipTags_InputMessage" />
@@ -188,6 +198,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetHumourStatus">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetHumourStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHumourStatus">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatus" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

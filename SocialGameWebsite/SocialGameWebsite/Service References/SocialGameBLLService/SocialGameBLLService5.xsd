@@ -22,6 +22,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="HumourStatus" nillable="true" type="tns:HumourStatus" />
+  <xs:complexType name="ArrayOfHumourStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HumourStatus" nillable="true" type="tns:HumourStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHumourStatus" nillable="true" type="tns:ArrayOfHumourStatus" />
   <xs:complexType name="ArrayOfRelationshipTag">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="RelationshipTag" nillable="true" type="tns:RelationshipTag" />
@@ -45,12 +51,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Graph" nillable="true" type="tns:Graph" />
-  <xs:complexType name="ArrayOfHumourStatus">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="HumourStatus" nillable="true" type="tns:HumourStatus" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfHumourStatus" nillable="true" type="tns:ArrayOfHumourStatus" />
   <xs:complexType name="ArrayOfInterest">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Interest" nillable="true" type="tns:Interest" />
