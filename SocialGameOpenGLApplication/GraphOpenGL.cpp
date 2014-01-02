@@ -1,5 +1,6 @@
 #include "GraphOpenGL.h"
-#include "GraphScene.h"
+#include "AdvanceModeGraphScene.h"
+#include "NormalModeGraphScene.h"
 
 #define GAP		25
 
@@ -14,24 +15,55 @@ GraphWindows Window;
 GraphOpenGL::GraphOpenGL(){
 }
 
-InterfaceScene * GraphOpenGL::graphScene;
-SubWindowSceneInterface *GraphOpenGL::subgraphScene;
-
+GraphScene * GraphOpenGL::advanceScene;
+GraphScene  * GraphOpenGL::normalScene;
+GraphScene * GraphOpenGL::currentScene;
+bool GraphOpenGL::advancedMode = true;
 
 GraphOpenGL::~GraphOpenGL(){}
 
 
 void GraphOpenGL::Init(){
-	graphScene->Init();
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_DEPTH_TEST);
+	glShadeModel(GL_SMOOTH);
+	currentScene->Init();
+}
+
+void GraphOpenGL::subWindowInit(){
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_DEPTH_TEST);
+	glShadeModel(GL_SMOOTH);
+	currentScene->subWindowInit();
 }
 
 void GraphOpenGL::MotionMouse(int x, int y)
 {
-	graphScene->MotionMouse(x,y);
+	currentScene->MotionMouse(x, y);
 }
 
 void GraphOpenGL::Mouse(int button, int state, int x, int y){
-	graphScene->Mouse(button,state,x, y);
+	currentScene->Mouse(button, state, x, y);
 }
 
 void GraphOpenGL::ReshapeMinimap(int width, int height)
@@ -54,11 +86,11 @@ void GraphOpenGL::Reshape(int width, int height){
 }
 
 void GraphOpenGL::DrawMinimap(){
-	subgraphScene->drawSubWindow();
+	currentScene->drawSubWindow();
 }
 
 void GraphOpenGL::Draw(){
-	graphScene->Draw();
+	currentScene->Draw();
 	
 }
 
@@ -68,7 +100,7 @@ void GraphOpenGL::redisplayAll(void)
 	glutPostRedisplay();
 	glutSetWindow(Window.Top);
 	
-	if (subgraphScene->isSubWindowActive()){
+	if (currentScene->isSubWindowActive()){
 		glutShowWindow();
 	}
 	else{
@@ -80,7 +112,7 @@ void GraphOpenGL::redisplayAll(void)
 
 void GraphOpenGL::Timer(int value){
 	glutTimerFunc(1, Timer, 0);
-	graphScene->Timer(value);
+	currentScene->Timer(value);
 	//glutPostRedisplay();
 	redisplayAll();
 }
@@ -93,22 +125,36 @@ void GraphOpenGL::PrintKeys(){
 }
 
 void GraphOpenGL::Key(unsigned char key, int x, int y){
+	if (key == 'c'){
+		//Change Mode Advance - Normal
+		if (advancedMode)
+		{
+			currentScene = normalScene;
+			advancedMode = false;
+		}
+		else{
+			currentScene = advanceScene;
+			advancedMode = true;
+		}
 
-	graphScene->Key(key,x, y);
+	}
+	currentScene->Key(key, x, y);
 }
 
 void GraphOpenGL::SpecialKey(int key, int x, int y){
-	graphScene->SpecialKey(key, x, y);
+	currentScene->SpecialKey(key, x, y);
 }
 
 void GraphOpenGL::SpecialKeyUp(int key, int x, int y){
-	graphScene->SpecialKeyUp(key, x, y);
+	currentScene->SpecialKeyUp(key, x, y);
 }
 
-void GraphOpenGL::Run(int argc, char **argv, InterfaceScene * scene, SubWindowSceneInterface * subWindowScene)
+void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client, std::string email)
 {
-	graphScene = scene;
-	subgraphScene = subWindowScene;
+	advanceScene = new AdvanceModeGraphScene(client, email);
+	normalScene = new NormalModeGraphScene(client, email);
+	currentScene = advanceScene;
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);
@@ -118,7 +164,7 @@ void GraphOpenGL::Run(int argc, char **argv, InterfaceScene * scene, SubWindowSc
 	PrintKeys();
 
 	//Main window
-	graphScene->Init();
+	Init();
 	glutTimerFunc(1, Timer, 0);
 	glutReshapeFunc(Reshape);
 	glutDisplayFunc(Draw);
@@ -130,7 +176,7 @@ void GraphOpenGL::Run(int argc, char **argv, InterfaceScene * scene, SubWindowSc
 	//Minimap Subwindow
 	
 	Window.Top = glutCreateSubWindow(Window.Main, GAP, GAP, 200, 200);
-	subgraphScene->subWindowInit();
+	subWindowInit();
 	glutTimerFunc(1, Timer, 0);
 	glutReshapeFunc(ReshapeMinimap);
 	glutDisplayFunc(DrawMinimap);

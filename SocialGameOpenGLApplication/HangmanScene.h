@@ -1,9 +1,9 @@
 #pragma once
-#include "SceneInterface.h"
+#include "IWindowScene.h"
 #include "HangmanPLEngine.h"
 
 class HangmanScene :
-	public InterfaceScene
+	public IWindowScene
 {
 public:
 	HangmanScene();

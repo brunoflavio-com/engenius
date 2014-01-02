@@ -94,7 +94,7 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	
 	unsigned char s[100];
 	
-	strcpy((char*)s, userA->email->c_str());
+	strcpy((char*)s, userA->email.c_str());
 
 	glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
 	glEnable(GL_LIGHTING);

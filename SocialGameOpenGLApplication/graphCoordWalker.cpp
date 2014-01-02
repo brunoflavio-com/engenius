@@ -23,7 +23,7 @@ void graphCoordWalker::walk(User * graph){
 	maxStrenght = 0;
 	maxUserConnections = 0;
 
-	std::cout << *graph->email << " | ";
+	std::cout << graph->email << " | ";
 	std::cout << graph->x << " | ";
 	std::cout << graph->y << " | ";
 	std::cout << graph->z << " | ";
@@ -33,7 +33,7 @@ void graphCoordWalker::walk(User * graph){
 
 void graphCoordWalker::walkVertice(User * user){
 	//Sets Height to the number of connections:
-	user->z = user->relationships->size();
+	user->z = user->relationships.size();
 	/*Update Stats*/
 	maxUserConnections = user->z > maxUserConnections? user->z : maxUserConnections;
 }
@@ -43,7 +43,7 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 		relationship->user->graphLevel = userA->graphLevel + 1;
 		User * userB = relationship->user;
 		float racio = position / (float)total;
-		int totalRelationships = userA->relationships->size();
+		int totalRelationships = userA->relationships.size();
 
 		float distance = MIN_DIST - ((3 * 2 * SPHERE_RADIUS) + totalRelationships *(2 * SPHERE_RADIUS)) / (2 * M_PI);
 
@@ -62,7 +62,7 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 		//Z definido no walkVertice() 
 		//userB->z = 0;
 
-		std::cout << *userB->email << " | ";
+		std::cout << userB->email << " | ";
 		std::cout << userB->x << " | ";
 		std::cout << userB->y << " | ";
 		std::cout << userB->z << " | ";

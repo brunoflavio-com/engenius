@@ -37,22 +37,10 @@ GraphMouse_State MouseStatus;
 
 GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 {
-	onGame = false;
 	apiClient = client;
 	email = loginEmail;
-	graph =	apiClient->getGraph(email,5);
-	graphCoordWalker walker;
-	walker.walk(graph);
-
-	maxConnectionStrenght = walker.getMaxConnectionStrenght();
-	maxUserConnections = walker.getMaxUserConnections();
-
-
-	//TO REMOVE AFTER - this will be called from a menu of some sort ****************
-	gameScene = new HangmanScene();
-	//onGame = true;
-	// ******************************************************************************
-
+	ns5__Graph * ns5_graph = apiClient->getGraph(email, 5);
+	graph = new Graph(ns5_graph, loginEmail);
 }
 
 
@@ -67,62 +55,48 @@ void GraphScene::Draw(void){
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	CamLookAt();
-	GraphWalkerDraw drawWalker(maxUserConnections, maxConnectionStrenght);
-	drawWalker.walk(graph);
+	
+	Draw3dObjects();
 
-	if (onGame){
-		gameScene->Draw();
-	}
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0, 1, 0, 1, -1.0f, 1.0f);
 
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glPushAttrib(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
+
+	DrawOverlay();
+
+	glPopAttrib();
+
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
 	glutSwapBuffers();
 	glFlush();
 
 }
 
 void GraphScene::Init(void){
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-
-	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
-	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
-	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_DEPTH_TEST);
-	glShadeModel(GL_SMOOTH);
+	
 	StartCam();
 }
 
 void GraphScene::subWindowInit(void){
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-
-	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
-	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
-	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_DEPTH_TEST);
-	glShadeModel(GL_SMOOTH);
+	
 	StartCam();
 }
 
 
 void GraphScene::Timer(int value){
-	if (onGame){
-		gameScene->Timer(value);
-		return;
-	}
-	
-	
 	if (KeyStatus.up){
 		PersonCam.dist -= 0.01;
 	}
@@ -138,10 +112,7 @@ void GraphScene::Timer(int value){
 }
 
 void GraphScene::Key(unsigned char key, int x, int y){
-	if (onGame){
-		gameScene->Key(key,x,y);
-		return;
-	}
+	
 	switch (key) {
 	case 27:
 		exit(1);
@@ -160,10 +131,6 @@ void GraphScene::Key(unsigned char key, int x, int y){
 }
 
 void GraphScene::SpecialKey(int key, int x, int y){
-	if (onGame){
-		gameScene->SpecialKey(key,x,y);
-		return;
-	}
 	
 	switch (key){
 	case GLUT_KEY_UP: KeyStatus.up = GL_TRUE;
@@ -178,10 +145,6 @@ void GraphScene::SpecialKey(int key, int x, int y){
 }
 
 void GraphScene::SpecialKeyUp(int key, int x, int y){
-	if (onGame){
-		gameScene->SpecialKeyUp(key,x,y);
-		return;
-	}
 	
 	switch (key) {
 	case GLUT_KEY_UP: KeyStatus.up = GL_FALSE;
@@ -198,15 +161,10 @@ void GraphScene::SpecialKeyUp(int key, int x, int y){
 void GraphScene::drawSubWindow(){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	TopCamLookAt();
-
 	//draw subscene
-	GraphWalkerDraw drawWalker(maxUserConnections, maxConnectionStrenght);
-	drawWalker.walk(graph);
-
+	graph->draw();
 	glutSwapBuffers();
 	glFlush();
 }

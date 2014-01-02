@@ -1,6 +1,5 @@
 #pragma once
-#include "SceneInterface.h"
-#include "SubWindowSceneInterface.h"
+#include "IBothWindowScene.h"
 #include "SocialGamePublicAPIClient.h"
 #include "graphCoordWalker.h"
 #include "GraphWalkerDraw.h"
@@ -8,20 +7,19 @@
 #include <string>
 #include "User.h"
 #include <GL/glut.h>
+#include "Graph.h"
 
 class GraphScene :
-	public InterfaceScene, public SubWindowSceneInterface
+	public IBothWindowsScene
 {
 private:
-	int maxUserConnections;
-	int maxConnectionStrenght;
+	
 
 protected: 
 	bool isSubWindowsActive;
 	SocialGamePublicAPIClient * apiClient;
 	string email;
-	User * graph;
-	InterfaceScene * gameScene;
+	Graph * graph;
 	bool onGame;
 
 public:
