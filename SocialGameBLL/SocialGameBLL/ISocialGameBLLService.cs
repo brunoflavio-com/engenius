@@ -33,6 +33,8 @@ namespace SocialGameBLL
         [OperationContract]
         HumourStatus GetHumourStatus(int Id);
         [OperationContract]
+        ICollection<HumourStatus> GetAllHumourStatus();
+        [OperationContract]
         ICollection<RelationshipTag> GetRelationshipTags();
         [OperationContract]
         Graph GetRelationships(User User, int Depth);
