@@ -45,7 +45,20 @@ namespace SocialGameBLL.Controllers
             try
             {
                 HumourStatusEntity HumourStatusEntity = db.HumourStatus.Find(Id);
-                return EntityServiceConverter.ConertToHumourStatusFromHumourStatusEntity(HumourStatusEntity);
+                return EntityServiceConverter.ConvertToHumourStatusFromHumourStatusEntity(HumourStatusEntity);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public ICollection<HumourStatus> GetAllHumourStatus()
+        {
+            try
+            {
+                IList<HumourStatusEntity> HumourStatusEntities = db.HumourStatus.ToList();
+                return EntityServiceConverter.ConvertToHumourStatusFromHumourStatusEntities(HumourStatusEntities);
             }
             catch (Exception e)
             {
