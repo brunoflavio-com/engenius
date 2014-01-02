@@ -72,7 +72,7 @@ namespace SocialGameBLL.Controllers
             UserEntity.Surname = User.Surname;
             if (User.Birthdate != null)
             {
-                UserEntity.Birthdate = (DateTime?)UserEntity.Birthdate;
+                UserEntity.Birthdate = (DateTime?)User.Birthdate;
             }
             UserEntity.HumourStatusID = User.HumourStatusId;
             UserEntity.PhoneNumber = User.PhoneNumber;
