@@ -23,7 +23,28 @@
 
 %%
 % Request Handler:
-
+get_common_tag_friends(Request) :-
+	get_common_tag_friends_action(Request,CommonTagFriends),
+	prolog_to_json(CommonTagFriends, CommonTagFriendsJSON),
+	reply_json(CommonTagFriendsJSON).
 
 %%
 % Compute:
+get_common_tag_friends_action(Request,CommonTagFriends) :-
+	findall([User,Interests],
+		user(User, _, _, _, _, Interests, _, _, _),
+		UserList),
+	get_common_tag_friends_action1(Request,CommonTagFriends,UserList).
+	
+get_common_tag_friends_action1(_,[],[]).
+get_common_tag_friends_action1(Request,[User|CommonTagFriends],[[User,Interests]|T]):-
+	checkcommontags(Request,Interests),
+	get_common_tag_friends_action1(Request,CommonTagFriends,T).
+get_common_tag_friends_action1(Request,CommonTagFriends,[_|T]):-
+	get_common_tag_friends_action1(Request,CommonTagFriends,T).
+	
+checkcommontags([],_).
+checkcommontags([H|T],Interests):-
+	(member(H,Interests),checkcommontags(T,Interests));(!,fail).
+	
+	
