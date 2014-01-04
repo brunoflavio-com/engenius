@@ -1,16 +1,17 @@
 #pragma once
-#include "SceneInterface.h"
+#include "IWindowScene.h"
 #include "TicTacToePLEngine.h"
-
+#include "SocialGamePublicAPIClient.h"
+#include <string>
 
 class TicTacToeScene :
-	public InterfaceScene
+	public IWindowScene
 {
 public:
 
 	char board[9];
 
-	TicTacToeScene();
+	TicTacToeScene(SocialGamePublicAPIClient *client, string loginEmail);
 	~TicTacToeScene();
 
 	// Initiate Scene
@@ -21,6 +22,8 @@ public:
 
 	//Draw Callback
 	void Draw(void);
+	void Draw3dObjects(void);
+	void DrawOverlay(void);
 
 	// Keyboard callback
 	void Key(unsigned char key, int x, int y);

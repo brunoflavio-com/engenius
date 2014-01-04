@@ -5,8 +5,11 @@
 #define PI 3.14159265358979323846
 
 
-TicTacToeScene::TicTacToeScene()
+TicTacToeScene::TicTacToeScene(SocialGamePublicAPIClient *client, string loginEmail)
 {
+	//If necessary, use the client soap connection to get game related data from the server.
+	//client->
+
 	//initialize game engine:
 	game = new TicTacToePLEngine('o');
 	//for test
@@ -40,20 +43,25 @@ void TicTacToeScene::Timer(int value)
 void TicTacToeScene::Draw(void)
 {
 	
+}
+
+void TicTacToeScene::Draw3dObjects(void)
+{
+
 	// Clear Screen and Depth Buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	
+
 
 	// Define a viewing transformation
 	gluLookAt(0.0, -1.5, 8, 1.5, -1.5, 0, 0, 1, 0);
-	
+
 	// Push and pop the current matrix stack. 
 	// This causes that translations and rotations on this matrix wont influence others
 	glPushMatrix(); //Save the transformations performed thus far
-		
+
 	drawBoard();
-		
+
 	//Draw the game engine message:
 	glPushMatrix();
 	unsigned char msg[100];
@@ -61,10 +69,27 @@ void TicTacToeScene::Draw(void)
 	glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
-	
+
 	glPopMatrix();
 
 	glutSwapBuffers();//Send the 3D scene to the screen
+}
+
+void TicTacToeScene::DrawOverlay(void)
+{
+	// Draw the engine message
+	glPushMatrix();
+
+	//position in the bottom-center:
+	glRasterPos2f(0.5, 0.1);
+
+	unsigned char msg[100];
+	strcpy((char*) msg, game->getMessage().c_str());
+
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
+	glEnable(GL_LIGHTING);
+
+	glPopMatrix();
 }
 
 

@@ -3,6 +3,7 @@
 #include <gl\freeglut.h>
 
 #include "HangmanScene.h"
+#include "TicTacToeScene.h"
 
 NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail):GraphScene(client, loginEmail)
 {
@@ -46,7 +47,11 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	if (key == 'G') {
 		game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
-	}	
+	}
+	if (key == 'T') {
+		game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
+		gameOn = true;
+	}
 }
 
 void NormalModeGraphScene::Timer(int value){
