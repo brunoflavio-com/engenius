@@ -81,7 +81,7 @@ namespace SocialGameBLL.Util
             return HumourStatus;
         }
 
-        public static HumourStatus ConertToHumourStatusFromHumourStatusEntity(HumourStatusEntity HumourStatusEntity)
+        public static HumourStatus ConvertToHumourStatusFromHumourStatusEntity(HumourStatusEntity HumourStatusEntity)
         {
             return new HumourStatus
             {

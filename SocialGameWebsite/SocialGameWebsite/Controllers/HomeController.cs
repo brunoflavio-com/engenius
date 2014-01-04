@@ -25,7 +25,8 @@ namespace SocialGameWebsite.Controllers
         public ActionResult ViewProfile()
         {
             SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
-            UserViewModel UserViewModel = new UserViewModel(ServiceUser);
+            IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
+            UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
             return View(UserViewModel);
         }
 
@@ -33,7 +34,8 @@ namespace SocialGameWebsite.Controllers
         public ActionResult EditProfile()
         {
             SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
-            UserViewModel UserViewModel = new UserViewModel(ServiceUser);
+            IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
+            UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
             return View(UserViewModel);
         }
 
@@ -75,6 +77,7 @@ namespace SocialGameWebsite.Controllers
             return View();
         }
 
+        /*Helper Methods*/
 
         private UserViewModel UpdateUserViewModel(UserViewModel UpdatedUserViewModel)
         {
@@ -89,6 +92,19 @@ namespace SocialGameWebsite.Controllers
             UserViewModel.FacebookProfile = UpdatedUserViewModel.FacebookProfile;
             if (UpdatedUserViewModel.HumourStatus != null) UserViewModel.HumourStatus = UpdatedUserViewModel.HumourStatus;
             return UserViewModel;
+        }
+
+        private IList<HumourStatusViewModel> GetHumourStatus()
+        {
+            IList<HumourStatusViewModel> HumourStatus = new List<HumourStatusViewModel>();
+            ICollection<HumourStatus> ServiceHumourStatus = Proxy.GetAllHumourStatus();
+
+            foreach(HumourStatus H in ServiceHumourStatus)
+            {
+                HumourStatus.Add(new HumourStatusViewModel(H));
+            }
+
+            return HumourStatus;
         }
     }
 }

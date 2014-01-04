@@ -1,6 +1,6 @@
 #pragma once
 
-class InterfaceScene
+class IWindowScene
 {
 public:
 
@@ -12,6 +12,10 @@ public:
 
 	// Callback de desenho
 	virtual void Draw(void) = 0;
+
+	virtual void DrawOverlay(void) = 0;
+
+	virtual void Draw3dObjects(void) = 0;
 
 	// Callback para interacção via teclado (carregar na tecla)
 	virtual void Key(unsigned char key, int x, int y) = 0;

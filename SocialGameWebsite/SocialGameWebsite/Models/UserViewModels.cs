@@ -10,7 +10,7 @@ namespace SocialGameWebsite.Models
     public class UserViewModel
     {
         public UserViewModel() { }
-        internal UserViewModel(User BLLUser)
+        internal UserViewModel(User BLLUser, IList<HumourStatusViewModel> HumourStatus=null)
         {
             this.Email = BLLUser.Email;
             this.Name = BLLUser.Name;
@@ -19,7 +19,7 @@ namespace SocialGameWebsite.Models
             this.PhoneNumber = BLLUser.PhoneNumber;
             this.FacebookProfile = BLLUser.FacebookProfile;
             this.LinkedinProfile = BLLUser.LinkedInProfile;
-            this.HumourStatus = GetHumourStatusFromService(BLLUser.HumourStatusId);
+            this.HumourStatus = GetHumourStatusFromService(BLLUser.HumourStatusId, HumourStatus);
         }
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -45,7 +45,7 @@ namespace SocialGameWebsite.Models
         [Display(Name="Facebook Profile")]
         public string FacebookProfile { get; set; }
 
-        public HumourStatus HumourStatus { get; set; }
+        public HumourStatusViewModel HumourStatus { get; set; }
 
         internal User GetServiceUser()
         {
@@ -63,24 +63,44 @@ namespace SocialGameWebsite.Models
             return User;
         }
 
-        private HumourStatus GetHumourStatusFromService(int Id)
+        private HumourStatusViewModel GetHumourStatusFromService(int Id, IList<HumourStatusViewModel> ServiceHumourStatus)
         {
             //LocalHostSocialGameBLL.SocialGameBLLServiceClient Proxy = new LocalHostSocialGameBLL.SocialGameBLLServiceClient();
             //LocalHostSocialGameBLL.HumourStatus ServiceHumourStatus = Proxy.GetHumourStatus(Id);
-            SocialGameBLLService.SocialGameBLLServiceClient Proxy = new SocialGameBLLService.SocialGameBLLServiceClient();
-            SocialGameBLLService.HumourStatus ServiceHumourStatus = Proxy.GetHumourStatus(Id);
-            return new HumourStatus
+
+            if (ServiceHumourStatus == null)
             {
-                ID = ServiceHumourStatus.Id,
-                Name = ServiceHumourStatus.Name
-            };
+                SocialGameBLLService.SocialGameBLLServiceClient Proxy = new SocialGameBLLService.SocialGameBLLServiceClient();
+                SocialGameBLLService.HumourStatus ServiceHS = Proxy.GetHumourStatus(Id);
+                return new HumourStatusViewModel(ServiceHS);
+            }
+            else
+            {
+                HumourStatusViewModel HSViewModel = ServiceHumourStatus.First(hs => hs.ID == Id);
+                if (HSViewModel != null)
+                {
+                    return HSViewModel;
+                }
+                else
+                {
+                    SocialGameBLLService.SocialGameBLLServiceClient Proxy = new SocialGameBLLService.SocialGameBLLServiceClient();
+                    SocialGameBLLService.HumourStatus ServiceHS = Proxy.GetHumourStatus(Id);
+                    return new HumourStatusViewModel(ServiceHS);
+                }
+            }
         }
     }
 
-    public class HumourStatus
+    public class HumourStatusViewModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        internal HumourStatusViewModel(HumourStatus ServiceHumourStatus)
+        {
+            this.ID = ServiceHumourStatus.Id;
+            this.Name = ServiceHumourStatus.Name;
+        }
     }
 
 }

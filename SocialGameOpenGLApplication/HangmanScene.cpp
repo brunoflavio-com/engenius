@@ -2,10 +2,9 @@
 #include <gl\freeglut.h>
 #include <ctype.h>
 
-
-HangmanScene::HangmanScene()
-{
+HangmanScene::HangmanScene(SocialGamePublicAPIClient *client, string loginEmail){
 	//retrieve info (categories/words)
+	//client-> 
 
 	//initialize game engine:
 	game = new HangmanPLEngine(3, "engenius");
@@ -36,6 +35,11 @@ void HangmanScene::Timer(int value)
 // Draw Callback
 void HangmanScene::Draw(void)
 {
+	
+}
+
+void HangmanScene::Draw3dObjects(void){
+
 	// Clear Screen and Depth Buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -43,11 +47,11 @@ void HangmanScene::Draw(void)
 	// Define a viewing transformation
 	gluLookAt(4, 2, 0, 0, 0, 0, 0, 1, 0);
 
-
 	// Push and pop the current matrix stack. 
 	// This causes that translations and rotations on this matrix wont influence others.
 
 	glPushMatrix();
+	
 	glColor3f(1, 0, 0);
 	glTranslatef(0, 0, 0);
 	glRotatef(g_rotation, 0, 1, 0);
@@ -57,17 +61,23 @@ void HangmanScene::Draw(void)
 	glutSolidTeapot(1);
 	glPopMatrix();
 
-	//Draw the game engine message:
+
+}
+void HangmanScene::DrawOverlay(void) {
+
+	// Draw the engine message
 	glPushMatrix();
-		unsigned char msg[100];
-		strcpy((char*)msg, game->getMessage().c_str());
+	
+	//position in the center:
+	glRasterPos2f(0.5, 0.5);
 
-		glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
-		glEnable(GL_LIGHTING);
-		glPopMatrix();
+	unsigned char msg[100];
+	strcpy((char*)msg, game->getMessage().c_str());
+	
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
+	glEnable(GL_LIGHTING);
+
 	glPopMatrix();
-
-	glutSwapBuffers();
 }
 
 // Keyboard callback

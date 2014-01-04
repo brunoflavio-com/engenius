@@ -1,7 +1,7 @@
 #pragma once
-#include "Relationship.h";
+#include "Relationship.h"
 #include "UserTag.h"
-#include "HumorStatus.h";
+#include "HumorStatus.h"
 #include <vector>
 class Relationship;
 
@@ -11,14 +11,14 @@ class User
 {
 public:
 	int graphLevel;
-	string * email;
-	string * name;
-	string * surname;
+	string  email;
+	string  name;
+	string  surname;
 	float cota;
 	float x, y, z;
 
-	 vector<Relationship *> * relationships;
-	 vector<UserTag *> * userTags;
+	 vector<Relationship *>  relationships;
+	 vector<UserTag *>  userTags;
 	 
 	 HumorStatus * humor;
 	User();
