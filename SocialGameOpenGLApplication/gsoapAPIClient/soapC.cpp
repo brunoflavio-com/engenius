@@ -15,7 +15,7 @@ compiling, linking, and/or using OpenSSL is allowed.
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.17 2013-12-17 19:16:33 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.17 2013-12-21 18:44:06 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -226,10 +226,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		return soap_in_ns3__ArrayOfFaultException_x002eFaultReasonData(soap, NULL, NULL, "ns3:ArrayOfFaultException.FaultReasonData");
 	case SOAP_TYPE_ns3__FaultException_x002eFaultReasonData:
 		return soap_in_ns3__FaultException_x002eFaultReasonData(soap, NULL, NULL, "ns3:FaultException.FaultReasonData");
-	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData:
-		return soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, NULL, NULL, "ns3:ArrayOfFaultException.FaultCodeData");
 	case SOAP_TYPE_ns3__FaultException_x002eFaultCodeData:
 		return soap_in_ns3__FaultException_x002eFaultCodeData(soap, NULL, NULL, "ns3:FaultException.FaultCodeData");
+	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData:
+		return soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, NULL, NULL, "ns3:ArrayOfFaultException.FaultCodeData");
 	case SOAP_TYPE_ns3__CommunicationException:
 		return soap_in_ns3__CommunicationException(soap, NULL, NULL, "ns3:CommunicationException");
 	case SOAP_TYPE_ns3__FaultException:
@@ -365,13 +365,13 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, int *type)
 		{	*type = SOAP_TYPE_ns3__FaultException_x002eFaultReasonData;
 			return soap_in_ns3__FaultException_x002eFaultReasonData(soap, NULL, NULL, NULL);
 		}
-		if (!soap_match_tag(soap, t, "ns3:ArrayOfFaultException.FaultCodeData"))
-		{	*type = SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData;
-			return soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, NULL, NULL, NULL);
-		}
 		if (!soap_match_tag(soap, t, "ns3:FaultException.FaultCodeData"))
 		{	*type = SOAP_TYPE_ns3__FaultException_x002eFaultCodeData;
 			return soap_in_ns3__FaultException_x002eFaultCodeData(soap, NULL, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns3:ArrayOfFaultException.FaultCodeData"))
+		{	*type = SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData;
+			return soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, NULL, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "ns3:CommunicationException"))
 		{	*type = SOAP_TYPE_ns3__CommunicationException;
@@ -528,10 +528,10 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return ((ns3__ArrayOfFaultException_x002eFaultReasonData *)ptr)->soap_out(soap, tag, id, "ns3:ArrayOfFaultException.FaultReasonData");
 	case SOAP_TYPE_ns3__FaultException_x002eFaultReasonData:
 		return ((ns3__FaultException_x002eFaultReasonData *)ptr)->soap_out(soap, tag, id, "ns3:FaultException.FaultReasonData");
-	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData:
-		return ((ns3__ArrayOfFaultException_x002eFaultCodeData *)ptr)->soap_out(soap, tag, id, "ns3:ArrayOfFaultException.FaultCodeData");
 	case SOAP_TYPE_ns3__FaultException_x002eFaultCodeData:
 		return ((ns3__FaultException_x002eFaultCodeData *)ptr)->soap_out(soap, tag, id, "ns3:FaultException.FaultCodeData");
+	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData:
+		return ((ns3__ArrayOfFaultException_x002eFaultCodeData *)ptr)->soap_out(soap, tag, id, "ns3:ArrayOfFaultException.FaultCodeData");
 	case SOAP_TYPE_ns3__CommunicationException:
 		return ((ns3__CommunicationException *)ptr)->soap_out(soap, tag, id, "ns3:CommunicationException");
 	case SOAP_TYPE_ns3__FaultException:
@@ -667,11 +667,11 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	case SOAP_TYPE_ns3__FaultException_x002eFaultReasonData:
 		((ns3__FaultException_x002eFaultReasonData *)ptr)->soap_serialize(soap);
 		break;
-	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData:
-		((ns3__ArrayOfFaultException_x002eFaultCodeData *)ptr)->soap_serialize(soap);
-		break;
 	case SOAP_TYPE_ns3__FaultException_x002eFaultCodeData:
 		((ns3__FaultException_x002eFaultCodeData *)ptr)->soap_serialize(soap);
+		break;
+	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData:
+		((ns3__ArrayOfFaultException_x002eFaultCodeData *)ptr)->soap_serialize(soap);
 		break;
 	case SOAP_TYPE_ns3__CommunicationException:
 		((ns3__CommunicationException *)ptr)->soap_serialize(soap);
@@ -812,10 +812,10 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 		return (void*)soap_instantiate__ns1__Logout(soap, -1, type, arrayType, n);
 	case SOAP_TYPE__ns1__LogoutResponse:
 		return (void*)soap_instantiate__ns1__LogoutResponse(soap, -1, type, arrayType, n);
-	case SOAP_TYPE_ns3__FaultException_x002eFaultCodeData:
-		return (void*)soap_instantiate_ns3__FaultException_x002eFaultCodeData(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData:
 		return (void*)soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns3__FaultException_x002eFaultCodeData:
+		return (void*)soap_instantiate_ns3__FaultException_x002eFaultCodeData(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns3__FaultException_x002eFaultReasonData:
 		return (void*)soap_instantiate_ns3__FaultException_x002eFaultReasonData(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultReasonData:
@@ -951,17 +951,17 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap_clist *p)
 		else
 			SOAP_DELETE_ARRAY((_ns1__LogoutResponse*)p->ptr);
 		break;
-	case SOAP_TYPE_ns3__FaultException_x002eFaultCodeData:
-		if (p->size < 0)
-			SOAP_DELETE((ns3__FaultException_x002eFaultCodeData*)p->ptr);
-		else
-			SOAP_DELETE_ARRAY((ns3__FaultException_x002eFaultCodeData*)p->ptr);
-		break;
 	case SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData:
 		if (p->size < 0)
 			SOAP_DELETE((ns3__ArrayOfFaultException_x002eFaultCodeData*)p->ptr);
 		else
 			SOAP_DELETE_ARRAY((ns3__ArrayOfFaultException_x002eFaultCodeData*)p->ptr);
+		break;
+	case SOAP_TYPE_ns3__FaultException_x002eFaultCodeData:
+		if (p->size < 0)
+			SOAP_DELETE((ns3__FaultException_x002eFaultCodeData*)p->ptr);
+		else
+			SOAP_DELETE_ARRAY((ns3__FaultException_x002eFaultCodeData*)p->ptr);
 		break;
 	case SOAP_TYPE_ns3__FaultException_x002eFaultReasonData:
 		if (p->size < 0)
@@ -3772,138 +3772,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns3__FaultException_x002eFaultReasonData(st
 	*(ns3__FaultException_x002eFaultReasonData*)p = *(ns3__FaultException_x002eFaultReasonData*)q;
 }
 
-void ns3__ArrayOfFaultException_x002eFaultCodeData::soap_default(struct soap *soap)
-{
-	this->soap = soap;
-	soap_default_std__vectorTemplateOfPointerTons3__FaultException_x002eFaultCodeData(soap, &this->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData);
-	/* transient soap skipped */
-}
-
-void ns3__ArrayOfFaultException_x002eFaultCodeData::soap_serialize(struct soap *soap) const
-{
-#ifndef WITH_NOIDREF
-	(void)soap; /* appease -Wall -Werror */
-	soap_serialize_std__vectorTemplateOfPointerTons3__FaultException_x002eFaultCodeData(soap, &this->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData);
-	/* transient soap skipped */
-#endif
-}
-
-int ns3__ArrayOfFaultException_x002eFaultCodeData::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
-{
-	return soap_out_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, tag, id, this, type);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, const char *tag, int id, const ns3__ArrayOfFaultException_x002eFaultCodeData *a, const char *type)
-{
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData), type))
-		return soap->error;
-	if (soap_out_std__vectorTemplateOfPointerTons3__FaultException_x002eFaultCodeData(soap, "ns3:FaultException.FaultCodeData", -1, &(a->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData), ""))
-		return soap->error;
-	/* transient soap skipped */
-	return soap_element_end_out(soap, tag);
-}
-
-void *ns3__ArrayOfFaultException_x002eFaultCodeData::soap_in(struct soap *soap, const char *tag, const char *type)
-{	return soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, tag, this, type);
-}
-
-SOAP_FMAC3 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC4 soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, const char *tag, ns3__ArrayOfFaultException_x002eFaultCodeData *a, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 0, NULL))
-		return NULL;
-	a = (ns3__ArrayOfFaultException_x002eFaultCodeData *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData, sizeof(ns3__ArrayOfFaultException_x002eFaultCodeData), soap->type, soap->arrayType);
-	if (!a)
-		return NULL;
-	if (soap->alloced)
-	{	a->soap_default(soap);
-		if (soap->clist->type != SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData)
-		{	soap_revert(soap);
-			*soap->id = '\0';
-			return (ns3__ArrayOfFaultException_x002eFaultCodeData *)a->soap_in(soap, tag, type);
-		}
-	}
-	if (soap->body && !*soap->href)
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap->error == SOAP_TAG_MISMATCH)
-				if (soap_in_std__vectorTemplateOfPointerTons3__FaultException_x002eFaultCodeData(soap, "ns3:FaultException.FaultCodeData", &(a->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData), "ns3:FaultException.FaultCodeData"))
-					continue;
-			/* transient soap skipped */
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	else
-	{	a = (ns3__ArrayOfFaultException_x002eFaultCodeData *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData, 0, sizeof(ns3__ArrayOfFaultException_x002eFaultCodeData), 0, soap_copy_ns3__ArrayOfFaultException_x002eFaultCodeData);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-int ns3__ArrayOfFaultException_x002eFaultCodeData::soap_put(struct soap *soap, const char *tag, const  char *type) const
-{
-	register int id = soap_embed(soap, (void*)this, NULL, 0, tag, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData);
-	if (this->soap_out(soap, tag?tag:"ns3:ArrayOfFaultException.FaultCodeData", id, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-void *ns3__ArrayOfFaultException_x002eFaultCodeData::soap_get(struct soap *soap, const char *tag, const char *type)
-{
-	return soap_get_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, this, tag, type);
-}
-
-SOAP_FMAC3 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC4 soap_get_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, ns3__ArrayOfFaultException_x002eFaultCodeData *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC1 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC2 soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
-{
-	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
-	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData, n, soap_fdelete);
-	if (!cp)
-		return NULL;
-	if (n < 0)
-	{	cp->ptr = (void*)SOAP_NEW(ns3__ArrayOfFaultException_x002eFaultCodeData);
-		if (size)
-			*size = sizeof(ns3__ArrayOfFaultException_x002eFaultCodeData);
-		((ns3__ArrayOfFaultException_x002eFaultCodeData*)cp->ptr)->soap = soap;
-	}
-	else
-	{	cp->ptr = (void*)SOAP_NEW_ARRAY(ns3__ArrayOfFaultException_x002eFaultCodeData, n);
-		if (size)
-			*size = n * sizeof(ns3__ArrayOfFaultException_x002eFaultCodeData);
-		if (cp->ptr)
-			for (int i = 0; i < n; i++)
-				((ns3__ArrayOfFaultException_x002eFaultCodeData*)cp->ptr)[i].soap = soap;
-	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
-	if (!cp->ptr)
-		soap->error = SOAP_EOM;
-	return (ns3__ArrayOfFaultException_x002eFaultCodeData*)cp->ptr;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
-{
-	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying ns3__ArrayOfFaultException_x002eFaultCodeData %p -> %p\n", q, p));
-	*(ns3__ArrayOfFaultException_x002eFaultCodeData*)p = *(ns3__ArrayOfFaultException_x002eFaultCodeData*)q;
-}
-
 void ns3__FaultException_x002eFaultCodeData::soap_default(struct soap *soap)
 {
 	this->soap = soap;
@@ -4047,6 +3915,138 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns3__FaultException_x002eFaultCodeData(stru
 	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
 	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying ns3__FaultException_x002eFaultCodeData %p -> %p\n", q, p));
 	*(ns3__FaultException_x002eFaultCodeData*)p = *(ns3__FaultException_x002eFaultCodeData*)q;
+}
+
+void ns3__ArrayOfFaultException_x002eFaultCodeData::soap_default(struct soap *soap)
+{
+	this->soap = soap;
+	soap_default_std__vectorTemplateOfPointerTons3__FaultException_x002eFaultCodeData(soap, &this->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData);
+	/* transient soap skipped */
+}
+
+void ns3__ArrayOfFaultException_x002eFaultCodeData::soap_serialize(struct soap *soap) const
+{
+#ifndef WITH_NOIDREF
+	(void)soap; /* appease -Wall -Werror */
+	soap_serialize_std__vectorTemplateOfPointerTons3__FaultException_x002eFaultCodeData(soap, &this->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData);
+	/* transient soap skipped */
+#endif
+}
+
+int ns3__ArrayOfFaultException_x002eFaultCodeData::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
+{
+	return soap_out_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, tag, id, this, type);
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, const char *tag, int id, const ns3__ArrayOfFaultException_x002eFaultCodeData *a, const char *type)
+{
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData), type))
+		return soap->error;
+	if (soap_out_std__vectorTemplateOfPointerTons3__FaultException_x002eFaultCodeData(soap, "ns3:FaultException.FaultCodeData", -1, &(a->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData), ""))
+		return soap->error;
+	/* transient soap skipped */
+	return soap_element_end_out(soap, tag);
+}
+
+void *ns3__ArrayOfFaultException_x002eFaultCodeData::soap_in(struct soap *soap, const char *tag, const char *type)
+{	return soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, tag, this, type);
+}
+
+SOAP_FMAC3 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC4 soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, const char *tag, ns3__ArrayOfFaultException_x002eFaultCodeData *a, const char *type)
+{
+	(void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_in(soap, tag, 0, NULL))
+		return NULL;
+	a = (ns3__ArrayOfFaultException_x002eFaultCodeData *)soap_class_id_enter(soap, soap->id, a, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData, sizeof(ns3__ArrayOfFaultException_x002eFaultCodeData), soap->type, soap->arrayType);
+	if (!a)
+		return NULL;
+	if (soap->alloced)
+	{	a->soap_default(soap);
+		if (soap->clist->type != SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData)
+		{	soap_revert(soap);
+			*soap->id = '\0';
+			return (ns3__ArrayOfFaultException_x002eFaultCodeData *)a->soap_in(soap, tag, type);
+		}
+	}
+	if (soap->body && !*soap->href)
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap->error == SOAP_TAG_MISMATCH)
+				if (soap_in_std__vectorTemplateOfPointerTons3__FaultException_x002eFaultCodeData(soap, "ns3:FaultException.FaultCodeData", &(a->ns3__ArrayOfFaultException_x002eFaultCodeData::FaultException_x002eFaultCodeData), "ns3:FaultException.FaultCodeData"))
+					continue;
+			/* transient soap skipped */
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	else
+	{	a = (ns3__ArrayOfFaultException_x002eFaultCodeData *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData, 0, sizeof(ns3__ArrayOfFaultException_x002eFaultCodeData), 0, soap_copy_ns3__ArrayOfFaultException_x002eFaultCodeData);
+		if (soap->body && soap_element_end_in(soap, tag))
+			return NULL;
+	}
+	return a;
+}
+
+int ns3__ArrayOfFaultException_x002eFaultCodeData::soap_put(struct soap *soap, const char *tag, const  char *type) const
+{
+	register int id = soap_embed(soap, (void*)this, NULL, 0, tag, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData);
+	if (this->soap_out(soap, tag?tag:"ns3:ArrayOfFaultException.FaultCodeData", id, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+void *ns3__ArrayOfFaultException_x002eFaultCodeData::soap_get(struct soap *soap, const char *tag, const char *type)
+{
+	return soap_get_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, this, tag, type);
+}
+
+SOAP_FMAC3 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC4 soap_get_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, ns3__ArrayOfFaultException_x002eFaultCodeData *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_ns3__ArrayOfFaultException_x002eFaultCodeData(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
+SOAP_FMAC1 ns3__ArrayOfFaultException_x002eFaultCodeData * SOAP_FMAC2 soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns3__ArrayOfFaultException_x002eFaultCodeData(%d, %s, %s)\n", n, type?type:"", arrayType?arrayType:""));
+	struct soap_clist *cp = soap_link(soap, NULL, SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData, n, soap_fdelete);
+	if (!cp)
+		return NULL;
+	if (n < 0)
+	{	cp->ptr = (void*)SOAP_NEW(ns3__ArrayOfFaultException_x002eFaultCodeData);
+		if (size)
+			*size = sizeof(ns3__ArrayOfFaultException_x002eFaultCodeData);
+		((ns3__ArrayOfFaultException_x002eFaultCodeData*)cp->ptr)->soap = soap;
+	}
+	else
+	{	cp->ptr = (void*)SOAP_NEW_ARRAY(ns3__ArrayOfFaultException_x002eFaultCodeData, n);
+		if (size)
+			*size = n * sizeof(ns3__ArrayOfFaultException_x002eFaultCodeData);
+		if (cp->ptr)
+			for (int i = 0; i < n; i++)
+				((ns3__ArrayOfFaultException_x002eFaultCodeData*)cp->ptr)[i].soap = soap;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated location=%p\n", cp->ptr));
+	if (!cp->ptr)
+		soap->error = SOAP_EOM;
+	return (ns3__ArrayOfFaultException_x002eFaultCodeData*)cp->ptr;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_copy_ns3__ArrayOfFaultException_x002eFaultCodeData(struct soap *soap, int st, int tt, void *p, size_t len, const void *q, size_t n)
+{
+	(void)soap; (void)tt; (void)st; (void)len; (void)n; /* appease -Wall -Werror */
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copying ns3__ArrayOfFaultException_x002eFaultCodeData %p -> %p\n", q, p));
+	*(ns3__ArrayOfFaultException_x002eFaultCodeData*)p = *(ns3__ArrayOfFaultException_x002eFaultCodeData*)q;
 }
 
 void ns3__CommunicationException::soap_default(struct soap *soap)

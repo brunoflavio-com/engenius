@@ -12,6 +12,19 @@ namespace SocialGameBLL.Controllers
     {
         SocialGameBLLDbContext db = new SocialGameBLLDbContext();
 
+        public User GetUser(string Email)
+        {
+            try
+            {
+                UserEntity UserEntity = db.Users.Find(Email);
+                return EntityServiceConverter.ConvertUserEntityToUser(UserEntity);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         public User UpdateUser(User User)
         {
             try
@@ -23,7 +36,33 @@ namespace SocialGameBLL.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public HumourStatus GetHumourStatus(int Id)
+        {
+            try
+            {
+                HumourStatusEntity HumourStatusEntity = db.HumourStatus.Find(Id);
+                return EntityServiceConverter.ConvertToHumourStatusFromHumourStatusEntity(HumourStatusEntity);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public ICollection<HumourStatus> GetAllHumourStatus()
+        {
+            try
+            {
+                IList<HumourStatusEntity> HumourStatusEntities = db.HumourStatus.ToList();
+                return EntityServiceConverter.ConvertToHumourStatusFromHumourStatusEntities(HumourStatusEntities);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
             }
         }
 
@@ -33,7 +72,7 @@ namespace SocialGameBLL.Controllers
             UserEntity.Surname = User.Surname;
             if (User.Birthdate != null)
             {
-                UserEntity.Birthdate = (DateTime?)UserEntity.Birthdate;
+                UserEntity.Birthdate = (DateTime?)User.Birthdate;
             }
             UserEntity.HumourStatusID = User.HumourStatusId;
             UserEntity.PhoneNumber = User.PhoneNumber;

@@ -1,5 +1,7 @@
 #include "GraphWalkerDraw.h"
 #include <iostream>
+#include <gl\freeglut.h>
+#include <string>
 
 #define M_PI 3.1415926535897932384626433832795
 #define RAD(x)          (M_PI*(x)/180)
@@ -76,17 +78,26 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	/*Adjust height to max_height*/
 	float Z = MAX_HEIGHT * userA->z / maxUserConnections;
 	
-
 	GLUquadricObj *quadric;
 	glPushMatrix();
 	glTranslatef(userA->x, userA->y, Z);
 
 	quadric = gluNewQuadric();
 	gluQuadricDrawStyle(quadric, GLU_FILL);
+	
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
 	
-	glColor3ub( rand()%255, rand()%255, rand()%255 );	
+	//User text
+	glDisable(GL_LIGHTING);
+	glColor3ub(200, 200, 200);
+	glRasterPos3f(-2, 0, 4);
+	
+	unsigned char s[100];
+	
+	strcpy((char*)s, userA->email.c_str());
 
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
+	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
 

@@ -1,0 +1,51 @@
+﻿@model SocialGameWebsite.Models.UserViewModel
+@{
+    ViewBag.Title = "Edit Profile";
+}
+
+<section id="editForm">
+    <h2>Edit your profile!</h2>
+    @using(Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        <fieldset>
+            <legend>Edit Profile Form</legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.Email)
+                    @Html.EditorFor(m => m.Email)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Name)
+                    @Html.EditorFor(m => m.Name)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Surname)
+                    @Html.EditorFor(m => m.Surname)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Birthdate)
+                    @Html.EditorFor(m => m.Birthdate)
+                    @Html.ValidationMessageFor(m => m.Birthdate)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.PhoneNumber)
+                    @Html.EditorFor(m => m.PhoneNumber)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.LinkedinProfile)
+                    @Html.EditorFor(m => m.LinkedinProfile)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.FacebookProfile)
+                    @Html.EditorFor(m => m.FacebookProfile)
+                </li>
+            </ol>
+            <p>
+                <input type="submit" value="Update"/> 
+            </p>
+        </fieldset>
+    }
+</section>

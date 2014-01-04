@@ -632,6 +632,99 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelationshipRequest", Namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service")]
+    [System.SerializableAttribute()]
+    public partial class RelationshipRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RelationshipTagIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RequestedEmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RequesterEmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StrengthField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RelationshipTagId {
+            get {
+                return this.RelationshipTagIdField;
+            }
+            set {
+                if ((this.RelationshipTagIdField.Equals(value) != true)) {
+                    this.RelationshipTagIdField = value;
+                    this.RaisePropertyChanged("RelationshipTagId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RequestedEmail {
+            get {
+                return this.RequestedEmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RequestedEmailField, value) != true)) {
+                    this.RequestedEmailField = value;
+                    this.RaisePropertyChanged("RequestedEmail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RequesterEmail {
+            get {
+                return this.RequesterEmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RequesterEmailField, value) != true)) {
+                    this.RequesterEmailField = value;
+                    this.RaisePropertyChanged("RequesterEmail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Strength {
+            get {
+                return this.StrengthField;
+            }
+            set {
+                if ((this.StrengthField.Equals(value) != true)) {
+                    this.StrengthField = value;
+                    this.RaisePropertyChanged("Strength");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SocialGameBLLService.ISocialGameBLLService")]
     public interface ISocialGameBLLService {
@@ -678,6 +771,18 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationships", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipsResponse")]
         System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.Graph> GetRelationshipsAsync(SocialGamePublicAPI.SocialGameBLLService.User User, int Depth);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/MakeRelationshipRequest", ReplyAction="http://tempuri.org/ISocialGameBLLService/MakeRelationshipRequestResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.RelationshipRequest MakeRelationshipRequest(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Other, int RelationshipTagId, int Strength);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/MakeRelationshipRequest", ReplyAction="http://tempuri.org/ISocialGameBLLService/MakeRelationshipRequestResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.RelationshipRequest> MakeRelationshipRequestAsync(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Other, int RelationshipTagId, int Strength);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetShortestPath", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetShortestPathResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.User[] GetShortestPath(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Goal, int Depth);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetShortestPath", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetShortestPathResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetShortestPathAsync(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Goal, int Depth);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -761,6 +866,22 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
         
         public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.Graph> GetRelationshipsAsync(SocialGamePublicAPI.SocialGameBLLService.User User, int Depth) {
             return base.Channel.GetRelationshipsAsync(User, Depth);
+        }
+        
+        public SocialGamePublicAPI.SocialGameBLLService.RelationshipRequest MakeRelationshipRequest(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Other, int RelationshipTagId, int Strength) {
+            return base.Channel.MakeRelationshipRequest(Me, Other, RelationshipTagId, Strength);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.RelationshipRequest> MakeRelationshipRequestAsync(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Other, int RelationshipTagId, int Strength) {
+            return base.Channel.MakeRelationshipRequestAsync(Me, Other, RelationshipTagId, Strength);
+        }
+        
+        public SocialGamePublicAPI.SocialGameBLLService.User[] GetShortestPath(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Goal, int Depth) {
+            return base.Channel.GetShortestPath(Me, Goal, Depth);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetShortestPathAsync(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Goal, int Depth) {
+            return base.Channel.GetShortestPathAsync(Me, Goal, Depth);
         }
     }
 }

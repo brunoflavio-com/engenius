@@ -70,12 +70,51 @@ namespace SocialGameBLL
             return Controller.GetRelationships(User, Depth);
         }
 
+        public User GetUser(string Email)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetUser(Email);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public User UpdateUser(User User)
         {
             try
             {
                 UsersController Controller = new UsersController();
                 return Controller.UpdateUser(User);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public HumourStatus GetHumourStatus(int Id)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetHumourStatus(Id);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public ICollection<HumourStatus> GetAllHumourStatus()
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetAllHumourStatus();
             }
             catch (Exception e)
             {

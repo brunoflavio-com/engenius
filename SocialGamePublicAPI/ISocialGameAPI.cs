@@ -10,7 +10,7 @@ using SocialGamePublicAPI.Service;
 namespace SocialGamePublicAPI
 {
 
-     [ServiceContract(Namespace = "http://wvm008.dei.isep.ipp.pt")]
+     [ServiceContract(Namespace = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI")]
     public interface ISocialGameService
     {
 

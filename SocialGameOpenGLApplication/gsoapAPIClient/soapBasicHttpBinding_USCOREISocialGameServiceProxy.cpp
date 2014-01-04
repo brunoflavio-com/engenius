@@ -68,7 +68,7 @@ void BasicHttpBinding_USCOREISocialGameServiceProxy::BasicHttpBinding_USCOREISoc
 	{"arr", "http://schemas.microsoft.com/2003/10/Serialization/Arrays", NULL, NULL},
 	{"ser", "http://schemas.microsoft.com/2003/10/Serialization/", NULL, NULL},
 	{"ns3", "http://schemas.datacontract.org/2004/07/System.ServiceModel", NULL, NULL},
-	{"ns1", "http://wvm008.dei.isep.ipp.pt", NULL, NULL},
+	{"ns1", "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI", NULL, NULL},
 	{NULL, NULL, NULL, NULL}
 };
 	soap_set_namespaces(this->soap, namespaces);
@@ -136,9 +136,9 @@ int BasicHttpBinding_USCOREISocialGameServiceProxy::Login(const char *endpoint, 
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://wvm008.dei.isep.ipp.pt/SocialGameAPI.svc";
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
 	if (soap_action == NULL)
-		soap_action = "http://wvm008.dei.isep.ipp.pt/ISocialGameService/Login";
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/Login";
 	soap_begin(soap);
 	soap->encodingStyle = NULL;
 	soap_tmp___ns1__Login.ns1__Login = ns1__Login;
@@ -190,9 +190,9 @@ int BasicHttpBinding_USCOREISocialGameServiceProxy::GetGraph(const char *endpoin
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://wvm008.dei.isep.ipp.pt/SocialGameAPI.svc";
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
 	if (soap_action == NULL)
-		soap_action = "http://wvm008.dei.isep.ipp.pt/ISocialGameService/GetGraph";
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/GetGraph";
 	soap_begin(soap);
 	soap->encodingStyle = NULL;
 	soap_tmp___ns1__GetGraph.ns1__GetGraph = ns1__GetGraph;
@@ -244,9 +244,9 @@ int BasicHttpBinding_USCOREISocialGameServiceProxy::Logout(const char *endpoint,
 	if (endpoint)
 		soap_endpoint = endpoint;
 	if (soap_endpoint == NULL)
-		soap_endpoint = "http://wvm008.dei.isep.ipp.pt/SocialGameAPI.svc";
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
 	if (soap_action == NULL)
-		soap_action = "http://wvm008.dei.isep.ipp.pt/ISocialGameService/Logout";
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/Logout";
 	soap_begin(soap);
 	soap->encodingStyle = NULL;
 	soap_tmp___ns1__Logout.ns1__Logout = ns1__Logout;

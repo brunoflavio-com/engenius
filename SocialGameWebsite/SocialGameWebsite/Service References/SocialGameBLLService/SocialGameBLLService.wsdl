@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SocialGameBLLService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL" />
+      <xsd:import schemaLocation="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" />
+      <xsd:import schemaLocation="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System.ServiceModel" />
+      <xsd:import schemaLocation="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISocialGameBLLService_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetDataUsingDataContract_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetDataUsingDataContract_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_RegisterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_RegisterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_LoginUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginUser" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_LoginUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_LoginUser_FaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System.ServiceModel" name="detail" element="q1:FaultException" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetHumourStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHumourStatus" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetHumourStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHumourStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetAllHumourStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHumourStatus" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetAllHumourStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllHumourStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetRelationshipTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationshipTags" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetRelationshipTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationshipTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetRelationships_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationships" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetRelationships_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationshipsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_MakeRelationshipRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:MakeRelationshipRequest" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_MakeRelationshipRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MakeRelationshipRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetShortestPath_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShortestPath" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetShortestPath_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShortestPathResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ISocialGameBLLService">
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetData" message="tns:ISocialGameBLLService_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetDataResponse" message="tns:ISocialGameBLLService_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetDataUsingDataContract" message="tns:ISocialGameBLLService_GetDataUsingDataContract_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetDataUsingDataContractResponse" message="tns:ISocialGameBLLService_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/RegisterUser" message="tns:ISocialGameBLLService_RegisterUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/RegisterUserResponse" message="tns:ISocialGameBLLService_RegisterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/LoginUser" message="tns:ISocialGameBLLService_LoginUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/LoginUserResponse" message="tns:ISocialGameBLLService_LoginUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISocialGameBLLService/LoginUserFaultExceptionFault" name="FaultExceptionFault" message="tns:ISocialGameBLLService_LoginUser_FaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUser" message="tns:ISocialGameBLLService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserResponse" message="tns:ISocialGameBLLService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/UpdateUser" message="tns:ISocialGameBLLService_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/UpdateUserResponse" message="tns:ISocialGameBLLService_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHumourStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatus" message="tns:ISocialGameBLLService_GetHumourStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatusResponse" message="tns:ISocialGameBLLService_GetHumourStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHumourStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatus" message="tns:ISocialGameBLLService_GetAllHumourStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatusResponse" message="tns:ISocialGameBLLService_GetAllHumourStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationshipTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTags" message="tns:ISocialGameBLLService_GetRelationshipTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTagsResponse" message="tns:ISocialGameBLLService_GetRelationshipTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationships">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationships" message="tns:ISocialGameBLLService_GetRelationships_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipsResponse" message="tns:ISocialGameBLLService_GetRelationships_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MakeRelationshipRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/MakeRelationshipRequest" message="tns:ISocialGameBLLService_MakeRelationshipRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/MakeRelationshipRequestResponse" message="tns:ISocialGameBLLService_MakeRelationshipRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShortestPath">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetShortestPath" message="tns:ISocialGameBLLService_GetShortestPath_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetShortestPathResponse" message="tns:ISocialGameBLLService_GetShortestPath_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ISocialGameBLLService" type="tns:ISocialGameBLLService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginUser">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/LoginUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FaultExceptionFault">
+        <soap:fault use="literal" name="FaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHumourStatus">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetHumourStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllHumourStatus">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationshipTags">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipTags" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationships">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetRelationships" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeRelationshipRequest">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/MakeRelationshipRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShortestPath">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetShortestPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SocialGameBLLService">
+    <wsdl:port name="BasicHttpBinding_ISocialGameBLLService" binding="tns:BasicHttpBinding_ISocialGameBLLService">
+      <soap:address location="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

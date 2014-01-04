@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e366a0e7-5a2c-455d-8a05-709d053f7b1c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>true</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="Antlr3.Runtime" />
+      <ReferencedAssembly AssemblyName="DotNetOpenAuth.AspNet" />
+      <ReferencedAssembly AssemblyName="mscorlib" />
+      <ReferencedAssembly AssemblyName="Newtonsoft.Json" />
+      <ReferencedAssembly AssemblyName="System" />
+      <ReferencedAssembly AssemblyName="System.ComponentModel.DataAnnotations" />
+      <ReferencedAssembly AssemblyName="System.Configuration" />
+      <ReferencedAssembly AssemblyName="System.Core" />
+      <ReferencedAssembly AssemblyName="System.Data" />
+      <ReferencedAssembly AssemblyName="System.Data.DataSetExtensions" />
+      <ReferencedAssembly AssemblyName="System.Data.Entity" />
+      <ReferencedAssembly AssemblyName="System.Drawing" />
+      <ReferencedAssembly AssemblyName="System.EnterpriseServices" />
+      <ReferencedAssembly AssemblyName="System.Net.Http" />
+      <ReferencedAssembly AssemblyName="System.Net.Http.Formatting" />
+      <ReferencedAssembly AssemblyName="System.Net.Http.WebRequest" />
+      <ReferencedAssembly AssemblyName="System.Runtime.Serialization" />
+      <ReferencedAssembly AssemblyName="System.ServiceModel" />
+      <ReferencedAssembly AssemblyName="System.Spatial" />
+      <ReferencedAssembly AssemblyName="System.Transactions" />
+      <ReferencedAssembly AssemblyName="System.Web" />
+      <ReferencedAssembly AssemblyName="System.Web.Abstractions" />
+      <ReferencedAssembly AssemblyName="System.Web.ApplicationServices" />
+      <ReferencedAssembly AssemblyName="System.Web.DynamicData" />
+      <ReferencedAssembly AssemblyName="System.Web.Entity" />
+      <ReferencedAssembly AssemblyName="System.Web.Extensions" />
+      <ReferencedAssembly AssemblyName="System.Web.Helpers" />
+      <ReferencedAssembly AssemblyName="System.Web.Http" />
+      <ReferencedAssembly AssemblyName="System.Web.Http.OData" />
+      <ReferencedAssembly AssemblyName="System.Web.Http.WebHost" />
+      <ReferencedAssembly AssemblyName="System.Web.Mvc" />
+      <ReferencedAssembly AssemblyName="System.Web.Optimization" />
+      <ReferencedAssembly AssemblyName="System.Web.Razor" />
+      <ReferencedAssembly AssemblyName="System.Web.Routing" />
+      <ReferencedAssembly AssemblyName="System.Web.Services" />
+      <ReferencedAssembly AssemblyName="System.Web.WebPages" />
+      <ReferencedAssembly AssemblyName="System.Web.WebPages.Deployment" />
+      <ReferencedAssembly AssemblyName="System.Web.WebPages.Razor" />
+      <ReferencedAssembly AssemblyName="System.Xml" />
+      <ReferencedAssembly AssemblyName="System.Xml.Linq" />
+      <ReferencedAssembly AssemblyName="WebGrease" />
+      <ReferencedAssembly AssemblyName="WebMatrix.Data" />
+      <ReferencedAssembly AssemblyName="WebMatrix.WebData" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SocialGameBLLService.wsdl" MetadataType="Wsdl" ID="635bed80-535a-4af7-bbbb-e39c468d499d" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?wsdl" />
+    <MetadataFile FileName="SocialGameBLLService.xsd" MetadataType="Schema" ID="322aa866-eaaf-4197-b842-eae2153088c4" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SocialGameBLLService1.xsd" MetadataType="Schema" ID="95f1319e-7605-4588-a52e-41d7c007427d" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd5" />
+    <MetadataFile FileName="SocialGameBLLService2.xsd" MetadataType="Schema" ID="7bae6ba4-e2c3-47b2-b114-37c3d4b2e921" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SocialGameBLLService.disco" MetadataType="Disco" ID="ca19c27e-f05a-4df1-ab72-f6834e7fc957" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?disco" />
+    <MetadataFile FileName="SocialGameBLLService3.xsd" MetadataType="Schema" ID="903f4a7e-c342-44a4-b3d9-c878e97861a0" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd6" />
+    <MetadataFile FileName="SocialGameBLLService4.xsd" MetadataType="Schema" ID="d187d6b3-d050-484b-bb05-ee932009790a" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd4" />
+    <MetadataFile FileName="SocialGameBLLService5.xsd" MetadataType="Schema" ID="9b9c559b-10cf-4cae-bc7c-4c99c2099640" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SocialGameBLLService6.xsd" MetadataType="Schema" ID="73f41c96-a044-44c1-b993-0a9aee88a44f" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

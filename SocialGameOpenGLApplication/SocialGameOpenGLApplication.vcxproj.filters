@@ -66,9 +66,6 @@
     <ClInclude Include="GraphOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SceneInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GraphScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -79,6 +76,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GraphWalkerDraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HangmanScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HangmanPLEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalModeGraphScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AdvanceModeGraphScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ISubWindowScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IWindowScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IBothWindowScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TicTacToePLEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TicTacToeScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -134,5 +164,34 @@
     <ClCompile Include="GraphWalkerDraw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HangmanScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HangmanPLEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalModeGraphScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AdvanceModeGraphScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TicTacToePLEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TicTacToeScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hangman.pl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tictactoe.pl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

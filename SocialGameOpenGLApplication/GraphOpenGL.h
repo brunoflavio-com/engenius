@@ -1,4 +1,5 @@
-#include "InterfaceGL.h"
+#pragma once
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -7,20 +8,26 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <fstream>
-#include "SceneInterface.h"
+#include <string>
+#include "SocialGamePublicAPIClient.h"
 #include "GraphScene.h"
 
+class GraphScene;
 
-class GraphOpenGL : public InterfaceGL{
+
+class GraphOpenGL
+{
 private:
-	static InterfaceScene * graphScene;
+	static GraphScene * currentScene;
+	static GraphScene * advanceScene;
+	static GraphScene  * normalScene;
+	static bool advancedMode;
 public:
+	
 	GraphOpenGL();
 	~GraphOpenGL();
-	void static StartCam();
-	void static CamLookAt();
-	void static TopCamLookAt();
 	void static Init();
+	void static subWindowInit();
 	void static MotionMouse(int x, int y);
 	void static Mouse(int button, int state, int x, int y);
 	void static ReshapeMinimap(int width, int height);
@@ -33,5 +40,5 @@ public:
 	void static Key(unsigned char key, int x, int y);
 	void static SpecialKey(int key, int x, int y);
 	void static SpecialKeyUp(int key, int x, int y);
-	void static Run(int argc, char **argv, InterfaceScene * scene);
+	void static Run(int argc, char **argv, SocialGamePublicAPIClient * client, std::string login);
 };
