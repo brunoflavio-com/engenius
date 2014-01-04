@@ -1,12 +1,14 @@
 #pragma once
 #include "IWindowScene.h"
 #include "HangmanPLEngine.h"
+#include "SocialGamePublicAPIClient.h"
+#include <string>
 
 class HangmanScene :
 	public IWindowScene
 {
 public:
-	HangmanScene();
+	HangmanScene(SocialGamePublicAPIClient *client, string loginEmail);
 	~HangmanScene();
 
 	// Initiate scene
@@ -17,6 +19,8 @@ public:
 
 	// Draw Callback
 	void Draw(void);
+	void DrawOverlay(void);
+	void Draw3dObjects(void);
 
 	// Keyboard callback
 	void Key(unsigned char key, int x, int y);
