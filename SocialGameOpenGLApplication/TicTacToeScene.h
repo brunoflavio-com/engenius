@@ -4,12 +4,13 @@
 #include "SocialGamePublicAPIClient.h"
 #include <string>
 
+#define HUMAN 1
+#define COMPUTER 2 
+
 class TicTacToeScene :
 	public IWindowScene
 {
 public:
-
-	char board[9];
 
 	TicTacToeScene(SocialGamePublicAPIClient *client, string loginEmail);
 	~TicTacToeScene();
@@ -39,6 +40,9 @@ public:
 	void MotionMouse(int x, int y);
 
 private:
+
+	int board[9];
+
 	//Game Engine:
 	TicTacToePLEngine * game;
 

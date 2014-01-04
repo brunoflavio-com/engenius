@@ -12,10 +12,21 @@ TicTacToeScene::TicTacToeScene(SocialGamePublicAPIClient *client, string loginEm
 
 	//initialize game engine:
 	game = new TicTacToePLEngine('o');
+
+	//initialize board
+	for (int i = 0; i < 9; i++) board[i] = 0;
+
 	//for test
-	this->board[0] = 'h';
-	this->board[1] = 'c';
-	this->board[8] = 'h';
+	//this->board[0] = HUMAN;
+	//this->board[1] = COMPUTER;
+	//this->board[2] = HUMAN;
+	//this->board[3] = HUMAN;
+	//this->board[4] = COMPUTER;
+	//this->board[5] = COMPUTER;
+	//this->board[6] = COMPUTER;
+	//this->board[7] = HUMAN;
+	//this->board[8] = HUMAN;
+
 }
 
 
@@ -97,15 +108,76 @@ void TicTacToeScene::DrawOverlay(void)
 void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pressed, and the current mouse coordenates
 {
 	switch (key) {
-
-	
+	case '1':
+		//if square is empty
+		if (board[0] == 0)
+		{
+			board[0] = HUMAN;
+		}
+		break;
+	case '2':
+		//if square is empty
+		if (board[1] == 0)
+		{
+			board[1] = HUMAN;
+		}
+		break;
+	case '3':
+		//if square is empty
+		if (board[2] == 0)
+		{
+			board[2] = HUMAN;
+		}
+		break;
+	case '4':
+		//if square is empty
+		if (board[3] == 0)
+		{
+			board[3] = HUMAN;
+		}
+		break;
+	case '5':
+		//if square is empty
+		if (board[4] == 0)
+		{
+			board[4] = HUMAN;
+		}
+		break;
+	case '6':
+		//if square is empty
+		if (board[5] == 0)
+		{
+			board[5] = HUMAN;
+		}
+		break;
+	case '7':
+		//if square is empty
+		if (board[6] == 0)
+		{
+			board[6] = HUMAN;
+		}
+		break;
+	case '8':
+		//if square is empty
+		if (board[7] == 0)
+		{
+			board[7] = HUMAN;
+		}
+		break;
+	case '9':
+		//if square is empty
+		if (board[8] == 0)
+		{
+			board[8] = HUMAN;
+		}
+		break;
 	case 27:
 		//end game on ESC?
 		break;
 	}
 
-	//pass letters to the game engine:
-	if (isalpha(key))
+	//pass digits to the game engine:
+	if (isdigit(key))
 	{
 		/*game->play(key);*/
 	}
@@ -204,49 +276,49 @@ void TicTacToeScene::drawO(float x, float y)
 void TicTacToeScene::drawBoard(){
 		drawGrid();
 		//Square1
-		if (board[0] == 'c')
+		if (board[0] == COMPUTER)
 			drawX(0.5f, -0.5f);
-		else if (board[0] == 'h')
+		else if (board[0] == HUMAN)
 			drawO(0.5f, -0.5f);
 		//Square2
-		if (board[1] == 'c')
+		if (board[1] == COMPUTER)
 			drawX(1.5f, -0.5f);
-		else if (board[1] == 'h')
+		else if (board[1] == HUMAN)
 			drawO(1.5f, -0.5f);
 		//Square3
-		if (board[2] == 'c')
+		if (board[2] == COMPUTER)
 			drawX(2.5f, -0.5f);
-		else if (board[2] == 'h')
+		else if (board[2] == HUMAN)
 			drawO(2.5f, -0.5f);
 		//Square4
-		if (board[3] == 'c')
+		if (board[3] == COMPUTER)
 			drawX(0.50f, -1.5f);
-		else if (board[3] == 'h')
+		else if (board[3] == HUMAN)
 			drawO(0.50f, -1.5f);
 		//Square5
-		if (board[4] == 'c')
+		if (board[4] == COMPUTER)
 			drawX(1.50f, -1.5f);
-		else if (board[4] == 'h')
+		else if (board[4] == HUMAN)
 			drawO(1.50f, -1.5f);
 		//Square6
-		if (board[5] == 'c')
+		if (board[5] == COMPUTER)
 			drawX(2.50f, -1.5f);
-		else if (board[5] == 'h')
+		else if (board[5] == HUMAN)
 			drawO(2.50f, -1.5f);
 		//Square7
-		if (board[6] == 'c')
+		if (board[6] == COMPUTER)
 			drawX(0.50f, -2.5f);
-		else if (board[6] == 'h')
+		else if (board[6] == HUMAN)
 			drawO(0.50f, -2.5f);
 		//Square8
-		if (board[7] == 'c')
+		if (board[7] == COMPUTER)
 			drawX(1.50f, -2.5f);
-		else if (board[7] == 'h')
+		else if (board[7] == HUMAN)
 			drawO(1.50f, -2.5f);
 		//Square9
-		if (board[8] == 'c')
+		if (board[8] == COMPUTER)
 			drawX(2.50f, -2.5f);
-		else if (board[8] == 'h')
+		else if (board[8] == HUMAN)
 			drawO(2.50f, -2.5f);
 		glFlush();
 	}

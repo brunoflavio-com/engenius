@@ -149,14 +149,14 @@ computerPlay(Square):-
 gameStatus(Status):-
 	game(Board,_),
 	\+winner(Board,_),
-	Status = -1.
+	Status is -1.
 	
 %Draw	
 gameStatus(Status):-
 	game(Board,_),
 	\+availableSquares(Board,_),
 	\+winner(Board,_),
-	Status = 0.
+	Status is 0.
 
 %Computer Wins	
 gameStatus(Status):-

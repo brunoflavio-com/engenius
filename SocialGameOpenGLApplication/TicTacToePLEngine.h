@@ -2,61 +2,41 @@
 #include <SWI-cpp.h>
 #include <string>
 
-#define HUMAN 'h'
-#define COMPUTER 'c'
-
 using namespace std;
 
 class TicTacToePLEngine
 {
 public:
 
-
-	// Status Game
-	// status 2 -> computer wins
-	// status 1 -> human wins
-	// status 0 -> draw
-	// status -1 -> playing
-	int statusGame();
-	char board[9];
-
-	// Define first player as human
-	TicTacToePLEngine(char Player=HUMAN);
-
+	// PL Engine, Define first player as human (o- human;x-computer)
+	TicTacToePLEngine(char Player);
 	~TicTacToePLEngine();
 
+	//Get Message
 	string getMessage();
+
 	
 private:
 	PlEngine * prolog;
 
-	// 1 - Human 	// 2 - Computer 	// 0 - Draw
+	// Winner:1 - Human; 2 - Computer; 0 - Draw
 	int winner;
+	int status;
 
-	bool gameOver;
 	string message;
 
-	// Prepare the Tic tac Toe Game, initialize board and set first player
-	// x -> Computer
-	// o -> Human
-	void setFirstPlayer(char symbol);
+	// Prepare the Tic tac Toe Game, initialize board and set first player ( x - Computer; o - Human)
+	void plSetFirstPlayer(char symbol);
 
 	// Human Move where Square:[1-9]
-	void humanPlay(int square);
+	int plHumanPlay(int square);
 	
 	// Best Computer move, return Square [1-9]
-	void computerPlay();
+	int plComputerPlay();
 
+	// Verify status game: return status game( 2- computer wins; 1- human wins; 0- draw; -1 -playing)
+	int plStatusGame();
 
-
-	// Verify if game is over
-	bool isGameOver();
-
-	// Set Move
-	void setMove(int square, char Player);
-
-	//Play Game
-	void playTTT();
-
+	void play(int square);
 };
 
