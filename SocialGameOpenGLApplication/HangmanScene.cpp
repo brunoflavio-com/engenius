@@ -35,40 +35,7 @@ void HangmanScene::Timer(int value)
 // Draw Callback
 void HangmanScene::Draw(void)
 {
-	// Clear Screen and Depth Buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
-
-	// Define a viewing transformation
-	gluLookAt(4, 2, 0, 0, 0, 0, 0, 1, 0);
-
-	Draw3dObjects();
-
-	DrawOverlay();
-	// Push and pop the current matrix stack. 
-	// This causes that translations and rotations on this matrix wont influence others.
-
-	//glPushMatrix();
-	//glColor3f(1, 0, 0);
-	//glTranslatef(0, 0, 0);
-	//glRotatef(g_rotation, 0, 1, 0);
-	//glRotatef(90, 0, 1, 0);
-
-	//// Draw the teapot
-	//glutSolidTeapot(1);
-	//glPopMatrix();
-
-	//Draw the game engine message:
-	/*glPushMatrix();
-		unsigned char msg[100];
-		strcpy((char*)msg, game->getMessage().c_str());
-
-		glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
-		glEnable(GL_LIGHTING);
-		glPopMatrix();
-	glPopMatrix();
-	*/
-	glutSwapBuffers();
+	
 }
 
 void HangmanScene::Draw3dObjects(void){
