@@ -110,23 +110,35 @@
 
 %starting game cpp - assert(word(W)).
 %during game Prolog - assert(used(C)).
-
-play(C,R):- not(used(C)),
+%Results: 	0 - Win;
+%			1 - word contains character;
+%			2 - word does not contains character.
+			
+%play (Character,Result)			
+play(C,R):- not(checkRepeated(C,R)), 			
 			assert(used(C)),
 			!,
-			word(W),
-			find(C,W,R).
+			find(C,R).
 			
-%find (character,word,Result)
-find(X,Y,R):- (string_chars(Y,LY),
-			member(X,LY),
+%checkWin(Character,CheckRepeatedResult)		
+checkRepeated(CA,CRR):-	findall(US,used(US),LUS),
+						member(CA,LUS),
+						CRR is 3,
+						write('Repeated').
+
+%find (Character,Result)
+find(X,R):-	( word(W),
+			string_chars(W,LW),
+			member(X,LW),
 			((checkWin(R),!); R is 1,!)); R is 2.
-			
-checkWin(P):-  findall(U,used(U),LH),
-			word(W),
-			string_chars(W,L),
-			intersection(LH,L,LR),
-			%compare(=,L,LR),
-			same_length(L,LR),
-			P is 0,
-			write('WIN!').
+
+%checkWin(CheckWinResult)
+checkWin(CWR):-	findall(U,used(U),LH),
+				word(W),
+				string_chars(W,L),
+				intersection(LH,L,LR),			
+				same_length(L,LR),
+				CWR is 0,
+				write('WIN!').
+				
+teste(R):- R is 3, true.
