@@ -12,7 +12,7 @@
 % game([Board,Player]) 
 % Board - a Prolog list to represent the Board (Squares 1-9) 
 % Player - next player to play (x or o)
-setFirstPlayer(Player):- assert(game([_,_,_,_,_,_,_,_,_],Player)). 
+:- assert(game([_,_,_,_,_,_,_,_,_],'x')). 
 
 
 %% predicate to mark a move (Square:1-9)
@@ -54,8 +54,7 @@ insertMove(Player,Square) :- game(Board,_),
    retract(game(Board,_)),
    mark(Player,Board,Square),
    nextPlayer(Player,NextPlayer),
-   assert(game(Board,NextPlayer)),
-   showBoard(Board).
+   assert(game(Board,NextPlayer)).
    
 %% predicate to find all possible moves, if there is none fails
 availableSquares(Board,Available):- findall(X,(mark(Player,Board,X),var(Player)),Available),Available \= [].
@@ -135,17 +134,17 @@ better(Nivel,Move,X,Value1,Z,Value2,S,Value) :-
 %%%     MAIN PROGRAM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-humanPlay(Square):-
+humanPlay(Square,Status):-
 	game(Board,o),
-	insertMove('o',Square).
+	insertMove('o',Square),gameStatus(Status).
 
-computerPlay(Square):- 
+computerPlay(Square,Status):- 
 	game(Board,x),
 	availableSquares(Board,[H|_]),
 	insertMove('x',H),
-	Square=H.
+	Square=H,gameStatus(Status).
 
-%Draw	
+%Playing	
 gameStatus(Status):-
 	game(Board,_),
 	\+winner(Board,_),
@@ -171,3 +170,6 @@ gameStatus(Status):-
 	winner(Board,W),
 	W=='o',
 	Status is 1.
+
+%NextPlayer
+nextPlayer(Player):-game(_,Player).	

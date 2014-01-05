@@ -4,10 +4,10 @@
 TicTacToePLEngine::TicTacToePLEngine(char symbolFirstPlayer)
 {
 	
-	char * argv [] = { "libswipl.dll", "-s", "tictactoe.pl", NULL };
+	char* argv [] = { "libswipl.dll", "-s", "tictactoe.pl", NULL };
 
 	prolog = new PlEngine(3, argv);
-	plSetFirstPlayer(symbolFirstPlayer);
+	//plSetFirstPlayer(symbolFirstPlayer);
 
 	message = "Hi, good luck playing Tic Tac Toe!\nYou Start!";
 
@@ -20,20 +20,21 @@ TicTacToePLEngine::~TicTacToePLEngine()
 
 void TicTacToePLEngine::plSetFirstPlayer(char symbol)
 {
+	char plSymbol[2] = { symbol, '\0' };
 	//prepare parameters:
-	PlTermv setFirstPlayer_params(1);
-	setFirstPlayer_params[0] = symbol;
+	PlTermv set_First_Player_params(1);
+	set_First_Player_params[0] = PlAtom(plSymbol);
 
 	//invoque setFirstPlayer predicate
-	PlQuery	setFirstPlayer("setFirstPlayer", setFirstPlayer_params);
+	PlQuery	setFirstPlayer("setFirstPlayer2", set_First_Player_params);
 	setFirstPlayer.next_solution();
 }
 
+//Bum!
 int TicTacToePLEngine::plHumanPlay(int square)
 {
-
 	//prepare parameters (Square,ReturnedStatus):
-	PlTermv human_play_params(1);
+	PlTermv human_play_params(2);
 	human_play_params[0] = square;
 
 	//invoque humanPlay predicate
@@ -46,46 +47,32 @@ int TicTacToePLEngine::plHumanPlay(int square)
 
 int TicTacToePLEngine::plComputerPlay()
 {
-	//Create parameters (ReturnedStatus)
-	PlTermv play_params(1);
+	//Create parameters (BestMove,ReturnedStatus)
+	PlTermv play_params(2);
 
 	//Invoque the play predicate
 	PlQuery play("computerPlay", play_params);
 	play.next_solution();
 
+	status = play_params[1]; //Status is updated
+	//Read and return output parameter:
+	return play_params[0]; //Best Move
 	
-	//Read and return output parameter:
-	return play_params[1];
 }
-
-int TicTacToePLEngine::plStatusGame()
-{
-	//Create paramters (Result)
-	PlTermv status_params(1);
-
-	//Invoque the play predicate
-	PlQuery status("gameStatus", status_params);
-	status.next_solution();
-
-	//Read and return output parameter:
-	// status 2 -> computer wins
-	// status 1 -> human wins
-	// status 0 -> draw
-	// status -1 -> playing
-	return status_params[1];
-}
-
 
 string TicTacToePLEngine::getMessage()
 {
 	return message;
 }
 
-
-
-void TicTacToePLEngine::play(int square)
+int TicTacToePLEngine::getComputerMove()
 {
-
-	//int status = plHumanPlay( square);
-
+	return plComputerPlay();
 }
+
+int TicTacToePLEngine::getStatus()
+{
+	return status;
+}
+
+
