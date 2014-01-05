@@ -31,10 +31,10 @@ void GraphOpenGL::myortho(void){
 	GLfloat H = glutGet(GLUT_WINDOW_HEIGHT);
 	if (W <= H)
 		glOrtho(-2.5, 2.5, -2.5 * H / W,
-		2.5 * H / W, -10.0, 10.0);
+		2.5 * H / W, -100.0, 100.0);
 	else
 		glOrtho(-2.5 * W / H,
-		2.5 * W / H, -2.5, 2.5, -10.0, 10.0);
+		2.5 * W / H, -2.5, 2.5, -100.0, 100.0);
 }
 
 void GraphOpenGL::Init(){
@@ -51,7 +51,9 @@ void GraphOpenGL::Init(){
 	glEnable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
+	glSelectBuffer(BUFFSIZE, selecter);
 	currentScene->Init();
+
 }
 
 void GraphOpenGL::subWindowInit(){

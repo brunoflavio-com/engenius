@@ -82,10 +82,9 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	glPushMatrix();
 	glTranslatef(userA->x, userA->y, Z);
 
-	// glLoadName(112); AQUI COLOCAMOS O IDENTIFICADOR!
+	glLoadName(112); //AQUI COLOCAMOS O IDENTIFICADOR!
 	quadric = gluNewQuadric();
 	gluQuadricDrawStyle(quadric, GLU_FILL);
-	
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
 	
 	//User text
