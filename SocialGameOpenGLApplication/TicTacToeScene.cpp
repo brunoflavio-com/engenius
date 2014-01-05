@@ -73,6 +73,7 @@ void TicTacToeScene::Draw3dObjects(void)
 
 	drawBoard();
 
+
 	//Draw the game engine message:
 	glPushMatrix();
 	unsigned char msg[100];
@@ -107,80 +108,89 @@ void TicTacToeScene::DrawOverlay(void)
 // Keyboard callback
 void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pressed, and the current mouse coordenates
 {
-	switch (key) {
-	case '1':
-		//if square is empty
-		if (board[0] == 0)
-		{
-			board[0] = HUMAN;
-		}
-		break;
-	case '2':
-		//if square is empty
-		if (board[1] == 0)
-		{
-			board[1] = HUMAN;
-		}
-		break;
-	case '3':
-		//if square is empty
-		if (board[2] == 0)
-		{
-			board[2] = HUMAN;
-		}
-		break;
-	case '4':
-		//if square is empty
-		if (board[3] == 0)
-		{
-			board[3] = HUMAN;
-		}
-		break;
-	case '5':
-		//if square is empty
-		if (board[4] == 0)
-		{
-			board[4] = HUMAN;
-		}
-		break;
-	case '6':
-		//if square is empty
-		if (board[5] == 0)
-		{
-			board[5] = HUMAN;
-		}
-		break;
-	case '7':
-		//if square is empty
-		if (board[6] == 0)
-		{
-			board[6] = HUMAN;
-		}
-		break;
-	case '8':
-		//if square is empty
-		if (board[7] == 0)
-		{
-			board[7] = HUMAN;
-		}
-		break;
-	case '9':
-		//if square is empty
-		if (board[8] == 0)
-		{
-			board[8] = HUMAN;
-		}
-		break;
-	case 27:
-		//end game on ESC?
-		break;
-	}
+	//do{
 
-	//pass digits to the game engine:
-	if (isdigit(key))
-	{
-		/*game->play(key);*/
-	}
+		switch (key) {
+		case '1':
+			//if square is empty
+			if (board[0] == 0)
+			{
+				board[0] = HUMAN;
+			}
+			break;
+		case '2':
+			//if square is empty
+			if (board[1] == 0)
+			{
+				board[1] = HUMAN;
+			}
+			break;
+		case '3':
+			//if square is empty
+			if (board[2] == 0)
+			{
+				board[2] = HUMAN;
+			}
+			break;
+		case '4':
+			//if square is empty
+			if (board[3] == 0)
+			{
+				board[3] = HUMAN;
+			}
+			break;
+		case '5':
+			//if square is empty
+			if (board[4] == 0)
+			{
+				board[4] = HUMAN;
+			}
+			break;
+		case '6':
+			//if square is empty
+			if (board[5] == 0)
+			{
+				board[5] = HUMAN;
+			}
+			break;
+		case '7':
+			//if square is empty
+			if (board[6] == 0)
+			{
+				board[6] = HUMAN;
+			}
+			break;
+		case '8':
+			//if square is empty
+			if (board[7] == 0)
+			{
+				board[7] = HUMAN;
+			}
+			break;
+		case '9':
+			//if square is empty
+			if (board[8] == 0)
+			{
+				board[8] = HUMAN;
+			}
+			break;
+		case 27:
+			//end game on ESC?
+			break;
+		}
+
+		//pass digits to the game engine:
+		if (isdigit(key))
+		{
+
+			//game->playHuman(key-48);
+			board[game->getComputerMove() - 1] = COMPUTER;
+			
+		}
+		
+
+	//} while (game->getStatus()< 0);
+
 }
 
 // Special key callback

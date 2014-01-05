@@ -15,6 +15,9 @@ public:
 	//Get Message
 	string getMessage();
 
+	// Get Computer Move
+	int getComputerMove();
+	int getStatus();
 	
 private:
 	PlEngine * prolog;
@@ -37,6 +40,6 @@ private:
 	// Verify status game: return status game( 2- computer wins; 1- human wins; 0- draw; -1 -playing)
 	int plStatusGame();
 
-	void play(int square);
+	
 };
 
