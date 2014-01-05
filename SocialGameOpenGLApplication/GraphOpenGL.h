@@ -11,6 +11,7 @@
 #include <string>
 #include "SocialGamePublicAPIClient.h"
 #include "GraphScene.h"
+#define BUFFSIZE 512
 
 class GraphScene;
 
@@ -18,6 +19,8 @@ class GraphScene;
 class GraphOpenGL
 {
 private:
+	GLuint selecter[BUFFSIZE];
+	GLuint theObject;
 	static GraphScene * currentScene;
 	static GraphScene * advanceScene;
 	static GraphScene  * normalScene;
@@ -26,8 +29,11 @@ public:
 	
 	GraphOpenGL();
 	~GraphOpenGL();
+	void static myortho(void);
 	void static Init();
 	void static subWindowInit();
+	void static	locate(int value);
+	void static	passiveMotion(int newx, int newy);
 	void static MotionMouse(int x, int y);
 	void static Mouse(int button, int state, int x, int y);
 	void static ReshapeMinimap(int width, int height);
