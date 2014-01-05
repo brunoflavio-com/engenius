@@ -56,5 +56,7 @@ private:
 	//Draw Grid
 	void drawGrid(void);
 
+	float g_rotation = 0.0;
+
 };
 

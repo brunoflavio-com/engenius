@@ -11,7 +11,7 @@ TicTacToeScene::TicTacToeScene(SocialGamePublicAPIClient *client, string loginEm
 	//client->
 
 	//initialize game engine:
-	game = new TicTacToePLEngine('o');
+	game = new TicTacToePLEngine('x');
 
 	//initialize board
 	for (int i = 0; i < 9; i++) board[i] = 0;
@@ -47,7 +47,7 @@ void TicTacToeScene::Init(void){
 // Timer Callback
 void TicTacToeScene::Timer(int value)
 {
-	
+	g_rotation += 0.01;
 }
 
 // Draw Callback
@@ -70,12 +70,14 @@ void TicTacToeScene::Draw3dObjects(void)
 	// Push and pop the current matrix stack. 
 	// This causes that translations and rotations on this matrix wont influence others
 	glPushMatrix(); //Save the transformations performed thus far
-
+	glRotatef(g_rotation, 0, 1, 0);
 	drawBoard();
 
 
 	//Draw the game engine message:
 	glPushMatrix();
+	glColor3f(0.0f, 1.0f, 0.0f); //Green
+
 	unsigned char msg[100];
 	strcpy((char*) msg, game->getMessage().c_str());
 	glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
@@ -93,7 +95,7 @@ void TicTacToeScene::DrawOverlay(void)
 	glPushMatrix();
 
 	//position in the bottom-center:
-	glRasterPos2f(0.5, 0.1);
+	glRasterPos2f(0.7f, 0.7f);
 
 	unsigned char msg[100];
 	strcpy((char*) msg, game->getMessage().c_str());
@@ -108,8 +110,7 @@ void TicTacToeScene::DrawOverlay(void)
 // Keyboard callback
 void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pressed, and the current mouse coordenates
 {
-	//do{
-
+	
 		switch (key) {
 		case '1':
 			//if square is empty
@@ -182,14 +183,11 @@ void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pre
 		//pass digits to the game engine:
 		if (isdigit(key))
 		{
-
-			//game->playHuman(key-48);
+			//game->playTTT(key - 48);
 			board[game->getComputerMove() - 1] = COMPUTER;
-			
 		}
 		
-
-	//} while (game->getStatus()< 0);
+	
 
 }
 
@@ -223,7 +221,9 @@ void TicTacToeScene::drawGrid(void)
 	float h = 3.0f;
 	//Draw Grid
 	glPushMatrix();
+	//glColor3f(0.0f, 1.0f, 0.0f);
 	glRotatef(90, 1, 0, 0);
+
 	//translate...
 
 	glPushMatrix();
@@ -231,6 +231,7 @@ void TicTacToeScene::drawGrid(void)
 	glutSolidCylinder(0.1f, h, 10, 10);
 	glTranslatef(1.0, 0, 0);
 	glutSolidCylinder(0.1f, h, 10, 10);
+
 	glPopMatrix();
 
 	glPushMatrix();
@@ -252,19 +253,22 @@ void TicTacToeScene::drawX(float x, float y)
 	float h = sqrt((w*w) * 2.0f);
 
 	glPushMatrix();
-	glTranslatef(w / -2.0, w / 2.0, 0.0f);
+	//glColor3f(0.0f, 0.0f, 1.0f);
+	glTranslatef(w / -2.0f, w / 2.0f, 0.0f);
 	glTranslatef(x, y, 0.0f);
 	glRotatef(90, 1.0f,0.0f, 0.0f);
 
 		glPushMatrix();
 		glRotatef(45, 0, 1, 0);
 		glutSolidCylinder(0.1f, h, 10, 10);
+
 		glPopMatrix();
 
 		glPushMatrix();
 		glTranslatef(w, 0.0f, 0.0f);
 		glRotatef(-45, 0.0f, 1.0f, 0.0f);
 		glutSolidCylinder(0.1f, h, 10, 10);
+
 		glPopMatrix();
 
 	glPopMatrix();
@@ -277,6 +281,7 @@ void TicTacToeScene::drawO(float x, float y)
 	int n = 20;
 	glPushMatrix();
 	glTranslatef(x, y, 0.0);
+	//glColor3f(1.0f, 0.0f, 0.0f);
 	glutSolidSphere(r, n, n);
 	glPopMatrix();
 
