@@ -156,7 +156,7 @@ void GraphOpenGL::passiveMotion(int newx, int newy){
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	hits = glRenderMode(GL_RENDER);
-	printf("%d", hits);
+	printf("Hits %d", hits);
 	if (hits == 0)
 		theObject = 0;
 	else{ // if glut detects items, gets the name
@@ -185,14 +185,20 @@ void GraphOpenGL::passiveMotion(int newx, int newy){
 
 			if (getThisName)
 				newObject = *ptr;
-			ptr += names;       
+
+			for (int i = 0; i < names; ++i) {				
+				printf(", %d", *ptr);
+				ptr++;
+			}
+			
+			//ptr += names;  
 		}
 		if (theObject != newObject) {
 			theObject = newObject;
 			glutPostRedisplay();
 		}
 	}
-
+	printf("\n");
 }
 
 void GraphOpenGL::PrintKeys(){
