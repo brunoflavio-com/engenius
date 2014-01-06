@@ -13,7 +13,6 @@ class GraphScene :
 	public IBothWindowsScene
 {
 private:
-	void static myortho(void);
 
 protected: 
 	bool isSubWindowsActive;

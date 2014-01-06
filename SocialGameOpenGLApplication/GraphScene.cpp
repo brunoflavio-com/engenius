@@ -52,17 +52,6 @@ GraphScene::~GraphScene()
 {
 }
 
-void GraphScene::myortho(void){
-	GLfloat W = glutGet(GLUT_WINDOW_WIDTH);
-	GLfloat H = glutGet(GLUT_WINDOW_HEIGHT);
-	if (W <= H)
-		glOrtho(-2.5, 2.5, -2.5 * H / W,
-		2.5 * H / W, -100.0, 100.0);
-	else
-		glOrtho(-2.5 * W / H,
-		2.5 * W / H, -2.5, 2.5, -100.0, 100.0);
-}
-
 void GraphScene::Draw(void){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
