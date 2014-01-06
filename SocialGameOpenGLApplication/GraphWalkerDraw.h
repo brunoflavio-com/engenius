@@ -14,6 +14,6 @@ public:
 private:
 	int maxUserConnections;
 	int maxConnectionStrenght;
-	
+	void selectedAttribute();
 };
 

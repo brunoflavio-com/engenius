@@ -242,8 +242,15 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	glMatrixMode(GL_MODELVIEW);
 	hits = glRenderMode(GL_RENDER);
 	printf("Hits %d", hits);
-	if (hits == 0)
+	
+
+	if (hits == 0) {
+		if (theObject > 0) {
+			ISelectable * previousEntity = (ISelectable *)theObject;
+			previousEntity->selected = false;
+		}
 		theObject = 0;
+	}
 	else{ // if glut detects items, gets the name
 		GLuint depth = (GLuint)~0;
 		unsigned int getThisName;
@@ -272,19 +279,35 @@ void GraphScene::PassiveMotion(int newx, int newy){
 				newObject = *ptr;
 
 			for (int i = 0; i < names; ++i) {
-				if (*ptr > 0) {
-					User * selectedUser = (User*) *ptr;
-					printf(", %s", selectedUser->email.c_str());
+				if (*ptr > 0) {										
+					//User * selectedUser = dynamic_cast<User*>((User *)*ptr);
+					ISelectable * selectedEntity = (ISelectable *)*ptr;
+					selectedEntity->selected = true;
+					//printf(", %s", selectedEntity);
+					//if (typeid(*selectedEntity) == typeid(User)) {
+						//printf("USER");
+					//}
 				}
 				ptr++;
 			}
 
 			//ptr += names;  
 		}
-		if (theObject != newObject) {
-			theObject = newObject;		
-			// TODO: set user as selected:
-			// User * user = (User*)newObject;
+		if (theObject != newObject) {			
+			//remove the selected attribute from the previous object:
+			if (theObject > 0) {
+				ISelectable * previousEntity = (ISelectable *)theObject;
+				previousEntity->selected = false;
+			}
+
+			theObject = newObject;
+			
+			//set selected.
+			ISelectable * selectedEntity = (ISelectable *)newObject;
+			selectedEntity->selected = true;
+
+			/*User * user = (User*)newObject;
+			printf("selected -> %s", user->email.c_str());*/
 			// user->selected = true;
 
 			glutPostRedisplay();
