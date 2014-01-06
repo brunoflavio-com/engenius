@@ -4,6 +4,7 @@
 
 #include "HangmanScene.h"
 #include "TicTacToeScene.h"
+#include "MazeScene.h"
 
 NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail):GraphScene(client, loginEmail)
 {
@@ -50,6 +51,10 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	}
 	if (key == 'T') {
 		game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
+		gameOn = true;
+	}
+	if (key == 'M' || key == 'm') {
+		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
 	}
 }

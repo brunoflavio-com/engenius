@@ -31,6 +31,16 @@ int MazeMap::getWidth()
 	return this->mapMatrix->at(0)->size();
 }
 
+int MazeMap::getStartLine()
+{
+	return startLine;
+}
+
+int MazeMap::getStartColumn()
+{
+	return startColumn;
+}
+
 bool MazeMap::isWall(int x, int y)
 {
 	if (x >= 0 && x < this->mapMatrix->size())
@@ -57,11 +67,15 @@ void MazeMap::readMapFile(string mapFile){
 
 		std::getline(file, fileLine);
 		for (int i = 0; i < fileLine.size(); i++){
-			if (fileLine[i] != ' '){
+			if (fileLine[i] == '*'){
 				matrixLine->push_back(1);
 			}
 			else{
 				matrixLine->push_back(0);
+			}
+			if (fileLine[i] == 'x'){
+				startLine = i;
+				startColumn = matrixLine->size();
 			}
 		}
 	}

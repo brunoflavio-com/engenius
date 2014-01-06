@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Map1.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +94,9 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="IBothWindowScene.h" />
     <ClInclude Include="InterfaceGL.h" />
+    <ClInclude Include="MazeMap.h" />
+    <ClInclude Include="MazePlEngine.h" />
+    <ClInclude Include="MazeScene.h" />
     <ClInclude Include="NormalModeGraphScene.h" />
     <ClInclude Include="RelationShip.h" />
     <ClInclude Include="RelationshipTag.h" />
@@ -123,6 +127,9 @@
     <ClCompile Include="GraphWalkerDraw.cpp" />
     <ClCompile Include="HangmanPLEngine.cpp" />
     <ClCompile Include="HangmanScene.cpp" />
+    <ClCompile Include="MazeMap.cpp" />
+    <ClCompile Include="MazePlEngine.cpp" />
+    <ClCompile Include="MazeScene.cpp" />
     <ClCompile Include="NormalModeGraphScene.cpp" />
     <ClCompile Include="RelationShip.cpp" />
     <ClCompile Include="RelationShipTag.cpp" />
@@ -141,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="hangman.pl" />
+    <None Include="maze.pl" />
     <None Include="tictactoe.pl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
