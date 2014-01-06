@@ -7,7 +7,8 @@ HangmanScene::HangmanScene(SocialGamePublicAPIClient *client, string loginEmail)
 	//client-> 
 
 	//initialize game engine:
-	game = new HangmanPLEngine(3, "engenius");
+	word = "teste";
+	game = new HangmanPLEngine(3, word.c_str());
 
 }
 
@@ -29,7 +30,7 @@ void HangmanScene::Init(void)
 // Timer Callback
 void HangmanScene::Timer(int value)
 {
-	g_rotation += 0.1;
+	g_rotation += 0.01;
 }
 
 // Draw Callback
@@ -45,7 +46,7 @@ void HangmanScene::Draw3dObjects(void){
 	glLoadIdentity();
 
 	// Define a viewing transformation
-	gluLookAt(4, 2, 0, 0, 0, 0, 0, 1, 0);
+	gluLookAt(0.0, -1.5, 8, 1.5, -1.5, 0, 0, 1, 0);
 
 	// Push and pop the current matrix stack. 
 	// This causes that translations and rotations on this matrix wont influence others.
@@ -57,8 +58,9 @@ void HangmanScene::Draw3dObjects(void){
 	glRotatef(g_rotation, 0, 1, 0);
 	glRotatef(90, 0, 1, 0);
 
-	// Draw the teapot
-	glutSolidTeapot(1);
+	//
+	drawWordToFind();
+	
 	glPopMatrix();
 
 
@@ -69,7 +71,7 @@ void HangmanScene::DrawOverlay(void) {
 	glPushMatrix();
 	
 	//position in the center:
-	glRasterPos2f(0.5, 0.5);
+	glRasterPos2f(0.7f, 0.7f);
 
 	unsigned char msg[100];
 	strcpy((char*)msg, game->getMessage().c_str());
@@ -92,7 +94,7 @@ void HangmanScene::Key(unsigned char key, int x, int y)
 	//pass letters to the game engine:
 	if (isalpha(key))
 	{
-		game->play(key);
+		play(key);
 	}
 }
 
@@ -116,5 +118,43 @@ void HangmanScene::Mouse(int btn, int state, int x, int y)
 
 void HangmanScene::MotionMouse(int x, int y)
 {
+
+}
+
+void HangmanScene::drawWordToFind()
+{
+	glPushMatrix();
+		//position in the center:
+		glRasterPos2f(0.5, 0.5);
+
+		unsigned char msg[100];
+		strcpy((char*) msg, guessString().c_str());
+
+		glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, msg);
+	glPopMatrix();
+
+}
+
+string HangmanScene::guessString() {
+	string output = " ";
+	for (int i = 0; i < word.length(); i++)
+	{
+		char letter = word[i];
+
+		if (std::find(letters.begin(), letters.end(), letter) != letters.end()) {
+			output += letter;
+		}
+		else {
+			output += '_';
+		}
+		output += ' ';
+	}
+	return output;
+}
+
+void HangmanScene::play(unsigned char key) {
+	letters.push_back(key);
+	game->play(key);
+	
 
 }
