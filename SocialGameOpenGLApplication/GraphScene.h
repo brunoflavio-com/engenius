@@ -13,7 +13,7 @@ class GraphScene :
 	public IBothWindowsScene
 {
 private:
-	
+	void static myortho(void);
 
 protected: 
 	bool isSubWindowsActive;
@@ -51,7 +51,7 @@ public:
 
 	void TopCamLookAt();
 	void MotionMouse(int x, int y);
-
+	void PassiveMotion(int newx, int newy);
 	void Mouse(int button, int state, int x, int y);
 };
 

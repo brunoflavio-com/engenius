@@ -29,7 +29,7 @@ public:
 	// Callback para interacção do rato
 	virtual void Mouse(int btn, int state, int x, int y) = 0;
 	virtual	void MotionMouse(int x, int y) = 0;
-	
+	virtual void PassiveMotion(int x, int y) {};
 
 
 };

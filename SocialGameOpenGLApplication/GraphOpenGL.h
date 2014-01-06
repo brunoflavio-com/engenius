@@ -25,10 +25,9 @@ public:
 	
 	GraphOpenGL();
 	~GraphOpenGL();
-	void static myortho(void);
 	void static Init();
 	void static subWindowInit();
-	void static	passiveMotion(int newx, int newy);
+	void static PassiveMotion(int x, int y);
 	void static MotionMouse(int x, int y);
 	void static Mouse(int button, int state, int x, int y);
 	void static ReshapeMinimap(int width, int height);

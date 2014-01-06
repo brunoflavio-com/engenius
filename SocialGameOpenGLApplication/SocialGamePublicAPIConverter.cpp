@@ -58,17 +58,18 @@ User * SocialGamePublicAPIConverter::convertGraph(ns5__Graph * graph, string ema
 	}
 	
 	for (unsigned int i = 0; i < graph->Relationships->Relationship.size(); i++){
-	ns5__Relationship * ns5__relationship	= graph->Relationships->Relationship.at(i);
-	Relationship * relationship = new Relationship();
-	User * userA = getUser(*ns5__relationship->UserAEmail);
-	User * userB = getUser(*ns5__relationship->UserBEmail);
-	RelationshipTag * relationshipTag = getRelationshipTag(*ns5__relationship->RelationshipTagId);
-	relationship->user = userB;
-	relationship->strength = *ns5__relationship->Strength;
-	relationship->relationshipTag = relationshipTag;
-	userA->relationships.push_back(relationship);
+		ns5__Relationship * ns5__relationship	= graph->Relationships->Relationship.at(i);
+		Relationship * relationship = new Relationship();
+		User * userA = getUser(*ns5__relationship->UserAEmail);
+		User * userB = getUser(*ns5__relationship->UserBEmail);
+		RelationshipTag * relationshipTag = getRelationshipTag(*ns5__relationship->RelationshipTagId);
+		relationship->user = userB;
+		relationship->strength = *ns5__relationship->Strength;
+		relationship->relationshipTag = relationshipTag;
+		userA->relationships.push_back(relationship);
 	}
-		return getUser(email);
+		
+	return getUser(email);
 
 }
 
