@@ -55,7 +55,7 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 
 	float rotX = -deltaY * deltaZ;
 	float rotY =  deltaX * deltaZ;
-
+	glLoadName((GLuint)relationship);
 	glPushMatrix();
 		glTranslatef(userA->x, userA->y, Za);
 
@@ -85,11 +85,10 @@ void GraphWalkerDraw::walkVertice(User * userA){
 
 	//We'll use the address of this node as the gl Identifier:
 	glLoadName((GLuint) userA);
-
+	if (glRenderMode)
 	quadric = gluNewQuadric();
 	gluQuadricDrawStyle(quadric, GLU_FILL);
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
-	
 	//User text
 	if (drawUserNames){
 		glDisable(GL_LIGHTING);

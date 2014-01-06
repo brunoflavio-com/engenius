@@ -147,5 +147,57 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public int GetUserLevel(string Email)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetUserLevel(Email);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public float GetUserPoints(string Email)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetUserPoints(Email);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public void SetUserLevel(string Email, int Level)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                Controller.SetUserLevel(Email, Level);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public void SetUserPoints(string Email, float Points)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                Controller.SetUserPoints(Email, Points);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }

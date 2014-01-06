@@ -51,17 +51,6 @@ GraphScene::~GraphScene()
 {
 }
 
-void GraphScene::myortho(void){
-	GLfloat W = glutGet(GLUT_WINDOW_WIDTH);
-	GLfloat H = glutGet(GLUT_WINDOW_HEIGHT);
-	if (W <= H)
-		glOrtho(-2.5, 2.5, -2.5 * H / W,
-		2.5 * H / W, -100.0, 100.0);
-	else
-		glOrtho(-2.5 * W / H,
-		2.5 * W / H, -2.5, 2.5, -100.0, 100.0);
-}
-
 void GraphScene::Draw(void){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -236,7 +225,6 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	viewport[2] = glutGet(GLUT_WINDOW_WIDTH);
 	viewport[3] = glutGet(GLUT_WINDOW_HEIGHT);
 	gluPickMatrix(newx, viewport[3] - newy, 5.0, 5.0, viewport); // searches for existing items on the path
-	myortho();
 	glMatrixMode(GL_MODELVIEW);
 	Draw();
 	glMatrixMode(GL_PROJECTION);
