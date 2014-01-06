@@ -113,14 +113,20 @@
 %Results: 	0 - Win;
 %			1 - word contains character;
 %			2 - word does not contains character.
-			
+%			3 - word repeated
+
 %play (Character,Result)			
-play(C,R):- not(checkRepeated(C,R)), 			
-			assert(used(C)),
+play(C,R):- findall(US,used(US),LUS),
+			member(C,LUS),
+			R is 3,
+			!.				
+%play (Character,Result)			
+play(C,R):- assert(used(C)),
 			!,
 			find(C,R).
 			
-%checkWin(Character,CheckRepeatedResult)		
+
+%checkRepeated(Character,CheckRepeatedResult)		
 checkRepeated(CA,CRR):-	findall(US,used(US),LUS),
 						member(CA,LUS),
 						CRR is 3,
@@ -140,5 +146,3 @@ checkWin(CWR):-	findall(U,used(U),LH),
 				same_length(L,LR),
 				CWR is 0,
 				write('WIN!').
-				
-teste(R):- R is 3, true.

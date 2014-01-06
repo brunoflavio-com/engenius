@@ -30,6 +30,8 @@ namespace SocialGameBLL.Entities
 
         public virtual ICollection<InterestEntity> Interests { get; set; }
 
+        public virtual SimpleModeScoreEntity Score { get; set; }
+
         public ICollection<RelationshipEntity> GetAllUsersRelationships()
         {
             ICollection<RelationshipEntity> AllReltionships = new List<RelationshipEntity>();
