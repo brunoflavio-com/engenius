@@ -95,6 +95,7 @@ void GraphOpenGL::DrawMinimap(){
 }
 
 void GraphOpenGL::Draw(){
+	glLoadName(-1);
 	currentScene->Draw();
 	
 }
