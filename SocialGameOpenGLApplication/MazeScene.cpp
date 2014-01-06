@@ -10,7 +10,7 @@ MazeScene::MazeScene()
 
 MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail)
 {
-	this->map = new MazeMap("C:\\Users\\Luis\\git\\Engenius\\SocialGameOpenGLApplication\\Map1.txt");
+	this->map = new MazeMap("Map1.txt");
 	this->xPosition = map->getStartLine() + this->cubeAndSphereSize / 2;
 	this->zPosition = map->getStartColumn() + this->cubeAndSphereSize / 2;
 	this->yPosition = this->cubeAndSphereSize / 2;
