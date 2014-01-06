@@ -10,7 +10,10 @@ MazeScene::MazeScene()
 
 MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail)
 {
-	this->map = new MazeMap("C:\\Users\\Luis\\git\\Engenius\\SocialGameOpenGLApplication\\Map1.txt");
+	this->map = new MazeMap("Map1.txt");
+	this->xPosition = map->getStartLine() + this->cubeAndSphereSize / 2;
+	this->zPosition = map->getStartColumn() + this->cubeAndSphereSize / 2;
+	this->yPosition = this->cubeAndSphereSize / 2;
 }
 
 MazeScene::~MazeScene()
@@ -47,6 +50,9 @@ void MazeScene::Draw3dObjects(void)
 		glRotatef(g_rotation, 0, 1, 0);
 		glScalef(0.1, 0.1, 0.1);
 		this->drawMap();
+		glPushMatrix();
+			this->drawSphere(xPosition, yPosition, zPosition, cubeAndSphereSize / 2);
+		glPopMatrix();
 	glPopMatrix();
 }
 
@@ -95,7 +101,7 @@ void MazeScene::drawMap(void)
 		{
 			if (this->map->isWall(line, column))
 			{
-				this->drawCube(x, y, z, 1);
+				this->drawCube(x, y, z, this->cubeAndSphereSize);
 			}
 			x++;
 		}
@@ -109,6 +115,7 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 {
 	//d
 	glBegin(GL_POLYGON);
+	glNormal3f(0, -1, 0);
 	glVertex3f(x, y, z);
 	glVertex3f(x + side, y, z);
 	glVertex3f(x + side, y, z + side);
@@ -116,6 +123,7 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 	glEnd();
 	//b
 	glBegin(GL_POLYGON);
+	glNormal3f(0, 0, -1);
 	glVertex3f(x, y, z);
 	glVertex3f(x, y + side, z);
 	glVertex3f(x + side, y + side, z );
@@ -123,6 +131,7 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 	glEnd();
 	//t
 	glBegin(GL_POLYGON);
+	glNormal3f(0, 1, 0);
 	glVertex3f(x, y + side, z);
 	glVertex3f(x, y + side, z + side);
 	glVertex3f(x + side, y + side, z + side);
@@ -130,6 +139,7 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 	glEnd();
 	//f
 	glBegin(GL_POLYGON);
+	glNormal3f(0, 0, 1);
 	glVertex3f(x, y, z + side);
 	glVertex3f(x + side, y, z + side);
 	glVertex3f(x + side, y + side, z + side);
@@ -137,6 +147,7 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 	glEnd();
 	//r
 	glBegin(GL_POLYGON);
+	glNormal3f(-1, 0, 0);
 	glVertex3f(x, y, z);
 	glVertex3f(x, y, z + side);
 	glVertex3f(x, y + side, z + side);
@@ -144,10 +155,17 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 	glEnd();
 	//l
 	glBegin(GL_POLYGON);
+	glNormal3f(1, 0, 0);
 	glVertex3f(x + side, y, z);
 	glVertex3f(x + side, y + side, z);
 	glVertex3f(x + side, y + side, z + side);
 	glVertex3f(x + side, y, z + side);
 	glEnd();
+}
+
+void MazeScene::drawSphere(float x, float y, float z, float radius)
+{
+	glTranslatef(x, y, z);
+	glutSolidSphere(radius, 20, 20);
 }
 

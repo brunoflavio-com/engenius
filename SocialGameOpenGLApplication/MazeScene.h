@@ -45,9 +45,16 @@ namespace MinigamesMaze{
 		//Game Engine
 		MazePlEngine* game;
 
-		float g_rotation = 0.0;
+		//Position
+		float xPosition;
+		float yPosition;
+		float zPosition;
+
+		float g_rotation = 0.0f;
+		float cubeAndSphereSize = 1.0f;
 
 		void drawMap(void);
 		void drawCube(float x, float y, float z, float side);
+		void drawSphere(float x, float y, float z, float radius);
 	};
 }
