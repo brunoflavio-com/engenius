@@ -23,15 +23,21 @@
 %%
 % Request Handler:
 get_graph_stats(_) :-			
-	get_graph_stats_action(Total, Average),
-	prolog_to_json(UserGraph, UserGraphJSON),
-	reply_json(UserGraphJSON).
+	get_graph_stats_action(GraphStats),
+	prolog_to_json(GraphStats, GraphStatsJSON),
+	reply_json(GraphStatsJSON).
 
 %%
 % Compute:
-get_graph_stats_action(Total, Average) :-
+get_graph_stats_action(GraphStats) :-
 	get_total_friends(Total),
-	get_average_connection_strength(Average).
+	get_average_connection_strength(Average),
+	GraphStats = json(
+		      [
+				'TotalFriends'=Total,
+				'AverageStrength'=Average
+			   ]
+		    ).
 
 get_total_friends(Total):-
 	findall(Name,
