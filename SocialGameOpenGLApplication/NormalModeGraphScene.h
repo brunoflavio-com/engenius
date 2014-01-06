@@ -19,5 +19,7 @@ public:
 	
 	void Key(unsigned char key, int x, int y);
 	void Timer(int value);
+
+	void PassiveMotion(int x, int y);
 };
 

@@ -65,3 +65,8 @@ void NormalModeGraphScene::Timer(int value){
 	GraphScene::Timer(value);		
 	
 }
+
+void NormalModeGraphScene::PassiveMotion(int x, int y) {
+	if (gameOn) return game->PassiveMotion(x, y);
+	GraphScene::PassiveMotion(x, y);
+}
