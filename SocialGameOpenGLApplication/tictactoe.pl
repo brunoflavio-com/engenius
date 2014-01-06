@@ -82,10 +82,10 @@ value(Board,V) :- V = 0.
 maximizing('x').       
 minimizing('o').        
 	
-%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Minimax
 % computer is always X, user is O
-%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 minimax(Board,Player,Move,Value):-
 	availableSquares(Board,PM),!,
@@ -134,7 +134,7 @@ better(Nivel,Move,X,Value1,Z,Value2,S,Value) :-
 %%%     MAIN PROGRAM
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-humanPlay(Status):-
+humanPlay(Square,Status):-
 	game(Board,o),
 	insertMove('o',Square),
 	gameStatus(Status).

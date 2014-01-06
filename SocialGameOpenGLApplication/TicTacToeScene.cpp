@@ -4,28 +4,16 @@
 
 #define PI 3.14159265358979323846
 
-
 TicTacToeScene::TicTacToeScene(SocialGamePublicAPIClient *client, string loginEmail)
 {
 	//If necessary, use the client soap connection to get game related data from the server.
 	//client->
 
 	//initialize game engine:
-	game = new TicTacToePLEngine('x');
+	game = new TicTacToePLEngine('o');
 
-	//initialize board
+	//initialize board (0 is empty)
 	for (int i = 0; i < 9; i++) board[i] = 0;
-
-	//for test
-	//this->board[0] = HUMAN;
-	//this->board[1] = COMPUTER;
-	//this->board[2] = HUMAN;
-	//this->board[3] = HUMAN;
-	//this->board[4] = COMPUTER;
-	//this->board[5] = COMPUTER;
-	//this->board[6] = COMPUTER;
-	//this->board[7] = HUMAN;
-	//this->board[8] = HUMAN;
 
 }
 
@@ -71,12 +59,13 @@ void TicTacToeScene::Draw3dObjects(void)
 	// This causes that translations and rotations on this matrix wont influence others
 	glPushMatrix(); //Save the transformations performed thus far
 	glRotatef(g_rotation, 0, 1, 0);
+	// Draw board
 	drawBoard();
 
 
 	//Draw the game engine message:
 	glPushMatrix();
-	glColor3f(0.0f, 1.0f, 0.0f); //Green
+	glColor3f(0.5f,1.0f,0.0f); //Green
 
 	unsigned char msg[100];
 	strcpy((char*) msg, game->getMessage().c_str());
@@ -110,70 +99,63 @@ void TicTacToeScene::DrawOverlay(void)
 // Keyboard callback
 void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pressed, and the current mouse coordenates
 {
+	if (game->getStatus()>0) return;
 	
+
 		switch (key) {
 		case '1':
 			//if square is empty
 			if (board[0] == 0)
-			{
 				board[0] = HUMAN;
-			}
+			else return;
 			break;
 		case '2':
 			//if square is empty
 			if (board[1] == 0)
-			{
 				board[1] = HUMAN;
-			}
+			else return;
 			break;
 		case '3':
 			//if square is empty
 			if (board[2] == 0)
-			{
 				board[2] = HUMAN;
-			}
+			else return;
 			break;
 		case '4':
 			//if square is empty
 			if (board[3] == 0)
-			{
 				board[3] = HUMAN;
-			}
+			else return;
 			break;
 		case '5':
 			//if square is empty
 			if (board[4] == 0)
-			{
 				board[4] = HUMAN;
-			}
+			else return;
 			break;
 		case '6':
 			//if square is empty
 			if (board[5] == 0)
-			{
 				board[5] = HUMAN;
-			}
+			else return;
 			break;
 		case '7':
 			//if square is empty
 			if (board[6] == 0)
-			{
 				board[6] = HUMAN;
-			}
+			else return;
 			break;
 		case '8':
 			//if square is empty
 			if (board[7] == 0)
-			{
 				board[7] = HUMAN;
-			}
+			else return;
 			break;
 		case '9':
 			//if square is empty
 			if (board[8] == 0)
-			{
 				board[8] = HUMAN;
-			}
+			else return;
 			break;
 		case 27:
 			//end game on ESC?
@@ -183,7 +165,12 @@ void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pre
 		//pass digits to the game engine:
 		if (isdigit(key))
 		{
-			//game->playTTT(key - 48);
+			// key to digit
+			int square = key - 48;
+			// Human Move
+			game->playTTT(square);
+			game->getStatus();
+			// Computer Move
 			board[game->getComputerMove() - 1] = COMPUTER;
 		}
 		
@@ -206,7 +193,7 @@ void TicTacToeScene::SpecialKeyUp(int key, int x, int y)
 // Mouse Callbacks
 void TicTacToeScene::Mouse(int btn, int state, int x, int y)
 {
-
+	
 }
 
 void TicTacToeScene::MotionMouse(int x, int y)
@@ -280,8 +267,8 @@ void TicTacToeScene::drawO(float x, float y)
 	float r = 0.5f;
 	int n = 20;
 	glPushMatrix();
-	glTranslatef(x, y, 0.0);
 	//glColor3f(1.0f, 0.0f, 0.0f);
+	glTranslatef(x, y, 0.0);
 	glutSolidSphere(r, n, n);
 	glPopMatrix();
 

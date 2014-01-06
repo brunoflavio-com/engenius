@@ -53,8 +53,9 @@ private:
 	void drawO(float x, float y);
 	// Draw Board
 	void drawBoard(void);
-	//Draw Grid
+	// Draw Grid
 	void drawGrid(void);
+
 
 	float g_rotation = 0.0;
 

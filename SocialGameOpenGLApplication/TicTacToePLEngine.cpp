@@ -10,7 +10,7 @@ TicTacToePLEngine::TicTacToePLEngine(char symbolFirstPlayer)
 	plSetFirstPlayer(symbolFirstPlayer);
 	status = -1;
 
-	message = "Hi, good luck playing Tic Tac Toe!";
+	message += "You start.\n\nGood luck!";
 
 }
 
@@ -29,6 +29,7 @@ void TicTacToePLEngine::plSetFirstPlayer(char symbol)
 	//invoque setFirstPlayer predicate
 	PlQuery	setFirstPlayer("setFirstPlayer", set_First_Player_params);
 	setFirstPlayer.next_solution();
+	message = "Hi, you're playing Tic Tac Toe\n";
 	
 }
 
@@ -69,15 +70,15 @@ string TicTacToePLEngine::getMessage()
 
 int TicTacToePLEngine::getComputerMove()
 {
-	message = "Computer played\n Select square!";
+	message = "Computer made move.\n\n Select square!";
 	return plComputerPlay();
 }
 
 int TicTacToePLEngine::getStatus()
 {
-	if (status == 0) message = "DRAW";
-	else if (status == 1) message = "YOU WIN";
-	else if (status == 2) message = "COMPUTER WIN";
+	if (status == 0) message = "Nobody won, better luck next time...";
+	else if (status == 1) message = "Congratulations, you won!";
+	else if (status == 2) message = "Computer won, better luck next time...";
 	else message = "playing tic tac toe";
 	return status;
 }
