@@ -11,10 +11,11 @@
 #define MAX_HEIGHT 5
 
 
-GraphWalkerDraw::GraphWalkerDraw(int maxUserConnections, int maxConnectionStrenght)
+GraphWalkerDraw::GraphWalkerDraw(int maxUserConnections, int maxConnectionStrenght, bool drawUserNames)
 {
 	this->maxUserConnections = maxUserConnections;
 	this->maxConnectionStrenght = maxConnectionStrenght;	
+	this->drawUserNames = drawUserNames;
 }
 
 
@@ -90,16 +91,18 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
 	
 	//User text
-	glDisable(GL_LIGHTING);
-	glColor3ub(200, 200, 200);
-	glRasterPos3f(-2, 0, 4);
-	
-	unsigned char s[100];
-	
-	strcpy((char*)s, userA->email.c_str());
+	if (drawUserNames){
+		glDisable(GL_LIGHTING);
+		glColor3ub(200, 200, 200);
+		glRasterPos3f(-2, 0, 4);
 
-	glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
-	glEnable(GL_LIGHTING);
+		unsigned char s[100];
+
+		strcpy((char*)s, userA->email.c_str());
+
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
+		glEnable(GL_LIGHTING);
+	}
 	glPopMatrix();
 
 

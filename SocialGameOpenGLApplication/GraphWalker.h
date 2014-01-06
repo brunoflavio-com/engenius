@@ -11,7 +11,7 @@ protected:
 public:
 
 	GraphWalker();
-	virtual void walk(User * graph);
+	virtual void walk(User * graph, int graphDepth);
 	~GraphWalker();
 	
 };

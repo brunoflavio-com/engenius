@@ -18,7 +18,7 @@ NormalModeGraphScene::~NormalModeGraphScene()
 
 void NormalModeGraphScene::Draw3dObjects(void){
 	if (gameOn) return game->Draw3dObjects();
-	graph->draw();
+	graph->draw(true);
 }
 
 void NormalModeGraphScene::DrawOverlay(void){

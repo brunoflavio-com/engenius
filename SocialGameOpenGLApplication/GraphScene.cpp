@@ -179,7 +179,7 @@ void GraphScene::drawSubWindow(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	TopCamLookAt();
 	//draw subscene
-	graph->draw();
+	graph->draw(false);
 	glutSwapBuffers();
 	glFlush();
 }

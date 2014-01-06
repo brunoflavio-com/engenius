@@ -23,12 +23,15 @@ void graphCoordWalker::walk(User * graph){
 	maxStrenght = 0;
 	maxUserConnections = 0;
 
+	/*	
+	DEBUG
 	std::cout << graph->email << " | ";
 	std::cout << graph->x << " | ";
 	std::cout << graph->y << " | ";
 	std::cout << graph->z << " | ";
 	std::cout << graph->graphLevel << endl;
-	GraphWalker::walk(graph);
+	*/
+	GraphWalker::walk(graph, -1);
 }
 
 void graphCoordWalker::walkVertice(User * user){

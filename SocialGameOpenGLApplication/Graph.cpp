@@ -11,9 +11,15 @@ Graph::Graph(ns5__Graph * graph, std::string email)
 	maxConnectionStrenght = coordWalker.getMaxConnectionStrenght();
 	maxUserConnections = coordWalker.getMaxUserConnections();
 }
-void Graph::draw(){
-	GraphWalkerDraw drawWalker(maxUserConnections, maxConnectionStrenght);
-	drawWalker.walk(user);
+void Graph::draw(bool drawUserName){
+	GraphWalkerDraw drawWalker(maxUserConnections, maxConnectionStrenght, drawUserName);
+	drawWalker.walk(user,3);
+}
+
+void Graph::changeUser(std::string email){
+	graphCoordWalker coordWalker;
+	User * user = converter.getUser(email);
+	coordWalker.walk(user);
 }
 
 Graph::~Graph()

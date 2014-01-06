@@ -10,10 +10,10 @@ private:
 	SocialGamePublicAPIConverter converter;
 	int maxUserConnections;
 	int maxConnectionStrenght;
-
 public:
 	Graph(ns5__Graph * graph, std::string);
 	~Graph();
-	void draw();
+	void draw(bool drawUserName);
+	void changeUser(std::string email);
 };
 

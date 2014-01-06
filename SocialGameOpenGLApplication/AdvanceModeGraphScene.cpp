@@ -14,7 +14,7 @@ AdvanceModeGraphScene::~AdvanceModeGraphScene()
 }
 
 void AdvanceModeGraphScene::Draw3dObjects(void){
-	graph->draw();
+	graph->draw(true);
 }
 
 void AdvanceModeGraphScene::DrawOverlay(void){
