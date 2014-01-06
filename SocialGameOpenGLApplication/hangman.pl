@@ -1,38 +1,3 @@
-%%%%%%%%%% TESTS %%%%%%%%%%
-
-%hangman(category,word)
-%:-dynamic hangman/2.
-
-%hangman(marcaCarros, toyota).
-%hangman(marcaCarros, honda).
-%hangman(marcaCarros, bmw).
-%hangman(marcaCarros, audi).
-%hangman(marcaCarros, mercedes).
-
-%assert(hangman(marcaCarros,rover)).
-
-%cenas(L,R):- findall(L,used(L),R).
-%get all used characters
-	%cenas(R):- findall(U,used(U),R).
-%14 ?- compare(>,5,2).
-%true.
-
-%15 ?- compare(=,[1,2,3],[1,2,3]).
-%true.
-
-%16 ?- compare(>,[1,2,3],[1,2,3]).
-
-%?21 ?- string_to_list(texto,L).
-%L = [116, 101, 120, 116, 111].
-
-%find (character,word)
-%find(X,Y):- read(X), char_code(X,L), member(L,"texto").
-%find(X,Y):- char_code(X,LX), string_to_list(Y,LY), member(LX,LY).
-
-%(condicao1,condicao2,condicao3,((condicao4, condicao5,R is 0);R is 1));R is 2.
-
-
-%%%%%%%%%% TO USE PREDICATES %%%%%%%%%%
 
 :- dynamic word/1.
 :- dynamic used/1.
@@ -47,30 +12,48 @@
 %starting game cpp - assert(word(W)).
 %during game Prolog - assert(used(C)).
 
-find(X,Y,R):- 
-	( 
-	char_code(X,LX), 
-	string_to_list(Y,LY), 
-	member(LX,LY), 
-	(
-		(
-			findall(
-				U,
-				used(U),
-				R
-			),
-		compare(=,LY,R),
-		R is 0
-	);
-	R is 1
-	)
-	);
-	R is 2.
+%set_word (Word)
+set_word(Word):- 
+			retractall(word(_)),
+			retractall(used(_)), 
+			assert(word(Word)).
 
-play(C,R):- not(used(C)),
-		assert(used(C)),
-		!,
-		word(W),
-		find(C,W,R).
+%find (Character,Result)
+find(X,R):-	( word(W),
+			string_chars(W,LW),
+			member(X,LW),
+			((checkWin(R),!); R is 1,!)); R is 2.
 
-set_word(Word):- retractall(word(_)), retractall(used(_)), assert(word(Word)).
+
+%play (Character,Result)
+%Results: 	0 - Win;
+%			1 - word contains character;
+%			2 - word does not contains character.
+%			3 - character repeated			
+play(C,R):- findall(US,used(US),LUS),
+			member(C,LUS),
+			R is 3,
+			!.			
+				
+%play (Character,Result)			
+play(C,R):- 
+			assert(used(C)),
+			!,
+			find(C,R).
+
+%checkRepeated(Character,CheckRepeatedResult)		
+checkRepeated(CA,CRR):-
+			findall(US,used(US),LUS),
+			member(CA,LUS),
+			CRR is 3,
+			write('Repeated').
+
+%checkWin(CheckWinResult)
+checkWin(CWR):-
+			findall(U,used(U),LH),
+			word(W),
+			string_chars(W,L),
+			intersection(LH,L,LR),			
+			same_length(L,LR),
+			CWR is 0.
+

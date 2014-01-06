@@ -7,7 +7,7 @@ using namespace std;
 class HangmanPLEngine
 {
 public:
-	HangmanPLEngine(int maxRetries = 3, string word = "hangman");
+	HangmanPLEngine(int maxRetries, string word);
 	~HangmanPLEngine();
 
 	bool isGameOver(bool &winner);	

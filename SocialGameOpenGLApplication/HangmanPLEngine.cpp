@@ -36,13 +36,20 @@ void HangmanPLEngine::play(char attempt)
 		message +="\" doesn't belongs to this word, sorry!\nTry again:";
 		curRetries++;
 		break;
+	case 3:
+		message = "\"";
+		message += attempt;
+		message += "\" repeated letter, sorry!\nTry again:";
+		curRetries++;
+		break;
 	case 0:
 		gameOver = true;
 		break;
 	}
 
-	if (curRetries >= maxRetries){		
+	if (curRetries >= maxRetries){
 		gameOver = true;
+
 		if (hasWon()) {
 			message = "Congratulations, you won!";
 		}
