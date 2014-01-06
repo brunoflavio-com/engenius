@@ -3,6 +3,10 @@
 #include "NormalModeGraphScene.h"
 
 #define GAP		25
+#define BUFFSIZE 512
+
+GLuint selecter[BUFFSIZE];
+GLuint theObject;
 
 typedef struct GraphWindows{
 	GLint        Main;
@@ -22,6 +26,16 @@ bool GraphOpenGL::advancedMode = true;
 
 GraphOpenGL::~GraphOpenGL(){}
 
+void GraphOpenGL::myortho(void){
+	GLfloat W = glutGet(GLUT_WINDOW_WIDTH);
+	GLfloat H = glutGet(GLUT_WINDOW_HEIGHT);
+	if (W <= H)
+		glOrtho(-2.5, 2.5, -2.5 * H / W,
+		2.5 * H / W, -100.0, 100.0);
+	else
+		glOrtho(-2.5 * W / H,
+		2.5 * W / H, -2.5, 2.5, -100.0, 100.0);
+}
 
 void GraphOpenGL::Init(){
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -37,7 +51,9 @@ void GraphOpenGL::Init(){
 	glEnable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
+	glSelectBuffer(BUFFSIZE, selecter);
 	currentScene->Init();
+
 }
 
 void GraphOpenGL::subWindowInit(){
@@ -117,6 +133,74 @@ void GraphOpenGL::Timer(int value){
 	redisplayAll();
 }
 
+void GraphOpenGL::passiveMotion(int newx, int newy){
+	GLint viewport[4];
+	GLint hits;
+
+	(void)glRenderMode(GL_SELECT);
+	glInitNames();
+	glPushName(-1);
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	viewport[0] = 0;
+	viewport[1] = 0;
+	viewport[2] = glutGet(GLUT_WINDOW_WIDTH);
+	viewport[3] = glutGet(GLUT_WINDOW_HEIGHT);
+	gluPickMatrix(newx, viewport[3] - newy, 5.0, 5.0, viewport); // searches for existing items on the path
+	myortho();
+	glMatrixMode(GL_MODELVIEW);
+	Draw();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	hits = glRenderMode(GL_RENDER);
+	printf("Hits %d", hits);
+	if (hits == 0)
+		theObject = 0;
+	else{ // if glut detects items, gets the name
+		GLuint depth = (GLuint)~0;
+		unsigned int getThisName;
+		GLint i;
+		GLuint names, *ptr;
+		GLuint newObject;
+
+		ptr = (GLuint *)selecter;
+		newObject = 0;
+		for (i = 0; i < hits; i++) { 
+			getThisName = 0;
+			names = *ptr;
+			ptr++;           
+			if (*ptr <= depth) {
+				depth = *ptr;
+				getThisName = 1;
+			}
+			ptr++;            
+			if (*ptr <= depth) {
+				depth = *ptr;
+				getThisName = 1;
+			}
+			ptr++;              
+
+			if (getThisName)
+				newObject = *ptr;
+
+			for (int i = 0; i < names; ++i) {				
+				printf(", %d", *ptr);
+				ptr++;
+			}
+			
+			//ptr += names;  
+		}
+		if (theObject != newObject) {
+			theObject = newObject;
+			glutPostRedisplay();
+		}
+	}
+	printf("\n");
+}
+
 void GraphOpenGL::PrintKeys(){
 	printf("Up/Down - Zoom in/out\n");
 	printf("Left/Right - rodar para a esquerda/direita\n");
@@ -172,6 +256,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 	glutSpecialFunc(SpecialKey);
 	glutSpecialUpFunc(SpecialKeyUp);
 	glutMouseFunc(Mouse);
+	glutPassiveMotionFunc(passiveMotion);
 
 	//Minimap Subwindow
 	
