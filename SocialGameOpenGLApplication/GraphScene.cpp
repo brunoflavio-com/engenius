@@ -43,7 +43,7 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 {
 	apiClient = client;
 	email = loginEmail;
-	ns5__Graph * ns5_graph = apiClient->getGraph(email, 5);
+	ns5__Graph * ns5_graph = apiClient->getGraph(email, 2);
 	graph = new Graph(ns5_graph, loginEmail);
 }
 
