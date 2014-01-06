@@ -11,5 +11,6 @@ public:
 	void DrawOverlay(void);
 	void Draw3dObjects(void);
 	~AdvanceModeGraphScene();
+	Graph * getGraph(std::string loginEmail);
 };
 

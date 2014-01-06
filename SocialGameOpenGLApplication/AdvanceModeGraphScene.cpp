@@ -1,16 +1,12 @@
 #include "AdvanceModeGraphScene.h"
+#include "GraphFactory.h"
 #include <gl\glut.h>
 #include <gl\freeglut.h>
 
 
 AdvanceModeGraphScene::AdvanceModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail):GraphScene(client, loginEmail)
 {
-	
-}
-
-
-AdvanceModeGraphScene::~AdvanceModeGraphScene()
-{
+	graph = getGraph(loginEmail);
 }
 
 void AdvanceModeGraphScene::Draw3dObjects(void){
@@ -32,4 +28,9 @@ void AdvanceModeGraphScene::DrawOverlay(void){
 
 	glPopMatrix();
 
+}
+
+Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail){
+	ns5__Graph * ns5_graph = apiClient->getGraph(email, 5);
+	return GraphFactory::convertGraph(ns5_graph, loginEmail);
 }

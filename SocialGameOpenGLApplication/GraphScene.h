@@ -53,5 +53,7 @@ public:
 	void MotionMouse(int x, int y);
 	void PassiveMotion(int newx, int newy);
 	void Mouse(int button, int state, int x, int y);
+
+	virtual Graph * getGraph(std::string loginEmail) = 0;
 };
 

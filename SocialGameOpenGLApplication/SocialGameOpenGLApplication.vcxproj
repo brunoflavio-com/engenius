@@ -98,6 +98,7 @@
     <ClInclude Include="MazePlEngine.h" />
     <ClInclude Include="MazeScene.h" />
     <ClInclude Include="NormalModeGraphScene.h" />
+    <ClInclude Include="GraphFactory.h" />
     <ClInclude Include="RelationShip.h" />
     <ClInclude Include="RelationshipTag.h" />
     <ClInclude Include="gsoapAPIClient\Service1.h" />
@@ -108,7 +109,6 @@
     <ClInclude Include="HumorStatus.h" />
     <ClInclude Include="IWindowScene.h" />
     <ClInclude Include="SocialGamePublicAPIClient.h" />
-    <ClInclude Include="SocialGamePublicAPIConverter.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="ISubWindowScene.h" />
     <ClInclude Include="targetver.h" />
@@ -131,6 +131,7 @@
     <ClCompile Include="MazePlEngine.cpp" />
     <ClCompile Include="MazeScene.cpp" />
     <ClCompile Include="NormalModeGraphScene.cpp" />
+    <ClCompile Include="GraphFactory.cpp" />
     <ClCompile Include="RelationShip.cpp" />
     <ClCompile Include="RelationShipTag.cpp" />
     <ClCompile Include="gsoapAPIClient\soapBasicHttpBinding_USCOREISocialGameServiceProxy.cpp" />
@@ -139,7 +140,6 @@
     <ClCompile Include="HumorStatus.cpp" />
     <ClCompile Include="SocialGameOpenGLApplication.cpp" />
     <ClCompile Include="SocialGamePublicAPIClient.cpp" />
-    <ClCompile Include="SocialGamePublicAPIConverter.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TicTacToePLEngine.cpp" />
     <ClCompile Include="TicTacToeScene.cpp" />

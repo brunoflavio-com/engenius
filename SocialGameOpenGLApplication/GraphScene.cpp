@@ -1,5 +1,6 @@
 #include "GraphScene.h"
 #include "HangmanScene.h"
+#include "GraphFactory.h"
 
 
 #ifndef M_PI
@@ -43,8 +44,6 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 {
 	apiClient = client;
 	email = loginEmail;
-	ns5__Graph * ns5_graph = apiClient->getGraph(email, 5);
-	graph = new Graph(ns5_graph, loginEmail);
 }
 
 
