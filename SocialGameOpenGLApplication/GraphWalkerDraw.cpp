@@ -86,11 +86,15 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	//We'll use the address of this node as the gl Identifier:
 	glLoadName((GLuint) userA);
 	if (glRenderMode)
-	quadric = gluNewQuadric();
+		quadric = gluNewQuadric();
+
+	if (userA->selected) selectedAttribute();
 	gluQuadricDrawStyle(quadric, GLU_FILL);
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
+	if (userA->selected) glPopAttrib();
+
 	//User text
-	if (drawUserNames){
+	if (drawUserNames && userA->selected){
 		glDisable(GL_LIGHTING);
 		glColor3ub(200, 200, 200);
 		glRasterPos3f(-2, 0, 4);
@@ -107,4 +111,15 @@ void GraphWalkerDraw::walkVertice(User * userA){
 
 	/*DEBUG:*/
 	//std::cout << "(" << userA->x << "," << userA->y << "," << userA->z << ")" << endl;
+}
+
+
+void GraphWalkerDraw::selectedAttribute(void)
+{
+	static GLfloat red[4] =
+	{ 1.0, 0.0, 0.0, 1.0 };
+
+	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, red);
+	glColor3f(1.0, 0.0, 0.0);
 }

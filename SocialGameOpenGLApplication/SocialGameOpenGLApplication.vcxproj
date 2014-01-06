@@ -94,6 +94,7 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="IBothWindowScene.h" />
     <ClInclude Include="InterfaceGL.h" />
+    <ClInclude Include="ISelectable.h" />
     <ClInclude Include="MazeMap.h" />
     <ClInclude Include="MazePlEngine.h" />
     <ClInclude Include="MazeScene.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="GraphWalkerDraw.cpp" />
     <ClCompile Include="HangmanPLEngine.cpp" />
     <ClCompile Include="HangmanScene.cpp" />
+    <ClCompile Include="ISelectable.cpp" />
     <ClCompile Include="MazeMap.cpp" />
     <ClCompile Include="MazePlEngine.cpp" />
     <ClCompile Include="MazeScene.cpp" />

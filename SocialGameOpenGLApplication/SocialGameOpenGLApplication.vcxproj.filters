@@ -123,6 +123,9 @@
     <ClInclude Include="MazeScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ISelectable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -204,6 +207,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MazeScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ISelectable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
