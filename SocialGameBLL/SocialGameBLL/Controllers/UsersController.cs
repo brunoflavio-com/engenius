@@ -40,6 +40,87 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public int GetUserLevel(string Email)
+        {
+            try
+            {
+                UserEntity UserEntity = db.Users.Find(Email);
+                SimpleModeScoreEntity Score = UserEntity.Score;
+                return (Score == null || Score.Level == null) ? 0 : (int)Score.Level;
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public int GetUserPoints(string Email)
+        {
+            try
+            {
+                UserEntity UserEntity = db.Users.Find(Email);
+                SimpleModeScoreEntity Score = UserEntity.Score;
+                return (Score == null || Score.Points == null) ? 0 : (int)Score.Points;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public void SetUserLevel(string Email, int Level)
+        {
+            try
+            {
+                UserEntity UserEntity = db.Users.Find(Email);
+                SimpleModeScoreEntity Score = UserEntity.Score;
+                if (Score == null)
+                {
+                    Score = new SimpleModeScoreEntity
+                    {
+                        Level = Level,
+                        Points = 0
+                    };
+                    UserEntity.Score = Score;
+                }
+                else
+                {
+                    Score.Level = Level;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public void SetUserPoints(string Email, float Points)
+        {
+            try
+            {
+                UserEntity UserEntity = db.Users.Find(Email);
+                SimpleModeScoreEntity Score = UserEntity.Score;
+                if(Score == null)
+                {
+                    Score = new SimpleModeScoreEntity
+                    {
+                        Level = 0,
+                        Points = Points
+                    };
+                    UserEntity.Score = Score;
+                }
+                else
+                {
+                    Score.Points = Points;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         public HumourStatus GetHumourStatus(int Id)
         {
             try
@@ -66,6 +147,8 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+
+        /*Private helper methods*/
         private void UpdateUserEntity(UserEntity UserEntity, User User)
         {
             UserEntity.Name = User.Name;

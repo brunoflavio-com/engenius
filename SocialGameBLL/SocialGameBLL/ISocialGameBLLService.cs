@@ -42,6 +42,14 @@ namespace SocialGameBLL
         RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength);
         [OperationContract]
         ICollection<User> GetShortestPath(User Me, User Goal, int Depth);
+        [OperationContract]
+        int GetUserLevel(string Email);
+        [OperationContract]
+        float GetUserPoints(string Email);
+        [OperationContract]
+        void SetUserLevel(string Email, int Level);
+        [OperationContract]
+        void SetUserPoints(string Email, float Points);
     }
 
 
