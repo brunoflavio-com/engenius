@@ -22,7 +22,6 @@ bool GraphOpenGL::advancedMode = true;
 
 GraphOpenGL::~GraphOpenGL(){}
 
-
 void GraphOpenGL::Init(){
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
@@ -36,8 +35,9 @@ void GraphOpenGL::Init(){
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
-	glShadeModel(GL_SMOOTH);
+	
 	currentScene->Init();
+
 }
 
 void GraphOpenGL::subWindowInit(){
@@ -64,6 +64,11 @@ void GraphOpenGL::MotionMouse(int x, int y)
 
 void GraphOpenGL::Mouse(int button, int state, int x, int y){
 	currentScene->Mouse(button, state, x, y);
+}
+
+void GraphOpenGL::PassiveMotion(int x, int y)
+{
+	currentScene->PassiveMotion(x, y);
 }
 
 void GraphOpenGL::ReshapeMinimap(int width, int height)
@@ -116,6 +121,7 @@ void GraphOpenGL::Timer(int value){
 	//glutPostRedisplay();
 	redisplayAll();
 }
+
 
 void GraphOpenGL::PrintKeys(){
 	printf("Up/Down - Zoom in/out\n");
@@ -172,6 +178,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 	glutSpecialFunc(SpecialKey);
 	glutSpecialUpFunc(SpecialKeyUp);
 	glutMouseFunc(Mouse);
+	glutPassiveMotionFunc(PassiveMotion);
 
 	//Minimap Subwindow
 	

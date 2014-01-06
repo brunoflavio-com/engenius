@@ -16,8 +16,10 @@ public:
 	string getMessage();
 
 	// Get Computer Move
+	void playTTT(int square);
 	int getComputerMove();
 	int getStatus();
+	void setHumanMove(int square);
 	
 private:
 	PlEngine * prolog;
@@ -32,7 +34,7 @@ private:
 	void plSetFirstPlayer(char symbol);
 
 	// Human Move where Square:[1-9]
-	int plHumanPlay(int square);
+	void plHumanPlay(int square);
 	
 	// Best Computer move, return Square [1-9]
 	int plComputerPlay();

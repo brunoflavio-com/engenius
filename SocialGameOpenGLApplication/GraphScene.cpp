@@ -9,6 +9,10 @@
 #define RAD(x)          (M_PI*(x)/180)
 #define GRAUS(x)        (180*(x)/M_PI)
 
+#define BUFFSIZE 512
+GLuint selecter[BUFFSIZE];
+GLuint theObject;
+
 typedef	GLdouble Vertice[3];
 
 typedef struct GraphCamera{
@@ -48,6 +52,16 @@ GraphScene::~GraphScene()
 {
 }
 
+void GraphScene::myortho(void){
+	GLfloat W = glutGet(GLUT_WINDOW_WIDTH);
+	GLfloat H = glutGet(GLUT_WINDOW_HEIGHT);
+	if (W <= H)
+		glOrtho(-2.5, 2.5, -2.5 * H / W,
+		2.5 * H / W, -100.0, 100.0);
+	else
+		glOrtho(-2.5 * W / H,
+		2.5 * W / H, -2.5, 2.5, -100.0, 100.0);
+}
 
 void GraphScene::Draw(void){
 	glMatrixMode(GL_MODELVIEW);
@@ -86,7 +100,8 @@ void GraphScene::Draw(void){
 }
 
 void GraphScene::Init(void){
-	
+	glShadeModel(GL_SMOOTH);
+	glSelectBuffer(BUFFSIZE, selecter);
 	StartCam();
 }
 
@@ -204,6 +219,81 @@ void GraphScene::TopCamLookAt(){
 		PersonCam.center[0], PersonCam.center[1], PersonCam.center[2],
 		0, 1, 0
 		);
+}
+
+void GraphScene::PassiveMotion(int newx, int newy){
+	GLint viewport[4];
+	GLint hits;
+
+	(void)glRenderMode(GL_SELECT);
+	glInitNames();
+	glPushName(-1);
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	viewport[0] = 0;
+	viewport[1] = 0;
+	viewport[2] = glutGet(GLUT_WINDOW_WIDTH);
+	viewport[3] = glutGet(GLUT_WINDOW_HEIGHT);
+	gluPickMatrix(newx, viewport[3] - newy, 5.0, 5.0, viewport); // searches for existing items on the path
+	myortho();
+	glMatrixMode(GL_MODELVIEW);
+	Draw();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	hits = glRenderMode(GL_RENDER);
+	printf("Hits %d", hits);
+	if (hits == 0)
+		theObject = 0;
+	else{ // if glut detects items, gets the name
+		GLuint depth = (GLuint)~0;
+		unsigned int getThisName;
+		GLint i;
+		GLuint names, *ptr;
+		GLuint newObject;
+
+		ptr = (GLuint *)selecter;
+		newObject = 0;
+		for (i = 0; i < hits; i++) {
+			getThisName = 0;
+			names = *ptr;
+			ptr++;
+			if (*ptr <= depth) {
+				depth = *ptr;
+				getThisName = 1;
+			}
+			ptr++;
+			if (*ptr <= depth) {
+				depth = *ptr;
+				getThisName = 1;
+			}
+			ptr++;
+
+			if (getThisName)
+				newObject = *ptr;
+
+			for (int i = 0; i < names; ++i) {
+				if (*ptr > 0) {
+					User * selectedUser = (User*) *ptr;
+					printf(", %s", selectedUser->email.c_str());
+				}
+				ptr++;
+			}
+
+			//ptr += names;  
+		}
+		if (theObject != newObject) {
+			theObject = newObject;		
+			// TODO: set user as selected:
+			// User * user = (User*)newObject;
+			// user->selected = true;
+
+			glutPostRedisplay();
+		}
+	}
+	printf(".\n");
 }
 
 void GraphScene::MotionMouse(int x, int y)
