@@ -12,7 +12,7 @@
 % game([Board,Player]) 
 % Board - a Prolog list to represent the Board (Squares 1-9) 
 % Player - next player to play (x or o)
-:- assert(game([_,_,_,_,_,_,_,_,_],'x')). 
+setFirstPlayer(Player):- assert(game([_,_,_,_,_,_,_,_,_],Player)). 
 
 
 %% predicate to mark a move (Square:1-9)
@@ -82,10 +82,10 @@ value(Board,V) :- V = 0.
 maximizing('x').       
 minimizing('o').        
 	
-%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Minimax
 % computer is always X, user is O
-%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 minimax(Board,Player,Move,Value):-
 	availableSquares(Board,PM),!,
@@ -136,11 +136,13 @@ better(Nivel,Move,X,Value1,Z,Value2,S,Value) :-
 
 humanPlay(Square,Status):-
 	game(Board,o),
-	insertMove('o',Square),gameStatus(Status).
+	insertMove('o',Square),
+	gameStatus(Status).
+
 
 computerPlay(Square,Status):- 
 	game(Board,x),
-	availableSquares(Board,[H|_]),
+	availableSquares(Board,[_,H|_]),
 	insertMove('x',H),
 	Square=H,gameStatus(Status).
 
