@@ -3,7 +3,7 @@
 %
 
 %
-% Social Game Server: Handler for sugesting new friend(s)
+% Social Game Server: Handler for sugesting new friends
 %
 
 %%
@@ -24,9 +24,8 @@
 % Request Handler:
 get_possible_friends(Request) :-
 	http_parameters(Request,
-                    [ 
-					useremail(UserEmail, [])
-					]),
+		[ useremail(UserEmail, [])
+		]),
 	get_possible_friends_action(UserEmail, SugestedFriends),
 	prolog_to_json(SugestedFriends, SugestedFriendsJSON),
 	reply_json(SugestedFriendsJSON).
@@ -39,14 +38,13 @@ get_possible_friends_action(UserEmail, SugestedFriends):-
 			UserB\=UserEmail,
 			not(http_session_data(relationship(UserEmail,UserB,_,_))),
 			not(http_session_data(relationship(UserB,UserEmail,_,_))),
-			write(UserB),nl,
 			get_common_interests(UserEmail,UserB, Common)),
 		List),
 	sort(List, List1),
 	reverse(List1,List2),
 	findall(User,
 		member((_,User),List2),
-		SugestedFriends).		
+		SugestedFriends).
 
 get_common_interests(UserA,UserB, Common):-
 	http_session_data(user(UserA,_,_,_,_,InterestsA,_,_,_)),
