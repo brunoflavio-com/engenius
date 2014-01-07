@@ -13,6 +13,8 @@ class GraphScene :
 	public IBothWindowsScene
 {
 private:
+	bool pickReference(GLuint &objectRef, int newx, int newy);
+	ISelectable * pickISelectable( int x, int y);
 
 protected: 
 	bool isSubWindowsActive;

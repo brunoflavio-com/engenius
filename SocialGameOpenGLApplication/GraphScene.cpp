@@ -12,7 +12,7 @@
 
 #define BUFFSIZE 512
 GLuint selecter[BUFFSIZE];
-GLuint theObject;
+ISelectable * theObject = 0;
 
 typedef	GLdouble Vertice[3];
 
@@ -210,6 +210,27 @@ void GraphScene::TopCamLookAt(){
 }
 
 void GraphScene::PassiveMotion(int newx, int newy){
+	ISelectable * object;
+	if ((int)theObject > 0)
+		theObject->selected = false;
+
+	if ((object = pickISelectable(newx, newy)) != NULL ) {
+		theObject = object;
+		theObject->selected = true;
+	}
+
+	glutPostRedisplay();
+}
+
+ISelectable * GraphScene::pickISelectable(int x, int y) {
+	GLuint object;
+	if (pickReference(object, x, y)) {
+		return (ISelectable *)object;
+	}
+	return NULL;
+}
+
+bool GraphScene::pickReference(GLuint &objectRef, int newx, int newy) {
 	GLint viewport[4];
 	GLint hits;
 
@@ -228,16 +249,10 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-	hits = glRenderMode(GL_RENDER);	
+	hits = glRenderMode(GL_RENDER);
 
-	if (hits == 0) {
-		if (theObject > 0) {
-			ISelectable * previousEntity = (ISelectable *)theObject;
-			previousEntity->selected = false;
-			theObject = 0;
-		}		
-	}
-	else{ // if glut detects items, gets the name
+	if (hits > 0) {
+	    // if glut detects items, gets the name
 		GLuint depth = (GLuint)~0;
 		unsigned int getThisName;
 		GLint i;
@@ -264,24 +279,14 @@ void GraphScene::PassiveMotion(int newx, int newy){
 			if (getThisName)
 				newObject = *ptr;
 
-			ptr += names;  
+			ptr += names;
 		}
-		if (theObject != newObject) {			
-			//remove the selected attribute from the previous object:
-			if (theObject > 0) {
-				ISelectable * previousEntity = (ISelectable *)theObject;
-				previousEntity->selected = false;
-			}
 
-			theObject = newObject;
-			
-			//set selected.
-			ISelectable * selectedEntity = (ISelectable *)newObject;
-			selectedEntity->selected = true;
-
-			glutPostRedisplay();
-		}
+		objectRef = newObject;
+		return true;
 	}
+
+	return false;
 }
 
 void GraphScene::MotionMouse(int x, int y)
