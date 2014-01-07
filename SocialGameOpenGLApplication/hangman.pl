@@ -1,3 +1,10 @@
+%   +-----+
+%   |     |
+%   |     O
+%   |    -|-
+%   |    / \
+%   |
+% -----
 
 :- dynamic word/1.
 :- dynamic used/1.
@@ -17,43 +24,46 @@ set_word(Word):-
 			retractall(word(_)),
 			retractall(used(_)), 
 			assert(word(Word)).
+			
+%list with letters already used			
+usedLetters(UsedLetters):- findall(US,used(US),UsedLetters).
 
 %find (Character,Result)
-find(X,R):-	( word(W),
-			string_chars(W,LW),
-			member(X,LW),
-			((checkWin(R),!); R is 1,!)); R is 2.
-
-
-%play (Character,Result)
-%Results: 	0 - Win;
+%Results: 	
 %			1 - word contains character;
 %			2 - word does not contains character.
-%			3 - character repeated			
-play(C,R):- findall(US,used(US),LUS),
-			member(C,LUS),
-			R is 3,
-			!.			
-				
-%play (Character,Result)			
-play(C,R):- 
-			assert(used(C)),
-			!,
-			find(C,R).
+%			3 - character repeated
+find(X,R):-	usedLetters(L),
+			member(X,L),
+			R is 3,!.
+			
+find(X,R):-	word(W), %word 
+			string_chars(W,LW), %LW list with all the letters of the word
+			\+member(X,LW),	%if char X is not a element of word
+			R is 2,!. % Result is 2
+			
+find(X,R):-	word(W), %word 
+			string_chars(W,LW), %LW list with all the letters of the word
+			member(X,LW),	%if char X is element of word
+			R is 1,!.			
 
-%checkRepeated(Character,CheckRepeatedResult)		
-checkRepeated(CA,CRR):-
-			findall(US,used(US),LUS),
-			member(CA,LUS),
-			CRR is 3,
-			write('Repeated').
-
-%checkWin(CheckWinResult)
-checkWin(CWR):-
-			findall(U,used(U),LH),
+%checkWin true or false
+checkWin:-
+			usedLetters(LH), %LH  list with all the letters used by player
 			word(W),
-			string_chars(W,L),
-			intersection(LH,L,LR),			
-			same_length(L,LR),
-			CWR is 0.
+			string_chars(W,L),%L list with all the letters of the word
+			subset(L,LH).
+	
+% True if all elements of L belong to LH as well	
+subset([X],L):- member(X,L).
+subset([H|T],List) :-
+    member(H,List),
+    subset(T,List).
 
+	
+% check winner (Win - 0; otherwise -1)
+win(W):- checkWin, W is 0,!.
+win(W):- W is -1.
+
+% %play (Character,Result)
+play(C,R):- find(C,R), assert(used(C)).

@@ -40,6 +40,7 @@ private:
 	HangmanPLEngine * game;
 	//Soap Proxy to retrieve categories/words?
 
+
 	//Word to find
 	string word;
 
@@ -47,10 +48,10 @@ private:
 	vector<char> letters;
 
 	//rotation
-	float g_rotation;
+	float g_rotation = 0.0;
 
 	//Draw Board
-	void drawWordToFind();
+	void drawOutputWord();
 
 	//Output word in progress
 	string guessString();

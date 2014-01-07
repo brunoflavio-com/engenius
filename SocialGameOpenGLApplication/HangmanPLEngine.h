@@ -10,13 +10,14 @@ public:
 	HangmanPLEngine(int maxRetries, string word);
 	~HangmanPLEngine();
 
-	bool isGameOver(bool &winner);	
+	bool isGameOver();	
 
 	int noOfRetries();
 
 	string getMessage();
 
 	void play(char attempt);
+
 
 private:
 	PlEngine * prolog;
@@ -29,8 +30,8 @@ private:
 	string message;
 	
 	void setWord(string word);
-	bool hasWon();
 	int plPlay(char attempt);
+	int plWinner();
 
 };
 

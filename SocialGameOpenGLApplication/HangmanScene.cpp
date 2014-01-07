@@ -46,25 +46,26 @@ void HangmanScene::Draw3dObjects(void){
 	glLoadIdentity();
 
 	// Define a viewing transformation
-	gluLookAt(0.0, -1.5, 8, 1.5, -1.5, 0, 0, 1, 0);
-
+	gluLookAt(0.0, -0.5, 6, 1.5, -1.5, 0, 0, 1, 0);
+	
+	
 	// Push and pop the current matrix stack. 
 	// This causes that translations and rotations on this matrix wont influence others.
-
 	glPushMatrix();
 	
 	glColor3f(1, 0, 0);
 	glTranslatef(0, 0, 0);
-	glRotatef(g_rotation, 0, 1, 0);
-	glRotatef(90, 0, 1, 0);
+	//glRotatef(g_rotation, 0, 1, 0);
+	glRotatef(45, 0, 1, 0);
 
-	//
-	drawWordToFind();
+	//Show space of letters
+	drawOutputWord();
+	//glutSolidTeapot(1); 
 	
 	glPopMatrix();
 
-
 }
+
 void HangmanScene::DrawOverlay(void) {
 
 	// Draw the engine message
@@ -121,26 +122,32 @@ void HangmanScene::MotionMouse(int x, int y)
 
 }
 
-void HangmanScene::drawWordToFind()
+void HangmanScene::drawOutputWord()
 {
+
+	// Draw the engine message
 	glPushMatrix();
-		//position in the center:
-		glRasterPos2f(0.5, 0.5);
 
-		unsigned char msg[100];
-		strcpy((char*) msg, guessString().c_str());
+	//position in the center:
+	glRasterPos2f(0.5, 0.5);
 
-		glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, msg);
+	unsigned char msg[100];
+	strcpy((char*) msg, guessString().c_str());
+
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, msg);
+	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
 }
 
-string HangmanScene::guessString() {
+
+string HangmanScene::guessString() 
+{
 	string output = " ";
 	for (int i = 0; i < word.length(); i++)
 	{
 		char letter = word[i];
-
+		//get chars
 		if (std::find(letters.begin(), letters.end(), letter) != letters.end()) {
 			output += letter;
 		}
@@ -152,9 +159,9 @@ string HangmanScene::guessString() {
 	return output;
 }
 
-void HangmanScene::play(unsigned char key) {
-	letters.push_back(key);
-	game->play(key);
+void HangmanScene::play(unsigned char key)
+{
+		letters.push_back(key);
+		game->play(key);
 	
-
 }
