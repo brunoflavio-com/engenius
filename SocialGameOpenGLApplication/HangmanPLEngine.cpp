@@ -9,6 +9,7 @@ HangmanPLEngine::HangmanPLEngine(int maxRetries, string word)
 	setWord(word);
 
 	message = "Hi, guess the word!\n Enter the first letter:";
+	curRetries = 0;
 	gameOver = false;
 }
 
@@ -29,27 +30,27 @@ void HangmanPLEngine::play(char attempt)
 		message = "Correct, \"";
 		message += attempt;
 		message += "\" belongs to this word!\nGuess the next letter:";
+		message += "\n\nCurrent retries: " + std::to_string(curRetries);
 		break;
 	case 2:
 		message = "\"";
 		message += attempt;
 		message +="\" doesn't belongs to this word, sorry!\nTry again:";
 		curRetries++;
+		message += "\n\nCurrent retries: " + std::to_string(curRetries);
 		break;
-	case 0:
-		gameOver = true;
+	case 3:
+		message = "\"";
+		message += attempt;
+		message += "\" repeated letter, sorry!\nTry again:";
+		curRetries++;
+		message += "\n\nCurrent retries: " + std::to_string(curRetries);
 		break;
+
 	}
 
-	if (curRetries >= maxRetries){		
-		gameOver = true;
-		if (hasWon()) {
-			message = "Congratulations, you won!";
-		}
-		else {
-			message = "Game over, better luck next time...";
-		}
-	}
+	isGameOver();
+
 }
 
 int HangmanPLEngine::plPlay(char attempt)
@@ -80,11 +81,33 @@ void HangmanPLEngine::setWord(string word)
 }
 
 
-bool HangmanPLEngine::isGameOver(bool &winner) 
+bool HangmanPLEngine::isGameOver() 
 {
-	if (gameOver) winner = hasWon();
-	return gameOver;
+	int status = plWinner();
+	if (curRetries > maxRetries){
+		gameOver = true;
+		winner = false;
+		message = "Game over, Can't retry anymore...";
+		return true;
+	}
+	if (curRetries < maxRetries && status == 0){
+		gameOver = true;
+		winner = true;
+		message = "Congratulations, you won!";
+		return true;
+	}
+	if (curRetries == maxRetries && status == -1){
+		gameOver = true;
+		winner = false;
+		message = "Game over, better luck next time...";
+		return true;
+	}
+	else
+		return false;
+	
 }
+
+
 
 int HangmanPLEngine::noOfRetries()
 {
@@ -96,8 +119,15 @@ string HangmanPLEngine::getMessage()
 	return message;
 }
 
-bool HangmanPLEngine::hasWon()
+int HangmanPLEngine::plWinner()
 {
-	if (!gameOver) return false;
-	return curRetries < maxRetries;
+	//Create parameters (Result)
+	PlTermv winner_params(1);
+	
+	//Invoque the winner predicate
+	PlQuery w("win", winner_params);
+	w.next_solution();
+
+	//Read and return output parameter:
+	return winner_params[0];
 }

@@ -51,11 +51,11 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 
 		distance = MIN_DIST - ((3 * 2 * SPHERE_RADIUS) + totalRelationships *(2 * SPHERE_RADIUS)) / (2 * M_PI);
 
-		if (userB->graphLevel == 2){ // Level 2 positions
+		if (userB->graphLevel >= 2){ // Level 2 positions
 			double prevAngle;
-			if (userA->x < 0) // in case the X is negtive
-				prevAngle = atan2(userA->y, userA->x) + M_PI - M_PI/4;
-			else
+			//if (userA->x < 0) // in case the X is negtive
+			//	prevAngle = atan2(userA->y, userA->x) + M_PI - M_PI/4;
+			//else
 				prevAngle = atan2(userA->y, userA->x) - M_PI/4;
 
 			sx = ((MIN_DIST + distance)*cos(prevAngle + ((M_PI / 2)*position / totalRelationships)));

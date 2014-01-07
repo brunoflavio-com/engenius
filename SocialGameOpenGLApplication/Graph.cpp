@@ -2,15 +2,10 @@
 #include "graphCoordWalker.h"
 #include "GraphWalkerDraw.h"
 
-Graph::Graph(ns5__Graph * graph, std::string email)
+Graph::Graph()
 {
-	user = converter.convertGraph(graph, email);
-	graphCoordWalker coordWalker;
-	coordWalker.walk(user);
-
-	maxConnectionStrenght = coordWalker.getMaxConnectionStrenght();
-	maxUserConnections = coordWalker.getMaxUserConnections();
 }
+
 void Graph::draw(bool drawUserName){
 	GraphWalkerDraw drawWalker(maxUserConnections, maxConnectionStrenght, drawUserName);
 	drawWalker.walk(user,3);
@@ -18,34 +13,75 @@ void Graph::draw(bool drawUserName){
 
 void Graph::changeUser(std::string email){
 	graphCoordWalker coordWalker;
-	User * user = converter.getUser(email);
+	User * user = getUser(email);
 	coordWalker.walk(user);
 }
 
+
 Graph::~Graph()
 {
-	for each (User * var in converter.users)
+	for each (User * var in users)
 	{
 		delete var;
 	}
 
-	for each (HumorStatus * var in converter.humorStatus)
+	for each (HumorStatus * var in humorStatus)
 	{
 		delete var;
 	}
 
-	for each (RelationshipTag * var in converter.relationShipTags)
+	for each (RelationshipTag * var in relationShipTags)
 	{
 		delete var;
 	}
 
-	for each (Relationship * var in converter.relationShips)
+	for each (Relationship * var in relationShips)
 	{
 		delete var;
 	}
 
-	for each (UserTag * var in converter.userTags)
+	for each (UserTag * var in userTags)
 	{
 		delete var;
+	}
+}
+
+HumorStatus *  Graph::getHumorStatus(int id){
+	for (unsigned int i = 0; i < humorStatus.size(); i++){
+		if (humorStatus.at(i)->id == id)
+		{
+			return humorStatus.at(i);
+		}
+	}
+}
+
+UserTag *  Graph::getUserTag(int id){
+	for (unsigned int i = 0; i < userTags.size(); i++){
+		if (userTags.at(i)->id == id)
+		{
+			return userTags.at(i);
+		}
+	}
+}
+
+User *  Graph::getUser(string email){
+	for (unsigned int i = 0; i < users.size(); i++){
+
+		if (email.compare(users.at(i)->email) == 0)
+		{
+			return users.at(i);
+		}
+	}
+
+
+}
+
+RelationshipTag *  Graph::getRelationshipTag(int id){
+	for (unsigned int i = 0; i < relationShipTags.size(); i++){
+
+		if (relationShipTags.at(i)->id == id)
+		{
+			return relationShipTags.at(i);
+		}
 	}
 }

@@ -57,9 +57,6 @@
     <ClInclude Include="RelationshipTag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SocialGamePublicAPIConverter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HumorStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -123,6 +120,9 @@
     <ClInclude Include="MazeScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GraphFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -153,9 +153,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RelationShipTag.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SocialGamePublicAPIConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HumorStatus.cpp">
@@ -204,6 +201,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MazeScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

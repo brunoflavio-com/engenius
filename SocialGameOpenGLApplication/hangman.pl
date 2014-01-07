@@ -1,38 +1,10 @@
-%%%%%%%%%% TESTS %%%%%%%%%%
-
-%hangman(category,word)
-%:-dynamic hangman/2.
-
-%hangman(marcaCarros, toyota).
-%hangman(marcaCarros, honda).
-%hangman(marcaCarros, bmw).
-%hangman(marcaCarros, audi).
-%hangman(marcaCarros, mercedes).
-
-%assert(hangman(marcaCarros,rover)).
-
-%cenas(L,R):- findall(L,used(L),R).
-%get all used characters
-	%cenas(R):- findall(U,used(U),R).
-%14 ?- compare(>,5,2).
-%true.
-
-%15 ?- compare(=,[1,2,3],[1,2,3]).
-%true.
-
-%16 ?- compare(>,[1,2,3],[1,2,3]).
-
-%?21 ?- string_to_list(texto,L).
-%L = [116, 101, 120, 116, 111].
-
-%find (character,word)
-%find(X,Y):- read(X), char_code(X,L), member(L,"texto").
-%find(X,Y):- char_code(X,LX), string_to_list(Y,LY), member(LX,LY).
-
-%(condicao1,condicao2,condicao3,((condicao4, condicao5,R is 0);R is 1));R is 2.
-
-
-%%%%%%%%%% TO USE PREDICATES %%%%%%%%%%
+%   +-----+
+%   |     |
+%   |     O
+%   |    -|-
+%   |    / \
+%   |
+% -----
 
 :- dynamic word/1.
 :- dynamic used/1.
@@ -47,30 +19,51 @@
 %starting game cpp - assert(word(W)).
 %during game Prolog - assert(used(C)).
 
-find(X,Y,R):- 
-	( 
-	char_code(X,LX), 
-	string_to_list(Y,LY), 
-	member(LX,LY), 
-	(
-		(
-			findall(
-				U,
-				used(U),
-				R
-			),
-		compare(=,LY,R),
-		R is 0
-	);
-	R is 1
-	)
-	);
-	R is 2.
+%set_word (Word)
+set_word(Word):- 
+			retractall(word(_)),
+			retractall(used(_)), 
+			assert(word(Word)).
+			
+%list with letters already used			
+usedLetters(UsedLetters):- findall(US,used(US),UsedLetters).
 
-play(C,R):- not(used(C)),
-		assert(used(C)),
-		!,
-		word(W),
-		find(C,W,R).
+%find (Character,Result)
+%Results: 	
+%			1 - word contains character;
+%			2 - word does not contains character.
+%			3 - character repeated
+find(X,R):-	usedLetters(L),
+			member(X,L),
+			R is 3,!.
+			
+find(X,R):-	word(W), %word 
+			string_chars(W,LW), %LW list with all the letters of the word
+			\+member(X,LW),	%if char X is not a element of word
+			R is 2,!. % Result is 2
+			
+find(X,R):-	word(W), %word 
+			string_chars(W,LW), %LW list with all the letters of the word
+			member(X,LW),	%if char X is element of word
+			R is 1,!.			
 
-set_word(Word):- retractall(word(_)), retractall(used(_)), assert(word(Word)).
+%checkWin true or false
+checkWin:-
+			usedLetters(LH), %LH  list with all the letters used by player
+			word(W),
+			string_chars(W,L),%L list with all the letters of the word
+			subset(L,LH).
+	
+% True if all elements of L belong to LH as well	
+subset([X],L):- member(X,L).
+subset([H|T],List) :-
+    member(H,List),
+    subset(T,List).
+
+	
+% check winner (Win - 0; otherwise -1)
+win(W):- checkWin, W is 0,!.
+win(W):- W is -1.
+
+% %play (Character,Result)
+play(C,R):- find(C,R), assert(used(C)).

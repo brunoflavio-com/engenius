@@ -39,8 +39,24 @@ private:
 	//Game engine:
 	HangmanPLEngine * game;
 	//Soap Proxy to retrieve categories/words?
-	
-	//teapot example:
+
+
+	//Word to find
+	string word;
+
+	//Vector with letters
+	vector<char> letters;
+
+	//rotation
 	float g_rotation = 0.0;
+
+	//Draw Board
+	void drawOutputWord();
+
+	//Output word in progress
+	string guessString();
+
+	//Send letter to prolog
+	void play(unsigned char key);
 };
 

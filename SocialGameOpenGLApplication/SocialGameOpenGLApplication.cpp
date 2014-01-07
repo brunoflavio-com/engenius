@@ -5,12 +5,9 @@
 #include <exception>
 #include "GraphOpenGL.h"
 
-class GraphScene;
 
 int _tmain(int argc, char* argv[])
 {
-	
-	
 	string email;
 	string password;
 	/*

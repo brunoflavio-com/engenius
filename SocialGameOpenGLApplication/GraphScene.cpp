@@ -1,5 +1,6 @@
 #include "GraphScene.h"
 #include "HangmanScene.h"
+#include "GraphFactory.h"
 
 
 #ifndef M_PI
@@ -11,7 +12,7 @@
 
 #define BUFFSIZE 512
 GLuint selecter[BUFFSIZE];
-GLuint theObject;
+ISelectable * theObject = 0;
 
 typedef	GLdouble Vertice[3];
 
@@ -43,8 +44,6 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 {
 	apiClient = client;
 	email = loginEmail;
-	ns5__Graph * ns5_graph = apiClient->getGraph(email, 2);
-	graph = new Graph(ns5_graph, loginEmail);
 }
 
 
@@ -211,6 +210,27 @@ void GraphScene::TopCamLookAt(){
 }
 
 void GraphScene::PassiveMotion(int newx, int newy){
+	ISelectable * object;
+	if ((int)theObject > 0)
+		theObject->selected = false;
+
+	if ((object = pickISelectable(newx, newy)) != NULL ) {
+		theObject = object;
+		theObject->selected = true;
+	}
+
+	glutPostRedisplay();
+}
+
+ISelectable * GraphScene::pickISelectable(int x, int y) {
+	GLuint object;
+	if (pickReference(object, x, y)) {
+		return (ISelectable *)object;
+	}
+	return NULL;
+}
+
+bool GraphScene::pickReference(GLuint &objectRef, int newx, int newy) {
 	GLint viewport[4];
 	GLint hits;
 
@@ -230,10 +250,9 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	hits = glRenderMode(GL_RENDER);
-	printf("Hits %d", hits);
-	if (hits == 0)
-		theObject = 0;
-	else{ // if glut detects items, gets the name
+
+	if (hits > 0) {
+	    // if glut detects items, gets the name
 		GLuint depth = (GLuint)~0;
 		unsigned int getThisName;
 		GLint i;
@@ -260,26 +279,14 @@ void GraphScene::PassiveMotion(int newx, int newy){
 			if (getThisName)
 				newObject = *ptr;
 
-			for (int i = 0; i < names; ++i) {
-				if (*ptr > 0) {
-					User * selectedUser = (User*) *ptr;
-					printf(", %s", selectedUser->email.c_str());
-				}
-				ptr++;
-			}
-
-			//ptr += names;  
+			ptr += names;
 		}
-		if (theObject != newObject) {
-			theObject = newObject;		
-			// TODO: set user as selected:
-			// User * user = (User*)newObject;
-			// user->selected = true;
 
-			glutPostRedisplay();
-		}
+		objectRef = newObject;
+		return true;
 	}
-	printf(".\n");
+
+	return false;
 }
 
 void GraphScene::MotionMouse(int x, int y)
@@ -305,6 +312,12 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 			MouseStatus.xMouse = x;
 			MouseStatus.yMouse = y;
 			glutMotionFunc(GraphOpenGL::MotionMouse);
+
+			ISelectable * object;			
+			if ((object = pickISelectable(x, y)) != NULL) {
+				User * user = (User *)object;
+				printf("CLICKED %s\n",user->email.c_str());
+			}
 
 		}
 		else{

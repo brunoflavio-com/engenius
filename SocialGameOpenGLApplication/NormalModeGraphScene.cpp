@@ -1,7 +1,7 @@
 #include "NormalModeGraphScene.h"
 #include <gl\glut.h>
 #include <gl\freeglut.h>
-
+#include "GraphFactory.h"
 #include "HangmanScene.h"
 #include "TicTacToeScene.h"
 #include "MazeScene.h"
@@ -9,13 +9,13 @@
 NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail):GraphScene(client, loginEmail)
 {
 	gameOn = false;
+	graph = getGraph(loginEmail);
 }
 
-
-NormalModeGraphScene::~NormalModeGraphScene()
-{
+Graph * NormalModeGraphScene::getGraph(std::string loginEmail){
+	//TODO Graph Based on User Level
+	return GraphFactory::buildRandomGraph(3,loginEmail);
 }
-
 
 void NormalModeGraphScene::Draw3dObjects(void){
 	if (gameOn) return game->Draw3dObjects();

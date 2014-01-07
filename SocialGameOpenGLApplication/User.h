@@ -1,4 +1,5 @@
 #pragma once
+#include "ISelectable.h"
 #include "Relationship.h"
 #include "UserTag.h"
 #include "HumorStatus.h"
@@ -7,7 +8,8 @@ class Relationship;
 
 using namespace std;
 
-class User
+class User : 
+	public ISelectable
 {
 public:
 	int graphLevel;
