@@ -76,6 +76,16 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		
 	}
 
+	for each(Relationship * r in graph->relationShips){
+		int i = 0;
+		r->glId = i++;
+	}
+
+	for each(User * u in graph->users){
+		int i = 0;
+		u->glId = i++;
+	}
+
 	graph->user = realUser;
 	graphCoordWalker coordWalker;
 	coordWalker.walk(graph->user);
@@ -114,7 +124,7 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 	for (unsigned int i = 0; i < graph->Users->User.size(); i++){
 		ns5__User * ns5__user = graph->Users->User.at(i);
 		User * user = new User();
-
+		user->glId = i;
 		user->email = *ns5__user->Email;
 
 		if (ns5__user->Name != NULL){
@@ -138,12 +148,14 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 		User * userA = graphObj->getUser(*ns5__relationship->UserAEmail);
 		User * userB = graphObj->getUser(*ns5__relationship->UserBEmail);
 		RelationshipTag * relationshipTag = graphObj->getRelationshipTag(*ns5__relationship->RelationshipTagId);
+		relationship->glId = i;
 		relationship->userA = userA;
 		relationship->userB = userB;
 		relationship->strength = *ns5__relationship->Strength;
 		relationship->relationshipTag = relationshipTag;
 		userA->relationships.push_back(relationship);
 		userB->relationships.push_back(relationship);
+		graphObj->relationShips.push_back(relationship);
 	}
 
 	graphObj->user = graphObj->getUser(email);

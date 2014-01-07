@@ -9,6 +9,7 @@ class Relationship :
 	public ISelectable
 {
 	public:
+	int glId;
 	User * userA;
 	User * userB;
 	int strength;

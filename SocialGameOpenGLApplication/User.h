@@ -12,6 +12,7 @@ class User :
 	public ISelectable
 {
 public:
+	int glId;
 	int graphLevel;
 	string  email;
 	string  name;
