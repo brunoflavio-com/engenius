@@ -13,13 +13,13 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 
 	std::string firstNames[10] = {"carlos", "rui", "sofia", "luis","bruno", "jorge","miguel","ze", "alexandre", "diogo"};
 	
-	
 	vector<User *> users;
 	User * realUser = new User();
 	realUser->email = email;
 
 	users.push_back(realUser);
 	graph->users.push_back(realUser);
+
 	RelationshipTag * family = new RelationshipTag();
 	family->id = 1;
 	family->name = "Familia";
@@ -34,7 +34,6 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		graph->relationShipTags.push_back(relationShipTags[i]);
 	}
 
-	graph->users.push_back(realUser);
 	srand(time(0));
 	//Build Users and Direct RelationShips
 	for(int i = 0; i < graphDepth; i++){
@@ -45,10 +44,12 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 			int directConnections = 1+ rand() % 4 ;
 			for (int y = 0; y < directConnections; y++){
 				User * tempUser = new User();
-			
-				tempUser->email = firstNames[rand() % 5] + to_string(rand() % 100) + "@test.com";
+				tempUsers.push_back(tempUser);
 				graph->users.push_back(tempUser);
+				tempUser->email = firstNames[rand() % 5] + to_string(rand() % 100) + "@test.com";
 				Relationship * relationShip = new Relationship();
+				graph->relationShips.push_back(relationShip);
+				
 				RelationshipTag * relationShipTag = relationShipTags[rand() % 3];
 				relationShip->relationshipTag = relationShipTag;
 				relationShip->strength = 1 + rand() % 5;
@@ -56,34 +57,36 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 				relationShip->userB = tempUser;
 				user->relationships.push_back(relationShip);
 				tempUser->relationships.push_back(relationShip);
-				tempUsers.push_back(tempUser);
+				
 			}
 		}
 		users = tempUsers;
 	}
 	int nonDirectRelationShips = graphDepth * rand() % 3;
+
 	for (int i = 0; i < nonDirectRelationShips; i++){
 		Relationship * relationShip = new Relationship();
+		graph->relationShips.push_back(relationShip);
 		RelationshipTag * relationShipTag = relationShipTags[rand() % 3];
 
 		User * userA = graph->users.at(rand() % graph->users.size());
 		User * userB = NULL;
+
 		while (userB == NULL || userA == userB)
 		{
-			User * userB = graph->users.at(rand() % graph->users.size());
+			int i = rand() % graph->users.size();
+			User * userB = graph->users.at(i);
 			relationShip->strength = 1 + rand() % 5;
 		}
 		
 	}
-
-	for each(Relationship * r in graph->relationShips){
-		int i = 0;
-		r->glId = i++;
+	
+	for (int i = 0; i < graph->users.size();i++){
+		graph->users.at(i)->glId = i;
 	}
 
-	for each(User * u in graph->users){
-		int i = 0;
-		u->glId = i++;
+	for (int i = 0; i < graph->relationShips.size(); i++){
+		graph->relationShips.at(i)->glId = i;
 	}
 
 	graph->user = realUser;

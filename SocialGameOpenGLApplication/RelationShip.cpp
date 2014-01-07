@@ -20,3 +20,7 @@ User * Relationship::getDestinationUser(User * originUser){
 		return userA;
 	}
 }
+
+int Relationship::getType(){
+	return RELATIONSHIP_TYPE;
+}

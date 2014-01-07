@@ -56,7 +56,7 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 	float rotX = -deltaY * deltaZ;
 	float rotY =  deltaX * deltaZ;
 
-	glLoadName((GLuint)2);
+	glLoadName((GLuint)ISelectable::RELATIONSHIP_TYPE);
 	glPushName((GLuint)relationship->glId);
 
 	glPushMatrix();
@@ -92,7 +92,7 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	glPushMatrix();
 	glTranslatef(userA->x, userA->y, Z);
  
-	glLoadName((GLuint) 1 );
+	glLoadName((GLuint)ISelectable::USER_TYPE);
 	glPushName((GLuint)userA->glId);
 
 	if (glRenderMode)

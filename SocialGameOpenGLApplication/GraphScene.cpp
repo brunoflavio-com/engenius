@@ -281,14 +281,14 @@ ISelectable * GraphScene::pickISelectable(int newx, int newy) {
 		
 		switch (selectableObjectType)
 		{
-		case 1:
+		case ISelectable::USER_TYPE:
 			//User
 			if (selectableObjectId < graph->users.size() ){
 				 return (ISelectable*)graph->users.at(selectableObjectId);
 			}
 
 			break;
-		case 2:
+		case ISelectable::RELATIONSHIP_TYPE:
 			//Reference
 			if (selectableObjectId < graph->relationShips.size()){
 				return (ISelectable*)graph->relationShips.at(selectableObjectId);

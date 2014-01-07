@@ -18,5 +18,6 @@ class Relationship :
 	Relationship();
 	~Relationship();
 	User * getDestinationUser(User * originUser);
+	int getType();
 };
 

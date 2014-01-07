@@ -22,8 +22,8 @@ public:
 
 	 vector<Relationship *>  relationships;
 	 vector<UserTag *>  userTags;
-	 
 	 HumorStatus * humor;
+	 int getType();
 	User();
 	~User();
 };
