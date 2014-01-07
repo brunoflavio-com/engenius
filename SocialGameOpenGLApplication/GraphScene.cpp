@@ -228,16 +228,14 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-	hits = glRenderMode(GL_RENDER);
-	printf("Hits %d", hits);
-	
+	hits = glRenderMode(GL_RENDER);	
 
 	if (hits == 0) {
 		if (theObject > 0) {
 			ISelectable * previousEntity = (ISelectable *)theObject;
 			previousEntity->selected = false;
-		}
-		theObject = 0;
+			theObject = 0;
+		}		
 	}
 	else{ // if glut detects items, gets the name
 		GLuint depth = (GLuint)~0;
@@ -266,20 +264,7 @@ void GraphScene::PassiveMotion(int newx, int newy){
 			if (getThisName)
 				newObject = *ptr;
 
-			for (int i = 0; i < names; ++i) {
-				if (*ptr > 0) {										
-					//User * selectedUser = dynamic_cast<User*>((User *)*ptr);
-					ISelectable * selectedEntity = (ISelectable *)*ptr;
-					selectedEntity->selected = true;
-					//printf(", %s", selectedEntity);
-					//if (typeid(*selectedEntity) == typeid(User)) {
-						//printf("USER");
-					//}
-				}
-				ptr++;
-			}
-
-			//ptr += names;  
+			ptr += names;  
 		}
 		if (theObject != newObject) {			
 			//remove the selected attribute from the previous object:
@@ -294,14 +279,9 @@ void GraphScene::PassiveMotion(int newx, int newy){
 			ISelectable * selectedEntity = (ISelectable *)newObject;
 			selectedEntity->selected = true;
 
-			/*User * user = (User*)newObject;
-			printf("selected -> %s", user->email.c_str());*/
-			// user->selected = true;
-
 			glutPostRedisplay();
 		}
 	}
-	printf(".\n");
 }
 
 void GraphScene::MotionMouse(int x, int y)
