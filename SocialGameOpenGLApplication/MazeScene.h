@@ -1,6 +1,5 @@
 #pragma once
 #include "IWindowScene.h"
-#include "MazePlEngine.h"
 #include "MazeMap.h"
 #include "SocialGamePublicAPIClient.h"
 #include <string>
@@ -41,9 +40,6 @@ namespace MinigamesMaze{
 	private:
 		// Map
 		MazeMap* map;
-
-		//Game Engine
-		MazePlEngine* game;
 
 		//Position
 		float xPosition;

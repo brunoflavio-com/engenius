@@ -12,6 +12,9 @@ MazeMap::MazeMap()
 
 MazeMap::MazeMap(string mapFile){
 	this->mapMatrix = new std::vector<vector<char>*>();
+	this->game = new MazePlEngine();
+
+	/*This function must be called after the PlEngine be initialized*/
 	this->readMapFile(mapFile);
 }
 
@@ -19,6 +22,7 @@ MazeMap::MazeMap(string mapFile){
 MazeMap::~MazeMap()
 {
 	delete this->mapMatrix;
+	delete this->game;
 }
 
 int MazeMap::getHeight()
@@ -39,6 +43,17 @@ int MazeMap::getStartLine()
 int MazeMap::getStartColumn()
 {
 	return startColumn;
+}
+
+void MazeMap::setCurrentPosition(int line, int column)
+{
+	this->currentLine = line;
+	this->currentColumn = column;
+}
+
+void MazeMap::getSuggestion(int& sugLine, int& sugColumn)
+{
+	game->getSuggestion(currentLine, currentColumn, goalLine, goalColumn, sugLine, sugColumn);
 }
 
 bool MazeMap::isWall(int x, int y)
@@ -72,10 +87,15 @@ void MazeMap::readMapFile(string mapFile){
 			}
 			else{
 				matrixLine->push_back(0);
-			}
-			if (fileLine[i] == 'x'){
-				startLine = i;
-				startColumn = matrixLine->size();
+				game->setNode(mapMatrix->size() - 1, matrixLine->size() - 1);
+				if (fileLine[i] == '+'){
+					startLine = currentLine = mapMatrix->size() - 1;
+					startColumn = currentColumn = matrixLine->size() - 1;
+				}
+				if (fileLine[i] == 'x'){
+					goalLine = mapMatrix->size() - 1;
+					goalColumn = matrixLine->size() - 1;
+				}
 			}
 		}
 	}

@@ -11,15 +11,17 @@ MazeScene::MazeScene()
 MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail)
 {
 	this->map = new MazeMap("Map1.txt");
-	this->xPosition = map->getStartLine() + this->cubeAndSphereSize / 2;
-	this->zPosition = map->getStartColumn() + this->cubeAndSphereSize / 2;
+	this->xPosition = map->getStartColumn() + this->cubeAndSphereSize / 2;
+	this->zPosition = map->getStartLine() + this->cubeAndSphereSize / 2;
 	this->yPosition = this->cubeAndSphereSize / 2;
+	int Line, Column;
+	this->map->getSuggestion(Line, Column);
+	std::cout << "Line: " << Line << "Column: " << Column << std::endl;
 }
 
 MazeScene::~MazeScene()
 {
 	delete map;
-	delete game;
 }
 
 void MazeScene::Init(void)
