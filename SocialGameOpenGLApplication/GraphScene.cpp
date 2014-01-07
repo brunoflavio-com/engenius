@@ -220,13 +220,11 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	viewport[0] = 0;
-	viewport[1] = 0;
-	viewport[2] = glutGet(GLUT_WINDOW_WIDTH);
-	viewport[3] = glutGet(GLUT_WINDOW_HEIGHT);
-	gluPickMatrix(newx, viewport[3] - newy, 5.0, 5.0, viewport); // searches for existing items on the path
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	gluPickMatrix(newx, glutGet(GLUT_WINDOW_HEIGHT) - newy, 5.0, 5.0, viewport); // searches for existing items on the path
+	gluPerspective(65.0, (GLdouble)glutGet(GLUT_WINDOW_WIDTH) / glutGet(GLUT_WINDOW_HEIGHT), 1.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
-	Draw();
+	Draw3dObjects();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
