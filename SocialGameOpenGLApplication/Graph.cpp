@@ -12,8 +12,16 @@ void Graph::draw(bool drawUserName){
 }
 
 void Graph::changeUser(std::string email){
-	graphCoordWalker coordWalker;
+	for each(User * tempUser in users){
+		tempUser->graphLevel = -1;
+		tempUser->cota = 0;
+		tempUser->x = 0;
+		tempUser->y = 0;
+		tempUser->z = 0;
+	}
+	
 	User * user = getUser(email);
+	graphCoordWalker coordWalker;
 	coordWalker.walk(user);
 }
 

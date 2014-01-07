@@ -42,9 +42,9 @@ void graphCoordWalker::walkVertice(User * user){
 }
 
 void graphCoordWalker::walkConnection(User * userA, Relationship * relationship, int position, int total){
-	if (relationship->user->graphLevel == -1){
-		relationship->user->graphLevel = userA->graphLevel + 1;
-		User * userB = relationship->user;
+	User * userB = relationship->getDestinationUser(userA);
+	if (userB->graphLevel == -1){
+		userB->graphLevel = userA->graphLevel + 1;
 		float racio = position / (float)total;
 		int totalRelationships = userA->relationships.size();
 		float distance, sx, sy;

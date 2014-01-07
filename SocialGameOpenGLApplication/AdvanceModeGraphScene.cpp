@@ -34,3 +34,10 @@ Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail){
 	ns5__Graph * ns5_graph = apiClient->getGraph(email, 5);
 	return GraphFactory::convertGraph(ns5_graph, loginEmail);
 }
+
+void AdvanceModeGraphScene::moveGraphToNewUser(User * user){
+	Graph * tempGraph = graph;
+	graph = getGraph(user->email);
+	
+//	TOTO delete tempGraph;
+}

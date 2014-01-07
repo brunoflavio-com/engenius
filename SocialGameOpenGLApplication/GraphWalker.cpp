@@ -14,6 +14,7 @@ void GraphWalker::walk(User * graph, int graphDepth){
 	//if GraphLevel = -1 means inicial walk, users dont have graphDepth specified 
 	vector<User *> visitedUsers;
 	vector<User *> users;
+	vector<Relationship *> visitedRelationShips;
 
 	visitedUsers.push_back(graph);
 	users.push_back(graph);
@@ -23,16 +24,20 @@ void GraphWalker::walk(User * graph, int graphDepth){
 		walkVertice(user);
 		users.pop_back();
 		for (int i = 0; i < user->relationships.size(); i++){
-			User * tempUser = user->relationships.at(i)->user;
+			User * tempUser = user->relationships.at(i)->getDestinationUser(user);
+
 			if (graphDepth == -1 || tempUser->graphLevel < graphDepth)
 			{
-				walkConnection(user, user->relationships.at(i), i, user->relationships.size());
+				if (std::find(visitedRelationShips.begin(), visitedRelationShips.end(), user->relationships.at(i)) == visitedRelationShips.end()){
+					//RelationShip is not visited
+					walkConnection(user, user->relationships.at(i), i, user->relationships.size());
 
-				if (std::find(visitedUsers.begin(), visitedUsers.end(), tempUser) == visitedUsers.end()){
-					//User is not visited
+					if (std::find(visitedUsers.begin(), visitedUsers.end(), tempUser) == visitedUsers.end()){
+						//User is not visited
 
-					visitedUsers.insert(visitedUsers.begin(), tempUser);
-					users.insert(users.begin(), tempUser);
+						visitedUsers.insert(visitedUsers.begin(), tempUser);
+						users.insert(users.begin(), tempUser);
+					}
 				}
 			}
 		}

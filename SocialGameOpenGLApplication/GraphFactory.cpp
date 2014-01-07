@@ -52,8 +52,10 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 				RelationshipTag * relationShipTag = relationShipTags[rand() % 3];
 				relationShip->relationshipTag = relationShipTag;
 				relationShip->strength = 1 + rand() % 5;
-				relationShip->user = tempUser;
+				relationShip->userA = user;
+				relationShip->userB = tempUser;
 				user->relationships.push_back(relationShip);
+				tempUser->relationships.push_back(relationShip);
 				tempUsers.push_back(tempUser);
 			}
 		}
@@ -136,11 +138,14 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 		User * userA = graphObj->getUser(*ns5__relationship->UserAEmail);
 		User * userB = graphObj->getUser(*ns5__relationship->UserBEmail);
 		RelationshipTag * relationshipTag = graphObj->getRelationshipTag(*ns5__relationship->RelationshipTagId);
-		relationship->user = userB;
+		relationship->userA = userA;
+		relationship->userB = userB;
 		relationship->strength = *ns5__relationship->Strength;
 		relationship->relationshipTag = relationshipTag;
 		userA->relationships.push_back(relationship);
+		userB->relationships.push_back(relationship);
 	}
+
 	graphObj->user = graphObj->getUser(email);
 	graphCoordWalker coordWalker;
 	coordWalker.walk(graphObj->user);

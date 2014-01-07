@@ -70,3 +70,7 @@ void NormalModeGraphScene::PassiveMotion(int x, int y) {
 	if (gameOn) return game->PassiveMotion(x, y);
 	GraphScene::PassiveMotion(x, y);
 }
+
+void NormalModeGraphScene::moveGraphToNewUser(User * user){
+	graph->changeUser(user->email);
+}

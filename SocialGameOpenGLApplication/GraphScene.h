@@ -56,5 +56,6 @@ public:
 	void Mouse(int button, int state, int x, int y);
 
 	virtual Graph * getGraph(std::string loginEmail) = 0;
+	virtual void moveGraphToNewUser(User * user) = 0;
 };
 

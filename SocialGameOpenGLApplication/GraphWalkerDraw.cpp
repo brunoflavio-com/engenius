@@ -24,7 +24,7 @@ GraphWalkerDraw::~GraphWalkerDraw()
 }
 
 void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, int position, int total){
-	User * userB = relationship->user;
+	User * userB = relationship->getDestinationUser(userA);
 
 	/*Adjust height to max_height*/
 	float Za = MAX_HEIGHT * userA->z / maxUserConnections;
