@@ -50,6 +50,12 @@ namespace SocialGameBLL
         void SetUserLevel(string Email, int Level);
         [OperationContract]
         void SetUserPoints(string Email, float Points);
+        [OperationContract]
+        ICollection<User> GetFriendsWithCommonInterests(User Me, ICollection<Interest> Interests);
+
+        [OperationContract]
+        ICollection<string> GetGraphStats(User Me);
+        
     }
 
 
