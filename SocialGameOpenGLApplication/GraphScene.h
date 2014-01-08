@@ -48,6 +48,7 @@ public:
 	void StartCam();
 
 	void CamLookAt();
+	void CamMovement();
 
 	void TopCamLookAt();
 	void MotionMouse(int x, int y);
