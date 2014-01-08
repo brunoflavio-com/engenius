@@ -36,12 +36,7 @@ void MazePlEngine::getSuggestion(int originLine, int originColumn, int destinyLi
 
 
 	PlQuery suggestion("path", suggestion_params);
-	if (suggestion.next_solution()){
-		std::cout << "Success";
-		SugLine = suggestion_params[4];
-		SugColumn = suggestion_params[5];
-	}
-	else{
-		std::cout << "Failed";
-	}
+	suggestion.next_solution();
+	SugLine = suggestion_params[4];
+	SugColumn = suggestion_params[5];
 }

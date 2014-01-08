@@ -38,6 +38,12 @@ namespace MinigamesMaze{
 		void MotionMouse(int x, int y);
 
 	private:
+		struct{
+			bool up;
+			bool down;
+			bool left;
+			bool right;
+		} arrowKeys;
 		// Map
 		MazeMap* map;
 
@@ -46,11 +52,13 @@ namespace MinigamesMaze{
 		float yPosition;
 		float zPosition;
 
-		float g_rotation = 0.0f;
 		float cubeAndSphereSize = 1.0f;
 
 		void drawMap(void);
 		void drawCube(float x, float y, float z, float side);
 		void drawSphere(float x, float y, float z, float radius);
+		void convertToGridCoordinates();
+		bool colision();
+
 	};
 }

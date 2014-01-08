@@ -16,7 +16,8 @@ MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail)
 	this->yPosition = this->cubeAndSphereSize / 2;
 	int Line, Column;
 	this->map->getSuggestion(Line, Column);
-	std::cout << "Line: " << Line << "Column: " << Column << std::endl;
+	arrowKeys.up = false, arrowKeys.down = false,
+		arrowKeys.left = false, arrowKeys.right = false;
 }
 
 MazeScene::~MazeScene()
@@ -31,7 +32,18 @@ void MazeScene::Init(void)
 
 void MazeScene::Timer(int value)
 {
-	g_rotation += 0.1;
+	if (arrowKeys.up && !colision()){
+		zPosition -= 0.05;
+	}
+	if (arrowKeys.down && !colision()){
+		zPosition += 0.05;
+	}
+	if (arrowKeys.left && !colision()){
+		xPosition -= 0.05;
+	}
+	if (arrowKeys.right && !colision()){
+		xPosition += 0.05;
+	}
 }
 
 void MazeScene::Draw(void)
@@ -46,10 +58,9 @@ void MazeScene::Draw3dObjects(void)
 	glLoadIdentity();
 
 	//Define a viewing transformation
-	gluLookAt(4, 2, 0, 0, 0, 0, 0, 1, 0);
+	gluLookAt(0, 4, 0, 0, 0, 0, 0, 0, -1);
 
 	glPushMatrix();
-		glRotatef(g_rotation, 0, 1, 0);
 		glScalef(0.1, 0.1, 0.1);
 		this->drawMap();
 		glPushMatrix();
@@ -70,12 +81,30 @@ void MazeScene::Key(unsigned char key, int x, int y)
 
 void MazeScene::SpecialKey(int key, int x, int y)
 {
-
+	switch (key){
+	case GLUT_KEY_UP: arrowKeys.up = true;
+		break;
+	case GLUT_KEY_DOWN: arrowKeys.down = true;
+		break;
+	case GLUT_KEY_LEFT: arrowKeys.left = true;
+		break;
+	case GLUT_KEY_RIGHT: arrowKeys.right = true;
+		break;
+	}
 }
 
 void MazeScene::SpecialKeyUp(int key, int x, int y)
 {
-
+	switch (key){
+	case GLUT_KEY_UP: arrowKeys.up = false;
+		break;
+	case GLUT_KEY_DOWN: arrowKeys.down = false;
+		break;
+	case GLUT_KEY_LEFT: arrowKeys.left = false;
+		break;
+	case GLUT_KEY_RIGHT: arrowKeys.right = false;
+		break;
+	}
 }
 
 void MazeScene::Mouse(int btn, int state, int x, int y)
@@ -169,5 +198,38 @@ void MazeScene::drawSphere(float x, float y, float z, float radius)
 {
 	glTranslatef(x, y, z);
 	glutSolidSphere(radius, 20, 20);
+}
+
+void MazeScene::convertToGridCoordinates()
+{
+
+}
+
+bool MazeScene::colision()
+{
+	int lineToCheck;
+	int columnToCheck;
+	if (arrowKeys.up)
+	{
+		lineToCheck = (int)(zPosition - (cubeAndSphereSize / 2));
+		columnToCheck = (int)xPosition;
+	}
+	else if (arrowKeys.down)
+	{
+		lineToCheck = (int)(zPosition + (cubeAndSphereSize / 2));
+		columnToCheck = (int)xPosition;
+	}
+	else if (arrowKeys.right)
+	{
+		lineToCheck = (int)zPosition;
+		columnToCheck = (int)(xPosition + (cubeAndSphereSize / 2));
+	}
+	else if (arrowKeys.left)
+	{
+		lineToCheck = (int)zPosition;
+		columnToCheck = (int)(xPosition - (cubeAndSphereSize / 2));
+	}
+
+	return map->isWall(lineToCheck, columnToCheck);
 }
 

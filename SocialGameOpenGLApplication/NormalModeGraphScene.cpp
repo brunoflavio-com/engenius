@@ -59,6 +59,20 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	}
 }
 
+void NormalModeGraphScene::SpecialKey(int key, int x, int y)
+{
+	if (gameOn) return game->SpecialKey(key, x, y);
+
+
+}
+
+void NormalModeGraphScene::SpecialKeyUp(int key, int x, int y)
+{
+	if (gameOn) return game->SpecialKeyUp(key, x, y);
+
+
+}
+
 void NormalModeGraphScene::Timer(int value){
 	if (gameOn) return game->Timer(value);
 	

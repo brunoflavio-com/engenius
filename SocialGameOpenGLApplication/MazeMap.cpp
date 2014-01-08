@@ -105,6 +105,5 @@ void MazeMap::readMapFile(string mapFile){
 		for (int j = 0; j < line->size(); j++){
 			std::cout << (int)line->at(j) << ",";
 		}
-		std::cout << std::endl;
 	}
 }
