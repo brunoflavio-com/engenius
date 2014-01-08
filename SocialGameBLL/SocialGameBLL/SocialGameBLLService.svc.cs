@@ -70,6 +70,18 @@ namespace SocialGameBLL
             return Controller.GetRelationships(User, Depth);
         }
 
+        public ICollection<User> GetRelatedUsers(User User)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetRelatedUsers(User);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public User GetUser(string Email)
         {
             try

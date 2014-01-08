@@ -44,6 +44,30 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public ICollection<User> GetRelatedUsers(User User)
+        {
+            try
+            {
+                RelationshipsController RelationshipController = new RelationshipsController();
+                Graph Graph = RelationshipController.GetRelationships(User, 1);
+                ICollection<User> RelatedUsers = Graph.Users;
+                foreach(User U in RelatedUsers)
+                {
+                    if (U.Email == User.Email)
+                    {
+                        RelatedUsers.Remove(U);
+                        break;
+                    }
+                }
+                return RelatedUsers;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+
+        }
+
         public int GetUserLevel(string Email)
         {
             try
