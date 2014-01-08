@@ -1,0 +1,31 @@
+﻿@using (Ajax.BeginForm("HumourPartial", "Home", new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "moodChangerPartialView",
+        OnBegin = "disableBeforePost()"
+    }, new { id = "changeMoodForm" }))   
+
+{
+    <script type="text/javascript">
+    function disableBeforePost() {
+        $("#moodSelector").prop('disabled', true);
+    }
+
+    </script>
+    
+    <select id="moodSelector" onchange="$('#moodSubmit').click();" name="mood">
+        @foreach (var item in ViewBag.HumourStatusList)
+        {
+            if (item.ID == ViewBag.CurrentHumourStatusID) {                
+                <option value="@item.ID" selected >@item.Name</option>
+            }
+            else
+            {
+                <option value="@item.ID"  >@item.Name</option>
+            }
+        }
+    </select>
+    <input type="submit" id="moodSubmit" style="display:none;" value="Create" />
+}
+
