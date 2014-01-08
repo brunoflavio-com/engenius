@@ -46,13 +46,16 @@
                 <li class="header-login-field">
                     @Html.ActionLink("Edit Profile", "EditProfile")
                 </li>
+                <li id="moodChangerPartialView" class="header-login-field">
+                    @Html.Action("HumourPartial", "Home")
+                </li>   
                 <li class="header-login-field">
                     @using (Html.BeginForm("logoff", "account"))
                     {
                         @Html.AntiForgeryToken()
                         <input type="submit" value="Log Out" />
                     }
-                </li>
+                </li>                
             </ul>
         }
     </div>
