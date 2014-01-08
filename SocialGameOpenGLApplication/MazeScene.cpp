@@ -1,12 +1,8 @@
 #include "MazeScene.h"
 #include <gl\freeglut.h>
+#include <ctime>
 
 using namespace MinigamesMaze;
-
-MazeScene::MazeScene()
-{
-
-}
 
 MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail)
 {
@@ -14,10 +10,14 @@ MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail)
 	this->xPosition = map->getStartColumn() + this->cubeAndSphereSize / 2;
 	this->zPosition = map->getStartLine() + this->cubeAndSphereSize / 2;
 	this->yPosition = this->cubeAndSphereSize / 2;
-	int Line, Column;
-	this->map->getSuggestion(Line, Column);
-	arrowKeys.up = false, arrowKeys.down = false,
-		arrowKeys.left = false, arrowKeys.right = false;
+	
+	arrowKeys.up = false;
+	arrowKeys.down = false;
+	arrowKeys.left = false;
+	arrowKeys.right = false;
+	hintPressed = false;
+
+	hintStart = -1;
 }
 
 MazeScene::~MazeScene()
@@ -32,18 +32,40 @@ void MazeScene::Init(void)
 
 void MazeScene::Timer(int value)
 {
+	int newLine;
+	int newColumn;
 	if (arrowKeys.up && !colision()){
 		zPosition -= 0.05;
+		newLine = (int)(zPosition - (cubeAndSphereSize / 2));
+		newColumn = (int)xPosition;
+		map->setCurrentPosition(newLine, newColumn);
 	}
 	if (arrowKeys.down && !colision()){
 		zPosition += 0.05;
+		newLine = (int)(zPosition + (cubeAndSphereSize / 2));
+		newColumn = (int)xPosition;
+		map->setCurrentPosition(newLine, newColumn);
 	}
 	if (arrowKeys.left && !colision()){
 		xPosition -= 0.05;
+		newLine = (int)zPosition;
+		newColumn = (int)(xPosition + (cubeAndSphereSize / 2));
+		map->setCurrentPosition(newLine, newColumn);
 	}
 	if (arrowKeys.right && !colision()){
 		xPosition += 0.05;
+		newLine = (int)zPosition;
+		newColumn = (int)(xPosition - (cubeAndSphereSize / 2));
+		map->setCurrentPosition(newLine, newColumn);
 	}
+
+	
+	currTime = time(0);
+	if (hintPressed){	
+		hintStart = currTime;
+		hintPressed = false;
+	}
+	
 }
 
 void MazeScene::Draw(void)
@@ -63,6 +85,12 @@ void MazeScene::Draw3dObjects(void)
 	glPushMatrix();
 		glScalef(0.1, 0.1, 0.1);
 		this->drawMap();
+		if (hintStart != -1 && ((currTime - hintStart) < maxHintSeconds)){
+			drawHint();
+		}
+		else{
+			hintStart = -1;
+		}
 		glPushMatrix();
 			this->drawSphere(xPosition, yPosition, zPosition, cubeAndSphereSize / 2);
 		glPopMatrix();
@@ -76,7 +104,13 @@ void MazeScene::DrawOverlay(void)
 
 void MazeScene::Key(unsigned char key, int x, int y)
 {
-
+	switch (key){
+	case 'h':
+	case 'H':
+		hintPressed = true;
+		hintStart = 0;
+		break;
+	}
 }
 
 void MazeScene::SpecialKey(int key, int x, int y)
@@ -200,9 +234,23 @@ void MazeScene::drawSphere(float x, float y, float z, float radius)
 	glutSolidSphere(radius, 20, 20);
 }
 
-void MazeScene::convertToGridCoordinates()
+void MazeScene::drawSquare(float x, float y, float z, float side)
 {
+	glBegin(GL_POLYGON);
+	glNormal3f(0, 1, 0);
+	glVertex3f(x, y, z);
+	glVertex3f(x + side, y, z);
+	glVertex3f(x + side, y, z + side);
+	glVertex3f(x, y, z + side);
+	glEnd();
+}
 
+void MazeScene::drawHint()
+{
+	int line;
+	int column;
+	map->getSuggestion(line, column);
+	drawSquare(column, 0, line, cubeAndSphereSize);
 }
 
 bool MazeScene::colision()

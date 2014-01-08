@@ -9,7 +9,6 @@ namespace MinigamesMaze{
 		public IWindowScene
 	{
 	public:
-		MazeScene();
 		MazeScene(SocialGamePublicAPIClient *client, string loginEmail);
 		~MazeScene();
 
@@ -38,12 +37,14 @@ namespace MinigamesMaze{
 		void MotionMouse(int x, int y);
 
 	private:
+		//keys
 		struct{
 			bool up;
 			bool down;
 			bool left;
 			bool right;
 		} arrowKeys;
+
 		// Map
 		MazeMap* map;
 
@@ -52,12 +53,18 @@ namespace MinigamesMaze{
 		float yPosition;
 		float zPosition;
 
+		bool hintPressed;
+		int maxHintSeconds = 2;
+		long currTime;
+		long hintStart;
+
 		float cubeAndSphereSize = 1.0f;
 
 		void drawMap(void);
 		void drawCube(float x, float y, float z, float side);
 		void drawSphere(float x, float y, float z, float radius);
-		void convertToGridCoordinates();
+		void drawSquare(float x, float y, float z, float side);
+		void drawHint();
 		bool colision();
 
 	};
