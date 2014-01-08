@@ -100,12 +100,18 @@ void GraphScene::subWindowInit(void){
 }
 
 void GraphScene::CamMovement(void){
-	GLdouble z = PersonCam.eye[2] + PersonCam.vel*sin(PersonCam.dir_lat);
-	GLdouble y = PersonCam.eye[1] + PersonCam.vel*sin(PersonCam.dir_long);
-	GLdouble x = PersonCam.eye[0] + PersonCam.vel*cos(PersonCam.dir_long);
-	PersonCam.eye[0] = x;
-	PersonCam.eye[1] = y;
-	PersonCam.eye[2] = z;
+		GLdouble x = PersonCam.eye[0] + PersonCam.vel*cos(PersonCam.dir_long);
+		GLdouble y = PersonCam.eye[1] + PersonCam.vel*sin(PersonCam.dir_long);
+		GLdouble z = PersonCam.eye[2] + PersonCam.vel*sin(PersonCam.dir_lat);
+		if (!ColisionTest(x, y)){
+			PersonCam.eye[0] = x;
+			PersonCam.eye[1] = y;
+			PersonCam.eye[2] = z;
+		}
+		else {
+			KeyStatus.up = false;
+			KeyStatus.down = false;
+		}
 }
 
 
@@ -135,11 +141,13 @@ void GraphScene::Key(unsigned char key, int x, int y){
 	case 'q':
 	case 'Q':
 		PersonCam.height += 0.1;
+		CamMovement();
 		glutPostRedisplay();
 		break;
 	case 'a':
 	case 'A':
 		PersonCam.height -= 0.1;
+		CamMovement();
 		glutPostRedisplay();
 		break;
 	}
@@ -240,6 +248,38 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	}
 
 	glutPostRedisplay();
+}
+
+bool GraphScene::ColisionTest(int newx, int newy){
+	GLint viewport[4];
+	GLint hits;
+
+	glPushMatrix();
+	(void)glRenderMode(GL_SELECT);
+	glInitNames();
+	glPushName(-1);
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	//gluPickMatrix(newx, glutGet(GLUT_WINDOW_HEIGHT) - newy, 5.0, 5.0, viewport); // searches for existing items on the path
+	glLoadIdentity();
+	glOrtho(-2.5, 2.5, -2.5, 2.5, 0.0, 2.5);
+	//gluPerspective(65.0, (GLdouble)glutGet(GLUT_WINDOW_WIDTH) / glutGet(GLUT_WINDOW_HEIGHT), 1.0, 100.0);
+	glMatrixMode(GL_MODELVIEW);
+	Draw3dObjects();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	hits = glRenderMode(GL_RENDER);
+
+	glPopMatrix();
+	if (hits > 0) {
+		printf("colisao");
+		return true;
+	}
+	return false;
 }
 
 ISelectable * GraphScene::pickISelectable(int newx, int newy) {
