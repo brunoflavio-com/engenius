@@ -8,7 +8,7 @@ class graphCoordWalker :
 	public GraphWalker
 {
 public:
-	graphCoordWalker();
+	graphCoordWalker(int maxUserRelationships, int maxStregth);
 	~graphCoordWalker();
 	void walkConnection(User * userA, Relationship * relationship, int position, int total);
 	void walkVertice(User * userA);

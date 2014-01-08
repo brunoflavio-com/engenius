@@ -38,6 +38,4 @@ Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail){
 void AdvanceModeGraphScene::moveGraphToNewUser(User * user){
 	Graph * tempGraph = graph;
 	graph = getGraph(user->email);
-	
-//	TOTO delete tempGraph;
 }

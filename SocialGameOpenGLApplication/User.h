@@ -1,9 +1,11 @@
 #pragma once
+#include <gl\glut.h>
 #include "ISelectable.h"
 #include "Relationship.h"
 #include "UserTag.h"
 #include "HumorStatus.h"
 #include <vector>
+
 class Relationship;
 
 using namespace std;
@@ -19,7 +21,7 @@ public:
 	string  surname;
 	float cota;
 	float x, y, z;
-
+	bool isTarget;
 	 vector<Relationship *>  relationships;
 	 vector<UserTag *>  userTags;
 	 HumorStatus * humor;

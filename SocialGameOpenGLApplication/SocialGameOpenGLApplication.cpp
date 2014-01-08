@@ -21,7 +21,7 @@ int _tmain(int argc, char* argv[])
 	password = "123456";
 	
 	SocialGamePublicAPIClient * client = new SocialGamePublicAPIClient();
-	boolean login = client->Login(email, password);
+	bool login = client->Login(email, password);
 
 	GraphOpenGL::Run(argc, argv, client, email);
 

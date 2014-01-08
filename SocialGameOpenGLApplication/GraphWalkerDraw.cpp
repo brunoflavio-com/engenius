@@ -9,12 +9,12 @@
 
 #define SPHERE_RADIUS 2
 #define MAX_HEIGHT 5
+GLfloat white[4] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat red[4] = { 1.0, 0.0, 0.0, 1.0 };
+GLfloat blue[4] = { 0.0, 1.0, 0.0, 1.0 };
 
-
-GraphWalkerDraw::GraphWalkerDraw(int maxUserConnections, int maxConnectionStrenght, bool drawUserNames)
-{
-	this->maxUserConnections = maxUserConnections;
-	this->maxConnectionStrenght = maxConnectionStrenght;	
+GraphWalkerDraw::GraphWalkerDraw(bool drawUserNames)
+{	
 	this->drawUserNames = drawUserNames;
 }
 
@@ -27,24 +27,24 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 	User * userB = relationship->getDestinationUser(userA);
 
 	/*Adjust height to max_height*/
-	float Za = MAX_HEIGHT * userA->z / maxUserConnections;
-	float Zb = MAX_HEIGHT * userB->z / maxUserConnections;
+	//float Za = MAX_HEIGHT * userA->z / maxUserConnections;
+	//float Zb = MAX_HEIGHT * userB->z / maxUserConnections;
 
 	/*Adjust cylinder radios to max_cylinder_radius*/
-	float cylinderRadius = SPHERE_RADIUS * 0.75 * relationship->strength / maxConnectionStrenght;
+	//float cylinderRadius = SPHERE_RADIUS * 0.75 * relationship->strength / maxConnectionStrenght;
 	GLUquadricObj *quadric;
 
 	float deltaX = userB->x - userA->x;
 	float deltaY = userB->y - userA->y;
-	float deltaZ = Zb-Za;
+	float deltaZ = userB->z - userA->z;
 
 	float distance = sqrt(pow(deltaX, 2) + pow(deltaY, 2) + pow(deltaZ, 2));
 
 	float rotAngle;
 	if (fabs(deltaZ) <= 0.001)  {
-			rotAngle = DEG(acos(deltaX / distance));
-			if (deltaY <= 0.0)
-				rotAngle *= -1;
+		rotAngle = DEG(acos(deltaX / distance));
+		if (deltaY <= 0.0)
+			rotAngle *= -1;
 
 	}
 	else {
@@ -54,13 +54,13 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 	}
 
 	float rotX = -deltaY * deltaZ;
-	float rotY =  deltaX * deltaZ;
+	float rotY = deltaX * deltaZ;
 
 	glLoadName((GLuint)ISelectable::RELATIONSHIP_TYPE);
 	glPushName((GLuint)relationship->glId);
 
 	glPushMatrix();
-		glTranslatef(userA->x, userA->y, Za);
+		glTranslatef(userA->x, userA->y, userA->z);
 
 		if (fabs(deltaZ) <= 0.001)  {
 			glRotatef(90.0, 0 , 1, 0.0);
@@ -71,13 +71,15 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 		}
 
 		quadric = gluNewQuadric();
+		GLfloat * color = white;
 		if (relationship->selected){
-			selectedAttribute();
-
+			color = red;
 		}
+		glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 		gluQuadricDrawStyle(quadric, GLU_FILL);
-		gluCylinder(quadric, cylinderRadius, cylinderRadius, distance, 30,10);
-		if (relationship->selected) glPopAttrib();
+		gluCylinder(quadric, relationship->cylinderRadius, relationship->cylinderRadius, distance, 30, 10);
+	    glPopAttrib();
 	glPopMatrix();
 
 	glPopName();
@@ -86,51 +88,45 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 void GraphWalkerDraw::walkVertice(User * userA){
 
 	/*Adjust height to max_height*/
-	float Z = MAX_HEIGHT * userA->z / maxUserConnections;
+	//float Z = MAX_HEIGHT * userA->z / maxUserConnections;
 	
 	GLUquadricObj *quadric;
 	glPushMatrix();
-	glTranslatef(userA->x, userA->y, Z);
+	glTranslatef(userA->x, userA->y, userA->z);
  
-	glLoadName((GLuint)ISelectable::USER_TYPE);
-	glPushName((GLuint)userA->glId);
+	
 
 	if (glRenderMode)
 		quadric = gluNewQuadric();
+	GLfloat * color = white;
 
-	if (userA->selected) selectedAttribute();
+	if (userA->isTarget){
+		color = blue;
+	}
+
+	if (userA->selected) {
+		color = red;
+
+		if (drawUserNames){
+			glDisable(GL_LIGHTING);
+			glColor3ub(200, 200, 200);
+			glRasterPos3f(-2, 0, 4);
+			unsigned char s[100];
+			strcpy((char*)s, userA->email.c_str());
+			glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
+			glEnable(GL_LIGHTING);
+		}
+	};
+
+	glLoadName((GLuint)ISelectable::USER_TYPE);
+	glPushName((GLuint)userA->glId);
+	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 	gluQuadricDrawStyle(quadric, GLU_FILL);
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
-	if (userA->selected) glPopAttrib();
-
+	glPopAttrib();
 	glPopName();
-	//User text
-	if (drawUserNames && userA->selected){
-		glDisable(GL_LIGHTING);
-		glColor3ub(200, 200, 200);
-		glRasterPos3f(-2, 0, 4);
-
-		unsigned char s[100];
-
-		strcpy((char*)s, userA->email.c_str());
-
-		glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
-		glEnable(GL_LIGHTING);
-	}
+	
+	
 	glPopMatrix();
-
-
-	/*DEBUG:*/
-	//std::cout << "(" << userA->x << "," << userA->y << "," << userA->z << ")" << endl;
-}
-
-
-void GraphWalkerDraw::selectedAttribute(void)
-{
-	static GLfloat red[4] =
-	{ 1.0, 0.0, 0.0, 1.0 };
-
-	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, red);
-	glColor3f(1.0, 0.0, 0.0);
 }

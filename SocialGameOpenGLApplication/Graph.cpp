@@ -7,7 +7,7 @@ Graph::Graph()
 }
 
 void Graph::draw(bool drawUserName){
-	GraphWalkerDraw drawWalker(maxUserConnections, maxConnectionStrenght, drawUserName);
+	GraphWalkerDraw drawWalker(drawUserName);
 	drawWalker.walk(user,3);
 }
 
@@ -21,7 +21,7 @@ void Graph::changeUser(std::string email){
 	}
 	
 	User * user = getUser(email);
-	graphCoordWalker coordWalker;
+	graphCoordWalker coordWalker(maxUserConnections,maxConnectionStrenght);
 	coordWalker.walk(user);
 }
 

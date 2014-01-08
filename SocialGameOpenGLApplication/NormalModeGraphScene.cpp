@@ -6,10 +6,17 @@
 #include "TicTacToeScene.h"
 #include "MazeScene.h"
 
-NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail):GraphScene(client, loginEmail)
+NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level):GraphScene(client, loginEmail)
 {
 	gameOn = false;
 	graph = getGraph(loginEmail);
+	for each(User * u in graph->users){
+		if (u->graphLevel == level){
+			targetUser = u;
+			targetUser->isTarget = true;
+			break;
+		}	
+	}
 }
 
 Graph * NormalModeGraphScene::getGraph(std::string loginEmail){

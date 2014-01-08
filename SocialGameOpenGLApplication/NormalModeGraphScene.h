@@ -9,9 +9,11 @@ class NormalModeGraphScene :
 private:
 	bool gameOn;
 	IWindowScene * game;
+	User * targetUser;
 
 public:
-	NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail);
+
+	NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level);
 	~NormalModeGraphScene();
 
 	void DrawOverlay(void);

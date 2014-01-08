@@ -10,6 +10,7 @@ class Relationship :
 {
 	public:
 	int glId;
+	float cylinderRadius;
 	User * userA;
 	User * userB;
 	int strength;

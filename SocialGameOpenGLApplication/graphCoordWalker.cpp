@@ -3,9 +3,12 @@
 
 #define MIN_DIST 7.5
 #define SPHERE_RADIUS 2
+#define MAX_HEIGHT 5
 
-graphCoordWalker::graphCoordWalker()
+graphCoordWalker::graphCoordWalker(int maxUserRelationships, int maxStregth)
 {
+	this->maxUserConnections = maxUserRelationships;
+	this->maxStrenght = maxStregth;
 }
 
 
@@ -17,28 +20,13 @@ void graphCoordWalker::walk(User * graph){
 	graph->graphLevel = 0;
 	graph->x = 0;
 	graph->y = 0;
-	graph->z = 0;
-	
-	/*Reset Stats*/
-	maxStrenght = 0;
-	maxUserConnections = 0;
+	graph->z = MAX_HEIGHT *  graph->relationships.size() / maxUserConnections;
 
-	/*	
-	DEBUG
-	std::cout << graph->email << " | ";
-	std::cout << graph->x << " | ";
-	std::cout << graph->y << " | ";
-	std::cout << graph->z << " | ";
-	std::cout << graph->graphLevel << endl;
-	*/
-	GraphWalker::walk(graph, -1);
+	GraphWalker::walk(graph,-1);
 }
 
 void graphCoordWalker::walkVertice(User * user){
-	//Sets Height to the number of connections:
-	user->z = user->relationships.size();
-	/*Update Stats*/
-	maxUserConnections = user->z > maxUserConnections? user->z : maxUserConnections;
+	
 }
 
 void graphCoordWalker::walkConnection(User * userA, Relationship * relationship, int position, int total){
@@ -53,9 +41,6 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 
 		if (userB->graphLevel >= 2){ // Level 2 positions
 			double prevAngle;
-			//if (userA->x < 0) // in case the X is negtive
-			//	prevAngle = atan2(userA->y, userA->x) + M_PI - M_PI/4;
-			//else
 				prevAngle = atan2(userA->y, userA->x) - M_PI/4;
 
 			sx = ((MIN_DIST + distance)*cos(prevAngle + ((M_PI / 2)*position / totalRelationships)));
@@ -65,23 +50,12 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 			sx = ((MIN_DIST + distance)*cos(2 * M_PI*position / totalRelationships));
 			sy = ((MIN_DIST + distance)*sin(2 * M_PI*position / totalRelationships));
 		}
-		//float sx = floorf(cos(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
-		//float sy = floorf(sin(2 * M_PI * racio) * 100) / 100 * 3*(3 - userB->graphLevel);
 		
-
-		/*Update Stats*/
-		maxStrenght = relationship->strength > maxStrenght ? relationship->strength : maxStrenght;
-
 		userB->x= userA->x + sx;
 		userB->y = userA->y + sy;
-		//Z definido no walkVertice() 
-		//userB->z = 0;
+		userB->z = MAX_HEIGHT *  userB->relationships.size() / maxUserConnections;
 
-		std::cout << userB->email << " | ";
-		std::cout << userB->x << " | ";
-		std::cout << userB->y << " | ";
-		std::cout << userB->z << " | ";
-		std::cout << userB->graphLevel << endl;
+		relationship->cylinderRadius = SPHERE_RADIUS * 0.75 * relationship->strength / maxStrenght;
 	}
 }
 

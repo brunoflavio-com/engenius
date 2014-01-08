@@ -10,7 +10,7 @@
 
 Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 	Graph * graph = new Graph();
-
+	
 	std::string firstNames[10] = {"carlos", "rui", "sofia", "luis","bruno", "jorge","miguel","ze", "alexandre", "diogo"};
 	
 	vector<User *> users;
@@ -80,20 +80,29 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		}
 		
 	}
-	
+	int maxUserRelationShips = 0;
 	for (int i = 0; i < graph->users.size();i++){
 		graph->users.at(i)->glId = i;
+		if (maxUserRelationShips < graph->users.at(i)->relationships.size()){
+			maxUserRelationShips = graph->users.at(i)->relationships.size();
+		}
+
 	}
 
+	int maxRelationStrength = 0;
 	for (int i = 0; i < graph->relationShips.size(); i++){
 		graph->relationShips.at(i)->glId = i;
+		if (maxRelationStrength < graph->relationShips.at(i)->strength){
+			maxRelationStrength = graph->relationShips.at(i)->strength;
+		}
 	}
 
 	graph->user = realUser;
-	graphCoordWalker coordWalker;
+	graph->maxConnectionStrenght = maxRelationStrength;
+	graph->maxUserConnections = maxUserRelationShips;
+
+	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength);
 	coordWalker.walk(graph->user);
-	graph->maxConnectionStrenght = coordWalker.getMaxConnectionStrenght();
-	graph->maxUserConnections = coordWalker.getMaxUserConnections();
 	return graph;
 }
 
@@ -162,10 +171,29 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 	}
 
 	graphObj->user = graphObj->getUser(email);
-	graphCoordWalker coordWalker;
+	
+	int maxUserRelationShips= 0;
+	for (int i = 0; i < graphObj->users.size(); i++){
+		graphObj->users.at(i)->glId = i;
+		if (maxUserRelationShips < graphObj->users.at(i)->relationships.size()){
+			maxUserRelationShips = graphObj->users.at(i)->relationships.size();
+		}
+
+	}
+
+	int maxRelationStrength = 0;
+	for (int i = 0; i < graphObj->relationShips.size(); i++){
+		graphObj->relationShips.at(i)->glId = i;
+		if (maxRelationStrength < graphObj->relationShips.at(i)->strength){
+			maxRelationStrength = graphObj->relationShips.at(i)->strength;
+		}
+	}
+
+	graphObj->maxConnectionStrenght = maxRelationStrength;
+	graphObj->maxUserConnections = maxUserRelationShips;
+
+	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength);
 	coordWalker.walk(graphObj->user);
-	graphObj->maxConnectionStrenght = coordWalker.getMaxConnectionStrenght();
-	graphObj->maxUserConnections = coordWalker.getMaxUserConnections();
 	return graphObj;
 
 }

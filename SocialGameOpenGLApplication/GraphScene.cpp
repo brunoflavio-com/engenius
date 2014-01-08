@@ -49,6 +49,7 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 
 GraphScene::~GraphScene()
 {
+	delete graph;
 }
 
 void GraphScene::Draw(void){
@@ -327,10 +328,7 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 			ISelectable * object;			
 			if ((object = pickISelectable(x, y)) != NULL) {
 				User * user = (User *)object;
-
 				moveGraphToNewUser(user);
-
-				
 			}
 
 		}

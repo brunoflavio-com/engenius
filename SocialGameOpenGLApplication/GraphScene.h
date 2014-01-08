@@ -17,12 +17,12 @@ private:
 
 protected: 
 	bool isSubWindowsActive;
-	SocialGamePublicAPIClient * apiClient;
-	string email;
 	Graph * graph;
-	bool onGame;
 
 public:
+	string email;
+	SocialGamePublicAPIClient * apiClient;
+
 	GraphScene(SocialGamePublicAPIClient *, string loginEmail);
 	~GraphScene();
 	
