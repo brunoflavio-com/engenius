@@ -7,7 +7,7 @@ HangmanScene::HangmanScene(SocialGamePublicAPIClient *client, string loginEmail)
 	//client-> 
 
 	//initialize game engine:
-	word = "teste";
+	word = "felicidade";
 	game = new HangmanPLEngine(3, word.c_str());
 
 }
@@ -53,14 +53,10 @@ void HangmanScene::Draw3dObjects(void){
 	// This causes that translations and rotations on this matrix wont influence others.
 	glPushMatrix();
 	
-	glColor3f(1, 0, 0);
-	glTranslatef(0, 0, 0);
-	//glRotatef(g_rotation, 0, 1, 0);
-	glRotatef(45, 0, 1, 0);
-
-	//Show space of letters
-	drawOutputWord();
-	//glutSolidTeapot(1); 
+		glColor3f(1, 0, 0);
+		glTranslatef(0, 0, 0);
+		//glRotatef(g_rotation, 0, 1, 0);
+		glRotatef(45, 0, 1, 0);
 	
 	glPopMatrix();
 
@@ -68,19 +64,10 @@ void HangmanScene::Draw3dObjects(void){
 
 void HangmanScene::DrawOverlay(void) {
 
-	// Draw the engine message
-	glPushMatrix();
+	//Show space of letters
+	drawOutputWord();
+	drawMessage();
 	
-	//position in the center:
-	glRasterPos2f(0.7f, 0.7f);
-
-	unsigned char msg[100];
-	strcpy((char*)msg, game->getMessage().c_str());
-	
-	glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
-	glEnable(GL_LIGHTING);
-
-	glPopMatrix();
 }
 
 // Keyboard callback
@@ -122,24 +109,38 @@ void HangmanScene::MotionMouse(int x, int y)
 
 }
 
+//Draw the word in Output
 void HangmanScene::drawOutputWord()
 {
-
-	// Draw the engine message
 	glPushMatrix();
-
+	// Draw the engine message
+	glColor3f(1.0f, 1.0f, 1.0);
 	//position in the center:
-	glRasterPos2f(0.5, 0.5);
+	glRasterPos2f(0.4, 0.4);
 
 	unsigned char msg[100];
 	strcpy((char*) msg, guessString().c_str());
 
 	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, msg);
-	glEnable(GL_LIGHTING);
+
 	glPopMatrix();
 
 }
 
+void HangmanScene::drawMessage(){
+	// Draw the engine message
+	glPushMatrix();
+	glColor3f(1.0f, 0, 0);
+	//position in the center:
+	glRasterPos2f(0.7f, 0.7f);
+
+	unsigned char msg[100];
+	strcpy((char*) msg, game->getMessage().c_str());
+
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
+
+	glPopMatrix();
+}
 
 string HangmanScene::guessString() 
 {
@@ -165,3 +166,5 @@ void HangmanScene::play(unsigned char key)
 		game->play(key);
 	
 }
+
+

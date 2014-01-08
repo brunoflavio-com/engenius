@@ -52,6 +52,7 @@ private:
 
 	//Draw Board
 	void drawOutputWord();
+	void drawMessage();
 
 	//Output word in progress
 	string guessString();

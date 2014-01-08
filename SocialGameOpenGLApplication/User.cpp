@@ -10,3 +10,7 @@ User::User()
 User::~User()
 {
 }
+
+int User::getType(){
+	return USER_TYPE;
+}

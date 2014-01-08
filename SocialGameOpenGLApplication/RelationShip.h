@@ -9,11 +9,15 @@ class Relationship :
 	public ISelectable
 {
 	public:
-	User * user;
+	int glId;
+	User * userA;
+	User * userB;
 	int strength;
 	RelationshipTag * relationshipTag;
 
 	Relationship();
 	~Relationship();
+	User * getDestinationUser(User * originUser);
+	int getType();
 };
 

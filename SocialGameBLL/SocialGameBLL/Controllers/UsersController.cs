@@ -1,9 +1,13 @@
-﻿using SocialGameBLL.Entities;
+﻿using Newtonsoft.Json;
+using SocialGameBLL.Entities;
 using SocialGameBLL.Service;
 using SocialGameBLL.Util;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace SocialGameBLL.Controllers
@@ -147,6 +151,69 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public ICollection<User> GetFriendsWithCommonInterests(User Me, ICollection<Interest> Interests)
+        {
+            try
+            {
+                ICollection<int> InterestId = Interests.Select(i => i.Id).ToList();
+                Graph graph = new RelationshipsController().GetRelationships(Me, 1);
+                string Jsongraph = JsonConvert.SerializeObject(graph, Formatting.Indented);
+                
+                string AIService = ConfigurationManager.AppSettings["SocialGameAIURL"];
+                CookieContainer CookieJar = new CookieContainer();
+
+                string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, Jsongraph, CookieJar);
+
+                string JsonInterest = JsonConvert.SerializeObject(InterestId);
+                PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.GET_FRIENDS_WITH_COMMON_INTERESTS, JsonInterest, CookieJar);
+                
+                ICollection<UserEntity> Entities = StringToUserEntity(PostResponse);
+                ICollection<User> Users = new List<User>();
+
+                foreach (UserEntity entity in Entities)
+                {
+                    Users.Add(EntityServiceConverter.ConvertUserEntityToUser(entity));
+                }
+
+                return Users;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public ICollection<string> GetGraphStats(User Me)
+        {
+            try
+            {
+
+                Graph graph = new RelationshipsController().GetRelationships(Me, 2);
+                string Jsongraph = JsonConvert.SerializeObject(graph, Formatting.Indented);
+
+                string AIService = ConfigurationManager.AppSettings["SocialGameAIURL"];
+                CookieContainer CookieJar = new CookieContainer();
+
+                string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, Jsongraph, CookieJar);
+
+                string JsonInterest = JsonConvert.SerializeObject(0);
+                PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.GET_GRAPH_STATS, JsonInterest, CookieJar);
+
+                //ICollection<UserEntity> Entities = StringToUserEntity(PostResponse);
+                ICollection<string> Stats = new List<string>();
+
+                //foreach (UserEntity entity in Entities)
+                //{
+                //    Users.Add(EntityServiceConverter.ConvertUserEntityToUser(entity));
+                //}
+
+                return Stats;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
 
         /*Private helper methods*/
         private void UpdateUserEntity(UserEntity UserEntity, User User)
@@ -177,6 +244,17 @@ namespace SocialGameBLL.Controllers
                     }
                 }
             }
+        }
+
+        private ICollection<UserEntity> StringToUserEntity(string JsonEmails)
+        {
+            ICollection<UserEntity> returnList = new List<UserEntity>();
+            var array = JsonConvert.DeserializeObject<ICollection<string>>(JsonEmails);
+            foreach (var email in array)
+            {
+                returnList.Add(db.Users.Find(email));
+            }
+            return returnList;
         }
     }
 }

@@ -12,7 +12,7 @@
 
 #define BUFFSIZE 512
 GLuint selecter[BUFFSIZE];
-ISelectable * theObject = 0;
+ISelectable * selectedObject = NULL;
 
 typedef	GLdouble Vertice[3];
 
@@ -211,26 +211,18 @@ void GraphScene::TopCamLookAt(){
 
 void GraphScene::PassiveMotion(int newx, int newy){
 	ISelectable * object;
-	if ((int)theObject > 0)
-		theObject->selected = false;
+	if (selectedObject != NULL)
+		selectedObject->selected = false;
 
 	if ((object = pickISelectable(newx, newy)) != NULL ) {
-		theObject = object;
-		theObject->selected = true;
+		selectedObject = object;
+		selectedObject->selected = true;
 	}
 
 	glutPostRedisplay();
 }
 
-ISelectable * GraphScene::pickISelectable(int x, int y) {
-	GLuint object;
-	if (pickReference(object, x, y)) {
-		return (ISelectable *)object;
-	}
-	return NULL;
-}
-
-bool GraphScene::pickReference(GLuint &objectRef, int newx, int newy) {
+ISelectable * GraphScene::pickISelectable(int newx, int newy) {
 	GLint viewport[4];
 	GLint hits;
 
@@ -256,37 +248,56 @@ bool GraphScene::pickReference(GLuint &objectRef, int newx, int newy) {
 		GLuint depth = (GLuint)~0;
 		unsigned int getThisName;
 		GLint i;
-		GLuint names, *ptr;
-		GLuint newObject;
+		GLuint names, pos, *ptr;
+		GLuint selectableObjectType = -1, selectableObjectId =-1;
 
 		ptr = (GLuint *)selecter;
-		newObject = 0;
+		
 		for (i = 0; i < hits; i++) {
 			getThisName = 0;
 			names = *ptr;
 			ptr++;
+
+			//ZMIN
 			if (*ptr <= depth) {
 				depth = *ptr;
 				getThisName = 1;
 			}
+
 			ptr++;
-			if (*ptr <= depth) {
-				depth = *ptr;
-				getThisName = 1;
+			//ZMAX
+			ptr++;
+
+			if (getThisName){
+				selectableObjectType = *ptr;
+				++ptr;
+				selectableObjectId = *ptr;
+				++ptr;
 			}
-			ptr++;
-
-			if (getThisName)
-				newObject = *ptr;
-
-			ptr += names;
+			else{
+				ptr += 2;
+			}
 		}
+		
+		switch (selectableObjectType)
+		{
+		case ISelectable::USER_TYPE:
+			//User
+			if (selectableObjectId < graph->users.size() ){
+				 return (ISelectable*)graph->users.at(selectableObjectId);
+			}
 
-		objectRef = newObject;
-		return true;
+			break;
+		case ISelectable::RELATIONSHIP_TYPE:
+			//Reference
+			if (selectableObjectId < graph->relationShips.size()){
+				return (ISelectable*)graph->relationShips.at(selectableObjectId);
+			}
+			break;
+		}
+		
 	}
-
-	return false;
+	return NULL;
 }
 
 void GraphScene::MotionMouse(int x, int y)
@@ -316,7 +327,10 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 			ISelectable * object;			
 			if ((object = pickISelectable(x, y)) != NULL) {
 				User * user = (User *)object;
-				printf("CLICKED %s\n",user->email.c_str());
+
+				moveGraphToNewUser(user);
+
+				
 			}
 
 		}

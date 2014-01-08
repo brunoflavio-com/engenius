@@ -24,7 +24,7 @@ GraphWalkerDraw::~GraphWalkerDraw()
 }
 
 void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, int position, int total){
-	User * userB = relationship->user;
+	User * userB = relationship->getDestinationUser(userA);
 
 	/*Adjust height to max_height*/
 	float Za = MAX_HEIGHT * userA->z / maxUserConnections;
@@ -55,7 +55,10 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 
 	float rotX = -deltaY * deltaZ;
 	float rotY =  deltaX * deltaZ;
-	glLoadName((GLuint)relationship);
+
+	glLoadName((GLuint)ISelectable::RELATIONSHIP_TYPE);
+	glPushName((GLuint)relationship->glId);
+
 	glPushMatrix();
 		glTranslatef(userA->x, userA->y, Za);
 
@@ -68,10 +71,16 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 		}
 
 		quadric = gluNewQuadric();
+		if (relationship->selected){
+			selectedAttribute();
+
+		}
 		gluQuadricDrawStyle(quadric, GLU_FILL);
 		gluCylinder(quadric, cylinderRadius, cylinderRadius, distance, 30,10);
+		if (relationship->selected) glPopAttrib();
 	glPopMatrix();
 
+	glPopName();
 }
 
 void GraphWalkerDraw::walkVertice(User * userA){
@@ -82,9 +91,10 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	GLUquadricObj *quadric;
 	glPushMatrix();
 	glTranslatef(userA->x, userA->y, Z);
+ 
+	glLoadName((GLuint)ISelectable::USER_TYPE);
+	glPushName((GLuint)userA->glId);
 
-	//We'll use the address of this node as the gl Identifier:
-	glLoadName((GLuint) userA);
 	if (glRenderMode)
 		quadric = gluNewQuadric();
 
@@ -93,6 +103,7 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
 	if (userA->selected) glPopAttrib();
 
+	glPopName();
 	//User text
 	if (drawUserNames && userA->selected){
 		glDisable(GL_LIGHTING);

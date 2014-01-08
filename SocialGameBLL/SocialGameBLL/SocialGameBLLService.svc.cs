@@ -161,6 +161,32 @@ namespace SocialGameBLL
             }
         }
 
+        public ICollection<User> GetFriendsWithCommonInterests(User Me, ICollection<Interest> Interests)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetFriendsWithCommonInterests(Me,Interests);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public ICollection<string> GetGraphStats(User Me)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetGraphStats(Me);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public float GetUserPoints(string Email)
         {
             try

@@ -119,6 +119,7 @@ string HangmanPLEngine::getMessage()
 	return message;
 }
 
+//Verify if the is a winner
 int HangmanPLEngine::plWinner()
 {
 	//Create parameters (Result)

@@ -15,6 +15,9 @@ namespace SocialGameBLL.Util
         public const string LOAD_USER_GRAPH = "LoadUserGraph";
         public const string GET_SHORTEST_PATH = "GetShortestPath";
         public const string GET_STRONGEST_PATH = "GetStrongestPath";
+        public const string GET_FRIENDS_WITH_COMMON_INTERESTS = "GetFriendsWithCommonInterests";
+        public const string GET_GRAPH_STATS = "GetGraphStats";
+        public const string GET_POSSIBLE_FRIENDS = "GetPossibleFriends";
 
         public static string MakeJsonPostRequest(string ServerMethod, string Json, CookieContainer CookieJar)
         {

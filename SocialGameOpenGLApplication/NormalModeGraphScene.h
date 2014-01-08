@@ -23,6 +23,8 @@ public:
 	void Timer(int value);
 
 	void PassiveMotion(int x, int y);
+	void moveGraphToNewUser(User * user);
+
 	Graph * getGraph(std::string loginEmail);
 };
 

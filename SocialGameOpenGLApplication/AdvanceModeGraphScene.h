@@ -12,5 +12,6 @@ public:
 	void Draw3dObjects(void);
 	~AdvanceModeGraphScene();
 	Graph * getGraph(std::string loginEmail);
+	void moveGraphToNewUser(User * user);
 };
 

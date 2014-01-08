@@ -13,7 +13,6 @@ class GraphScene :
 	public IBothWindowsScene
 {
 private:
-	bool pickReference(GLuint &objectRef, int newx, int newy);
 	ISelectable * pickISelectable( int x, int y);
 
 protected: 
@@ -56,5 +55,6 @@ public:
 	void Mouse(int button, int state, int x, int y);
 
 	virtual Graph * getGraph(std::string loginEmail) = 0;
+	virtual void moveGraphToNewUser(User * user) = 0;
 };
 
