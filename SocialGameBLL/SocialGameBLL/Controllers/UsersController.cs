@@ -196,7 +196,8 @@ namespace SocialGameBLL.Controllers
 
                 foreach (UserEntity entity in Entities)
                 {
-                    Users.Add(EntityServiceConverter.ConvertUserEntityToUser(entity));
+                    if (entity.Email != Me.Email)
+                        Users.Add(EntityServiceConverter.ConvertUserEntityToUser(entity));
                 }
 
                 return Users;
