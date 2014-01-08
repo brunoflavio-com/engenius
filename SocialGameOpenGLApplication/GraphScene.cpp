@@ -21,6 +21,7 @@ typedef struct GraphCamera{
 	GLdouble dir_lat;
 	GLdouble dir_long;
 	GLfloat dist;
+	GLfloat vel;
 	Vertice eye;
 	Vertice center;
 }GraphCamera;
@@ -98,13 +99,24 @@ void GraphScene::subWindowInit(void){
 	StartCam();
 }
 
+void GraphScene::CamMovement(void){
+	GLdouble z = PersonCam.eye[2] + PersonCam.vel*sin(PersonCam.dir_lat);
+	GLdouble y = PersonCam.eye[1] + PersonCam.vel*sin(PersonCam.dir_long);
+	GLdouble x = PersonCam.eye[0] + PersonCam.vel*cos(PersonCam.dir_long);
+	PersonCam.eye[0] = x;
+	PersonCam.eye[1] = y;
+	PersonCam.eye[2] = z;
+}
+
 
 void GraphScene::Timer(int value){
 	if (KeyStatus.up){
-		PersonCam.dist -= 0.01;
+		PersonCam.vel = 0.01;
+		CamMovement();
 	}
 	if (KeyStatus.down){
-		PersonCam.dist += 0.01;
+		PersonCam.vel = -0.01;
+		CamMovement();
 	}
 	if (KeyStatus.left){
 		PersonCam.dir_long += M_PI*0.001;
@@ -122,12 +134,14 @@ void GraphScene::Key(unsigned char key, int x, int y){
 		break;
 	case 'q':
 	case 'Q':
-		PersonCam.height += 0.1;
+		PersonCam.vel = 0.1;
+		CamMovement();
 		glutPostRedisplay();
 		break;
 	case 'a':
 	case 'A':
-		PersonCam.height -= 0.1;
+		PersonCam.vel = -0.1;
+		CamMovement();
 		glutPostRedisplay();
 		break;
 	}
@@ -184,13 +198,21 @@ void GraphScene::StartCam(){
 	PersonCam.center[0] = 0;
 	PersonCam.center[1] = 0;
 	PersonCam.center[2] = 0;
+	/*PersonCam.eye[0] = PersonCam.center[0] + PersonCam.dist*cos(PersonCam.dir_long)*cos(PersonCam.dir_lat);
+	PersonCam.eye[1] = PersonCam.center[1] + PersonCam.dist*sin(PersonCam.dir_long)*cos(PersonCam.dir_lat);
+	PersonCam.eye[2] = PersonCam.center[2] + PersonCam.dist*sin(PersonCam.dir_lat);
+	gluLookAt(
+		PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2] + PersonCam.height,
+		PersonCam.center[0], PersonCam.center[1], PersonCam.center[2] + PersonCam.height,
+		0, 0, 1
+		);*/
 }
 
 void GraphScene::CamLookAt(){
 	
-	PersonCam.eye[0] = PersonCam.center[0] + PersonCam.dist*cos(PersonCam.dir_long)*cos(PersonCam.dir_lat);
-	PersonCam.eye[1] = PersonCam.center[1] + PersonCam.dist*sin(PersonCam.dir_long)*cos(PersonCam.dir_lat);
-	PersonCam.eye[2] = PersonCam.center[2] + PersonCam.dist*sin(PersonCam.dir_lat);
+	PersonCam.center[0] = PersonCam.eye[0] + PersonCam.dist*cos(PersonCam.dir_long)*cos(PersonCam.dir_lat);
+	PersonCam.center[1] = PersonCam.eye[1] + PersonCam.dist*sin(PersonCam.dir_long)*cos(PersonCam.dir_lat);
+	PersonCam.center[2] = PersonCam.eye[2] + PersonCam.dist*sin(PersonCam.dir_lat);
 	gluLookAt(
 		PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2] + PersonCam.height,
 		PersonCam.center[0], PersonCam.center[1], PersonCam.center[2] + PersonCam.height,
@@ -302,17 +324,27 @@ ISelectable * GraphScene::pickISelectable(int newx, int newy) {
 
 void GraphScene::MotionMouse(int x, int y)
 {
-	float newx = RAD((MouseStatus.xMouse - x)*0.1);
-	float newy = RAD((MouseStatus.yMouse - y)*0.1);
-	GLdouble latitude;
-	GLdouble longitude;
-	longitude = PersonCam.dir_long - newx;
-	latitude = PersonCam.dir_lat;
-	//if (PersonCam.dir_lat - newy < M_PI / 4 && PersonCam.dir_lat - newy > -M_PI / 4)
-	latitude += newy;
-	PersonCam.center[0] = PersonCam.eye[0] - PersonCam.dist*cos(longitude)*cos(latitude);
-	PersonCam.center[1] = PersonCam.eye[1] - PersonCam.dist*sin(longitude)*cos(latitude);
-	PersonCam.center[2] = PersonCam.eye[2] - PersonCam.dist*sin(latitude);
+	int dif;
+	dif = y - MouseStatus.yMouse;
+	if (dif > 0){//looking down
+		PersonCam.dir_lat -= dif*RAD(1);
+		if (PersonCam.dir_lat < -RAD(89))
+			PersonCam.dir_lat = -RAD(89);
+	}
+	if (dif < 0){//looking up
+		PersonCam.dir_lat += abs(dif)*RAD(1);
+		if (PersonCam.dir_lat > RAD(89))
+			PersonCam.dir_lat = RAD(89);
+	}
+
+	dif = x - MouseStatus.xMouse;
+	if (dif > 0){//looking right
+		PersonCam.dir_long -= dif*RAD(1);
+	}
+	if (dif < 0){//looking left
+		PersonCam.dir_long += abs(dif)*RAD(1);
+	}
+
 	MouseStatus.xMouse = x;
 	MouseStatus.yMouse = y;
 }
