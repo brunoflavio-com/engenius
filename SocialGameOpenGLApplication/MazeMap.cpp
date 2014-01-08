@@ -68,6 +68,11 @@ bool MazeMap::isWall(int x, int y)
 	return false;
 }
 
+bool MazeMap::isFinalPosition()
+{
+	return (currentLine == goalLine && currentColumn == goalColumn);
+}
+
 /*Private*/
 
 void MazeMap::readMapFile(string mapFile){

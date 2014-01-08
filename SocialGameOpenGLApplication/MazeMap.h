@@ -22,6 +22,7 @@ namespace MinigamesMaze{
 		void getSuggestion(int& line, int& column);
 
 		bool isWall(int line, int column);
+		bool isFinalPosition();
 	
 	private:
 		vector<vector<char>*>* mapMatrix;

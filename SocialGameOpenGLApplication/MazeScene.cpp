@@ -65,6 +65,11 @@ void MazeScene::Timer(int value)
 		hintStart = currTime;
 		hintPressed = false;
 	}
+
+	if (map->isFinalPosition())
+	{
+		std::cout << "Maze solved" << std::endl;
+	}
 	
 }
 
