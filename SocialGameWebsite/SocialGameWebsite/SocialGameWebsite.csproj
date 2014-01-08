@@ -367,6 +367,7 @@
     </Content>
     <Content Include="Views\Home\Header.cshtml" />
     <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Home\HumourPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

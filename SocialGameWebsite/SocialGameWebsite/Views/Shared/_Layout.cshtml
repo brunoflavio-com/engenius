@@ -7,6 +7,8 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
     </head>
     <body>
         <header>
@@ -15,7 +17,7 @@
                     <p class="site-title">@Html.ActionLink("SocialGame", "Index", "Home")</p>
                 </div>
             </div>*@
-            @Html.Action("header","home")
+            @Html.Action("header","home")         
         </header>
         <div id="body">
             @RenderSection("featured", required: false)

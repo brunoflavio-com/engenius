@@ -106,5 +106,42 @@ namespace SocialGameWebsite.Controllers
 
             return HumourStatus;
         }
+
+        //
+        // GET: /Home/HumourPartial
+
+        [Authorize]
+        public ActionResult HumourPartial()
+        {
+            SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
+
+            IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
+            UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
+
+            ViewBag.HumourStatusList = ServiceHumourStatus;
+            ViewBag.CurrentHumourStatusID = UserViewModel.HumourStatus.ID;
+
+            return PartialView();
+        }
+
+        //
+        // GET: /Home/HumourPartial
+        [HttpPost]
+        [Authorize]
+        public ActionResult HumourPartial(int mood)
+        {
+            SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
+
+            IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
+            UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
+
+            UserViewModel.HumourStatus = ServiceHumourStatus.Single(h => h.ID == mood);
+
+            Proxy.UpdateUser(UserViewModel.GetServiceUser());
+
+            ViewBag.HumourStatusList = ServiceHumourStatus;
+            ViewBag.CurrentHumourStatusID = UserViewModel.HumourStatus.ID;
+            return PartialView();
+        }
     }
 }
