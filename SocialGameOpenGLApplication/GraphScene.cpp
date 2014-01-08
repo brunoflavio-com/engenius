@@ -134,14 +134,12 @@ void GraphScene::Key(unsigned char key, int x, int y){
 		break;
 	case 'q':
 	case 'Q':
-		PersonCam.vel = 0.1;
-		CamMovement();
+		PersonCam.height += 0.1;
 		glutPostRedisplay();
 		break;
 	case 'a':
 	case 'A':
-		PersonCam.vel = -0.1;
-		CamMovement();
+		PersonCam.height -= 0.1;
 		glutPostRedisplay();
 		break;
 	}
@@ -191,21 +189,21 @@ bool GraphScene::isSubWindowActive(){
 }
 
 void GraphScene::StartCam(){
-	PersonCam.dir_lat = M_PI / 4;
-	PersonCam.dir_long = -M_PI / 4;
+	PersonCam.dir_lat = -M_PI/4;
+	PersonCam.dir_long = -M_PI/4;
 	PersonCam.height = 0;
 	PersonCam.dist = 40;
 	PersonCam.center[0] = 0;
 	PersonCam.center[1] = 0;
 	PersonCam.center[2] = 0;
-	/*PersonCam.eye[0] = PersonCam.center[0] + PersonCam.dist*cos(PersonCam.dir_long)*cos(PersonCam.dir_lat);
-	PersonCam.eye[1] = PersonCam.center[1] + PersonCam.dist*sin(PersonCam.dir_long)*cos(PersonCam.dir_lat);
-	PersonCam.eye[2] = PersonCam.center[2] + PersonCam.dist*sin(PersonCam.dir_lat);
+	PersonCam.eye[0] = PersonCam.center[0] - PersonCam.dist*cos(PersonCam.dir_long)*cos(PersonCam.dir_lat);
+	PersonCam.eye[1] = PersonCam.center[1] - PersonCam.dist*sin(PersonCam.dir_long)*cos(PersonCam.dir_lat);
+	PersonCam.eye[2] = PersonCam.center[2] - PersonCam.dist*sin(PersonCam.dir_lat);
 	gluLookAt(
 		PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2] + PersonCam.height,
 		PersonCam.center[0], PersonCam.center[1], PersonCam.center[2] + PersonCam.height,
 		0, 0, 1
-		);*/
+		);
 }
 
 void GraphScene::CamLookAt(){
@@ -221,12 +219,12 @@ void GraphScene::CamLookAt(){
 }
 
 void GraphScene::TopCamLookAt(){
-	MinimapCam.eye[0] = PersonCam.center[0];
-	MinimapCam.eye[1] = PersonCam.center[1];
+	MinimapCam.eye[0] = 0;
+	MinimapCam.eye[1] = 0;
 	MinimapCam.eye[2] = 50;
 	gluLookAt(
 		MinimapCam.eye[0], MinimapCam.eye[1], MinimapCam.eye[2],
-		PersonCam.center[0], PersonCam.center[1], PersonCam.center[2],
+		0, 0, 0,
 		0, 1, 0
 		);
 }
