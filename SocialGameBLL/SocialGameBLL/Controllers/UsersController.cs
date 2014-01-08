@@ -196,7 +196,7 @@ namespace SocialGameBLL.Controllers
 
                 string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, Jsongraph, CookieJar);
 
-                string JsonInterest = JsonConvert.SerializeObject(0);
+                string JsonInterest = JsonConvert.SerializeObject(0);//To change
                 PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.GET_GRAPH_STATS, JsonInterest, CookieJar);
 
                 //ICollection<UserEntity> Entities = StringToUserEntity(PostResponse);
@@ -208,6 +208,37 @@ namespace SocialGameBLL.Controllers
                 //}
 
                 return Stats;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public ICollection<User> GetPossibleFriends(User Me)
+        {
+            try
+            {
+                Graph graph = new RelationshipsController().GetRelationships(Me, 2);
+                string Jsongraph = JsonConvert.SerializeObject(graph, Formatting.Indented);
+
+                string AIService = ConfigurationManager.AppSettings["SocialGameAIURL"];
+                CookieContainer CookieJar = new CookieContainer();
+
+                string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, Jsongraph, CookieJar);
+
+                string JsonInterest = JsonConvert.SerializeObject(0);//To change
+                PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.GET_POSSIBLE_FRIENDS, JsonInterest, CookieJar);
+
+                ICollection<UserEntity> Entities = StringToUserEntity(PostResponse);
+                ICollection<User> Users = new List<User>();
+
+                foreach (UserEntity entity in Entities)
+                {
+                    Users.Add(EntityServiceConverter.ConvertUserEntityToUser(entity));
+                }
+
+                return Users;
             }
             catch (Exception e)
             {

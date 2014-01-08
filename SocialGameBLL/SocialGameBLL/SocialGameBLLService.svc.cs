@@ -187,6 +187,19 @@ namespace SocialGameBLL
             }
         }
 
+        public ICollection<User> GetPossibleFriends(User Me)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetPossibleFriends(Me);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public float GetUserPoints(string Email)
         {
             try
