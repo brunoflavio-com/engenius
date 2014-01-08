@@ -55,7 +55,9 @@ namespace SocialGameBLL
 
         [OperationContract]
         ICollection<string> GetGraphStats(User Me);
-        
+
+        [OperationContract]
+        ICollection<User> GetPossibleFriends(User Me);
     }
 
 
