@@ -220,17 +220,13 @@ namespace SocialGameBLL.Controllers
 
                 string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, Jsongraph, CookieJar);
 
-                string JsonInterest = JsonConvert.SerializeObject(0);//To change
-                PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.GET_GRAPH_STATS, JsonInterest, CookieJar);
+                PostResponse = PrologRequest.MakeJsonGetResquest(PrologRequest.GET_GRAPH_STATS, null, CookieJar);
 
-                //ICollection<UserEntity> Entities = StringToUserEntity(PostResponse);
                 ICollection<string> Stats = new List<string>();
 
-                //foreach (UserEntity entity in Entities)
-                //{
-                //    Users.Add(EntityServiceConverter.ConvertUserEntityToUser(entity));
-                //}
-
+                /** TO DO 
+                 * CHECK THE RETURN
+                 **/
                 return Stats;
             }
             catch (Exception e)
@@ -251,8 +247,9 @@ namespace SocialGameBLL.Controllers
 
                 string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, Jsongraph, CookieJar);
 
-                string JsonInterest = JsonConvert.SerializeObject(0);//To change
-                PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.GET_POSSIBLE_FRIENDS, JsonInterest, CookieJar);
+                OrderedDictionary param = new OrderedDictionary();
+                param["useremail"]=Me.Email;
+                PostResponse = PrologRequest.MakeJsonGetResquest(PrologRequest.GET_POSSIBLE_FRIENDS, param, CookieJar);
 
                 ICollection<UserEntity> Entities = StringToUserEntity(PostResponse);
                 ICollection<User> Users = new List<User>();
