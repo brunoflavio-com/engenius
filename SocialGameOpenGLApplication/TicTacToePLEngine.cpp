@@ -3,15 +3,18 @@
 
 TicTacToePLEngine::TicTacToePLEngine(char symbolFirstPlayer)
 {
-	
 	char* argv [] = { "libswipl.dll", "-s", "tictactoe.pl", NULL };
 
 	prolog = new PlEngine(3, argv);
 	plSetFirstPlayer(symbolFirstPlayer);
 	status = -1;
 
-	message += "You start.\n\nGood luck!";
-
+	message = "\nGood luck!\n";
+	message += "\nYou start.\n\n";
+	message += "\nInsert position, select[1 - 9]";
+	//message += "\n__1__|__2__|__3__";
+	//message += "\n__4__|__5__|__6__";
+	//message += "\n  7  |  8  |  9  ";
 }
 
 TicTacToePLEngine::~TicTacToePLEngine()
@@ -34,7 +37,7 @@ void TicTacToePLEngine::plSetFirstPlayer(char symbol)
 }
 
 
-void TicTacToePLEngine::plHumanPlay(int square)
+int TicTacToePLEngine::plHumanPlay(int square)
 {
 	//prepare parameters (Square,ReturnedStatus):
 	PlTermv human_play_params(2);
@@ -44,8 +47,7 @@ void TicTacToePLEngine::plHumanPlay(int square)
 	PlQuery	humanPlay("humanPlay", human_play_params);
 	humanPlay.next_solution();
 
-	//this->message = "well done!";
-	status = human_play_params[1]; //Status is updated
+	return human_play_params[1]; //Status 
 }
 
 int TicTacToePLEngine::plComputerPlay()
@@ -70,13 +72,13 @@ string TicTacToePLEngine::getMessage()
 
 int TicTacToePLEngine::getComputerMove()
 {
-	message = "Computer made move.\n\n Select square!";
+	message = "Select square";
 	return plComputerPlay();
 }
 
 int TicTacToePLEngine::getStatus()
 {
-	if (status == 0) message = "Nobody won, better luck next time...";
+	if (status == 3) message = "Nobody won, better luck next time...";
 	else if (status == 1) message = "Congratulations, you won!";
 	else if (status == 2) message = "Computer won, better luck next time...";
 	else message = "playing tic tac toe";
@@ -86,7 +88,7 @@ int TicTacToePLEngine::getStatus()
 
 void TicTacToePLEngine::playTTT(int square)
 {
-	plHumanPlay(square);
+	status= plHumanPlay(square);
 	getStatus();
 
 }

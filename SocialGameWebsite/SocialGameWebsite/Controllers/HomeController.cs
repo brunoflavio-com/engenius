@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SocialGameWebsite.SocialGameBLLService;
 using SocialGameWebsite.Models;
+using SocialGameWebsite.Util;
 
 namespace SocialGameWebsite.Controllers
 {
@@ -33,8 +34,7 @@ namespace SocialGameWebsite.Controllers
             }
             else
             {
-                byte[] userEmailBytes = Convert.FromBase64String(id);
-                UserEmail = System.Text.Encoding.UTF8.GetString(userEmailBytes);
+                UserEmail = Base64.Decode(id);
                 ViewBag.myself = false;
             }
 
@@ -49,7 +49,7 @@ namespace SocialGameWebsite.Controllers
             }
 
             ViewBag.FriendsUserViewModel = Friends;
-
+            
             return View(UserViewModel);
         }
 

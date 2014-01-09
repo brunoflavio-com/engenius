@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Mvc.Html;
 using System.Web.Mvc.Ajax;
+using SocialGameWebsite.Util;
 
 namespace SocialGameWebsite.Helpers
 {
@@ -18,16 +19,13 @@ namespace SocialGameWebsite.Helpers
             UrlHelper UrlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             AjaxHelper AjaxHelper = new AjaxHelper(HtmlHelper.ViewContext, HtmlHelper.ViewDataContainer);
 
-            StringBuilder outputHTML = new StringBuilder();
-
-            byte[] userEmailBytes = System.Text.Encoding.UTF8.GetBytes(user.Email);
-            string userEmailBase64 = Convert.ToBase64String(userEmailBytes);
+            StringBuilder outputHTML = new StringBuilder();            
 
             outputHTML.Append("<div id=\"user_")
-                      .Append(userEmailBase64)
+                      .Append(Base64.Encode(user.Email))
                       .Append("\" ")
                       .Append("onclick=\"if(event.target.tagName === 'A')return; location.href='")
-                      .Append(UrlHelper.Action("ViewProfile", "Home", new { id = userEmailBase64 }))
+                      .Append(UrlHelper.Action("ViewProfile", "Home", new { id = Base64.Encode(user.Email) }))
                       .Append("';\" ")
                       .Append("class=\"user ")
                       .Append("mood_")
