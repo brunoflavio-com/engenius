@@ -1,11 +1,12 @@
 ﻿html {
-    background-color: #00CDCD;
+    //background-color: #00CDCD;
+    background-color:darkgray;
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: #00CDCD;
+    background-color: #4863A0;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -98,14 +99,21 @@ h5, h6 {
 }
 
 #body {
-    background-color: #00CDCD;
+    background-color: #00abab;    
+    background-size: cover;
+    background-repeat: no-repeat;    
+
     clear: both;
     padding-bottom: 35px;
+    padding-top: 35px;
 }
 
     .main-content {
         padding-left: 10px;
         padding-top: 30px;
+        
+        background-color: rgba(255,255,255,0.8);
+        border-radius: 5px;
     }
 
     .featured + .main-content {

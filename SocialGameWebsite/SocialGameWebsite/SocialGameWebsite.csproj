@@ -187,6 +187,7 @@
     <Compile Include="Authorization\SocialGameWebSecurity.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -269,6 +270,12 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\user.png" />
     <Content Include="Images\user2.png" />
+    <Content Include="Images\wp\0.jpg" />
+    <Content Include="Images\wp\1.jpg" />
+    <Content Include="Images\wp\2.jpg" />
+    <Content Include="Images\wp\3.jpg" />
+    <Content Include="Images\wp\4.jpg" />
+    <Content Include="Scripts\RandomBackground.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
