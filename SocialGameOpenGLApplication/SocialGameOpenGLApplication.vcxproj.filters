@@ -223,5 +223,7 @@
     <None Include="maze.pl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -153,8 +153,10 @@
     <ClCompile Include="UserTag.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="hangman.pl" />
     <None Include="maze.pl" />
+    <None Include="packages.config" />
     <None Include="tictactoe.pl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
