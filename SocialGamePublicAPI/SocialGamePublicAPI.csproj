@@ -79,7 +79,19 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201401092019573_additional.cs" />
+    <Compile Include="Migrations\201401092019573_additional.Designer.cs">
+      <DependentUpon>201401092019573_additional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201401092028499_additional1.cs" />
+    <Compile Include="Migrations\201401092028499_additional1.Designer.cs">
+      <DependentUpon>201401092028499_additional1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Maze.cs" />
     <Compile Include="Model\Session.cs" />
+    <Compile Include="Model\Word.cs" />
+    <Compile Include="Model\WordCategory.cs" />
     <Compile Include="Service References\SocialGameBLLService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -92,6 +104,7 @@
     <Compile Include="Service\RelationshipTag.cs" />
     <Compile Include="Service\ServiceConverter.cs" />
     <Compile Include="Service\User.cs" />
+    <Compile Include="Service\UserGameInfo.cs" />
     <Compile Include="SocialGameAPI.svc.cs">
       <DependentUpon>SocialGameAPI.svc</DependentUpon>
     </Compile>
@@ -137,6 +150,9 @@
     <Content Include="Service References\SocialGameBLLService\SocialGamePublicAPI.SocialGameBLLService.RelationshipRequest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\SocialGameBLLService\SocialGamePublicAPI.SocialGameBLLService.HumourStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -151,7 +167,12 @@
     <WCFMetadataStorage Include="Service References\SocialGameBLLService\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <EmbeddedResource Include="Migrations\201401092019573_additional.resx">
+      <DependentUpon>201401092019573_additional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401092028499_additional1.resx">
+      <DependentUpon>201401092028499_additional1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

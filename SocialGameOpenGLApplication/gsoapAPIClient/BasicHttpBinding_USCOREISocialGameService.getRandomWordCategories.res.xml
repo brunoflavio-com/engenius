@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:ns4="http://schemas.datacontract.org/2004/07/System"
+  xmlns:ns5="http://schemas.datacontract.org/2004/07/SocialGamePublicAPI.Service"
+  xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"
+  xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/"
+  xmlns:ns3="http://schemas.datacontract.org/2004/07/System.ServiceModel"
+  xmlns:ns1="http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI">
+ <SOAP-ENV:Body>
+  <ns1:getRandomWordCategoriesResponse>
+   <ns1:getRandomWordCategoriesResult>
+    <arr:string></arr:string>
+    <arr:string></arr:string>
+   </ns1:getRandomWordCategoriesResult>
+  </ns1:getRandomWordCategoriesResponse>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
