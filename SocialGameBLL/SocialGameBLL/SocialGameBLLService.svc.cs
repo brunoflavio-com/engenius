@@ -171,6 +171,18 @@ namespace SocialGameBLL
             }
         }
 
+        public void AcceptRelationshipRequest(User Me, User Other)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                Controller.AcceptRelationshipRequest(Me, Other);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public ICollection<User> GetShortestPath(User Me, User Goal, int Depth)
         {
             try
