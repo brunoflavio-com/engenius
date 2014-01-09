@@ -76,6 +76,18 @@ namespace SocialGameBLL
             return Controller.GetRelationshipTags();
         }
 
+        public RelationshipTag GetRelationshipTag(int Id)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.GetRelationshipTag(Id);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public Graph GetRelationships(User User, int Depth)
         {
             RelationshipsController Controller = new RelationshipsController();

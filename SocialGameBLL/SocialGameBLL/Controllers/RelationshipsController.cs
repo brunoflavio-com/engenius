@@ -42,6 +42,18 @@ namespace SocialGameBLL.Controllers
             return RelationshipTags;
         }
 
+        public RelationshipTag GetRelationshipTag(int Id)
+        {
+            try
+            {
+                RelationTagEntity RTEntity = db.RelationTags.Find(Id);
+                return EntityServiceConverter.ConvertRelationTagEntityToRelationTag(RTEntity);
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         public Graph GetRelationships(User User, int Depth)
         {
             Node FirstNode = new Node
@@ -64,7 +76,7 @@ namespace SocialGameBLL.Controllers
                 Users = ConvertNodeToUser(ListOfNodes),
                 Relationships = EntityServiceConverter.ConvertRelationshipEntitiesToRelationships(ListOfArcs),
                 Interests = EntityServiceConverter.ConvertToInterestFromInterestEntities(Interests),
-                RelationshipTags = EntityServiceConverter.ConvertToRelationshipTagsFromRelationTagEntities(RelationTags),
+                RelationshipTags = EntityServiceConverter.ConvertRelationTagEntitiesToRelationshipTag(RelationTags),
                 HumourStatus = EntityServiceConverter.ConvertToHumourStatusFromHumourStatusEntities(HumourStatus)
             };
         }
@@ -89,7 +101,7 @@ namespace SocialGameBLL.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message, e);
             }
         }
 

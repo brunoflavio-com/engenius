@@ -39,6 +39,8 @@ namespace SocialGameBLL
         [OperationContract]
         ICollection<RelationshipTag> GetRelationshipTags();
         [OperationContract]
+        RelationshipTag GetRelationshipTag(int Id);
+        [OperationContract]
         ICollection<User> GetRelatedUsers(User User);
         [OperationContract]
         Graph GetRelationships(User User, int Depth);

@@ -23,6 +23,15 @@ namespace SocialGameBLL.Util
             return RelationshipTags;
         }
 
+        public static RelationshipTag ConvertRelationTagEntityToRelationTag(RelationTagEntity RelationTagEntity)
+        {
+            return new RelationshipTag
+                {
+                    Id = RelationTagEntity.ID,
+                    Name = RelationTagEntity.Name
+                };
+        }
+
         public static ICollection<Relationship> ConvertRelationshipEntitiesToRelationships(IList<RelationshipEntity> RelationshipEntities)
         {
             ICollection<Relationship> Relationships = new List<Relationship>();
@@ -37,20 +46,6 @@ namespace SocialGameBLL.Util
                 });
             }
             return Relationships;
-        }
-
-        public static ICollection<RelationshipTag> ConvertToRelationshipTagsFromRelationTagEntities(ICollection<RelationTagEntity> RelationTagEntities)
-        {
-            ICollection<RelationshipTag> RelationshipTags = new List<RelationshipTag>();
-            foreach (RelationTagEntity RelationTagEntity in RelationTagEntities)
-            {
-                RelationshipTags.Add(new RelationshipTag
-                {
-                    Id = RelationTagEntity.ID,
-                    Name = RelationTagEntity.Name
-                });
-            }
-            return RelationshipTags;
         }
 
         public static ICollection<Interest> ConvertToInterestFromInterestEntities(ICollection<InterestEntity> InterestEntities)
