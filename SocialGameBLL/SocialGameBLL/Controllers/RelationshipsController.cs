@@ -81,6 +81,27 @@ namespace SocialGameBLL.Controllers
             };
         }
 
+        public Relationship CheckRelatedUser(User Me, User Other)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                UserEntity OtherEntity = db.Users.Find(Other.Email);
+                RelationshipEntity RelationshipEntity;
+                try
+                {
+                    RelationshipEntity = MyEntity.GetAllUsersRelationships().Single(r => (r.UserEmail == MyEntity.Email && r.FriendEmail == OtherEntity.Email) || (r.FriendEmail == MyEntity.Email && r.UserEmail == OtherEntity.Email));
+                }catch(Exception e)
+                {
+                    RelationshipEntity = null;
+                }
+                return EntityServiceConverter.ConvertRelationshipEntityToRelationship(RelationshipEntity);
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         public RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength)
         {
             try
@@ -153,6 +174,36 @@ namespace SocialGameBLL.Controllers
                 db.RelationshipsRequests.Remove(RelationshipRequestEntity);
                 db.SaveChanges();
 
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public void RejectRelationshipRequest(User Me, User Other)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                UserEntity OtherEntity = db.Users.Find(Other.Email);
+                RelationshipRequestEntity RelationshipRequestEntity = db.RelationshipsRequests.Find(OtherEntity.Email, MyEntity.Email);
+                db.RelationshipsRequests.Remove(RelationshipRequestEntity);
+                db.SaveChanges();
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public RelationshipRequest CheckPendingRequest(User Me, User Other)
+        {
+            try
+            {
+                RelationshipRequestEntity RelationshipRequestEntity = db.RelationshipsRequests.Find(Me.Email, Other.Email);
+                if (RelationshipRequestEntity == null)
+                    return null;
+
+                return EntityServiceConverter.ConvertToRelationshipRequestFromRelationshipRequestEntity(RelationshipRequestEntity);
             }catch(Exception e)
             {
                 throw new Exception(e.Message, e);
