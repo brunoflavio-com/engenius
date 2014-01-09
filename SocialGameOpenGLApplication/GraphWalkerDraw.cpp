@@ -11,7 +11,8 @@
 #define MAX_HEIGHT 5
 GLfloat white[4] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat red[4] = { 1.0, 0.0, 0.0, 1.0 };
-GLfloat blue[4] = { 0.0, 1.0, 0.0, 1.0 };
+GLfloat blue[4] = { 0.0, 0.0, 1.0, 1.0 };
+GLfloat green[4] = { 0.0, 1.0, 0.0, 1.0 };
 
 GraphWalkerDraw::GraphWalkerDraw(bool drawUserNames)
 {	
@@ -26,12 +27,6 @@ GraphWalkerDraw::~GraphWalkerDraw()
 void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, int position, int total){
 	User * userB = relationship->getDestinationUser(userA);
 
-	/*Adjust height to max_height*/
-	//float Za = MAX_HEIGHT * userA->z / maxUserConnections;
-	//float Zb = MAX_HEIGHT * userB->z / maxUserConnections;
-
-	/*Adjust cylinder radios to max_cylinder_radius*/
-	//float cylinderRadius = SPHERE_RADIUS * 0.75 * relationship->strength / maxConnectionStrenght;
 	GLUquadricObj *quadric;
 
 	float deltaX = userB->x - userA->x;
@@ -101,6 +96,10 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	GLfloat * color = white;
 
 	if (userA->isTarget){
+		color = green;
+	}
+
+	if (userA->isCenter){
 		color = blue;
 	}
 

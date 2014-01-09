@@ -123,6 +123,9 @@
     <ClInclude Include="GraphFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ISelectable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -164,9 +167,6 @@
     <ClCompile Include="GraphScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="graphCoordWalker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GraphWalker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -204,6 +204,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GraphFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ISelectable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="graphCoordWalker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

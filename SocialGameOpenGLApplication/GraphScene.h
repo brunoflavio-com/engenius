@@ -57,7 +57,7 @@ public:
 
 	bool ColisionTest(GLdouble newx, GLdouble newy, GLdouble newz);
 
-	virtual Graph * getGraph(std::string loginEmail) = 0;
+	virtual Graph * getGraph(std::string loginEmail, int level) = 0;
 	virtual void moveGraphToNewUser(User * user) = 0;
 };
 

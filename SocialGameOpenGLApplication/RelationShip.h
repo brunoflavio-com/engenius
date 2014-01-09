@@ -15,7 +15,7 @@ class Relationship :
 	User * userB;
 	int strength;
 	RelationshipTag * relationshipTag;
-
+	bool contains(User * user);
 	Relationship();
 	~Relationship();
 	User * getDestinationUser(User * originUser);

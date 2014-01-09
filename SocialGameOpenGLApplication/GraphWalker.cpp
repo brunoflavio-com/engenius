@@ -30,6 +30,7 @@ void GraphWalker::walk(User * graph, int graphDepth){
 			{
 				if (std::find(visitedRelationShips.begin(), visitedRelationShips.end(), user->relationships.at(i)) == visitedRelationShips.end()){
 					//RelationShip is not visited
+					visitedRelationShips.push_back(user->relationships.at(i));
 					walkConnection(user, user->relationships.at(i), i, user->relationships.size());
 
 					if (std::find(visitedUsers.begin(), visitedUsers.end(), tempUser) == visitedUsers.end()){

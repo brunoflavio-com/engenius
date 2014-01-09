@@ -4,9 +4,11 @@
 #include <gl\freeglut.h>
 
 
+#define REMOTE_GRAPH_LEVEL 3
+
 AdvanceModeGraphScene::AdvanceModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail):GraphScene(client, loginEmail)
 {
-	graph = getGraph(loginEmail);
+	graph = getGraph(loginEmail, REMOTE_GRAPH_LEVEL);
 }
 
 void AdvanceModeGraphScene::Draw3dObjects(void){
@@ -30,12 +32,13 @@ void AdvanceModeGraphScene::DrawOverlay(void){
 
 }
 
-Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail){
-	ns5__Graph * ns5_graph = apiClient->getGraph(email, 5);
-	return GraphFactory::convertGraph(ns5_graph, loginEmail);
+Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail ,int level){
+	ns5__Graph * ns5_graph = apiClient->getGraph(email, level);
+	Graph * tempGraph = GraphFactory::convertGraph(ns5_graph, loginEmail);
+	return tempGraph;
 }
 
 void AdvanceModeGraphScene::moveGraphToNewUser(User * user){
 	Graph * tempGraph = graph;
-	graph = getGraph(user->email);
+	graph = getGraph(user->email,REMOTE_GRAPH_LEVEL);
 }
