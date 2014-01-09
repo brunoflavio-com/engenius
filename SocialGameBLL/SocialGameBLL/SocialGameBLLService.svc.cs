@@ -106,6 +106,19 @@ namespace SocialGameBLL
             }
         }
 
+        public Relationship CheckRelatedUser(User Me, User Other)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.CheckRelatedUser(Me, Other);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public User GetUser(string Email)
         {
             try
@@ -177,6 +190,30 @@ namespace SocialGameBLL
             {
                 RelationshipsController Controller = new RelationshipsController();
                 Controller.AcceptRelationshipRequest(Me, Other);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public void RejectRelationshipRequest(User Me, User Other)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                Controller.RejectRelationshipRequest(Me, Other);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public RelationshipRequest CheckPendingRequest(User Me, User Other)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.CheckPendingRequest(Me, Other);
             }catch(Exception e)
             {
                 throw new FaultException(e.Message);
