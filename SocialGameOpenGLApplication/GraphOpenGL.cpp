@@ -18,6 +18,7 @@ GraphOpenGL::GraphOpenGL(){
 GraphScene * GraphOpenGL::advanceScene;
 GraphScene  * GraphOpenGL::normalScene;
 GraphScene * GraphOpenGL::currentScene;
+
 bool GraphOpenGL::advancedMode = true;
 
 GraphOpenGL::~GraphOpenGL(){
@@ -137,11 +138,15 @@ void GraphOpenGL::Key(unsigned char key, int x, int y){
 		//Change Mode Advance - Normal
 		if (advancedMode)
 		{
-			normalScene = new NormalModeGraphScene(advanceScene->apiClient, advanceScene->email, 2);
+			normalScene = new NormalModeGraphScene(advanceScene->apiClient, advanceScene->email, advanceScene->userLevel);
+			normalScene->userLevel = advanceScene->userLevel;
+			normalScene->userPoints = advanceScene->userPoints;
 			currentScene = normalScene;
 			advancedMode = false;
 		}
 		else{
+			advanceScene->userLevel = normalScene->userLevel;
+			advanceScene->userPoints = normalScene->userPoints;
 			currentScene = advanceScene;
 			delete normalScene;
 			
@@ -164,7 +169,6 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 {
 	advanceScene = new AdvanceModeGraphScene(client, email);
 	currentScene = advanceScene;
-
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);

@@ -62,21 +62,33 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		}
 		users = tempUsers;
 	}
-	int nonDirectRelationShips = rand() % graph->users.size();
+	int nUsers = graph->users.size();
+	int nonDirectRelationShips = rand() % nUsers;
+	int maxConnectionPossible = nUsers*(nUsers - 1) / 2;
 
 	for (int i = 0; i < nonDirectRelationShips; i++){
+		if (maxConnectionPossible == graph->relationShips.size())
+		{
+			//There cannot be more connections when every user is connected
+			break;
+		}
 		Relationship * relationShip = new Relationship();
 		RelationshipTag * relationShipTag = relationShipTags[rand() % 3];
 		relationShip->strength = 1 + rand() % 5;
-		User * userA = graph->users.at(rand() % graph->users.size());
+		
 		User * userB = NULL;
+		User * userA = NULL;
 
-		while (userB == NULL || userB == userA)
-		{
+		
+		while (userB == userA)
+		{ 
+			userA = graph->users.at(rand() % graph->users.size());
 		    userB = graph->users.at(rand() % graph->users.size());
+			//Checking if Relationship already exists
 			for each(Relationship * r in graph->relationShips){
 				if (r->contains(userA) && r->contains(userB)){
 					userB = NULL;
+					userA = NULL;
 				}
 				
 			}
@@ -86,6 +98,7 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		userA->relationships.push_back(relationShip);
 		userB->relationships.push_back(relationShip);
 		graph->relationShips.push_back(relationShip);
+		
 	}
 	int maxUserRelationShips = 0;
 	for (int i = 0; i < graph->users.size();i++){

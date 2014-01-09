@@ -20,6 +20,8 @@ protected:
 	Graph * graph;
 
 public:
+	int userLevel;
+	float userPoints;
 	string email;
 	SocialGamePublicAPIClient * apiClient;
 
@@ -59,5 +61,6 @@ public:
 
 	virtual Graph * getGraph(std::string loginEmail, int level) = 0;
 	virtual void moveGraphToNewUser(User * user) = 0;
+	void getUserPointsAndLevel();
 };
 

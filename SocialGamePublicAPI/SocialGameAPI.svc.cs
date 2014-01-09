@@ -63,8 +63,6 @@ namespace SocialGamePublicAPI
         }
 
         public List<string> getRandomWordCategories(string Token, int number){
-
-            
             Session Session = getSession(Token);
             SessionContext context = new SessionContext();
             List<WordCategory> categories = context.Categories.ToList<WordCategory>();
