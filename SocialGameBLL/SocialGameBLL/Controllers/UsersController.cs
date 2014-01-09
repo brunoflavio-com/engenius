@@ -29,6 +29,17 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public int GetTotalNumberOfUsers()
+        {
+            try
+            {
+                return db.Users.Count();
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         public User UpdateUser(User User)
         {
             try

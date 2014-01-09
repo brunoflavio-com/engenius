@@ -58,6 +58,18 @@ namespace SocialGameBLL
             }
         }
 
+        public int GetTotalNumberOfUsers()
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetTotalNumberOfUsers();
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public ICollection<RelationshipTag> GetRelationshipTags()
         {
             RelationshipsController Controller = new RelationshipsController();
