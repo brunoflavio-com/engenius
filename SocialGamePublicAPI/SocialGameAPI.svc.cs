@@ -63,15 +63,25 @@ namespace SocialGamePublicAPI
         }
 
         public List<string> getRandomWordCategories(string Token, int number){
+
+            
             Session Session = getSession(Token);
             SessionContext context = new SessionContext();
             List<WordCategory> categories = context.Categories.ToList<WordCategory>();
-
+            if (number > categories.Count()) {
+                throw new FaultException("Not enough categories");
+            }
             Random random = new Random();
-            List<string> tempCategories = new List<string>(); ;
+            List<string> tempCategories = new List<string>();
+            List<int> numbers = new List<int>();
             for (int i = 0; i < number; i++)
             {
-                int randomNumber = random.Next(0, categories.Count());
+                int randomNumber = -1;
+                    while(randomNumber==-1 || numbers.Contains(randomNumber))
+                    {
+                         randomNumber = random.Next(0, categories.Count());
+                    }
+                    numbers.Add(randomNumber);
                 tempCategories.Add(categories.ElementAt(randomNumber).CategoryName);
             }
             return tempCategories;
@@ -83,7 +93,7 @@ namespace SocialGamePublicAPI
             SessionContext context = new SessionContext();
             WordCategory wordCategory = context.Categories.First(e => e.CategoryName == category);
             Random random = new Random();
-            List<string> tempCategories = new List<string>(); ;
+            List<string> tempCategories = new List<string>();
             int randomNumber = random.Next(0, wordCategory.words.Count());
             return wordCategory.words.ElementAt(randomNumber).word;    
         }
