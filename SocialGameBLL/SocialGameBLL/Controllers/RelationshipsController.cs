@@ -88,18 +88,72 @@ namespace SocialGameBLL.Controllers
                 UserEntity MyEntity = db.Users.Find(Me.Email);
                 UserEntity OtherEntity = db.Users.Find(Other.Email);
                 RelationTagEntity TagEntity = db.RelationTags.Find(RelationshipTagId);
-                db.RelationshipsRequests.Add(new RelationshipRequestEntity
-                    {
-                        UserEmail = MyEntity.Email,
-                        FriendEmail = OtherEntity.Email,
-                        RelationTagID = TagEntity.ID,
-                        Strength = Strength
-                    });
+
+                RelationshipRequestEntity RelationshipRequestEntity = db.RelationshipsRequests.Find(MyEntity.Email, OtherEntity.Email);
+
+                if (RelationshipRequestEntity != null)
+                {
+                    RelationshipRequestEntity.RelationTagID = TagEntity.ID;
+                    RelationshipRequestEntity.Strength = Strength;
+                }
+                else
+                {
+                    RelationshipRequestEntity = new RelationshipRequestEntity();
+
+                    RelationshipRequestEntity.UserEmail = MyEntity.Email;
+                    RelationshipRequestEntity.FriendEmail = OtherEntity.Email;
+                    RelationshipRequestEntity.RelationTagID = TagEntity.ID;
+                    RelationshipRequestEntity.Strength = Strength;
+
+                    db.RelationshipsRequests.Add(RelationshipRequestEntity);
+                }
                 db.SaveChanges();
-                RelationshipRequestEntity RequestEntityCreated = db.RelationshipsRequests.Find(MyEntity.Email, OtherEntity.Email);
-                return EntityServiceConverter.ConvertToRelationshipRequestFromRelationshipRequestEntity(RequestEntityCreated);
+                return EntityServiceConverter.ConvertToRelationshipRequestFromRelationshipRequestEntity(RelationshipRequestEntity);
+            }catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
             }
-            catch (Exception e)
+        }
+
+        public void AcceptRelationshipRequest(User Me, User Other)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                UserEntity OtherEntity = db.Users.Find(Other.Email);
+
+                RelationshipEntity RelationshipEntity;
+                RelationshipRequestEntity RelationshipRequestEntity = db.RelationshipsRequests.Find(OtherEntity.Email, MyEntity.Email);
+                try
+                {
+                    RelationshipEntity = MyEntity.GetAllUsersRelationships().Single(r => (r.UserEmail == MyEntity.Email && r.FriendEmail == OtherEntity.Email) || (r.FriendEmail == MyEntity.Email && r.UserEmail == OtherEntity.Email));
+                }
+                catch (Exception e)
+                {
+                    RelationshipEntity = null;
+                }
+
+
+                if(RelationshipEntity != null)
+                {
+                    RelationshipEntity.Strength = RelationshipRequestEntity.Strength;
+                    RelationshipEntity.RelationTagID = RelationshipRequestEntity.RelationTagID;
+                }
+                else
+                {
+                    RelationshipEntity = new RelationshipEntity();
+
+                    RelationshipEntity.FriendEmail = MyEntity.Email;
+                    RelationshipEntity.UserEmail = OtherEntity.Email;
+                    RelationshipEntity.Strength = RelationshipRequestEntity.Strength;
+                    RelationshipEntity.RelationTagID = RelationshipRequestEntity.RelationTagID;
+                    db.Relationships.Add(RelationshipEntity);
+                }
+
+                db.RelationshipsRequests.Remove(RelationshipRequestEntity);
+                db.SaveChanges();
+
+            }catch(Exception e)
             {
                 throw new Exception(e.Message, e);
             }
