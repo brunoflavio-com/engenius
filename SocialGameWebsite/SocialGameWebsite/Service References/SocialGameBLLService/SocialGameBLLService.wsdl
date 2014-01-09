@@ -68,6 +68,12 @@
   <wsdl:message name="ISocialGameBLLService_GetRelationshipTags_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRelationshipTagsResponse" />
   </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetRelatedUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelatedUsers" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetRelatedUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelatedUsersResponse" />
+  </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_GetRelationships_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRelationships" />
   </wsdl:message>
@@ -85,6 +91,48 @@
   </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_GetShortestPath_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetShortestPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserLevel_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserLevel" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserLevel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserPoints_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPoints" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserPoints_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_SetUserLevel_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserLevel" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_SetUserLevel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_SetUserPoints_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserPoints" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_SetUserPoints_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetUserPointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetFriendsWithCommonInterests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsWithCommonInterests" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetFriendsWithCommonInterests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsWithCommonInterestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetGraphStats_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGraphStats" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetGraphStats_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGraphStatsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPossibleFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPossibleFriends" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPossibleFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPossibleFriendsResponse" />
   </wsdl:message>
   <wsdl:portType name="ISocialGameBLLService">
     <wsdl:operation name="GetData">
@@ -124,6 +172,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTags" message="tns:ISocialGameBLLService_GetRelationshipTags_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTagsResponse" message="tns:ISocialGameBLLService_GetRelationshipTags_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetRelatedUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelatedUsers" message="tns:ISocialGameBLLService_GetRelatedUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelatedUsersResponse" message="tns:ISocialGameBLLService_GetRelatedUsers_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetRelationships">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationships" message="tns:ISocialGameBLLService_GetRelationships_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipsResponse" message="tns:ISocialGameBLLService_GetRelationships_OutputMessage" />
@@ -135,6 +187,34 @@
     <wsdl:operation name="GetShortestPath">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetShortestPath" message="tns:ISocialGameBLLService_GetShortestPath_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetShortestPathResponse" message="tns:ISocialGameBLLService_GetShortestPath_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserLevel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserLevel" message="tns:ISocialGameBLLService_GetUserLevel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserLevelResponse" message="tns:ISocialGameBLLService_GetUserLevel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPoints">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserPoints" message="tns:ISocialGameBLLService_GetUserPoints_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserPointsResponse" message="tns:ISocialGameBLLService_GetUserPoints_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserLevel">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/SetUserLevel" message="tns:ISocialGameBLLService_SetUserLevel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/SetUserLevelResponse" message="tns:ISocialGameBLLService_SetUserLevel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserPoints">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/SetUserPoints" message="tns:ISocialGameBLLService_SetUserPoints_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/SetUserPointsResponse" message="tns:ISocialGameBLLService_SetUserPoints_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendsWithCommonInterests">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetFriendsWithCommonInterests" message="tns:ISocialGameBLLService_GetFriendsWithCommonInterests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetFriendsWithCommonInterestsResponse" message="tns:ISocialGameBLLService_GetFriendsWithCommonInterests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGraphStats">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetGraphStats" message="tns:ISocialGameBLLService_GetGraphStats_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetGraphStatsResponse" message="tns:ISocialGameBLLService_GetGraphStats_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPossibleFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPossibleFriends" message="tns:ISocialGameBLLService_GetPossibleFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPossibleFriendsResponse" message="tns:ISocialGameBLLService_GetPossibleFriends_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISocialGameBLLService" type="tns:ISocialGameBLLService">
@@ -223,6 +303,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetRelatedUsers">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetRelatedUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRelationships">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetRelationships" style="document" />
       <wsdl:input>
@@ -243,6 +332,69 @@
     </wsdl:operation>
     <wsdl:operation name="GetShortestPath">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetShortestPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserLevel">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetUserLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPoints">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetUserPoints" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserLevel">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/SetUserLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserPoints">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/SetUserPoints" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendsWithCommonInterests">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetFriendsWithCommonInterests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGraphStats">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetGraphStats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPossibleFriends">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetPossibleFriends" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -22,13 +22,37 @@ namespace SocialGameWebsite.Controllers
         }
 
         [Authorize]
-        public ActionResult ViewProfile()
+        public ActionResult ViewProfile(string id)
         {
-            SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
+            string UserEmail;
+
+            if (id == null) 
+            {
+               UserEmail = User.Identity.Name;
+               ViewBag.myself = true;
+            }
+            else
+            {
+                byte[] userEmailBytes = Convert.FromBase64String(id);
+                UserEmail = System.Text.Encoding.UTF8.GetString(userEmailBytes);
+                ViewBag.myself = false;
+            }
+
+            SocialGameBLLService.User ServiceUser = Proxy.GetUser(UserEmail);
             IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
             UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
+
+            ICollection<UserViewModel> Friends = new List<UserViewModel>();
+            foreach(User FriendServiceUser in Proxy.GetRelatedUsers(ServiceUser) )
+            {
+                Friends.Add( new UserViewModel(FriendServiceUser, ServiceHumourStatus) );
+            }
+
+            ViewBag.FriendsUserViewModel = Friends;
+
             return View(UserViewModel);
         }
+
 
         [Authorize]
         public ActionResult EditProfile()

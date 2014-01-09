@@ -1,0 +1,35 @@
+﻿.user{
+  width:200px;
+  height:200px;
+  float:left;
+  margin:5px;
+  border : 1px dotted;
+  text-align: center;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.user:hover {
+  border-style:solid;
+}
+
+.mood_1 {
+    border-color: #ff6a00;    
+}
+
+.mood_2 {
+    border-color: #00ff6a;    
+}
+
+.user .header {
+    height: 100px;
+}
+
+.user .image {
+    height: 100%;
+}
+
+.user-grid {
+    width: 100%;
+    overflow: hidden;
+}

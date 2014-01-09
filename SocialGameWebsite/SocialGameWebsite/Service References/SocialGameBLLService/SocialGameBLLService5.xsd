@@ -41,6 +41,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RelationshipTag" nillable="true" type="tns:RelationshipTag" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
   <xs:complexType name="Graph">
     <xs:sequence>
       <xs:element minOccurs="0" name="HumourStatus" nillable="true" type="tns:ArrayOfHumourStatus" />
@@ -79,12 +85,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Relationship" nillable="true" type="tns:Relationship" />
-  <xs:complexType name="ArrayOfUser">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
   <xs:complexType name="RelationshipRequest">
     <xs:sequence>
       <xs:element minOccurs="0" name="RelationshipTagId" type="xs:int" />
