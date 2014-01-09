@@ -118,7 +118,7 @@ void GraphOpenGL::redisplayAll(void)
 }
 
 void GraphOpenGL::Timer(int value){
-	glutTimerFunc(1, Timer, 0);
+	glutTimerFunc(20, Timer, value);
 	currentScene->Timer(value);
 	//glutPostRedisplay();
 	redisplayAll();
@@ -175,7 +175,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 
 	//Main window
 	Init();
-	glutTimerFunc(1, Timer, 0);
+	glutTimerFunc(20, Timer, 0);
 	glutReshapeFunc(Reshape);
 	glutDisplayFunc(Draw);
 	glutKeyboardFunc(Key);
@@ -188,7 +188,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 	
 	Window.Top = glutCreateSubWindow(Window.Main, GAP, GAP, 200, 200);
 	subWindowInit();
-	glutTimerFunc(1, Timer, 0);
+	glutTimerFunc(20, Timer, 1);
 	glutReshapeFunc(ReshapeMinimap);
 	glutDisplayFunc(DrawMinimap);
 	glutKeyboardFunc(Key);
