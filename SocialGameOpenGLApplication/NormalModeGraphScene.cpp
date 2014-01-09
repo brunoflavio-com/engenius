@@ -9,7 +9,7 @@
 NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level):GraphScene(client, loginEmail)
 {
 	gameOn = false;
-	graph = getGraph(loginEmail);
+	graph = getGraph(loginEmail, level);
 	for each(User * u in graph->users){
 		if (u->graphLevel == level){
 			targetUser = u;
@@ -17,11 +17,12 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 			break;
 		}	
 	}
+
+
 }
 
-Graph * NormalModeGraphScene::getGraph(std::string loginEmail){
-	//TODO Graph Based on User Level
-	return GraphFactory::buildRandomGraph(3,loginEmail);
+Graph * NormalModeGraphScene::getGraph(std::string loginEmail, int level){
+	return  GraphFactory::buildRandomGraph(level, loginEmail);
 }
 
 void NormalModeGraphScene::Draw3dObjects(void){
@@ -64,13 +65,15 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
 	}
+
+	GraphScene::Key(key, x, y);
 }
 
 void NormalModeGraphScene::SpecialKey(int key, int x, int y)
 {
 	if (gameOn) return game->SpecialKey(key, x, y);
 
-
+	GraphScene::Key(key, x, y);
 }
 
 void NormalModeGraphScene::SpecialKeyUp(int key, int x, int y)

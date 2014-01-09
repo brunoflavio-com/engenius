@@ -18,11 +18,13 @@ void Graph::changeUser(std::string email){
 		tempUser->x = 0;
 		tempUser->y = 0;
 		tempUser->z = 0;
+		tempUser->isCenter = false;
 	}
 	
 	User * user = getUser(email);
 	graphCoordWalker coordWalker(maxUserConnections,maxConnectionStrenght);
 	coordWalker.walk(user);
+	user->isCenter = true;
 }
 
 

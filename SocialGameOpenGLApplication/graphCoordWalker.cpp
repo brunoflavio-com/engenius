@@ -21,7 +21,6 @@ void graphCoordWalker::walk(User * graph){
 	graph->x = 0;
 	graph->y = 0;
 	graph->z = MAX_HEIGHT *  graph->relationships.size() / maxUserConnections;
-
 	GraphWalker::walk(graph,-1);
 }
 
@@ -55,8 +54,9 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 		userB->y = userA->y + sy;
 		userB->z = MAX_HEIGHT *  userB->relationships.size() / maxUserConnections;
 
-		relationship->cylinderRadius = SPHERE_RADIUS * 0.75 * relationship->strength / maxStrenght;
+		
 	}
+	relationship->cylinderRadius = SPHERE_RADIUS * 0.75 * relationship->strength / maxStrenght;
 }
 
 int graphCoordWalker::getMaxConnectionStrenght() {

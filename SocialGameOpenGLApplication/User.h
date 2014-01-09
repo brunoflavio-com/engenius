@@ -22,10 +22,12 @@ public:
 	float cota;
 	float x, y, z;
 	bool isTarget;
-	 vector<Relationship *>  relationships;
-	 vector<UserTag *>  userTags;
-	 HumorStatus * humor;
-	 int getType();
+	bool isCenter;
+	bool canWalkThrough;
+	vector<Relationship *>  relationships;
+	vector<UserTag *>  userTags;
+	HumorStatus * humor;
+	int getType();
 	User();
 	~User();
 };

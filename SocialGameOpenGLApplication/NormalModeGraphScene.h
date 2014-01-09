@@ -27,6 +27,6 @@ public:
 	void PassiveMotion(int x, int y);
 	void moveGraphToNewUser(User * user);
 
-	Graph * getGraph(std::string loginEmail);
+	Graph * getGraph(std::string loginEmail ,int level);
 };
 

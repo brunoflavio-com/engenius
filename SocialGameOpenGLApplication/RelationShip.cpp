@@ -24,3 +24,13 @@ User * Relationship::getDestinationUser(User * originUser){
 int Relationship::getType(){
 	return RELATIONSHIP_TYPE;
 }
+
+bool Relationship::contains(User * user){
+	if (userA == user || userB == user)
+	{
+		return true;
+	}
+	else { 
+		return false; 
+	}
+}
