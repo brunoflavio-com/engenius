@@ -24,7 +24,7 @@ public:
 private:
 	PlEngine * prolog;
 
-	// Winner:1 - Human; 2 - Computer; 0 - Draw
+	// Winner:1 - Human; 2 - Computer; 
 	int winner;
 	int status;
 
@@ -33,13 +33,13 @@ private:
 	// Prepare the Tic tac Toe Game, initialize board and set first player ( x - Computer; o - Human)
 	void plSetFirstPlayer(char symbol);
 
-	// Human Move where Square:[1-9]
-	void plHumanPlay(int square);
+	// Human Move where Square:[1-9] ; return status game( 2- computer wins; 1- human wins; 3- draw; -1 -playing)
+	int plHumanPlay(int square);
 	
 	// Best Computer move, return Square [1-9]
 	int plComputerPlay();
 
-	// Verify status game: return status game( 2- computer wins; 1- human wins; 0- draw; -1 -playing)
+	// Verify status game: return status game( 2- computer wins; 1- human wins; 3- draw; -1 -playing)
 	int plStatusGame();
 
 	
