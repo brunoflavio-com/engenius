@@ -1,8 +1,33 @@
-﻿@model SocialGameWebsite.Models.UserViewModel
+﻿@using SocialGameWebsite.Helpers
+@using SocialGameWebsite.Models
+
+@Styles.Render("~/Content/usercss")
+@model SocialGameWebsite.Models.UserViewModel
+
 @{
     ViewBag.Title = "Profile";
 }
 
-<h2>@Model.Name @Model.Surname</h2>
-<p>@Model.Email</p>
+<div class="profileSection">
+    <h2>@Model.Name @Model.Surname</h2>
+    <p>@Model.Email</p>
+    @Html.LabelFor(model => model.Birthdate) @Html.DisplayFor(model => model.Birthdate)
+    @Html.LabelFor(model => model.PhoneNumber) @Html.DisplayFor(model => model.PhoneNumber)
+    @Html.LabelFor(model => model.LinkedinProfile) @Html.DisplayFor(model => model.LinkedinProfile)
+</div>
 
+@if (ViewBag.myself)
+{
+    <h2>My friends:</h2>    
+}
+else
+{
+    <h2>@Model.Name's friends:</h2>
+}
+
+<div class="user-grid">
+    @foreach (var friend in ViewBag.FriendsUserViewModel)
+    {
+        @Html.DisplayForUser(friend as UserViewModel);
+    }
+</div>

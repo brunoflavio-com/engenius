@@ -58,10 +58,34 @@ namespace SocialGameBLL
             }
         }
 
+        public int GetTotalNumberOfUsers()
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetTotalNumberOfUsers();
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public ICollection<RelationshipTag> GetRelationshipTags()
         {
             RelationshipsController Controller = new RelationshipsController();
             return Controller.GetRelationshipTags();
+        }
+
+        public RelationshipTag GetRelationshipTag(int Id)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.GetRelationshipTag(Id);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
         }
 
         public Graph GetRelationships(User User, int Depth)

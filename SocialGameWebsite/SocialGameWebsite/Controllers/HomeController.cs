@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SocialGameWebsite.SocialGameBLLService;
 using SocialGameWebsite.Models;
+using SocialGameWebsite.Util;
 
 namespace SocialGameWebsite.Controllers
 {
@@ -22,13 +23,36 @@ namespace SocialGameWebsite.Controllers
         }
 
         [Authorize]
-        public ActionResult ViewProfile()
+        public ActionResult ViewProfile(string id)
         {
-            SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
+            string UserEmail;
+
+            if (id == null) 
+            {
+               UserEmail = User.Identity.Name;
+               ViewBag.myself = true;
+            }
+            else
+            {
+                UserEmail = Base64.Decode(id);
+                ViewBag.myself = false;
+            }
+
+            SocialGameBLLService.User ServiceUser = Proxy.GetUser(UserEmail);
             IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
             UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
+
+            ICollection<UserViewModel> Friends = new List<UserViewModel>();
+            foreach(User FriendServiceUser in Proxy.GetRelatedUsers(ServiceUser) )
+            {
+                Friends.Add( new UserViewModel(FriendServiceUser, ServiceHumourStatus) );
+            }
+
+            ViewBag.FriendsUserViewModel = Friends;
+            
             return View(UserViewModel);
         }
+
 
         [Authorize]
         public ActionResult EditProfile()

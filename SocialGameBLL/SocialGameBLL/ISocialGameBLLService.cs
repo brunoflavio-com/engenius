@@ -29,6 +29,8 @@ namespace SocialGameBLL
         [OperationContract]
         User GetUser(string Email);
         [OperationContract]
+        int GetTotalNumberOfUsers();
+        [OperationContract]
         User UpdateUser(User User);
         [OperationContract]
         HumourStatus GetHumourStatus(int Id);
@@ -36,6 +38,8 @@ namespace SocialGameBLL
         ICollection<HumourStatus> GetAllHumourStatus();
         [OperationContract]
         ICollection<RelationshipTag> GetRelationshipTags();
+        [OperationContract]
+        RelationshipTag GetRelationshipTag(int Id);
         [OperationContract]
         ICollection<User> GetRelatedUsers(User User);
         [OperationContract]

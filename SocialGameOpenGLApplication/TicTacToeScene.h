@@ -41,6 +41,7 @@ public:
 
 private:
 
+	//Board is a list with 9 elements
 	int board[9];
 
 	//Game Engine:

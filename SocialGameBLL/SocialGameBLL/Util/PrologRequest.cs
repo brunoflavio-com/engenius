@@ -69,6 +69,10 @@ namespace SocialGameBLL.Util
             ServerUrl += ConfigurationManager.AppSettings[ServerMethod];
 
             /*Prepare Query String*/
+            if (Params == null)
+            {
+                Params = new OrderedDictionary();
+            }
             string RequestQuery = (Params.Count > 0) ? "?" : "";
             int Counter = 0;
             foreach(var Key in Params.Keys)

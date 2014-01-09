@@ -104,32 +104,30 @@ void GraphScene::CamMovement(void){
 		GLdouble x = PersonCam.eye[0] + PersonCam.vel*cos(PersonCam.dir_long);
 		GLdouble y = PersonCam.eye[1] + PersonCam.vel*sin(PersonCam.dir_long);
 		GLdouble z = PersonCam.eye[2] + PersonCam.vel*sin(PersonCam.dir_lat);
-		if (!ColisionTest(x, y)){
+		if (!ColisionTest(x, y, z)){
 			PersonCam.eye[0] = x;
 			PersonCam.eye[1] = y;
 			PersonCam.eye[2] = z;
 		}
-		else {
-			KeyStatus.up = false;
-			KeyStatus.down = false;
-		}
 }
 
 
-void GraphScene::Timer(int value){
-	if (KeyStatus.up){
-		PersonCam.vel = 0.01;
-		CamMovement();
-	}
-	if (KeyStatus.down){
-		PersonCam.vel = -0.01;
-		CamMovement();
-	}
-	if (KeyStatus.left){
-		PersonCam.dir_long += M_PI*0.001;
-	}
-	if (KeyStatus.right){
-		PersonCam.dir_long -= M_PI*0.001;
+void GraphScene::Timer(int value){	
+	if (value == 0){
+		if (KeyStatus.up){
+			PersonCam.vel = 0.1;
+			CamMovement();
+		}
+		if (KeyStatus.down){
+			PersonCam.vel = -0.1;
+			CamMovement();
+		}
+		if (KeyStatus.left){
+			PersonCam.dir_long += M_PI*0.001;
+		}
+		if (KeyStatus.right){
+			PersonCam.dir_long -= M_PI*0.001;
+		}
 	}
 }
 
@@ -251,11 +249,12 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	glutPostRedisplay();
 }
 
-bool GraphScene::ColisionTest(int newx, int newy){
+bool GraphScene::ColisionTest(GLdouble newx, GLdouble newy, GLdouble newz){
 	GLint viewport[4];
 	GLint hits;
 
 	glPushMatrix();
+	glSelectBuffer(BUFFSIZE, selecter);
 	(void)glRenderMode(GL_SELECT);
 	glInitNames();
 	glPushName(-1);
@@ -264,22 +263,27 @@ bool GraphScene::ColisionTest(int newx, int newy){
 	glPushMatrix();
 	glLoadIdentity();
 	glGetIntegerv(GL_VIEWPORT, viewport);
-	//gluPickMatrix(newx, glutGet(GLUT_WINDOW_HEIGHT) - newy, 5.0, 5.0, viewport); // searches for existing items on the path
 	glLoadIdentity();
 	glOrtho(-2.5, 2.5, -2.5, 2.5, 0.0, 2.5);
-	//gluPerspective(65.0, (GLdouble)glutGet(GLUT_WINDOW_WIDTH) / glutGet(GLUT_WINDOW_HEIGHT), 1.0, 100.0);
+
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glRotatef(GRAUS(-M_PI / 2 - PersonCam.dir_lat), 1, 0, 0);
+	glRotatef(GRAUS(M_PI / 2 -PersonCam.dir_long), 0, 0, 1);	
+	glTranslatef(-newx,-newy,-newz);
 	Draw3dObjects();
+	
+	hits = glRenderMode(GL_RENDER);
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
-	hits = glRenderMode(GL_RENDER);
 
-	glPopMatrix();
 	if (hits > 0) {
-		printf("colisao");
+		printf("colisao\n");
 		return true;
 	}
+	else
+		printf("não colisao\n");
 	return false;
 }
 
