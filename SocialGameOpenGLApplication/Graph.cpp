@@ -11,17 +11,16 @@ void Graph::draw(bool drawUserName){
 	drawWalker.walk(user,3);
 }
 
-void Graph::changeUser(std::string email){
+void Graph::movetoVertice(User * nextUser){
 	for each(User * tempUser in users){
 		tempUser->graphLevel = -1;
 		tempUser->cota = 0;
-		tempUser->x = 0;
-		tempUser->y = 0;
-		tempUser->z = 0;
 		tempUser->isCenter = false;
 	}
-	
-	User * user = getUser(email);
+	Relationship * relationship = getRelationship(user,nextUser);
+	relationship->walked = true;
+
+	user = nextUser;
 	graphCoordWalker coordWalker(maxUserConnections,maxConnectionStrenght);
 	coordWalker.walk(user);
 	user->isCenter = true;
@@ -94,4 +93,13 @@ RelationshipTag *  Graph::getRelationshipTag(int id){
 			return relationShipTags.at(i);
 		}
 	}
+}
+
+Relationship * Graph::getRelationship(User * userA, User * userB){
+	for each(Relationship * r in relationShips){
+		if (r->contains(userA) && r->contains(userB)){
+			return r;
+		}
+	}
+	return NULL;
 }

@@ -18,13 +18,13 @@ private:
 	int messageUpdateTime;
 	bool isMessageActive;
 	atomic<int> glTime;
+
 protected: 
-	
-	
 	bool isSubWindowsActive;
 	Graph * graph;
 
 public:
+	bool isFinished;
 	bool returningToGame;
 	int userLevel;
 	float userPoints;
@@ -69,5 +69,6 @@ public:
 	virtual void verticeClicked(User * previousUser, User * nextUser) = 0;
 	void getUserPointsAndLevel();
 	void createMessage(std::string message);
+
 };
 

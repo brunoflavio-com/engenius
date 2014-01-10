@@ -14,5 +14,6 @@ public:
 	Graph * getGraph(std::string loginEmail, int level);
 	void verticeClicked(User * previousUser, User * nextUser);
 	void Timer(int value);
+
 };
 
