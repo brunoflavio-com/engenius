@@ -106,12 +106,26 @@ namespace SocialGameBLL
             }
         }
 
-        public Relationship CheckRelatedUser(User Me, User Other)
+        public Relationship GetRelationship(User Me, User Other)
         {
             try
             {
                 RelationshipsController Controller = new RelationshipsController();
-                return Controller.CheckRelatedUser(Me, Other);
+                return Controller.GetRelationship(Me, Other);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public bool CheckRelationship(User Me, User Other)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                Relationship Relationship = Controller.GetRelationship(Me, Other);
+                return (Relationship == null) ? false : true;
             }
             catch (Exception e)
             {
@@ -208,13 +222,27 @@ namespace SocialGameBLL
             }
         }
 
-        public RelationshipRequest CheckPendingRequest(User Me, User Other)
+        public RelationshipRequest GetPendingRequest(User Me, User Other)
         {
             try
             {
                 RelationshipsController Controller = new RelationshipsController();
-                return Controller.CheckPendingRequest(Me, Other);
+                return Controller.GetPendingRequest(Me, Other);
             }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public bool CheckPendingRequest(User Me, User Other)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                RelationshipRequest RelationshipRequest = Controller.GetPendingRequest(Me, Other);
+                return (RelationshipRequest == null) ? false : true;
+            }
+            catch (Exception e)
             {
                 throw new FaultException(e.Message);
             }

@@ -81,7 +81,7 @@ namespace SocialGameBLL.Controllers
             };
         }
 
-        public Relationship CheckRelatedUser(User Me, User Other)
+        public Relationship GetRelationship(User Me, User Other)
         {
             try
             {
@@ -195,7 +195,7 @@ namespace SocialGameBLL.Controllers
             }
         }
 
-        public RelationshipRequest CheckPendingRequest(User Me, User Other)
+        public RelationshipRequest GetPendingRequest(User Me, User Other)
         {
             try
             {
