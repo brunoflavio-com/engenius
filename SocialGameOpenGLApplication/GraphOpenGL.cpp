@@ -120,6 +120,16 @@ void GraphOpenGL::redisplayAll(void)
 
 void GraphOpenGL::Timer(int value){
 	glutTimerFunc(20, Timer, value + 1);
+	
+	if (!advancedMode && currentScene->isFinished){
+		advanceScene->userLevel = normalScene->userLevel;
+		advanceScene->userPoints = normalScene->userPoints;
+		currentScene = advanceScene;
+		delete normalScene;
+		currentScene->returningToGame = true;
+		advancedMode = true;
+		currentScene->createMessage("Congratulations you have achived yor mission");
+	}
 	currentScene->Timer(value);
 	redisplayAll();
 }
@@ -134,25 +144,14 @@ void GraphOpenGL::PrintKeys(){
 
 void GraphOpenGL::Key(unsigned char key, int x, int y){
 	if (key == 'c'){
-		//Change Mode Advance - Normal
-		if (advancedMode)
-		{
+		//Start Mission
 			normalScene = new NormalModeGraphScene(advanceScene->apiClient, advanceScene->email, advanceScene->userLevel);
 			normalScene->userLevel = advanceScene->userLevel;
 			normalScene->userPoints = advanceScene->userPoints;
 			currentScene = normalScene;
+			currentScene->returningToGame = true;
 			advancedMode = false;
 		}
-		else{
-			advanceScene->userLevel = normalScene->userLevel;
-			advanceScene->userPoints = normalScene->userPoints;
-			currentScene = advanceScene;
-			delete normalScene;
-			
-			advancedMode = true;
-		}
-		currentScene->returningToGame = true;
-	}
 	currentScene->Key(key, x, y);
 }
 

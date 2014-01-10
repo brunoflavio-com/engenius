@@ -3,6 +3,7 @@
 
 Relationship::Relationship()
 {
+	walked = false;
 }
 
 

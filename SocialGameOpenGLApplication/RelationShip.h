@@ -14,6 +14,7 @@ class Relationship :
 	User * userA;
 	User * userB;
 	int strength;
+	bool walked;
 	RelationshipTag * relationshipTag;
 	bool contains(User * user);
 	Relationship();
