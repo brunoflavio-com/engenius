@@ -1,0 +1,34 @@
+﻿@model SocialGameWebsite.Models.EditRelationshipViewModel
+
+<script type="text/javascript">
+    function disableBeforePost() {
+        $("#relationshipTagSelector").prop('disabled', true);
+    }
+</script>
+
+@using (Ajax.BeginForm("Create", "Relationship", new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "relationshipPartialView",
+        OnBegin = "disableBeforePost()"
+    }, new { id = "createRelationshipForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.UserA)
+    @Html.HiddenFor(model => model.UserB)
+
+    <select id="relationshipTagSelector" name="RelationshipTag">
+        @foreach (var item in ViewBag.RelationshipTagViewModels)
+        {
+            <option value="@item.ID">@item.Name</option>
+        }
+    </select>
+    @Html.EditorFor(m => m.Strenght)
+    
+    <input type="submit" id="createRelationshipFormSubmit" value="Create" />
+}
+
+
+

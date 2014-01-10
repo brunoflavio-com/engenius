@@ -17,6 +17,14 @@
     @Html.LabelFor(model => model.FacebookProfile) @Html.DisplayFor(model => model.FacebookProfile)
 </div>
 
+<div class="relationshipView">
+    @Html.Action("Router", "Relationship", new {
+                                                    id= new EditRelationshipViewModel {
+                                                            UserB = Model.Email
+                                                        }
+                                                })
+</div>
+
 @if (ViewBag.myself)
 {
     <h2>My friends:</h2>    

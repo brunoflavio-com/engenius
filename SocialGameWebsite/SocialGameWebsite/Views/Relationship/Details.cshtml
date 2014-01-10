@@ -1,0 +1,37 @@
+﻿@model SocialGameWebsite.Models.RelationshipViewModel
+
+<div id="strenght">
+    @Html.LabelFor(model => model.Strenght)
+    @Html.ValueFor(model => model.Strenght)
+</div>
+
+<div id="strenght">
+    @Html.LabelFor(model => model.RelationshipTag.Name)
+    @Html.ValueFor(model => model.RelationshipTag.Name)
+</div>
+
+<script type="text/javascript">
+    function disableBeforePost() {
+        $("#viewRelationshipFormSubmit").prop('disabled', true);
+    }
+</script>
+
+@using (Ajax.BeginForm("Edit", "Relationship", new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "relationshipPartialView",
+        OnBegin = "disableBeforePost()"
+    }, new { id = "detailsRelationshipForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.UserA)
+    @Html.HiddenFor(model => model.UserB)
+    @Html.HiddenFor(model => model.Strenght)
+    @Html.HiddenFor(model => model.RelationshipTag)    
+    <input type="submit" id="viewRelationshipFormSubmit" value="Edit" />
+}
+
+
+

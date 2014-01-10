@@ -47,6 +47,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:complexType name="Relationship">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RelationshipTagId" type="xs:int" />
+      <xs:element minOccurs="0" name="Strength" type="xs:int" />
+      <xs:element minOccurs="0" name="UserAEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserBEmail" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Relationship" nillable="true" type="tns:Relationship" />
   <xs:complexType name="Graph">
     <xs:sequence>
       <xs:element minOccurs="0" name="HumourStatus" nillable="true" type="tns:ArrayOfHumourStatus" />
@@ -76,15 +85,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRelationship" nillable="true" type="tns:ArrayOfRelationship" />
-  <xs:complexType name="Relationship">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="RelationshipTagId" type="xs:int" />
-      <xs:element minOccurs="0" name="Strength" type="xs:int" />
-      <xs:element minOccurs="0" name="UserAEmail" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UserBEmail" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Relationship" nillable="true" type="tns:Relationship" />
   <xs:complexType name="RelationshipRequest">
     <xs:sequence>
       <xs:element minOccurs="0" name="RelationshipTagId" type="xs:int" />
