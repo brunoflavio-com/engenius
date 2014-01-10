@@ -133,6 +133,18 @@ namespace SocialGameBLL
             }
         }
 
+        public void DeleteRelationship(User Me, User Other)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                Controller.DeleteRelationship(Me, Other);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public User GetUser(string Email)
         {
             try
@@ -217,6 +229,32 @@ namespace SocialGameBLL
                 RelationshipsController Controller = new RelationshipsController();
                 Controller.RejectRelationshipRequest(Me, Other);
             }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public ICollection<RelationshipRequest> GetUserPendingRequests(User Me)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.GetUserPendingRequests(Me);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public ICollection<RelationshipRequest> GetPendingRequestsToUser(User Me)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.GetPendingRequestsToUser(Me);
+            }
+            catch (Exception e)
             {
                 throw new FaultException(e.Message);
             }

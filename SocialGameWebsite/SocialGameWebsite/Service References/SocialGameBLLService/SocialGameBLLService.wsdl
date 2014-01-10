@@ -98,6 +98,12 @@
   <wsdl:message name="ISocialGameBLLService_CheckRelationship_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckRelationshipResponse" />
   </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_DeleteRelationship_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRelationship" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_DeleteRelationship_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRelationshipResponse" />
+  </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_GetRelationships_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRelationships" />
   </wsdl:message>
@@ -121,6 +127,18 @@
   </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_RejectRelationshipRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:RejectRelationshipRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserPendingRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPendingRequests" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserPendingRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserPendingRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPendingRequestsToUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPendingRequestsToUser" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPendingRequestsToUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPendingRequestsToUserResponse" />
   </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_GetPendingRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPendingRequest" />
@@ -240,6 +258,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/CheckRelationship" message="tns:ISocialGameBLLService_CheckRelationship_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/CheckRelationshipResponse" message="tns:ISocialGameBLLService_CheckRelationship_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="DeleteRelationship">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/DeleteRelationship" message="tns:ISocialGameBLLService_DeleteRelationship_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/DeleteRelationshipResponse" message="tns:ISocialGameBLLService_DeleteRelationship_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetRelationships">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationships" message="tns:ISocialGameBLLService_GetRelationships_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipsResponse" message="tns:ISocialGameBLLService_GetRelationships_OutputMessage" />
@@ -255,6 +277,14 @@
     <wsdl:operation name="RejectRelationshipRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/RejectRelationshipRequest" message="tns:ISocialGameBLLService_RejectRelationshipRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/RejectRelationshipRequestResponse" message="tns:ISocialGameBLLService_RejectRelationshipRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPendingRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserPendingRequests" message="tns:ISocialGameBLLService_GetUserPendingRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserPendingRequestsResponse" message="tns:ISocialGameBLLService_GetUserPendingRequests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingRequestsToUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPendingRequestsToUser" message="tns:ISocialGameBLLService_GetPendingRequestsToUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPendingRequestsToUserResponse" message="tns:ISocialGameBLLService_GetPendingRequestsToUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPendingRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPendingRequest" message="tns:ISocialGameBLLService_GetPendingRequest_InputMessage" />
@@ -428,6 +458,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="DeleteRelationship">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/DeleteRelationship" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRelationships">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetRelationships" style="document" />
       <wsdl:input>
@@ -457,6 +496,24 @@
     </wsdl:operation>
     <wsdl:operation name="RejectRelationshipRequest">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/RejectRelationshipRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPendingRequests">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetUserPendingRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingRequestsToUser">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetPendingRequestsToUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -102,6 +102,23 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public void DeleteRelationship(User Me, User Other)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                UserEntity OtherEntity = db.Users.Find(Other.Email);
+
+                RelationshipEntity RelationshipEntity = MyEntity.GetAllUsersRelationships().Single(r => (r.UserEmail == MyEntity.Email && r.FriendEmail == OtherEntity.Email) || (r.FriendEmail == MyEntity.Email && r.UserEmail == OtherEntity.Email));
+
+                db.Relationships.Remove(RelationshipEntity);
+                db.SaveChanges();
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         public RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength)
         {
             try
@@ -129,7 +146,7 @@ namespace SocialGameBLL.Controllers
                     db.RelationshipsRequests.Add(RelationshipRequestEntity);
                 }
                 db.SaveChanges();
-                return EntityServiceConverter.ConvertToRelationshipRequestFromRelationshipRequestEntity(RelationshipRequestEntity);
+                return EntityServiceConverter.ConvertRelationshipRequestEntityToRelationshipRequest(RelationshipRequestEntity);
             }catch (Exception e)
             {
                 throw new Exception(e.Message, e);
@@ -203,8 +220,43 @@ namespace SocialGameBLL.Controllers
                 if (RelationshipRequestEntity == null)
                     return null;
 
-                return EntityServiceConverter.ConvertToRelationshipRequestFromRelationshipRequestEntity(RelationshipRequestEntity);
+                return EntityServiceConverter.ConvertRelationshipRequestEntityToRelationshipRequest(RelationshipRequestEntity);
             }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public ICollection<RelationshipRequest> GetUserPendingRequests(User Me)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                ICollection<RelationshipRequestEntity> RelationshipRequestEntities = db.RelationshipsRequests.Where(rr => rr.UserEmail == MyEntity.Email).ToList();
+                if (RelationshipRequestEntities == null)
+                {
+                    return null;
+                }
+                return EntityServiceConverter.ConvertRelationshipRequestEntitiesToRelationshipRequests(RelationshipRequestEntities);
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public ICollection<RelationshipRequest> GetPendingRequestsToUser(User Me)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                ICollection<RelationshipRequestEntity> RelationshipRequestEntities = db.RelationshipsRequests.Where(rr => rr.FriendEmail == MyEntity.Email).ToList();
+                if (RelationshipRequestEntities == null)
+                {
+                    return null;
+                }
+                return EntityServiceConverter.ConvertRelationshipRequestEntitiesToRelationshipRequests(RelationshipRequestEntities);
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message, e);
             }

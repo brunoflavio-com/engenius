@@ -94,4 +94,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RelationshipRequest" nillable="true" type="tns:RelationshipRequest" />
+  <xs:complexType name="ArrayOfRelationshipRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RelationshipRequest" nillable="true" type="tns:RelationshipRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRelationshipRequest" nillable="true" type="tns:ArrayOfRelationshipRequest" />
 </xs:schema>

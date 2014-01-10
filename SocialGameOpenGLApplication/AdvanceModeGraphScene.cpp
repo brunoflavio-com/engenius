@@ -17,20 +17,7 @@ void AdvanceModeGraphScene::Draw3dObjects(void){
 }
 
 void AdvanceModeGraphScene::DrawOverlay(void){
-	glPushMatrix();
-
-	glColor3ub(200, 0, 0);
-	glRasterPos2d(0.5, 0.9);
-
-	unsigned char s[100];
-
-	strcpy((char*)s, "Advance Mode");
-
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
-	glEnable(GL_LIGHTING);
-
-	glPopMatrix();
-
+	
 }
 
 Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail ,int level){
@@ -39,7 +26,17 @@ Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail ,int level){
 	return tempGraph;
 }
 
-void AdvanceModeGraphScene::moveGraphToNewUser(User * user){
+void AdvanceModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
+	//Get new graph from remote api
 	Graph * tempGraph = graph;
-	graph = getGraph(user->email,REMOTE_GRAPH_LEVEL);
+	graph = getGraph(nextUser->email,REMOTE_GRAPH_LEVEL);
+}
+
+void AdvanceModeGraphScene::Timer(int value){
+	GraphScene::Timer(value);
+	if (returningToGame)
+	{
+		createMessage("Avanced Mode");
+		returningToGame = false;
+	}
 }

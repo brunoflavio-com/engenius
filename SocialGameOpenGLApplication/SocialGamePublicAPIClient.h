@@ -19,6 +19,8 @@ public:
 	ns5__Graph * getGraph(std::string email, int depth);
 	void getUserGameInfo(int & level, float &points);
 	std::future<ns5__Graph * > asyncGetGraph(std::string email, int depth);
+	std::vector<string> getCategories(int numberOfCategories);
+	std::string getWord(string category);
 	~SocialGamePublicAPIClient();
 };
 

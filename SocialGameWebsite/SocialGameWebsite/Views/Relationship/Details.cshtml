@@ -1,13 +1,13 @@
 ﻿@model SocialGameWebsite.Models.RelationshipViewModel
 
-<div id="strenght">
-    @Html.LabelFor(model => model.Strenght)
-    @Html.ValueFor(model => model.Strenght)
+<div id="relationshipStrenght">
+    <span class="label">@Html.LabelFor(model => model.Strenght)</span>
+    <span class="value">@Html.ValueFor(model => model.Strenght)</span>
 </div>
 
-<div id="strenght">
-    @Html.LabelFor(model => model.RelationshipTag.Name)
-    @Html.ValueFor(model => model.RelationshipTag.Name)
+<div id="relationshipName">
+    <span class="label">@Html.LabelFor(model => model.RelationshipTag.Name)</span>
+    <span class="value">@Html.ValueFor(model => model.RelationshipTag.Name)</span>
 </div>
 
 <script type="text/javascript">
@@ -16,7 +16,30 @@
     }
 </script>
 
-@using (Ajax.BeginForm("Edit", "Relationship", new AjaxOptions
+@using (Ajax.BeginForm("EditAction", "Relationship",
+    new { 
+        UserA = SocialGameWebsite.Util.Base64.Encode(Model.UserA.Email),
+        UserB = SocialGameWebsite.Util.Base64.Encode(Model.UserB.Email)
+    }, 
+    new AjaxOptions {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "relationshipPartialView",
+        OnBegin = "disableBeforePost()"
+    }, new { id = "detailsRelationshipForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="submit" id="viewRelationshipFormSubmit" value="Edit" />
+}
+
+@using (Ajax.BeginForm("Remove", "Relationship",
+    new
+    {
+        UserA = SocialGameWebsite.Util.Base64.Encode(Model.UserA.Email),
+        UserB = SocialGameWebsite.Util.Base64.Encode(Model.UserB.Email)
+    },
+    new AjaxOptions
     {
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
@@ -26,11 +49,7 @@
 {
     @Html.AntiForgeryToken()
 
-    @Html.HiddenFor(model => model.UserA)
-    @Html.HiddenFor(model => model.UserB)
-    @Html.HiddenFor(model => model.Strenght)
-    @Html.HiddenFor(model => model.RelationshipTag)    
-    <input type="submit" id="viewRelationshipFormSubmit" value="Edit" />
+    <input type="submit" id="viewRelationshipFormSubmit" value="Remove" />
 }
 
 
