@@ -93,7 +93,7 @@ namespace SocialGameBLL.Controllers
                     RelationshipEntity = MyEntity.GetAllUsersRelationships().Single(r => (r.UserEmail == MyEntity.Email && r.FriendEmail == OtherEntity.Email) || (r.FriendEmail == MyEntity.Email && r.UserEmail == OtherEntity.Email));
                 }catch(Exception e)
                 {
-                    RelationshipEntity = null;
+                    return null;
                 }
                 return EntityServiceConverter.ConvertRelationshipEntityToRelationship(RelationshipEntity);
             }catch(Exception e)
