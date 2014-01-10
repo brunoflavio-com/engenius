@@ -47,6 +47,8 @@ namespace SocialGameBLL
         [OperationContract]
         bool CheckRelationship(User Me, User Other);
         [OperationContract]
+        void DeleteRelationship(User Me, User Other);
+        [OperationContract]
         Graph GetRelationships(User User, int Depth);
         [OperationContract]
         RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength);
@@ -54,6 +56,10 @@ namespace SocialGameBLL
         void AcceptRelationshipRequest(User Me, User Other);
         [OperationContract]
         void RejectRelationshipRequest(User Me, User Other);
+        [OperationContract]
+        ICollection<RelationshipRequest> GetUserPendingRequests(User Me);
+        [OperationContract]
+        ICollection<RelationshipRequest> GetPendingRequestsToUser(User Me);
         [OperationContract]
         RelationshipRequest GetPendingRequest(User Me, User Other);
         [OperationContract]

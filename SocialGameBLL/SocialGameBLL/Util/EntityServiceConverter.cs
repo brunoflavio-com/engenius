@@ -125,7 +125,7 @@ namespace SocialGameBLL.Util
             return InterestsIDs;
         }
 
-        public static RelationshipRequest ConvertToRelationshipRequestFromRelationshipRequestEntity(RelationshipRequestEntity RequestEntity)
+        public static RelationshipRequest ConvertRelationshipRequestEntityToRelationshipRequest(RelationshipRequestEntity RequestEntity)
         {
             return new RelationshipRequest 
             { 
@@ -134,6 +134,16 @@ namespace SocialGameBLL.Util
                 RelationshipTagId = RequestEntity.RelationTagID,
                 Strength = RequestEntity.Strength
             };
+        }
+
+        public static ICollection<RelationshipRequest> ConvertRelationshipRequestEntitiesToRelationshipRequests(ICollection<RelationshipRequestEntity> RequestEntities)
+        {
+            ICollection<RelationshipRequest> RelationshipRequests = new List<RelationshipRequest>();
+            foreach (RelationshipRequestEntity Entity in RequestEntities)
+            {
+                RelationshipRequests.Add(ConvertRelationshipRequestEntityToRelationshipRequest(Entity));
+            }
+            return RelationshipRequests;
         }
     }
 }

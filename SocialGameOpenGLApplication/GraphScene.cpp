@@ -53,6 +53,7 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 	isMessageActive = false;
 	messageUpdateTime = 0;
 	returningToGame = true;
+	isFinished = false;
 }
 
 void GraphScene::getUserPointsAndLevel(){

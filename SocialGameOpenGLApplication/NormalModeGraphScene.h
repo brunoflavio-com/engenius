@@ -28,5 +28,6 @@ public:
 	void verticeClicked(User * previousUser, User * nextUser);
 
 	Graph * getGraph(std::string loginEmail ,int level);
+
 };
 

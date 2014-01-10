@@ -19,9 +19,10 @@ public:
 	User * getUser(string email);
 	HumorStatus *  getHumorStatus(int id);
 	RelationshipTag *  getRelationshipTag(int id);
+	Relationship * getRelationship(User * userA, User * userB);
 	Graph();
 	~Graph();
 	void draw(bool drawUserName);
-	void changeUser(std::string email);
+	void movetoVertice(User * user);
 };
 
