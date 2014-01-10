@@ -1,0 +1,46 @@
+﻿@model SocialGameWebsite.Models.EditRelationshipViewModel
+
+<script>
+    function disableBeforePost() {
+        $("#acceptRequestButton").prop('disabled', true);
+        $("#rejectRequestButton").prop('disabled', true);
+    }
+</script>
+
+@using (Ajax.BeginForm("AcceptRequest", "Relationship",
+    new
+    {
+        UserA = SocialGameWebsite.Util.Base64.Encode(Model.UserA),
+        UserB = SocialGameWebsite.Util.Base64.Encode(Model.UserB)
+        },
+    new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "relationshipPartialView",
+        OnBegin = "disableBeforePost"
+    }, new { id = "acceptRequestForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="submit" id="acceptRequestButton" value="Accept Request" />
+}
+
+@using (Ajax.BeginForm("RejectRequest", "Relationship",
+    new
+    {
+        UserA = SocialGameWebsite.Util.Base64.Encode(Model.UserA),
+        UserB = SocialGameWebsite.Util.Base64.Encode(Model.UserB)
+    },
+    new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "relationshipPartialView",
+        OnBegin = "disableBeforePost"
+    }, new { id = "rejectRequest" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="submit" id="rejectRequestButton" value="Reject Request" />
+}

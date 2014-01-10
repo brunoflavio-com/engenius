@@ -33,3 +33,9 @@
     width: 100%;
     overflow: hidden;
 }
+
+
+/*    RELATIONSHIPS     */
+.relationshipView {
+    background-color : lightcoral;
+}
