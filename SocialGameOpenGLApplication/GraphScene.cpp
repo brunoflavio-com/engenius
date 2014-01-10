@@ -163,7 +163,7 @@ void GraphScene::Timer(int value){
 		isMessageActive = false;
 	}
 
-	if (value == 0){
+	
 		if (KeyStatus.up){
 			PersonCam.vel = 0.1;
 			CamMovement();
@@ -178,7 +178,6 @@ void GraphScene::Timer(int value){
 		if (KeyStatus.right){
 			PersonCam.dir_long -= M_PI*0.001;
 		}
-	}
 }
 
 void GraphScene::Key(unsigned char key, int x, int y){
