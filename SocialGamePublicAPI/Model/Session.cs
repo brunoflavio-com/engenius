@@ -13,7 +13,8 @@ namespace SocialGamePublicAPI.Model
        public SessionContext()
             : base("DefaultConnection") { }
         public DbSet<Session> Sessions { get; set; }
-       
+        public DbSet<WordCategory> Categories { get; set; }
+        public DbSet<Maze> mazes { get; set; }
        
     }
 

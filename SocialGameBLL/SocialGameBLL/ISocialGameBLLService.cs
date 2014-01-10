@@ -43,9 +43,17 @@ namespace SocialGameBLL
         [OperationContract]
         ICollection<User> GetRelatedUsers(User User);
         [OperationContract]
+        Relationship CheckRelatedUser(User Me, User Other);
+        [OperationContract]
         Graph GetRelationships(User User, int Depth);
         [OperationContract]
         RelationshipRequest MakeRelationshipRequest(User Me, User Other, int RelationshipTagId, int Strength);
+        [OperationContract]
+        void AcceptRelationshipRequest(User Me, User Other);
+        [OperationContract]
+        void RejectRelationshipRequest(User Me, User Other);
+        [OperationContract]
+        RelationshipRequest CheckPendingRequest(User Me, User Other);
         [OperationContract]
         ICollection<User> GetShortestPath(User Me, User Goal, int Depth);
         [OperationContract]

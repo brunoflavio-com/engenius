@@ -47,6 +47,14 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 	email = loginEmail;
 }
 
+void GraphScene::getUserPointsAndLevel(){
+	int level;
+	float points;
+	apiClient->getUserGameInfo(level, points);
+	this->userLevel = level;
+	this->userPoints = points;
+
+}
 
 GraphScene::~GraphScene()
 {
@@ -401,8 +409,10 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 
 			ISelectable * object;			
 			if ((object = pickISelectable(x, y)) != NULL) {
+				if (object->getType() == ISelectable::USER_TYPE){
 				User * user = (User *)object;
 				moveGraphToNewUser(user);
+				}
 			}
 
 		}

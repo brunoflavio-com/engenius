@@ -48,6 +48,17 @@ namespace SocialGameBLL.Util
             return Relationships;
         }
 
+        public static Relationship ConvertRelationshipEntityToRelationship(RelationshipEntity RelationshipEntity)
+        {
+            return new Relationship
+            {
+                UserAEmail = RelationshipEntity.UserEmail,
+                UserBEmail = RelationshipEntity.FriendEmail,
+                Strength = RelationshipEntity.Strength,
+                RelationshipTagId = RelationshipEntity.RelationTagID
+            };
+        }
+
         public static ICollection<Interest> ConvertToInterestFromInterestEntities(ICollection<InterestEntity> InterestEntities)
         {
             ICollection<Interest> Interests = new List<Interest>();

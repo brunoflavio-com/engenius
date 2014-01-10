@@ -75,5 +75,29 @@ class SOAP_CMAC BasicHttpBinding_USCOREISocialGameServiceProxy
 	/// Web service operation 'Logout' (returns error code or SOAP_OK)
 	virtual	int Logout(_ns1__Logout *ns1__Logout, _ns1__LogoutResponse *ns1__LogoutResponse) { return this->Logout(NULL, NULL, ns1__Logout, ns1__LogoutResponse); }
 	virtual	int Logout(const char *endpoint, const char *soap_action, _ns1__Logout *ns1__Logout, _ns1__LogoutResponse *ns1__LogoutResponse);
+
+	/// Web service operation 'getRandomWordCategories' (returns error code or SOAP_OK)
+	virtual	int getRandomWordCategories(_ns1__getRandomWordCategories *ns1__getRandomWordCategories, _ns1__getRandomWordCategoriesResponse *ns1__getRandomWordCategoriesResponse) { return this->getRandomWordCategories(NULL, NULL, ns1__getRandomWordCategories, ns1__getRandomWordCategoriesResponse); }
+	virtual	int getRandomWordCategories(const char *endpoint, const char *soap_action, _ns1__getRandomWordCategories *ns1__getRandomWordCategories, _ns1__getRandomWordCategoriesResponse *ns1__getRandomWordCategoriesResponse);
+
+	/// Web service operation 'getRandomWordFromCategory' (returns error code or SOAP_OK)
+	virtual	int getRandomWordFromCategory(_ns1__getRandomWordFromCategory *ns1__getRandomWordFromCategory, _ns1__getRandomWordFromCategoryResponse *ns1__getRandomWordFromCategoryResponse) { return this->getRandomWordFromCategory(NULL, NULL, ns1__getRandomWordFromCategory, ns1__getRandomWordFromCategoryResponse); }
+	virtual	int getRandomWordFromCategory(const char *endpoint, const char *soap_action, _ns1__getRandomWordFromCategory *ns1__getRandomWordFromCategory, _ns1__getRandomWordFromCategoryResponse *ns1__getRandomWordFromCategoryResponse);
+
+	/// Web service operation 'getMaze' (returns error code or SOAP_OK)
+	virtual	int getMaze(_ns1__getMaze *ns1__getMaze, _ns1__getMazeResponse *ns1__getMazeResponse) { return this->getMaze(NULL, NULL, ns1__getMaze, ns1__getMazeResponse); }
+	virtual	int getMaze(const char *endpoint, const char *soap_action, _ns1__getMaze *ns1__getMaze, _ns1__getMazeResponse *ns1__getMazeResponse);
+
+	/// Web service operation 'getUserGameInfo' (returns error code or SOAP_OK)
+	virtual	int getUserGameInfo(_ns1__getUserGameInfo *ns1__getUserGameInfo, _ns1__getUserGameInfoResponse *ns1__getUserGameInfoResponse) { return this->getUserGameInfo(NULL, NULL, ns1__getUserGameInfo, ns1__getUserGameInfoResponse); }
+	virtual	int getUserGameInfo(const char *endpoint, const char *soap_action, _ns1__getUserGameInfo *ns1__getUserGameInfo, _ns1__getUserGameInfoResponse *ns1__getUserGameInfoResponse);
+
+	/// Web service operation 'setUserLevel' (returns error code or SOAP_OK)
+	virtual	int setUserLevel(_ns1__setUserLevel *ns1__setUserLevel, _ns1__setUserLevelResponse *ns1__setUserLevelResponse) { return this->setUserLevel(NULL, NULL, ns1__setUserLevel, ns1__setUserLevelResponse); }
+	virtual	int setUserLevel(const char *endpoint, const char *soap_action, _ns1__setUserLevel *ns1__setUserLevel, _ns1__setUserLevelResponse *ns1__setUserLevelResponse);
+
+	/// Web service operation 'setUserPoints' (returns error code or SOAP_OK)
+	virtual	int setUserPoints(_ns1__setUserPoints *ns1__setUserPoints, _ns1__setUserPointsResponse *ns1__setUserPointsResponse) { return this->setUserPoints(NULL, NULL, ns1__setUserPoints, ns1__setUserPointsResponse); }
+	virtual	int setUserPoints(const char *endpoint, const char *soap_action, _ns1__setUserPoints *ns1__setUserPoints, _ns1__setUserPointsResponse *ns1__setUserPointsResponse);
 };
 #endif

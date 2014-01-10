@@ -193,8 +193,263 @@ public:
 };
 #endif
 
+#ifndef SOAP_TYPE__ns1__getRandomWordCategories
+#define SOAP_TYPE__ns1__getRandomWordCategories (17)
+/* ns1:getRandomWordCategories */
+class SOAP_CMAC _ns1__getRandomWordCategories
+{
+public:
+	std::string *Token;	/* optional element of type xsd:string */
+	int *number;	/* optional element of type xsd:int */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 17; } /* = unique type id SOAP_TYPE__ns1__getRandomWordCategories */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__getRandomWordCategories() { _ns1__getRandomWordCategories::soap_default(NULL); }
+	virtual ~_ns1__getRandomWordCategories() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__getRandomWordCategoriesResponse
+#define SOAP_TYPE__ns1__getRandomWordCategoriesResponse (18)
+/* ns1:getRandomWordCategoriesResponse */
+class SOAP_CMAC _ns1__getRandomWordCategoriesResponse
+{
+public:
+	class arr__ArrayOfstring *getRandomWordCategoriesResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type arr:ArrayOfstring */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 18; } /* = unique type id SOAP_TYPE__ns1__getRandomWordCategoriesResponse */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__getRandomWordCategoriesResponse() { _ns1__getRandomWordCategoriesResponse::soap_default(NULL); }
+	virtual ~_ns1__getRandomWordCategoriesResponse() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__getRandomWordFromCategory
+#define SOAP_TYPE__ns1__getRandomWordFromCategory (19)
+/* ns1:getRandomWordFromCategory */
+class SOAP_CMAC _ns1__getRandomWordFromCategory
+{
+public:
+	std::string *Token;	/* optional element of type xsd:string */
+	std::string *category;	/* optional element of type xsd:string */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 19; } /* = unique type id SOAP_TYPE__ns1__getRandomWordFromCategory */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__getRandomWordFromCategory() { _ns1__getRandomWordFromCategory::soap_default(NULL); }
+	virtual ~_ns1__getRandomWordFromCategory() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__getRandomWordFromCategoryResponse
+#define SOAP_TYPE__ns1__getRandomWordFromCategoryResponse (20)
+/* ns1:getRandomWordFromCategoryResponse */
+class SOAP_CMAC _ns1__getRandomWordFromCategoryResponse
+{
+public:
+	std::string *getRandomWordFromCategoryResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type xsd:string */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 20; } /* = unique type id SOAP_TYPE__ns1__getRandomWordFromCategoryResponse */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__getRandomWordFromCategoryResponse() { _ns1__getRandomWordFromCategoryResponse::soap_default(NULL); }
+	virtual ~_ns1__getRandomWordFromCategoryResponse() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__getMaze
+#define SOAP_TYPE__ns1__getMaze (21)
+/* ns1:getMaze */
+class SOAP_CMAC _ns1__getMaze
+{
+public:
+	std::string *Token;	/* optional element of type xsd:string */
+	int *id;	/* optional element of type xsd:int */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 21; } /* = unique type id SOAP_TYPE__ns1__getMaze */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__getMaze() { _ns1__getMaze::soap_default(NULL); }
+	virtual ~_ns1__getMaze() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__getMazeResponse
+#define SOAP_TYPE__ns1__getMazeResponse (22)
+/* ns1:getMazeResponse */
+class SOAP_CMAC _ns1__getMazeResponse
+{
+public:
+	std::string *getMazeResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type xsd:string */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 22; } /* = unique type id SOAP_TYPE__ns1__getMazeResponse */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__getMazeResponse() { _ns1__getMazeResponse::soap_default(NULL); }
+	virtual ~_ns1__getMazeResponse() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__getUserGameInfo
+#define SOAP_TYPE__ns1__getUserGameInfo (23)
+/* ns1:getUserGameInfo */
+class SOAP_CMAC _ns1__getUserGameInfo
+{
+public:
+	std::string *Token;	/* optional element of type xsd:string */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 23; } /* = unique type id SOAP_TYPE__ns1__getUserGameInfo */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__getUserGameInfo() { _ns1__getUserGameInfo::soap_default(NULL); }
+	virtual ~_ns1__getUserGameInfo() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__getUserGameInfoResponse
+#define SOAP_TYPE__ns1__getUserGameInfoResponse (24)
+/* ns1:getUserGameInfoResponse */
+class SOAP_CMAC _ns1__getUserGameInfoResponse
+{
+public:
+	class ns5__UserGameInfo *getUserGameInfoResult;	/* SOAP 1.2 RPC return element (when namespace qualified) */	/* optional element of type ns5:UserGameInfo */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 24; } /* = unique type id SOAP_TYPE__ns1__getUserGameInfoResponse */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__getUserGameInfoResponse() { _ns1__getUserGameInfoResponse::soap_default(NULL); }
+	virtual ~_ns1__getUserGameInfoResponse() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__setUserLevel
+#define SOAP_TYPE__ns1__setUserLevel (25)
+/* ns1:setUserLevel */
+class SOAP_CMAC _ns1__setUserLevel
+{
+public:
+	std::string *Token;	/* optional element of type xsd:string */
+	int *Level;	/* optional element of type xsd:int */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 25; } /* = unique type id SOAP_TYPE__ns1__setUserLevel */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__setUserLevel() { _ns1__setUserLevel::soap_default(NULL); }
+	virtual ~_ns1__setUserLevel() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__setUserLevelResponse
+#define SOAP_TYPE__ns1__setUserLevelResponse (26)
+/* ns1:setUserLevelResponse */
+class SOAP_CMAC _ns1__setUserLevelResponse
+{
+public:
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 26; } /* = unique type id SOAP_TYPE__ns1__setUserLevelResponse */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__setUserLevelResponse() { _ns1__setUserLevelResponse::soap_default(NULL); }
+	virtual ~_ns1__setUserLevelResponse() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__setUserPoints
+#define SOAP_TYPE__ns1__setUserPoints (27)
+/* ns1:setUserPoints */
+class SOAP_CMAC _ns1__setUserPoints
+{
+public:
+	std::string *Token;	/* optional element of type xsd:string */
+	float *Points;	/* optional element of type xsd:float */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 27; } /* = unique type id SOAP_TYPE__ns1__setUserPoints */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__setUserPoints() { _ns1__setUserPoints::soap_default(NULL); }
+	virtual ~_ns1__setUserPoints() { }
+};
+#endif
+
+#ifndef SOAP_TYPE__ns1__setUserPointsResponse
+#define SOAP_TYPE__ns1__setUserPointsResponse (28)
+/* ns1:setUserPointsResponse */
+class SOAP_CMAC _ns1__setUserPointsResponse
+{
+public:
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 28; } /* = unique type id SOAP_TYPE__ns1__setUserPointsResponse */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         _ns1__setUserPointsResponse() { _ns1__setUserPointsResponse::soap_default(NULL); }
+	virtual ~_ns1__setUserPointsResponse() { }
+};
+#endif
+
 #ifndef SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData
-#define SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData (19)
+#define SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData (31)
 /* ns3:ArrayOfFaultException.FaultCodeData */
 class SOAP_CMAC ns3__ArrayOfFaultException_x002eFaultCodeData
 {
@@ -202,7 +457,7 @@ public:
 	std::vector<class ns3__FaultException_x002eFaultCodeData * >FaultException_x002eFaultCodeData;	/* optional element of type ns3:FaultException.FaultCodeData */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 19; } /* = unique type id SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData */
+	virtual int soap_type() const { return 31; } /* = unique type id SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultCodeData */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -215,7 +470,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns3__FaultException_x002eFaultCodeData
-#define SOAP_TYPE_ns3__FaultException_x002eFaultCodeData (20)
+#define SOAP_TYPE_ns3__FaultException_x002eFaultCodeData (32)
 /* ns3:FaultException.FaultCodeData */
 class SOAP_CMAC ns3__FaultException_x002eFaultCodeData
 {
@@ -224,7 +479,7 @@ public:
 	std::string *ns;	/* optional element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 20; } /* = unique type id SOAP_TYPE_ns3__FaultException_x002eFaultCodeData */
+	virtual int soap_type() const { return 32; } /* = unique type id SOAP_TYPE_ns3__FaultException_x002eFaultCodeData */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -237,7 +492,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns3__FaultException_x002eFaultReasonData
-#define SOAP_TYPE_ns3__FaultException_x002eFaultReasonData (21)
+#define SOAP_TYPE_ns3__FaultException_x002eFaultReasonData (33)
 /* ns3:FaultException.FaultReasonData */
 class SOAP_CMAC ns3__FaultException_x002eFaultReasonData
 {
@@ -246,7 +501,7 @@ public:
 	std::string *xmlLang;	/* optional element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 21; } /* = unique type id SOAP_TYPE_ns3__FaultException_x002eFaultReasonData */
+	virtual int soap_type() const { return 33; } /* = unique type id SOAP_TYPE_ns3__FaultException_x002eFaultReasonData */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -259,7 +514,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultReasonData
-#define SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultReasonData (22)
+#define SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultReasonData (34)
 /* ns3:ArrayOfFaultException.FaultReasonData */
 class SOAP_CMAC ns3__ArrayOfFaultException_x002eFaultReasonData
 {
@@ -267,7 +522,7 @@ public:
 	std::vector<ns3__FaultException_x002eFaultReasonData * >FaultException_x002eFaultReasonData;	/* optional element of type ns3:FaultException.FaultReasonData */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 22; } /* = unique type id SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultReasonData */
+	virtual int soap_type() const { return 34; } /* = unique type id SOAP_TYPE_ns3__ArrayOfFaultException_x002eFaultReasonData */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -280,7 +535,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns4__Exception
-#define SOAP_TYPE_ns4__Exception (24)
+#define SOAP_TYPE_ns4__Exception (36)
 /* ns4:Exception */
 class SOAP_CMAC ns4__Exception
 {
@@ -288,7 +543,7 @@ public:
 	std::vector<char * >__any;
 	int _ser__FactoryType;	/* optional attribute */
 public:
-	virtual int soap_type() const { return 24; } /* = unique type id SOAP_TYPE_ns4__Exception */
+	virtual int soap_type() const { return 36; } /* = unique type id SOAP_TYPE_ns4__Exception */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -301,7 +556,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__Graph
-#define SOAP_TYPE_ns5__Graph (25)
+#define SOAP_TYPE_ns5__Graph (37)
 /* ns5:Graph */
 class SOAP_CMAC ns5__Graph
 {
@@ -313,7 +568,7 @@ public:
 	class ns5__ArrayOfUser *Users;	/* optional element of type ns5:ArrayOfUser */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 25; } /* = unique type id SOAP_TYPE_ns5__Graph */
+	virtual int soap_type() const { return 37; } /* = unique type id SOAP_TYPE_ns5__Graph */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -326,7 +581,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__ArrayOfHumourStatus
-#define SOAP_TYPE_ns5__ArrayOfHumourStatus (26)
+#define SOAP_TYPE_ns5__ArrayOfHumourStatus (38)
 /* ns5:ArrayOfHumourStatus */
 class SOAP_CMAC ns5__ArrayOfHumourStatus
 {
@@ -334,7 +589,7 @@ public:
 	std::vector<class ns5__HumourStatus * >HumourStatus;	/* optional element of type ns5:HumourStatus */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 26; } /* = unique type id SOAP_TYPE_ns5__ArrayOfHumourStatus */
+	virtual int soap_type() const { return 38; } /* = unique type id SOAP_TYPE_ns5__ArrayOfHumourStatus */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -347,7 +602,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__HumourStatus
-#define SOAP_TYPE_ns5__HumourStatus (27)
+#define SOAP_TYPE_ns5__HumourStatus (39)
 /* ns5:HumourStatus */
 class SOAP_CMAC ns5__HumourStatus
 {
@@ -356,7 +611,7 @@ public:
 	std::string *Name;	/* optional element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 27; } /* = unique type id SOAP_TYPE_ns5__HumourStatus */
+	virtual int soap_type() const { return 39; } /* = unique type id SOAP_TYPE_ns5__HumourStatus */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -369,7 +624,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__ArrayOfInterest
-#define SOAP_TYPE_ns5__ArrayOfInterest (28)
+#define SOAP_TYPE_ns5__ArrayOfInterest (40)
 /* ns5:ArrayOfInterest */
 class SOAP_CMAC ns5__ArrayOfInterest
 {
@@ -377,7 +632,7 @@ public:
 	std::vector<class ns5__Interest * >Interest;	/* optional element of type ns5:Interest */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 28; } /* = unique type id SOAP_TYPE_ns5__ArrayOfInterest */
+	virtual int soap_type() const { return 40; } /* = unique type id SOAP_TYPE_ns5__ArrayOfInterest */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -390,7 +645,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__Interest
-#define SOAP_TYPE_ns5__Interest (29)
+#define SOAP_TYPE_ns5__Interest (41)
 /* ns5:Interest */
 class SOAP_CMAC ns5__Interest
 {
@@ -399,7 +654,7 @@ public:
 	std::string *Name;	/* optional element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 29; } /* = unique type id SOAP_TYPE_ns5__Interest */
+	virtual int soap_type() const { return 41; } /* = unique type id SOAP_TYPE_ns5__Interest */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -412,7 +667,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__ArrayOfRelationshipTag
-#define SOAP_TYPE_ns5__ArrayOfRelationshipTag (30)
+#define SOAP_TYPE_ns5__ArrayOfRelationshipTag (42)
 /* ns5:ArrayOfRelationshipTag */
 class SOAP_CMAC ns5__ArrayOfRelationshipTag
 {
@@ -420,7 +675,7 @@ public:
 	std::vector<class ns5__RelationshipTag * >RelationshipTag;	/* optional element of type ns5:RelationshipTag */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 30; } /* = unique type id SOAP_TYPE_ns5__ArrayOfRelationshipTag */
+	virtual int soap_type() const { return 42; } /* = unique type id SOAP_TYPE_ns5__ArrayOfRelationshipTag */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -433,7 +688,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__RelationshipTag
-#define SOAP_TYPE_ns5__RelationshipTag (31)
+#define SOAP_TYPE_ns5__RelationshipTag (43)
 /* ns5:RelationshipTag */
 class SOAP_CMAC ns5__RelationshipTag
 {
@@ -442,7 +697,7 @@ public:
 	std::string *Name;	/* optional element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 31; } /* = unique type id SOAP_TYPE_ns5__RelationshipTag */
+	virtual int soap_type() const { return 43; } /* = unique type id SOAP_TYPE_ns5__RelationshipTag */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -455,7 +710,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__ArrayOfRelationship
-#define SOAP_TYPE_ns5__ArrayOfRelationship (32)
+#define SOAP_TYPE_ns5__ArrayOfRelationship (44)
 /* ns5:ArrayOfRelationship */
 class SOAP_CMAC ns5__ArrayOfRelationship
 {
@@ -463,7 +718,7 @@ public:
 	std::vector<class ns5__Relationship * >Relationship;	/* optional element of type ns5:Relationship */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 32; } /* = unique type id SOAP_TYPE_ns5__ArrayOfRelationship */
+	virtual int soap_type() const { return 44; } /* = unique type id SOAP_TYPE_ns5__ArrayOfRelationship */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -476,7 +731,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__Relationship
-#define SOAP_TYPE_ns5__Relationship (33)
+#define SOAP_TYPE_ns5__Relationship (45)
 /* ns5:Relationship */
 class SOAP_CMAC ns5__Relationship
 {
@@ -487,7 +742,7 @@ public:
 	std::string *UserBEmail;	/* optional element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 33; } /* = unique type id SOAP_TYPE_ns5__Relationship */
+	virtual int soap_type() const { return 45; } /* = unique type id SOAP_TYPE_ns5__Relationship */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -500,7 +755,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__ArrayOfUser
-#define SOAP_TYPE_ns5__ArrayOfUser (34)
+#define SOAP_TYPE_ns5__ArrayOfUser (46)
 /* ns5:ArrayOfUser */
 class SOAP_CMAC ns5__ArrayOfUser
 {
@@ -508,7 +763,7 @@ public:
 	std::vector<class ns5__User * >User;	/* optional element of type ns5:User */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 34; } /* = unique type id SOAP_TYPE_ns5__ArrayOfUser */
+	virtual int soap_type() const { return 46; } /* = unique type id SOAP_TYPE_ns5__ArrayOfUser */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -521,7 +776,7 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns5__User
-#define SOAP_TYPE_ns5__User (35)
+#define SOAP_TYPE_ns5__User (47)
 /* ns5:User */
 class SOAP_CMAC ns5__User
 {
@@ -533,7 +788,7 @@ public:
 	std::string *Surname;	/* optional element of type xsd:string */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 35; } /* = unique type id SOAP_TYPE_ns5__User */
+	virtual int soap_type() const { return 47; } /* = unique type id SOAP_TYPE_ns5__User */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -545,8 +800,30 @@ public:
 };
 #endif
 
+#ifndef SOAP_TYPE_ns5__UserGameInfo
+#define SOAP_TYPE_ns5__UserGameInfo (48)
+/* ns5:UserGameInfo */
+class SOAP_CMAC ns5__UserGameInfo
+{
+public:
+	int *Level;	/* optional element of type xsd:int */
+	float *Points;	/* optional element of type xsd:float */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 48; } /* = unique type id SOAP_TYPE_ns5__UserGameInfo */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         ns5__UserGameInfo() { ns5__UserGameInfo::soap_default(NULL); }
+	virtual ~ns5__UserGameInfo() { }
+};
+#endif
+
 #ifndef SOAP_TYPE_arr__ArrayOfint
-#define SOAP_TYPE_arr__ArrayOfint (36)
+#define SOAP_TYPE_arr__ArrayOfint (49)
 /* arr:ArrayOfint */
 class SOAP_CMAC arr__ArrayOfint
 {
@@ -554,7 +831,7 @@ public:
 	std::vector<int >int_;	/* optional element of type xsd:int */
 	struct soap *soap;	/* transient */
 public:
-	virtual int soap_type() const { return 36; } /* = unique type id SOAP_TYPE_arr__ArrayOfint */
+	virtual int soap_type() const { return 49; } /* = unique type id SOAP_TYPE_arr__ArrayOfint */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -566,13 +843,34 @@ public:
 };
 #endif
 
+#ifndef SOAP_TYPE_arr__ArrayOfstring
+#define SOAP_TYPE_arr__ArrayOfstring (50)
+/* arr:ArrayOfstring */
+class SOAP_CMAC arr__ArrayOfstring
+{
+public:
+	std::vector<std::string >string;	/* optional element of type xsd:string */
+	struct soap *soap;	/* transient */
+public:
+	virtual int soap_type() const { return 50; } /* = unique type id SOAP_TYPE_arr__ArrayOfstring */
+	virtual void soap_default(struct soap*);
+	virtual void soap_serialize(struct soap*) const;
+	virtual int soap_put(struct soap*, const char*, const char*) const;
+	virtual int soap_out(struct soap*, const char*, int, const char*) const;
+	virtual void *soap_get(struct soap*, const char*, const char*);
+	virtual void *soap_in(struct soap*, const char*, const char*);
+	         arr__ArrayOfstring() { arr__ArrayOfstring::soap_default(NULL); }
+	virtual ~arr__ArrayOfstring() { }
+};
+#endif
+
 #ifndef SOAP_TYPE_ns4__SystemException
-#define SOAP_TYPE_ns4__SystemException (23)
+#define SOAP_TYPE_ns4__SystemException (35)
 /* ns4:SystemException */
 class SOAP_CMAC ns4__SystemException : public ns4__Exception
 {
 public:
-	virtual int soap_type() const { return 23; } /* = unique type id SOAP_TYPE_ns4__SystemException */
+	virtual int soap_type() const { return 35; } /* = unique type id SOAP_TYPE_ns4__SystemException */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -585,12 +883,12 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns3__CommunicationException
-#define SOAP_TYPE_ns3__CommunicationException (18)
+#define SOAP_TYPE_ns3__CommunicationException (30)
 /* ns3:CommunicationException */
 class SOAP_CMAC ns3__CommunicationException : public ns4__SystemException
 {
 public:
-	virtual int soap_type() const { return 18; } /* = unique type id SOAP_TYPE_ns3__CommunicationException */
+	virtual int soap_type() const { return 30; } /* = unique type id SOAP_TYPE_ns3__CommunicationException */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -603,12 +901,12 @@ public:
 #endif
 
 #ifndef SOAP_TYPE_ns3__FaultException
-#define SOAP_TYPE_ns3__FaultException (17)
+#define SOAP_TYPE_ns3__FaultException (29)
 /* ns3:FaultException */
 class SOAP_CMAC ns3__FaultException : public ns3__CommunicationException
 {
 public:
-	virtual int soap_type() const { return 17; } /* = unique type id SOAP_TYPE_ns3__FaultException */
+	virtual int soap_type() const { return 29; } /* = unique type id SOAP_TYPE_ns3__FaultException */
 	virtual void soap_default(struct soap*);
 	virtual void soap_serialize(struct soap*) const;
 	virtual int soap_put(struct soap*, const char*, const char*) const;
@@ -623,7 +921,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Detail
-#define SOAP_TYPE_SOAP_ENV__Detail (64)
+#define SOAP_TYPE_SOAP_ENV__Detail (83)
 /* SOAP-ENV:Detail */
 struct SOAP_ENV__Detail
 {
@@ -633,57 +931,129 @@ public:
 	int __type;	/* any type of element <fault> (defined below) */
 	void *fault;	/* transient */
 public:
-	int soap_type() const { return 64; } /* = unique type id SOAP_TYPE_SOAP_ENV__Detail */
+	int soap_type() const { return 83; } /* = unique type id SOAP_TYPE_SOAP_ENV__Detail */
 };
 #endif
 
 #endif
 
 #ifndef SOAP_TYPE___ns1__Login
-#define SOAP_TYPE___ns1__Login (69)
+#define SOAP_TYPE___ns1__Login (88)
 /* Operation wrapper: */
 struct __ns1__Login
 {
 public:
 	_ns1__Login *ns1__Login;	/* optional element of type ns1:Login */
 public:
-	int soap_type() const { return 69; } /* = unique type id SOAP_TYPE___ns1__Login */
+	int soap_type() const { return 88; } /* = unique type id SOAP_TYPE___ns1__Login */
 };
 #endif
 
 #ifndef SOAP_TYPE___ns1__GetGraph
-#define SOAP_TYPE___ns1__GetGraph (73)
+#define SOAP_TYPE___ns1__GetGraph (92)
 /* Operation wrapper: */
 struct __ns1__GetGraph
 {
 public:
 	_ns1__GetGraph *ns1__GetGraph;	/* optional element of type ns1:GetGraph */
 public:
-	int soap_type() const { return 73; } /* = unique type id SOAP_TYPE___ns1__GetGraph */
+	int soap_type() const { return 92; } /* = unique type id SOAP_TYPE___ns1__GetGraph */
 };
 #endif
 
 #ifndef SOAP_TYPE___ns1__Logout
-#define SOAP_TYPE___ns1__Logout (77)
+#define SOAP_TYPE___ns1__Logout (96)
 /* Operation wrapper: */
 struct __ns1__Logout
 {
 public:
 	_ns1__Logout *ns1__Logout;	/* optional element of type ns1:Logout */
 public:
-	int soap_type() const { return 77; } /* = unique type id SOAP_TYPE___ns1__Logout */
+	int soap_type() const { return 96; } /* = unique type id SOAP_TYPE___ns1__Logout */
+};
+#endif
+
+#ifndef SOAP_TYPE___ns1__getRandomWordCategories
+#define SOAP_TYPE___ns1__getRandomWordCategories (100)
+/* Operation wrapper: */
+struct __ns1__getRandomWordCategories
+{
+public:
+	_ns1__getRandomWordCategories *ns1__getRandomWordCategories;	/* optional element of type ns1:getRandomWordCategories */
+public:
+	int soap_type() const { return 100; } /* = unique type id SOAP_TYPE___ns1__getRandomWordCategories */
+};
+#endif
+
+#ifndef SOAP_TYPE___ns1__getRandomWordFromCategory
+#define SOAP_TYPE___ns1__getRandomWordFromCategory (104)
+/* Operation wrapper: */
+struct __ns1__getRandomWordFromCategory
+{
+public:
+	_ns1__getRandomWordFromCategory *ns1__getRandomWordFromCategory;	/* optional element of type ns1:getRandomWordFromCategory */
+public:
+	int soap_type() const { return 104; } /* = unique type id SOAP_TYPE___ns1__getRandomWordFromCategory */
+};
+#endif
+
+#ifndef SOAP_TYPE___ns1__getMaze
+#define SOAP_TYPE___ns1__getMaze (108)
+/* Operation wrapper: */
+struct __ns1__getMaze
+{
+public:
+	_ns1__getMaze *ns1__getMaze;	/* optional element of type ns1:getMaze */
+public:
+	int soap_type() const { return 108; } /* = unique type id SOAP_TYPE___ns1__getMaze */
+};
+#endif
+
+#ifndef SOAP_TYPE___ns1__getUserGameInfo
+#define SOAP_TYPE___ns1__getUserGameInfo (112)
+/* Operation wrapper: */
+struct __ns1__getUserGameInfo
+{
+public:
+	_ns1__getUserGameInfo *ns1__getUserGameInfo;	/* optional element of type ns1:getUserGameInfo */
+public:
+	int soap_type() const { return 112; } /* = unique type id SOAP_TYPE___ns1__getUserGameInfo */
+};
+#endif
+
+#ifndef SOAP_TYPE___ns1__setUserLevel
+#define SOAP_TYPE___ns1__setUserLevel (116)
+/* Operation wrapper: */
+struct __ns1__setUserLevel
+{
+public:
+	_ns1__setUserLevel *ns1__setUserLevel;	/* optional element of type ns1:setUserLevel */
+public:
+	int soap_type() const { return 116; } /* = unique type id SOAP_TYPE___ns1__setUserLevel */
+};
+#endif
+
+#ifndef SOAP_TYPE___ns1__setUserPoints
+#define SOAP_TYPE___ns1__setUserPoints (120)
+/* Operation wrapper: */
+struct __ns1__setUserPoints
+{
+public:
+	_ns1__setUserPoints *ns1__setUserPoints;	/* optional element of type ns1:setUserPoints */
+public:
+	int soap_type() const { return 120; } /* = unique type id SOAP_TYPE___ns1__setUserPoints */
 };
 #endif
 
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Header
-#define SOAP_TYPE_SOAP_ENV__Header (78)
+#define SOAP_TYPE_SOAP_ENV__Header (121)
 /* SOAP Header: */
 struct SOAP_ENV__Header
 {
 public:
-	int soap_type() const { return 78; } /* = unique type id SOAP_TYPE_SOAP_ENV__Header */
+	int soap_type() const { return 121; } /* = unique type id SOAP_TYPE_SOAP_ENV__Header */
 #ifdef WITH_NOEMPTYSTRUCT
 private:
 	char dummy;	/* dummy member to enable compilation */
@@ -696,7 +1066,7 @@ private:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Code
-#define SOAP_TYPE_SOAP_ENV__Code (79)
+#define SOAP_TYPE_SOAP_ENV__Code (122)
 /* SOAP Fault Code: */
 struct SOAP_ENV__Code
 {
@@ -704,7 +1074,7 @@ public:
 	char *SOAP_ENV__Value;	/* optional element of type xsd:QName */
 	struct SOAP_ENV__Code *SOAP_ENV__Subcode;	/* optional element of type SOAP-ENV:Code */
 public:
-	int soap_type() const { return 79; } /* = unique type id SOAP_TYPE_SOAP_ENV__Code */
+	int soap_type() const { return 122; } /* = unique type id SOAP_TYPE_SOAP_ENV__Code */
 };
 #endif
 
@@ -713,14 +1083,14 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Reason
-#define SOAP_TYPE_SOAP_ENV__Reason (81)
+#define SOAP_TYPE_SOAP_ENV__Reason (124)
 /* SOAP-ENV:Reason */
 struct SOAP_ENV__Reason
 {
 public:
 	char *SOAP_ENV__Text;	/* optional element of type xsd:string */
 public:
-	int soap_type() const { return 81; } /* = unique type id SOAP_TYPE_SOAP_ENV__Reason */
+	int soap_type() const { return 124; } /* = unique type id SOAP_TYPE_SOAP_ENV__Reason */
 };
 #endif
 
@@ -729,7 +1099,7 @@ public:
 #ifndef WITH_NOGLOBAL
 
 #ifndef SOAP_TYPE_SOAP_ENV__Fault
-#define SOAP_TYPE_SOAP_ENV__Fault (82)
+#define SOAP_TYPE_SOAP_ENV__Fault (125)
 /* SOAP Fault: */
 struct SOAP_ENV__Fault
 {
@@ -744,7 +1114,7 @@ public:
 	char *SOAP_ENV__Role;	/* optional element of type xsd:string */
 	struct SOAP_ENV__Detail *SOAP_ENV__Detail;	/* optional element of type SOAP-ENV:Detail */
 public:
-	int soap_type() const { return 82; } /* = unique type id SOAP_TYPE_SOAP_ENV__Fault */
+	int soap_type() const { return 125; } /* = unique type id SOAP_TYPE_SOAP_ENV__Fault */
 };
 #endif
 

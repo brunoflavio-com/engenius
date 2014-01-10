@@ -249,6 +249,67 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="HumourStatus", Namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service")]
+    [System.SerializableAttribute()]
+    public partial class HumourStatus : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="RelationshipTag", Namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service")]
     [System.SerializableAttribute()]
     public partial class RelationshipTag : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -403,67 +464,6 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
                 if ((object.ReferenceEquals(this.UsersField, value) != true)) {
                     this.UsersField = value;
                     this.RaisePropertyChanged("Users");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="HumourStatus", Namespace="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service")]
-    [System.SerializableAttribute()]
-    public partial class HumourStatus : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -754,17 +754,53 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/LoginUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/LoginUserResponse")]
         System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User> LoginUserAsync(string Email, string Password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.User GetUser(string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User> GetUserAsync(string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfUsers", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfUsersResponse")]
+        int GetTotalNumberOfUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfUsers", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfUsersResponse")]
+        System.Threading.Tasks.Task<int> GetTotalNumberOfUsersAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/UpdateUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/UpdateUserResponse")]
         SocialGamePublicAPI.SocialGameBLLService.User UpdateUser(SocialGamePublicAPI.SocialGameBLLService.User User);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/UpdateUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/UpdateUserResponse")]
         System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User> UpdateUserAsync(SocialGamePublicAPI.SocialGameBLLService.User User);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetHumourStatusResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.HumourStatus GetHumourStatus(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetHumourStatusResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.HumourStatus> GetHumourStatusAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatusResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.HumourStatus[] GetAllHumourStatus();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatus", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetAllHumourStatusResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.HumourStatus[]> GetAllHumourStatusAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTags", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipTagsResponse")]
         SocialGamePublicAPI.SocialGameBLLService.RelationshipTag[] GetRelationshipTags();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTags", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipTagsResponse")]
         System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.RelationshipTag[]> GetRelationshipTagsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTag", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipTagResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.RelationshipTag GetRelationshipTag(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipTag", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipTagResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.RelationshipTag> GetRelationshipTagAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelatedUsers", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelatedUsersResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.User[] GetRelatedUsers(SocialGamePublicAPI.SocialGameBLLService.User User);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelatedUsers", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelatedUsersResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetRelatedUsersAsync(SocialGamePublicAPI.SocialGameBLLService.User User);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationships", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipsResponse")]
         SocialGamePublicAPI.SocialGameBLLService.Graph GetRelationships(SocialGamePublicAPI.SocialGameBLLService.User User, int Depth);
@@ -783,6 +819,48 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetShortestPath", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetShortestPathResponse")]
         System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetShortestPathAsync(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Goal, int Depth);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserLevel", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserLevelResponse")]
+        int GetUserLevel(string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserLevel", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserLevelResponse")]
+        System.Threading.Tasks.Task<int> GetUserLevelAsync(string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserPoints", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserPointsResponse")]
+        float GetUserPoints(string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserPoints", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserPointsResponse")]
+        System.Threading.Tasks.Task<float> GetUserPointsAsync(string Email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/SetUserLevel", ReplyAction="http://tempuri.org/ISocialGameBLLService/SetUserLevelResponse")]
+        void SetUserLevel(string Email, int Level);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/SetUserLevel", ReplyAction="http://tempuri.org/ISocialGameBLLService/SetUserLevelResponse")]
+        System.Threading.Tasks.Task SetUserLevelAsync(string Email, int Level);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/SetUserPoints", ReplyAction="http://tempuri.org/ISocialGameBLLService/SetUserPointsResponse")]
+        void SetUserPoints(string Email, float Points);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/SetUserPoints", ReplyAction="http://tempuri.org/ISocialGameBLLService/SetUserPointsResponse")]
+        System.Threading.Tasks.Task SetUserPointsAsync(string Email, float Points);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetFriendsWithCommonInterests", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetFriendsWithCommonInterestsResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.User[] GetFriendsWithCommonInterests(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.Interest[] Interests);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetFriendsWithCommonInterests", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetFriendsWithCommonInterestsResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetFriendsWithCommonInterestsAsync(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.Interest[] Interests);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetGraphStats", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetGraphStatsResponse")]
+        string[] GetGraphStats(SocialGamePublicAPI.SocialGameBLLService.User Me);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetGraphStats", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetGraphStatsResponse")]
+        System.Threading.Tasks.Task<string[]> GetGraphStatsAsync(SocialGamePublicAPI.SocialGameBLLService.User Me);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetPossibleFriends", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetPossibleFriendsResponse")]
+        SocialGamePublicAPI.SocialGameBLLService.User[] GetPossibleFriends(SocialGamePublicAPI.SocialGameBLLService.User Me);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetPossibleFriends", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetPossibleFriendsResponse")]
+        System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetPossibleFriendsAsync(SocialGamePublicAPI.SocialGameBLLService.User Me);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -844,6 +922,22 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
             return base.Channel.LoginUserAsync(Email, Password);
         }
         
+        public SocialGamePublicAPI.SocialGameBLLService.User GetUser(string Email) {
+            return base.Channel.GetUser(Email);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User> GetUserAsync(string Email) {
+            return base.Channel.GetUserAsync(Email);
+        }
+        
+        public int GetTotalNumberOfUsers() {
+            return base.Channel.GetTotalNumberOfUsers();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetTotalNumberOfUsersAsync() {
+            return base.Channel.GetTotalNumberOfUsersAsync();
+        }
+        
         public SocialGamePublicAPI.SocialGameBLLService.User UpdateUser(SocialGamePublicAPI.SocialGameBLLService.User User) {
             return base.Channel.UpdateUser(User);
         }
@@ -852,12 +946,44 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
             return base.Channel.UpdateUserAsync(User);
         }
         
+        public SocialGamePublicAPI.SocialGameBLLService.HumourStatus GetHumourStatus(int Id) {
+            return base.Channel.GetHumourStatus(Id);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.HumourStatus> GetHumourStatusAsync(int Id) {
+            return base.Channel.GetHumourStatusAsync(Id);
+        }
+        
+        public SocialGamePublicAPI.SocialGameBLLService.HumourStatus[] GetAllHumourStatus() {
+            return base.Channel.GetAllHumourStatus();
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.HumourStatus[]> GetAllHumourStatusAsync() {
+            return base.Channel.GetAllHumourStatusAsync();
+        }
+        
         public SocialGamePublicAPI.SocialGameBLLService.RelationshipTag[] GetRelationshipTags() {
             return base.Channel.GetRelationshipTags();
         }
         
         public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.RelationshipTag[]> GetRelationshipTagsAsync() {
             return base.Channel.GetRelationshipTagsAsync();
+        }
+        
+        public SocialGamePublicAPI.SocialGameBLLService.RelationshipTag GetRelationshipTag(int Id) {
+            return base.Channel.GetRelationshipTag(Id);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.RelationshipTag> GetRelationshipTagAsync(int Id) {
+            return base.Channel.GetRelationshipTagAsync(Id);
+        }
+        
+        public SocialGamePublicAPI.SocialGameBLLService.User[] GetRelatedUsers(SocialGamePublicAPI.SocialGameBLLService.User User) {
+            return base.Channel.GetRelatedUsers(User);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetRelatedUsersAsync(SocialGamePublicAPI.SocialGameBLLService.User User) {
+            return base.Channel.GetRelatedUsersAsync(User);
         }
         
         public SocialGamePublicAPI.SocialGameBLLService.Graph GetRelationships(SocialGamePublicAPI.SocialGameBLLService.User User, int Depth) {
@@ -882,6 +1008,62 @@ namespace SocialGamePublicAPI.SocialGameBLLService {
         
         public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetShortestPathAsync(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.User Goal, int Depth) {
             return base.Channel.GetShortestPathAsync(Me, Goal, Depth);
+        }
+        
+        public int GetUserLevel(string Email) {
+            return base.Channel.GetUserLevel(Email);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetUserLevelAsync(string Email) {
+            return base.Channel.GetUserLevelAsync(Email);
+        }
+        
+        public float GetUserPoints(string Email) {
+            return base.Channel.GetUserPoints(Email);
+        }
+        
+        public System.Threading.Tasks.Task<float> GetUserPointsAsync(string Email) {
+            return base.Channel.GetUserPointsAsync(Email);
+        }
+        
+        public void SetUserLevel(string Email, int Level) {
+            base.Channel.SetUserLevel(Email, Level);
+        }
+        
+        public System.Threading.Tasks.Task SetUserLevelAsync(string Email, int Level) {
+            return base.Channel.SetUserLevelAsync(Email, Level);
+        }
+        
+        public void SetUserPoints(string Email, float Points) {
+            base.Channel.SetUserPoints(Email, Points);
+        }
+        
+        public System.Threading.Tasks.Task SetUserPointsAsync(string Email, float Points) {
+            return base.Channel.SetUserPointsAsync(Email, Points);
+        }
+        
+        public SocialGamePublicAPI.SocialGameBLLService.User[] GetFriendsWithCommonInterests(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.Interest[] Interests) {
+            return base.Channel.GetFriendsWithCommonInterests(Me, Interests);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetFriendsWithCommonInterestsAsync(SocialGamePublicAPI.SocialGameBLLService.User Me, SocialGamePublicAPI.SocialGameBLLService.Interest[] Interests) {
+            return base.Channel.GetFriendsWithCommonInterestsAsync(Me, Interests);
+        }
+        
+        public string[] GetGraphStats(SocialGamePublicAPI.SocialGameBLLService.User Me) {
+            return base.Channel.GetGraphStats(Me);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetGraphStatsAsync(SocialGamePublicAPI.SocialGameBLLService.User Me) {
+            return base.Channel.GetGraphStatsAsync(Me);
+        }
+        
+        public SocialGamePublicAPI.SocialGameBLLService.User[] GetPossibleFriends(SocialGamePublicAPI.SocialGameBLLService.User Me) {
+            return base.Channel.GetPossibleFriends(Me);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGamePublicAPI.SocialGameBLLService.User[]> GetPossibleFriendsAsync(SocialGamePublicAPI.SocialGameBLLService.User Me) {
+            return base.Channel.GetPossibleFriendsAsync(Me);
         }
     }
 }

@@ -291,4 +291,328 @@ int BasicHttpBinding_USCOREISocialGameServiceProxy::Logout(const char *endpoint,
 		return soap_closesock(soap);
 	return soap_closesock(soap);
 }
+
+int BasicHttpBinding_USCOREISocialGameServiceProxy::getRandomWordCategories(const char *endpoint, const char *soap_action, _ns1__getRandomWordCategories *ns1__getRandomWordCategories, _ns1__getRandomWordCategoriesResponse *ns1__getRandomWordCategoriesResponse)
+{	struct soap *soap = this->soap;
+	struct __ns1__getRandomWordCategories soap_tmp___ns1__getRandomWordCategories;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
+	if (soap_action == NULL)
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/getRandomWordCategories";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___ns1__getRandomWordCategories.ns1__getRandomWordCategories = ns1__getRandomWordCategories;
+	soap_serializeheader(soap);
+	soap_serialize___ns1__getRandomWordCategories(soap, &soap_tmp___ns1__getRandomWordCategories);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___ns1__getRandomWordCategories(soap, &soap_tmp___ns1__getRandomWordCategories, "-ns1:getRandomWordCategories", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___ns1__getRandomWordCategories(soap, &soap_tmp___ns1__getRandomWordCategories, "-ns1:getRandomWordCategories", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!ns1__getRandomWordCategoriesResponse)
+		return soap_closesock(soap);
+	ns1__getRandomWordCategoriesResponse->soap_default(soap);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	ns1__getRandomWordCategoriesResponse->soap_get(soap, "ns1:getRandomWordCategoriesResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int BasicHttpBinding_USCOREISocialGameServiceProxy::getRandomWordFromCategory(const char *endpoint, const char *soap_action, _ns1__getRandomWordFromCategory *ns1__getRandomWordFromCategory, _ns1__getRandomWordFromCategoryResponse *ns1__getRandomWordFromCategoryResponse)
+{	struct soap *soap = this->soap;
+	struct __ns1__getRandomWordFromCategory soap_tmp___ns1__getRandomWordFromCategory;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
+	if (soap_action == NULL)
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/getRandomWordFromCategory";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___ns1__getRandomWordFromCategory.ns1__getRandomWordFromCategory = ns1__getRandomWordFromCategory;
+	soap_serializeheader(soap);
+	soap_serialize___ns1__getRandomWordFromCategory(soap, &soap_tmp___ns1__getRandomWordFromCategory);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___ns1__getRandomWordFromCategory(soap, &soap_tmp___ns1__getRandomWordFromCategory, "-ns1:getRandomWordFromCategory", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___ns1__getRandomWordFromCategory(soap, &soap_tmp___ns1__getRandomWordFromCategory, "-ns1:getRandomWordFromCategory", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!ns1__getRandomWordFromCategoryResponse)
+		return soap_closesock(soap);
+	ns1__getRandomWordFromCategoryResponse->soap_default(soap);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	ns1__getRandomWordFromCategoryResponse->soap_get(soap, "ns1:getRandomWordFromCategoryResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int BasicHttpBinding_USCOREISocialGameServiceProxy::getMaze(const char *endpoint, const char *soap_action, _ns1__getMaze *ns1__getMaze, _ns1__getMazeResponse *ns1__getMazeResponse)
+{	struct soap *soap = this->soap;
+	struct __ns1__getMaze soap_tmp___ns1__getMaze;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
+	if (soap_action == NULL)
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/getMaze";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___ns1__getMaze.ns1__getMaze = ns1__getMaze;
+	soap_serializeheader(soap);
+	soap_serialize___ns1__getMaze(soap, &soap_tmp___ns1__getMaze);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___ns1__getMaze(soap, &soap_tmp___ns1__getMaze, "-ns1:getMaze", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___ns1__getMaze(soap, &soap_tmp___ns1__getMaze, "-ns1:getMaze", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!ns1__getMazeResponse)
+		return soap_closesock(soap);
+	ns1__getMazeResponse->soap_default(soap);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	ns1__getMazeResponse->soap_get(soap, "ns1:getMazeResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int BasicHttpBinding_USCOREISocialGameServiceProxy::getUserGameInfo(const char *endpoint, const char *soap_action, _ns1__getUserGameInfo *ns1__getUserGameInfo, _ns1__getUserGameInfoResponse *ns1__getUserGameInfoResponse)
+{	struct soap *soap = this->soap;
+	struct __ns1__getUserGameInfo soap_tmp___ns1__getUserGameInfo;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
+	if (soap_action == NULL)
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/getUserGameInfo";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___ns1__getUserGameInfo.ns1__getUserGameInfo = ns1__getUserGameInfo;
+	soap_serializeheader(soap);
+	soap_serialize___ns1__getUserGameInfo(soap, &soap_tmp___ns1__getUserGameInfo);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___ns1__getUserGameInfo(soap, &soap_tmp___ns1__getUserGameInfo, "-ns1:getUserGameInfo", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___ns1__getUserGameInfo(soap, &soap_tmp___ns1__getUserGameInfo, "-ns1:getUserGameInfo", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!ns1__getUserGameInfoResponse)
+		return soap_closesock(soap);
+	ns1__getUserGameInfoResponse->soap_default(soap);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	ns1__getUserGameInfoResponse->soap_get(soap, "ns1:getUserGameInfoResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int BasicHttpBinding_USCOREISocialGameServiceProxy::setUserLevel(const char *endpoint, const char *soap_action, _ns1__setUserLevel *ns1__setUserLevel, _ns1__setUserLevelResponse *ns1__setUserLevelResponse)
+{	struct soap *soap = this->soap;
+	struct __ns1__setUserLevel soap_tmp___ns1__setUserLevel;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
+	if (soap_action == NULL)
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/setUserLevel";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___ns1__setUserLevel.ns1__setUserLevel = ns1__setUserLevel;
+	soap_serializeheader(soap);
+	soap_serialize___ns1__setUserLevel(soap, &soap_tmp___ns1__setUserLevel);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___ns1__setUserLevel(soap, &soap_tmp___ns1__setUserLevel, "-ns1:setUserLevel", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___ns1__setUserLevel(soap, &soap_tmp___ns1__setUserLevel, "-ns1:setUserLevel", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!ns1__setUserLevelResponse)
+		return soap_closesock(soap);
+	ns1__setUserLevelResponse->soap_default(soap);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	ns1__setUserLevelResponse->soap_get(soap, "ns1:setUserLevelResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int BasicHttpBinding_USCOREISocialGameServiceProxy::setUserPoints(const char *endpoint, const char *soap_action, _ns1__setUserPoints *ns1__setUserPoints, _ns1__setUserPointsResponse *ns1__setUserPointsResponse)
+{	struct soap *soap = this->soap;
+	struct __ns1__setUserPoints soap_tmp___ns1__setUserPoints;
+	if (endpoint)
+		soap_endpoint = endpoint;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://wvm008.dei.isep.ipp.pt:8080/SocialGameAPI.svc";
+	if (soap_action == NULL)
+		soap_action = "http://wvm008.dei.isep.ipp.pt/SocialGamePublicAPI/ISocialGameService/setUserPoints";
+	soap_begin(soap);
+	soap->encodingStyle = NULL;
+	soap_tmp___ns1__setUserPoints.ns1__setUserPoints = ns1__setUserPoints;
+	soap_serializeheader(soap);
+	soap_serialize___ns1__setUserPoints(soap, &soap_tmp___ns1__setUserPoints);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if (soap->mode & SOAP_IO_LENGTH)
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___ns1__setUserPoints(soap, &soap_tmp___ns1__setUserPoints, "-ns1:setUserPoints", NULL)
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_url(soap, soap_endpoint, NULL), soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___ns1__setUserPoints(soap, &soap_tmp___ns1__setUserPoints, "-ns1:setUserPoints", NULL)
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	if (!ns1__setUserPointsResponse)
+		return soap_closesock(soap);
+	ns1__setUserPointsResponse->soap_default(soap);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	ns1__setUserPointsResponse->soap_get(soap, "ns1:setUserPointsResponse", "");
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
 /* End of client proxy code */

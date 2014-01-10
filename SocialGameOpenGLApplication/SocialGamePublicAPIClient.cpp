@@ -73,5 +73,26 @@ ns5__Graph * SocialGamePublicAPIClient::getGraph(std::string email, int depth){
 
 		throw std::exception();
 	}
+	return NULL;
+}
+
+void SocialGamePublicAPIClient::getUserGameInfo(int & level, float &points){
+	if (ready && LoggedIn){
+		ready = false;
+		_ns1__getUserGameInfo userGameInfo;
+		userGameInfo.Token = &token;
+		_ns1__getUserGameInfoResponse response;
+		proxy.getUserGameInfo(&userGameInfo, &response);
+
+		ns5__UserGameInfo * result = response.getUserGameInfoResult;
+
+		level = * result->Level;
+		points = *result->Points;
+		ready = true;
+	}
+	else{
+		throw std::exception();
+	}
+	return;
 }
 

@@ -8,6 +8,7 @@
 
 AdvanceModeGraphScene::AdvanceModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail):GraphScene(client, loginEmail)
 {
+	getUserPointsAndLevel();
 	graph = getGraph(loginEmail, REMOTE_GRAPH_LEVEL);
 }
 

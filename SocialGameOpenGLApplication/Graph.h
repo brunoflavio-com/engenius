@@ -5,9 +5,6 @@
 class Graph
 {
 private:
-	
-
-	
 
 public:
 	User * user;

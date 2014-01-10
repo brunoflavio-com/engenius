@@ -25,6 +25,31 @@ namespace SocialGamePublicAPI
         [OperationContract]
         [FaultContract(typeof(FaultException))]
         void Logout(string Token);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        List<string> getRandomWordCategories(string Token, int number);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        string getRandomWordFromCategory(string Token, string category);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        string getMaze(string Token, int id);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        Service.UserGameInfo getUserGameInfo(string Token);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        void setUserLevel(string Token, int Level);
+
+        [OperationContract]
+        [FaultContract(typeof(FaultException))]
+        void setUserPoints(string Token, float Points);
+        
     }
 
 
