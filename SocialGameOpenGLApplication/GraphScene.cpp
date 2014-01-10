@@ -1,6 +1,7 @@
 #include "GraphScene.h"
 #include "HangmanScene.h"
 #include "GraphFactory.h"
+#include <gl\freeglut.h>
 
 
 #ifndef M_PI
@@ -9,10 +10,12 @@
 
 #define RAD(x)          (M_PI*(x)/180)
 #define GRAUS(x)        (180*(x)/M_PI)
-
+#define MESSAGE_DURATION 200.0f
+#define MESSAGE_FADEOUT_DURATION 50.0f
 #define BUFFSIZE 512
 GLuint selecter[BUFFSIZE];
 ISelectable * selectedObject = NULL;
+
 
 typedef	GLdouble Vertice[3];
 
@@ -45,6 +48,11 @@ GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
 {
 	apiClient = client;
 	email = loginEmail;
+	message = "";
+	glTime = 0;
+	isMessageActive = false;
+	messageUpdateTime = 0;
+	returningToGame = true;
 }
 
 void GraphScene::getUserPointsAndLevel(){
@@ -82,11 +90,31 @@ void GraphScene::Draw(void){
 	glPushAttrib(GL_DEPTH_TEST);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
-
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	//Draw Growl Type Message
+	if (isMessageActive)
+	{
+		glPushMatrix();
+		float alpha = 1.0f;
+		if (glTime - messageUpdateTime > MESSAGE_FADEOUT_DURATION)
+		{
+			alpha = ((MESSAGE_DURATION - 2 * MESSAGE_FADEOUT_DURATION) - (glTime - messageUpdateTime)) / MESSAGE_FADEOUT_DURATION;
+		}
+		glColor4f(255.0, 255.0, 255.0, alpha);
+		glRasterPos2d(0.1, 0.1);
+		unsigned char s[100];
+		strcpy((char*)s, message.c_str());
+		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
+		glPopMatrix();
+	}
+	//End Draw Message
+	
 	DrawOverlay();
-
+	glEnable(GL_LIGHTING);
+	glDisable(GL_BLEND);
 	glPopAttrib();
-
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 
@@ -95,6 +123,12 @@ void GraphScene::Draw(void){
 	glutSwapBuffers();
 	glFlush();
 
+}
+
+void GraphScene::createMessage(std::string message){
+	this->message = message;
+	isMessageActive = true;
+	messageUpdateTime = glTime;
 }
 
 void GraphScene::Init(void){
@@ -121,6 +155,13 @@ void GraphScene::CamMovement(void){
 
 
 void GraphScene::Timer(int value){	
+	glTime = value;
+	if (isMessageActive)
+	if ( messageUpdateTime + MESSAGE_DURATION < value)
+	{
+		isMessageActive = false;
+	}
+
 	if (value == 0){
 		if (KeyStatus.up){
 			PersonCam.vel = 0.1;
@@ -355,14 +396,14 @@ ISelectable * GraphScene::pickISelectable(int newx, int newy) {
 		switch (selectableObjectType)
 		{
 		case ISelectable::USER_TYPE:
-			//User
+			//User mouseOver
 			if (selectableObjectId < graph->users.size() ){
 				 return (ISelectable*)graph->users.at(selectableObjectId);
 			}
 
 			break;
 		case ISelectable::RELATIONSHIP_TYPE:
-			//Reference
+			//Relationship mouse ver
 			if (selectableObjectId < graph->relationShips.size()){
 				return (ISelectable*)graph->relationShips.at(selectableObjectId);
 			}
@@ -410,8 +451,8 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 			ISelectable * object;			
 			if ((object = pickISelectable(x, y)) != NULL) {
 				if (object->getType() == ISelectable::USER_TYPE){
-				User * user = (User *)object;
-				moveGraphToNewUser(user);
+				User * nextUser = (User *)object;
+				verticeClicked(graph->user, nextUser);
 				}
 			}
 

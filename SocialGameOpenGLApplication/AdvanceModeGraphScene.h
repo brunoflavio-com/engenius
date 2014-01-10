@@ -12,6 +12,7 @@ public:
 	void Draw3dObjects(void);
 	~AdvanceModeGraphScene();
 	Graph * getGraph(std::string loginEmail, int level);
-	void moveGraphToNewUser(User * user);
+	void verticeClicked(User * previousUser, User * nextUser);
+	void Timer(int value);
 };
 

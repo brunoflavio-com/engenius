@@ -14,12 +14,18 @@ class GraphScene :
 {
 private:
 	ISelectable * pickISelectable( int x, int y);
-
+	string message;
+	int messageUpdateTime;
+	bool isMessageActive;
+	atomic<int> glTime;
 protected: 
+	
+	
 	bool isSubWindowsActive;
 	Graph * graph;
 
 public:
+	bool returningToGame;
 	int userLevel;
 	float userPoints;
 	string email;
@@ -60,7 +66,8 @@ public:
 	bool ColisionTest(GLdouble newx, GLdouble newy, GLdouble newz);
 
 	virtual Graph * getGraph(std::string loginEmail, int level) = 0;
-	virtual void moveGraphToNewUser(User * user) = 0;
+	virtual void verticeClicked(User * previousUser, User * nextUser) = 0;
 	void getUserPointsAndLevel();
+	void createMessage(std::string message);
 };
 

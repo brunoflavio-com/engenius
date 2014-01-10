@@ -17,8 +17,7 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 			break;
 		}	
 	}
-
-
+	createMessage("Mission mode");
 }
 
 Graph * NormalModeGraphScene::getGraph(std::string loginEmail, int level){
@@ -31,21 +30,9 @@ void NormalModeGraphScene::Draw3dObjects(void){
 }
 
 void NormalModeGraphScene::DrawOverlay(void){
+
+
 	if (gameOn) return game->DrawOverlay();
-
-	glPushMatrix();
-
-	glColor3ub(200, 0, 0);
-	glRasterPos2d(0.5, 0.9);
-
-	unsigned char s[100];
-
-	strcpy((char*)s, "Normal Mode");
-
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
-	glEnable(GL_LIGHTING);
-
-	glPopMatrix();
 
 }
 
@@ -85,9 +72,12 @@ void NormalModeGraphScene::SpecialKeyUp(int key, int x, int y)
 
 void NormalModeGraphScene::Timer(int value){
 	if (gameOn) return game->Timer(value);
-	
-	GraphScene::Timer(value);		
-	
+	GraphScene::Timer(value);
+	if (returningToGame)
+	{
+		createMessage("Mission Mode");
+		returningToGame = false;
+	}
 }
 
 void NormalModeGraphScene::PassiveMotion(int x, int y) {
@@ -95,6 +85,40 @@ void NormalModeGraphScene::PassiveMotion(int x, int y) {
 	GraphScene::PassiveMotion(x, y);
 }
 
-void NormalModeGraphScene::moveGraphToNewUser(User * user){
-	graph->changeUser(user->email);
+void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
+	//generate random user response
+	srand(time(0));
+	int userDecision = rand()%3;
+	int randomGame;
+	switch (userDecision){
+	//User rejects introduction
+	case 0:
+		createMessage("User " + nextUser->email + "has rejected to introduce you");
+		break;
+		//User asks for game to be played in order to accept introduction
+	case 1:
+		//Random Game
+		createMessage("User " + nextUser->email + " asked you to play a game");
+		//DEBUg
+		break;
+		randomGame = rand() % 2;
+		//debug
+		randomGame = 2;
+		switch (randomGame){
+		case 0:
+			game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
+		case 1:
+			game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
+		case 2:
+			game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email);
+		}
+		gameOn = true;
+		break;
+		//User accepts introduction
+	case 2:
+		createMessage("User " + nextUser->email + "has accepted to introduce you");
+		graph->changeUser(nextUser->email);
+		break;
+	}
+	
 }

@@ -89,9 +89,9 @@ namespace SocialGamePublicAPI
         {
             Session Session = getSession(Token);
             SessionContext context = new SessionContext();
-            WordCategory wordCategory = context.Categories.First(e => e.CategoryName == category);
+            WordCategory wordCategory = context.Categories.Include("words").First(e => e.CategoryName == category);
             Random random = new Random();
-            List<string> tempCategories = new List<string>();
+            
             int randomNumber = random.Next(0, wordCategory.words.Count());
             return wordCategory.words.ElementAt(randomNumber).word;    
         }

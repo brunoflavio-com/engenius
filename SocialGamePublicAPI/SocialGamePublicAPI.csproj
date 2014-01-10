@@ -79,15 +79,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201401092019573_additional.cs" />
-    <Compile Include="Migrations\201401092019573_additional.Designer.cs">
-      <DependentUpon>201401092019573_additional.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201401092028499_additional1.cs" />
-    <Compile Include="Migrations\201401092028499_additional1.Designer.cs">
-      <DependentUpon>201401092028499_additional1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Maze.cs" />
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\Word.cs" />
@@ -167,12 +158,7 @@
     <WCFMetadataStorage Include="Service References\SocialGameBLLService\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201401092019573_additional.resx">
-      <DependentUpon>201401092019573_additional.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201401092028499_additional1.resx">
-      <DependentUpon>201401092028499_additional1.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
