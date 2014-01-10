@@ -86,11 +86,17 @@
   <wsdl:message name="ISocialGameBLLService_GetRelatedUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRelatedUsersResponse" />
   </wsdl:message>
-  <wsdl:message name="ISocialGameBLLService_CheckRelatedUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:CheckRelatedUser" />
+  <wsdl:message name="ISocialGameBLLService_GetRelationship_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationship" />
   </wsdl:message>
-  <wsdl:message name="ISocialGameBLLService_CheckRelatedUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CheckRelatedUserResponse" />
+  <wsdl:message name="ISocialGameBLLService_GetRelationship_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationshipResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_CheckRelationship_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRelationship" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_CheckRelationship_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRelationshipResponse" />
   </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_GetRelationships_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRelationships" />
@@ -115,6 +121,12 @@
   </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_RejectRelationshipRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:RejectRelationshipRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPendingRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPendingRequest" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPendingRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPendingRequestResponse" />
   </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_CheckPendingRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:CheckPendingRequest" />
@@ -220,9 +232,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelatedUsers" message="tns:ISocialGameBLLService_GetRelatedUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelatedUsersResponse" message="tns:ISocialGameBLLService_GetRelatedUsers_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CheckRelatedUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/CheckRelatedUser" message="tns:ISocialGameBLLService_CheckRelatedUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/CheckRelatedUserResponse" message="tns:ISocialGameBLLService_CheckRelatedUser_OutputMessage" />
+    <wsdl:operation name="GetRelationship">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationship" message="tns:ISocialGameBLLService_GetRelationship_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipResponse" message="tns:ISocialGameBLLService_GetRelationship_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRelationship">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/CheckRelationship" message="tns:ISocialGameBLLService_CheckRelationship_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/CheckRelationshipResponse" message="tns:ISocialGameBLLService_CheckRelationship_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetRelationships">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetRelationships" message="tns:ISocialGameBLLService_GetRelationships_InputMessage" />
@@ -239,6 +255,10 @@
     <wsdl:operation name="RejectRelationshipRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/RejectRelationshipRequest" message="tns:ISocialGameBLLService_RejectRelationshipRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/RejectRelationshipRequestResponse" message="tns:ISocialGameBLLService_RejectRelationshipRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPendingRequest" message="tns:ISocialGameBLLService_GetPendingRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPendingRequestResponse" message="tns:ISocialGameBLLService_GetPendingRequest_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CheckPendingRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/CheckPendingRequest" message="tns:ISocialGameBLLService_CheckPendingRequest_InputMessage" />
@@ -390,8 +410,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CheckRelatedUser">
-      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/CheckRelatedUser" style="document" />
+    <wsdl:operation name="GetRelationship">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetRelationship" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRelationship">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/CheckRelationship" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -428,6 +457,15 @@
     </wsdl:operation>
     <wsdl:operation name="RejectRelationshipRequest">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/RejectRelationshipRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingRequest">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetPendingRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

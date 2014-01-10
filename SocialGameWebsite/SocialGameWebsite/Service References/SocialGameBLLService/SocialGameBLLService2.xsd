@@ -167,7 +167,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CheckRelatedUser">
+  <xs:element name="GetRelationship">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q14:User" />
@@ -175,17 +175,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CheckRelatedUserResponse">
+  <xs:element name="GetRelationshipResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="CheckRelatedUserResult" nillable="true" type="q16:Relationship" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetRelationshipResult" nillable="true" type="q16:Relationship" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckRelationship">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q17:User" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q18:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckRelationshipResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckRelationshipResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetRelationships">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="User" nillable="true" type="q17:User" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="User" nillable="true" type="q19:User" />
         <xs:element minOccurs="0" name="Depth" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -193,15 +208,15 @@
   <xs:element name="GetRelationshipsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetRelationshipsResult" nillable="true" type="q18:Graph" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetRelationshipsResult" nillable="true" type="q20:Graph" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="MakeRelationshipRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q19:User" />
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q20:User" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q21:User" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q22:User" />
         <xs:element minOccurs="0" name="RelationshipTagId" type="xs:int" />
         <xs:element minOccurs="0" name="Strength" type="xs:int" />
       </xs:sequence>
@@ -210,15 +225,15 @@
   <xs:element name="MakeRelationshipRequestResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="MakeRelationshipRequestResult" nillable="true" type="q21:RelationshipRequest" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="MakeRelationshipRequestResult" nillable="true" type="q23:RelationshipRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AcceptRelationshipRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q22:User" />
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q23:User" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q24:User" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q25:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -230,8 +245,8 @@
   <xs:element name="RejectRelationshipRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q24:User" />
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q25:User" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q26:User" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q27:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -240,26 +255,41 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPendingRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q28:User" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q29:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPendingRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetPendingRequestResult" nillable="true" type="q30:RelationshipRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CheckPendingRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q26:User" />
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q27:User" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q31:User" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Other" nillable="true" type="q32:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CheckPendingRequestResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="CheckPendingRequestResult" nillable="true" type="q28:RelationshipRequest" />
+        <xs:element minOccurs="0" name="CheckPendingRequestResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetShortestPath">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q29:User" />
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Goal" nillable="true" type="q30:User" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q33:User" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Goal" nillable="true" type="q34:User" />
         <xs:element minOccurs="0" name="Depth" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -267,7 +297,7 @@
   <xs:element name="GetShortestPathResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetShortestPathResult" nillable="true" type="q31:ArrayOfUser" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetShortestPathResult" nillable="true" type="q35:ArrayOfUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -328,43 +358,43 @@
   <xs:element name="GetFriendsWithCommonInterests">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q32:User" />
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Interests" nillable="true" type="q33:ArrayOfInterest" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q36:User" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Interests" nillable="true" type="q37:ArrayOfInterest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetFriendsWithCommonInterestsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetFriendsWithCommonInterestsResult" nillable="true" type="q34:ArrayOfUser" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetFriendsWithCommonInterestsResult" nillable="true" type="q38:ArrayOfUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetGraphStats">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q35:User" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q39:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetGraphStatsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetGraphStatsResult" nillable="true" type="q36:ArrayOfstring" />
+        <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetGraphStatsResult" nillable="true" type="q40:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPossibleFriends">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q37:User" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q41:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPossibleFriendsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetPossibleFriendsResult" nillable="true" type="q38:ArrayOfUser" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetPossibleFriendsResult" nillable="true" type="q42:ArrayOfUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

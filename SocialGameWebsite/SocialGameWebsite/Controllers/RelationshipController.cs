@@ -27,14 +27,14 @@ namespace SocialGameWebsite.Controllers
                 return new EmptyResult();
             }
 
-            if (true/*Proxy.isRelatedToUser(new User { Email = id.UserA }, new User { Email = id.UserB })*/) //We're not friends (yet):
+            if (!Proxy.CheckRelationship(new User { Email = id.UserA }, new User { Email = id.UserB })) //We're not friends (yet):
             {
                 return AssembleCreate(id);
             }
             else //We're related:
             {
-                //Relationship Relationship = Proxy.GetRelationship(new User { Email = id.UserA }, new User { Email = id.UserB });
-                //return AssembleDetails(Relationship);
+                Relationship Relationship = Proxy.GetRelationship(new User { Email = id.UserA }, new User { Email = id.UserB });
+                return AssembleDetails(Relationship);
             }
 
             return new EmptyResult();
