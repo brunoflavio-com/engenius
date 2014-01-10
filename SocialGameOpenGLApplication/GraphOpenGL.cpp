@@ -133,7 +133,7 @@ void GraphOpenGL::PrintKeys(){
 }
 
 void GraphOpenGL::Key(unsigned char key, int x, int y){
-	if (key == 'c'){
+	if (key == '*'){
 		//Change Mode Advance - Normal
 		if (advancedMode)
 		{

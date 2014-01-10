@@ -96,3 +96,47 @@ void SocialGamePublicAPIClient::getUserGameInfo(int & level, float &points){
 	return;
 }
 
+std::vector<std::string> SocialGamePublicAPIClient::getCategories(int numberOfCategories){
+
+	if (ready && LoggedIn){
+		ready = false;
+		_ns1__getRandomWordCategories getRandomWordCategories;
+		getRandomWordCategories.Token = &token;
+		getRandomWordCategories.number = &numberOfCategories;
+		_ns1__getRandomWordCategoriesResponse response;
+		proxy.getRandomWordCategories(&getRandomWordCategories, &response);
+		arr__ArrayOfstring * vCategories = response.getRandomWordCategoriesResult;
+
+		vector<string> categories;
+		for (int i = 0; i < numberOfCategories; i++){
+			categories.push_back(vCategories->string.at(i).c_str());			
+		}
+
+		ready = true;
+		return categories;
+	}
+	else{
+
+		throw std::exception();
+	}
+}
+
+std::string SocialGamePublicAPIClient::getWord(string category){
+
+	if (ready && LoggedIn){
+		ready = false;
+		_ns1__getRandomWordFromCategory getRandomWordFromCategory;
+		getRandomWordFromCategory.Token = &token;
+		getRandomWordFromCategory.category = &category;
+		_ns1__getRandomWordFromCategoryResponse response;
+		proxy.getRandomWordFromCategory(&getRandomWordFromCategory, &response);
+		string * word = response.getRandomWordFromCategoryResult;
+		ready = true;
+		return *word;
+	}
+	else{
+
+		throw std::exception();
+	}
+}
+
