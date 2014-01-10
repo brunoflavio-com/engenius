@@ -101,6 +101,18 @@ namespace SocialGameWebsite.Models
             this.ID = ServiceHumourStatus.Id;
             this.Name = ServiceHumourStatus.Name;
         }
+
+        internal static IList<HumourStatusViewModel> createList(ICollection<HumourStatus> ServiceHumourStatus)
+        {
+            IList<HumourStatusViewModel> HumourStatus = new List<HumourStatusViewModel>();
+
+            foreach (HumourStatus H in ServiceHumourStatus)
+            {
+                HumourStatus.Add(new HumourStatusViewModel(H));
+            }
+
+            return HumourStatus;
+        }
     }
 
 }

@@ -39,7 +39,7 @@ namespace SocialGameWebsite.Controllers
             }
 
             SocialGameBLLService.User ServiceUser = Proxy.GetUser(UserEmail);
-            IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
+            IList<HumourStatusViewModel> ServiceHumourStatus = HumourStatusViewModel.createList( Proxy.GetAllHumourStatus() );
             UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
 
             ICollection<UserViewModel> Friends = new List<UserViewModel>();
@@ -58,7 +58,7 @@ namespace SocialGameWebsite.Controllers
         public ActionResult EditProfile()
         {
             SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
-            IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
+            IList<HumourStatusViewModel> ServiceHumourStatus = HumourStatusViewModel.createList(Proxy.GetAllHumourStatus());
             UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
             return View(UserViewModel);
         }
@@ -118,19 +118,6 @@ namespace SocialGameWebsite.Controllers
             return UserViewModel;
         }
 
-        private IList<HumourStatusViewModel> GetHumourStatus()
-        {
-            IList<HumourStatusViewModel> HumourStatus = new List<HumourStatusViewModel>();
-            ICollection<HumourStatus> ServiceHumourStatus = Proxy.GetAllHumourStatus();
-
-            foreach(HumourStatus H in ServiceHumourStatus)
-            {
-                HumourStatus.Add(new HumourStatusViewModel(H));
-            }
-
-            return HumourStatus;
-        }
-
         //
         // GET: /Home/HumourPartial
 
@@ -139,7 +126,7 @@ namespace SocialGameWebsite.Controllers
         {
             SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
 
-            IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
+            IList<HumourStatusViewModel> ServiceHumourStatus = HumourStatusViewModel.createList(Proxy.GetAllHumourStatus());
             UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
 
             ViewBag.HumourStatusList = ServiceHumourStatus;
@@ -156,7 +143,7 @@ namespace SocialGameWebsite.Controllers
         {
             SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
 
-            IList<HumourStatusViewModel> ServiceHumourStatus = GetHumourStatus();
+            IList<HumourStatusViewModel> ServiceHumourStatus = HumourStatusViewModel.createList(Proxy.GetAllHumourStatus());
             UserViewModel UserViewModel = new UserViewModel(ServiceUser, ServiceHumourStatus);
 
             UserViewModel.HumourStatus = ServiceHumourStatus.Single(h => h.ID == mood);
