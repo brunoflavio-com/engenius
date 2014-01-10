@@ -119,9 +119,8 @@ void GraphOpenGL::redisplayAll(void)
 }
 
 void GraphOpenGL::Timer(int value){
-	glutTimerFunc(20, Timer, value);
+	glutTimerFunc(20, Timer, value + 1);
 	currentScene->Timer(value);
-	//glutPostRedisplay();
 	redisplayAll();
 }
 
@@ -152,7 +151,7 @@ void GraphOpenGL::Key(unsigned char key, int x, int y){
 			
 			advancedMode = true;
 		}
-
+		currentScene->returningToGame = true;
 	}
 	currentScene->Key(key, x, y);
 }

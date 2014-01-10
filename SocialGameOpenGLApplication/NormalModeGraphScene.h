@@ -25,7 +25,7 @@ public:
 	void Timer(int value);
 
 	void PassiveMotion(int x, int y);
-	void moveGraphToNewUser(User * user);
+	void verticeClicked(User * previousUser, User * nextUser);
 
 	Graph * getGraph(std::string loginEmail ,int level);
 };
