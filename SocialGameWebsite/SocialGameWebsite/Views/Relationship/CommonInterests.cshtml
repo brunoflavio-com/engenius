@@ -1,0 +1,29 @@
+﻿@using SocialGameWebsite.Models
+@using SocialGameWebsite.SocialGameBLLService
+@using SocialGameWebsite.Helpers
+
+@model ICollection<UserViewModel>
+
+@Styles.Render("~/Content/usercss")
+
+<h3>
+    @if (Model.Count == 0)
+    {
+        <text>You don't have any relationships sharing the interests: </text>
+    } else {
+        <text>Relstionships that share interest in: </text>
+    }
+    
+   @foreach (string InterestName in (ICollection<string>) ViewBag.InterestNames)
+    {
+            <span>[@InterestName]</span>
+    }
+</h3>
+
+<div class="user-grid">
+    @foreach (UserViewModel friend in Model)
+{
+        @Html.DisplayForUser(friend);
+}
+</div>
+

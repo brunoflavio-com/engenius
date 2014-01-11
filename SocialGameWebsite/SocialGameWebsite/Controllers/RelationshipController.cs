@@ -39,6 +39,36 @@ namespace SocialGameWebsite.Controllers
             return View(RequestsViewModel);
         }
 
+        
+        public ActionResult CommonInterests(ICollection<int> InterestIDs)
+        {
+            if (InterestIDs == null) return new EmptyResult();
+
+            User MeBLL = Proxy.GetUser(User.Identity.Name);
+
+            ICollection<string> InterestNames = new List<String>();
+
+            ICollection<Interest> Interests = new List<Interest>();
+            foreach (int InterestID in InterestIDs)
+            {
+                Interest Interest = Proxy.GetInterest(InterestID);
+                Interests.Add(Interest);
+                InterestNames.Add(Interest.Name);
+            }
+
+            User[] FriendsWithCommonInterests = Proxy.GetFriendsWithCommonInterests(MeBLL, Interests.ToArray());
+
+            IList<HumourStatusViewModel> ServiceHumourStatus = HumourStatusViewModel.createList(Proxy.GetAllHumourStatus());
+            ICollection<UserViewModel> FriendsWithCommonInterestsViewModel = new List<UserViewModel>();
+            foreach (User Friend in FriendsWithCommonInterests)
+            {
+                FriendsWithCommonInterestsViewModel.Add(new UserViewModel(Friend, ServiceHumourStatus));
+            }
+
+            ViewBag.InterestNames = InterestNames;
+            return View(FriendsWithCommonInterestsViewModel);
+        }
+
         //
         // GET: /Relationship/Router
         // Routes the request to the correct view.
@@ -199,6 +229,8 @@ namespace SocialGameWebsite.Controllers
 
             return PartialView(PossibleFriendsViewModel);
         }
+        
+
 
         private ActionResult AssembleCreate(EditRelationshipViewModel id)
         {

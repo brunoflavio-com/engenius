@@ -915,6 +915,18 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetPossibleFriends", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetPossibleFriendsResponse")]
         System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.User[]> GetPossibleFriendsAsync(SocialGameWebsite.SocialGameBLLService.User Me);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/AddInterestToUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/AddInterestToUserResponse")]
+        SocialGameWebsite.SocialGameBLLService.Interest AddInterestToUser(SocialGameWebsite.SocialGameBLLService.User Me, SocialGameWebsite.SocialGameBLLService.Interest Interest, string Freebase);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/AddInterestToUser", ReplyAction="http://tempuri.org/ISocialGameBLLService/AddInterestToUserResponse")]
+        System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.Interest> AddInterestToUserAsync(SocialGameWebsite.SocialGameBLLService.User Me, SocialGameWebsite.SocialGameBLLService.Interest Interest, string Freebase);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetInterest", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetInterestResponse")]
+        SocialGameWebsite.SocialGameBLLService.Interest GetInterest(int InterestID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetInterest", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetInterestResponse")]
+        System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.Interest> GetInterestAsync(int InterestID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1190,6 +1202,22 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.User[]> GetPossibleFriendsAsync(SocialGameWebsite.SocialGameBLLService.User Me) {
             return base.Channel.GetPossibleFriendsAsync(Me);
+        }
+        
+        public SocialGameWebsite.SocialGameBLLService.Interest AddInterestToUser(SocialGameWebsite.SocialGameBLLService.User Me, SocialGameWebsite.SocialGameBLLService.Interest Interest, string Freebase) {
+            return base.Channel.AddInterestToUser(Me, Interest, Freebase);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.Interest> AddInterestToUserAsync(SocialGameWebsite.SocialGameBLLService.User Me, SocialGameWebsite.SocialGameBLLService.Interest Interest, string Freebase) {
+            return base.Channel.AddInterestToUserAsync(Me, Interest, Freebase);
+        }
+        
+        public SocialGameWebsite.SocialGameBLLService.Interest GetInterest(int InterestID) {
+            return base.Channel.GetInterest(InterestID);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.Interest> GetInterestAsync(int InterestID) {
+            return base.Channel.GetInterestAsync(InterestID);
         }
     }
 }

@@ -393,6 +393,10 @@
     <Content Include="Views\Network\MyNetwork.cshtml" />
     <Content Include="Views\Relationship\Suggestions.cshtml" />
     <Content Include="Views\Home\Interests.cshtml" />
+    <Content Include="Views\Relationship\CommonInterests.cshtml" />
+    <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.Interest.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

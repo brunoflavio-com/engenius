@@ -439,4 +439,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddInterestToUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q49:User" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Interest" nillable="true" type="q50:Interest" />
+        <xs:element minOccurs="0" name="Freebase" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddInterestToUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="AddInterestToUserResult" nillable="true" type="q51:Interest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInterest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InterestID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInterestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetInterestResult" nillable="true" type="q52:Interest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
