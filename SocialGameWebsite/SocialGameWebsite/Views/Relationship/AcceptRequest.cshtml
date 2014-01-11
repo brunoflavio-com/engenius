@@ -1,5 +1,9 @@
 ﻿@model SocialGameWebsite.Models.EditRelationshipViewModel
-
+@using SocialGameWebsite.Util
+@{
+    string UID = Model.UserA.Equals(User.Identity.Name) ? Base64.Encode(Model.UserB) : Base64.Encode(Model.UserA);
+    string divUID = "relationshipPartialView" + UID.Replace("=", "\\=");
+}
 <script>
     function disableBeforePost() {
         $("#acceptRequestButton").prop('disabled', true);
@@ -17,9 +21,9 @@
     {
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "relationshipPartialView",
-        OnBegin = "disableBeforePost"
-    }, new { id = "acceptRequestForm" }))
+        UpdateTargetId = @divUID
+    },
+    new { id = "acceptRequestForm" }))
 {
     @Html.AntiForgeryToken()
 
