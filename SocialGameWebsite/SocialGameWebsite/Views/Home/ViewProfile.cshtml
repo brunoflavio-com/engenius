@@ -1,5 +1,6 @@
 ﻿@using SocialGameWebsite.Helpers
 @using SocialGameWebsite.Models
+@using SocialGameWebsite.Util
 
 @Styles.Render("~/Content/usercss")
 @model SocialGameWebsite.Models.UserViewModel
@@ -17,7 +18,8 @@
     @Html.LabelFor(model => model.FacebookProfile) @Html.DisplayFor(model => model.FacebookProfile)
 </div>
 
-<div id="relationshipPartialView" class="relationshipView">
+@{string divID = "relationshipPartialView" + Base64.Encode(Model.Email);}
+<div id="@divID" class="relationshipView">
     @Html.Action("Router", "Relationship", new
 {
     id = new EditRelationshipViewModel

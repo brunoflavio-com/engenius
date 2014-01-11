@@ -1,0 +1,53 @@
+﻿@model SocialGameWebsite.Models.RequestsViewModel
+@using SocialGameWebsite.Models
+@using SocialGameWebsite.Util
+<h2>Requests</h2>
+
+<h3>New Requests:</h3>
+<ul>
+    @foreach (UserViewModel User in Model.UserNewRequests)
+    {
+        string divID = "relationshipPartialView" + Base64.Encode(User.Email);
+        <li>
+            From: @User.Name @User.Surname
+            <div id="@divID" class="relationshipView">
+                @Html.Action("Router", "Relationship", new
+                {
+                    id = new EditRelationshipViewModel
+                    {
+                        UserB = User.Email
+                    }
+                })
+            </div>
+        </li>
+    }
+    @if (Model.UserNewRequests.Count == 0)
+    {
+        <li>There are no requests to show.</li>
+    }
+</ul>
+
+
+<h3>My Requests:</h3>
+<ul>
+    @foreach (UserViewModel User in Model.UserMyRequests)
+    {
+        string divID = "relationshipPartialView" + Base64.Encode(User.Email);
+        <li>
+            To: @User.Name @User.Surname
+            <div id="@divID" class="relationshipView">
+                @Html.Action("Router", "Relationship", new
+                {
+                    id = new EditRelationshipViewModel
+                    {
+                        UserB = User.Email
+                    }
+                })
+            </div>
+        </li>
+    }
+    @if (Model.UserMyRequests.Count == 0)
+    {
+        <li> There are no requests to show. </li>
+    }
+</ul>
