@@ -73,6 +73,15 @@ namespace SocialGameBLL.Util
             return Interests;
         }
 
+        public static Interest ConvertInterestEntityToInterest(InterestEntity InterestEntity)
+        {
+            return new Interest
+            {
+                Id = InterestEntity.ID,
+                Name = InterestEntity.Name
+            };
+        }
+
         public static ICollection<HumourStatus> ConvertToHumourStatusFromHumourStatusEntities(ICollection<HumourStatusEntity> HumourStatusEntities)
         {
             ICollection<HumourStatus> HumourStatus = new List<HumourStatus>();

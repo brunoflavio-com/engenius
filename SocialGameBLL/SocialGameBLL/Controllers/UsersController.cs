@@ -279,7 +279,7 @@ namespace SocialGameBLL.Controllers
             }
         }
 
-        public void AddInterestToUser(User Me, Interest Interest, string  FreebaseId)
+        public Interest AddInterestToUser(User Me, Interest Interest, string  FreebaseId)
         {
             try
             {
@@ -301,6 +301,7 @@ namespace SocialGameBLL.Controllers
 
                 MyEntity.Interests.Add(InterestEntity);
                 db.SaveChanges();
+                return EntityServiceConverter.ConvertInterestEntityToInterest(InterestEntity);
             }catch(Exception e)
             {
                 throw new Exception(e.Message, e);

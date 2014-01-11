@@ -390,12 +390,12 @@ namespace SocialGameBLL
             }
         }
 
-        public void AddInterestToUser(User User, Interest Intrerest, string FreebaseId)
+        public Interest AddInterestToUser(User User, Interest Intrerest, string FreebaseId)
         {
             try
             {
                 UsersController Controller = new UsersController();
-                Controller.AddInterestToUser(User, Intrerest, FreebaseId);
+                return Controller.AddInterestToUser(User, Intrerest, FreebaseId);
             }catch(Exception e)
             {
                 throw new FaultException(e.Message);
