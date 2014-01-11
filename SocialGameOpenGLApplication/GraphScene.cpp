@@ -500,6 +500,11 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 			if ((object = pickISelectable(x, y)) != NULL) {
 				if (object->getType() == ISelectable::USER_TYPE){
 				User * nextUser = (User *)object;
+				ALuint buffer, source;
+				buffer = alutCreateBufferFromFile("./sounds/mouseclick.wav");
+				alGenSources(1, &source);
+				alSourcei(source, AL_BUFFER, buffer);
+				alSourcePlay(source);
 				verticeClicked(graph->user, nextUser);
 				}
 			}
