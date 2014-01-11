@@ -19,7 +19,7 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 		}	
 	}
 	ALuint buffer, source;
-	buffer = alutCreateBufferFromFile("./sounds/crowdcheer.wav");
+	buffer = alutCreateBufferFromFile("./sounds/start.wav");
 	alGenSources(1, &source);
 	alSourcei(source, AL_BUFFER, buffer); 
 	alSourcePlay(source);

@@ -77,7 +77,7 @@ void GraphScene::Draw(void){
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	CamLookAt();
-	
+
 	Draw3dObjects();
 
 	glMatrixMode(GL_PROJECTION);
@@ -85,12 +85,12 @@ void GraphScene::Draw(void){
 	glLoadIdentity();
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	
+
 	glLoadIdentity();
 	//Reshape 2D SPACE
 	float ratio = (float)glutGet(GLUT_WINDOW_WIDTH) / glutGet(GLUT_WINDOW_HEIGHT);
-	float xSpan = 1; 
-	float ySpan = 1; 
+	float xSpan = 1;
+	float ySpan = 1;
 
 	if (ratio > 1){
 		xSpan *= ratio;
@@ -128,26 +128,35 @@ void GraphScene::Draw(void){
 	if (selectedObject != NULL && selectedObject->selected){
 		unsigned char s[500];
 		string selectedObjectInformation = selectedObject->toString();
-		glColor4f(255.0, 255.0, 255.0, 1.f);
-		glRasterPos2d( 0.6, 0.9);
+		glColor4f(255.0, 255.0, 255.0, 0.7f);
+		glRasterPos2d(0.6, 0.9);
 		strcpy((char*)s, selectedObjectInformation.c_str());
 		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
 	}
-	
+
 	//desenha circulo indicativos 
-	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-	
+
+	GLfloat colors[3][4] = {
+		{ 0.0, 0.0, 1.0, 0.7 },
+		{ 0.0, 1.0, 0.0, 0.7 },
+		{ 1.0, 1.0, 0.0, 0.7 },
+		};
+					
+	unsigned char textIndications[3][20] = { "You are here", "Mission Target", "You" };
 	
 	float radius = 0.05;
 	for (int y = 0; y < 3; y++){
 		glBegin(GL_POLYGON);
+		glColor4f(colors[y][0], colors[y][1], colors[y][2], colors[y][3]);
 		for (double i = 0; i < 2 * M_PI; i += M_PI / 50)
 			glVertex2f(-1 + cos(i) * radius, -0.5 -(y*0.13)+ sin(i) * radius);
 		glEnd();
+		glColor4f(255.0, 255.0, 255.0, 0.7f);
+		glRasterPos2d(-0.9, -0.52 - (y*0.13));
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, textIndications[y]);
 	}
 
 	DrawOverlay();
-
 	// ropõe estado
 	glDisable(GL_BLEND);
 	glEnable(GL_LIGHTING);
@@ -491,6 +500,11 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 			if ((object = pickISelectable(x, y)) != NULL) {
 				if (object->getType() == ISelectable::USER_TYPE){
 				User * nextUser = (User *)object;
+				ALuint buffer, source;
+				buffer = alutCreateBufferFromFile("./sounds/mouseclick.wav");
+				alGenSources(1, &source);
+				alSourcei(source, AL_BUFFER, buffer);
+				alSourcePlay(source);
 				verticeClicked(graph->user, nextUser);
 				}
 			}

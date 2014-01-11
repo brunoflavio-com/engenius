@@ -129,7 +129,11 @@ void GraphOpenGL::Timer(int value){
 		currentScene->returningMessage = normalScene->returningMessage;
 		delete normalScene;
 		advancedMode = true;
-		
+		ALuint buffer, source;
+		buffer = alutCreateBufferFromFile("./sounds/crowdcheer.wav");
+		alGenSources(1, &source);
+		alSourcei(source, AL_BUFFER, buffer);
+		alSourcePlay(source);
 		currentScene->createMessage("Congratulations you have achived yor mission");
 	}
 	currentScene->Timer(value);

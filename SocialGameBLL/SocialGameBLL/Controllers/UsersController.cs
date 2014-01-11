@@ -279,6 +279,35 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public Interest AddInterestToUser(User Me, Interest Interest, string  FreebaseId)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+
+                InterestEntity InterestEntity;
+                try
+                {
+                    InterestEntity = db.Interests.Single(i => i.FreebaseId == FreebaseId);
+                }catch(Exception e)
+                {
+                    InterestEntity = new InterestEntity 
+                    { 
+                        FreebaseId = FreebaseId,
+                        Name = Interest.Name
+                    };
+                    db.Interests.Add(InterestEntity);
+                }
+
+                MyEntity.Interests.Add(InterestEntity);
+                db.SaveChanges();
+                return EntityServiceConverter.ConvertInterestEntityToInterest(InterestEntity);
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         /*Private helper methods*/
         private void UpdateUserEntity(UserEntity UserEntity, User User)
         {

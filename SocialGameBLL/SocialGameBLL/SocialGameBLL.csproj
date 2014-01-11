@@ -91,6 +91,10 @@
     <Compile Include="Entities\SocialGameBLLDbContext.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Entities\UserSecurity.cs" />
+    <Compile Include="Migrations\201401111936046_Addfreebaseidtointerests.cs" />
+    <Compile Include="Migrations\201401111936046_Addfreebaseidtointerests.Designer.cs">
+      <DependentUpon>201401111936046_Addfreebaseidtointerests.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\SecurityService.cs" />
     <Compile Include="Service\HumourStatus.cs" />
@@ -137,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Documentation\RegisterUser.sequencediagram.layout">
       <DependentUpon>RegisterUser.sequencediagram</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401111936046_Addfreebaseidtointerests.resx">
+      <DependentUpon>201401111936046_Addfreebaseidtointerests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

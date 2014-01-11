@@ -392,6 +392,7 @@
     <Content Include="Views\Relationship\Requests.cshtml" />
     <Content Include="Views\Network\MyNetwork.cshtml" />
     <Content Include="Views\Relationship\Suggestions.cshtml" />
+    <Content Include="Views\Home\Interests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
