@@ -10,16 +10,10 @@
 
 Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 	Graph * graph = new Graph();
-	
+
+	// Sample Data for random Generation
 	std::string firstNames[10] = {"carlos", "rui", "sofia", "luis","bruno", "jorge","miguel","ze", "alexandre", "diogo"};
 	std::string surnames[10] = { "Teixeira", "Silvino", "Moreira", "Novais", "Flavio", "Pinto", "Lima", "Mota", "Pessegueira", "Pereira" };
-
-	vector<User *> users;
-	User * realUser = new User();
-	realUser->email = email;
-
-	users.push_back(realUser);
-	graph->users.push_back(realUser);
 
 	RelationshipTag * family = new RelationshipTag();
 	family->id = 1;
@@ -68,6 +62,14 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		graph->humorStatus.push_back(uStatus[i]);
 	}
 
+	vector<User *> users;
+	User * realUser = new User();
+	realUser->email = email;
+	realUser->humor = uStatus[rand() % 3];
+	users.push_back(realUser);
+	graph->users.push_back(realUser);
+
+
 	srand(time(0));
 	//Build Users and Direct RelationShips
 	for(int i = 0; i < graphDepth; i++){
@@ -78,9 +80,12 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 			int directConnections = 1+ rand() % 4 ;
 			for (int y = 0; y < directConnections; y++){
 				User * tempUser = new User();
+				
 				string name = firstNames[rand() % 5];
 				string surname = surnames[rand() % 5];
 				tempUser->email =  name + to_string(rand() % 100) + surname+"@gmail.com";
+				
+				
 				tempUser->name = name;
 				tempUser->surname = surname;
 				tempUser->humor = uStatus[rand() % 3];

@@ -44,7 +44,7 @@ GraphCamera MinimapCam;
 Graphspecial_Key KeyStatus;
 GraphMouse_State MouseStatus;
 
-GraphScene::GraphScene(SocialGamePublicAPIClient * client, string loginEmail)
+GraphScene::GraphScene(SocialGamePublicAPIClient * client, std::string loginEmail)
 {
 	apiClient = client;
 	email = loginEmail;
@@ -113,19 +113,18 @@ void GraphScene::Draw(void){
 	//End Draw Message
 	
 	//Draw Selected Object
-	User * selectedUser;
-	Relationship * selectedRelationship;
+	
+	string selectedObjectInformation;
 	if (selectedObject != NULL && selectedObject->selected){
+		unsigned char s[500];
 		string selectedObjectInformation = selectedObject->toString();
 		glPushMatrix();
 		glColor4f(255.0, 255.0, 255.0, 1.f);
-		glRasterPos2d(0.7, 0.9);
-		unsigned char s[100];
+		glRasterPos2d(0.7, 0.9);	
 		strcpy((char*)s, selectedObjectInformation.c_str());
 		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
 		glPopMatrix();
 	}
-	
 	
 
 	DrawOverlay();
