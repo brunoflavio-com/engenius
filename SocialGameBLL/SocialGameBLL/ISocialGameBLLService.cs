@@ -85,6 +85,9 @@ namespace SocialGameBLL
 
         [OperationContract]
         Interest AddInterestToUser(User Me, Interest Interest, string Freebase);
+
+        [OperationContract]
+        Interest GetInterest(int InterestID);
     }
 
 

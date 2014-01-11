@@ -308,6 +308,19 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public Interest GetInterest(int InterestID)
+        {
+            InterestEntity InterestEntity;
+            try
+            {
+                InterestEntity = db.Interests.Single(i => i.ID == InterestID);
+                return EntityServiceConverter.ConvertInterestEntityToInterest(InterestEntity);
+            } catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         /*Private helper methods*/
         private void UpdateUserEntity(UserEntity UserEntity, User User)
         {

@@ -401,5 +401,18 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public Interest GetInterest(int InterestID)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetInterest(InterestID);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }
