@@ -1,0 +1,15 @@
+﻿@using SocialGameWebsite.Models
+@using SocialGameWebsite.Helpers
+
+@Styles.Render("~/Content/usercss")
+
+@model ICollection<UserViewModel>
+
+<h3>Friend suggestions based on your interests:</h3>
+<div class="user-grid">
+    @foreach (UserViewModel suggestion in Model)
+    {
+        @Html.DisplayForUser(suggestion);
+    }
+</div>
+
