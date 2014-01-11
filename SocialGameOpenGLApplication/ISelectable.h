@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 class ISelectable
 {
 	
@@ -11,6 +13,7 @@ public:
 	virtual int getType()=0;
 	ISelectable();
 	~ISelectable();
+	virtual std::string toString() = 0;
 
 };
 

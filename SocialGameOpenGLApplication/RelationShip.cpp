@@ -35,3 +35,8 @@ bool Relationship::contains(User * user){
 		return false; 
 	}
 }
+
+string Relationship::toString(){
+	return  "Relationship:" + relationshipTag->name + "\n" + 
+			"Strength: " + to_string(strength) + "\n";
+}

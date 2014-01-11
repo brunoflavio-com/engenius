@@ -38,8 +38,17 @@ public:
 private:
 	//Game engine:
 	HangmanPLEngine * game;
-	//Soap Proxy to retrieve categories/words?
 
+	bool categorySelectionMode;
+
+	//Soap Proxy to retrieve categories/words
+	SocialGamePublicAPIClient *client;
+
+	//Vector with categories
+	std::vector<std::string> catVec;
+
+	//Selected Category
+	string selectedCategory;
 
 	//Word to find
 	string word;
@@ -59,5 +68,8 @@ private:
 
 	//Send letter to prolog
 	void play(unsigned char key);
+
+	//Send radom categories to output
+	void showCategories(vector<string> categories);
 };
 

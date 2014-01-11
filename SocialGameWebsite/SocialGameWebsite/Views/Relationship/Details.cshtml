@@ -1,5 +1,9 @@
 ﻿@model SocialGameWebsite.Models.RelationshipViewModel
-
+@using SocialGameWebsite.Util
+@{
+    string UID = Model.UserA.Equals(User.Identity.Name)? Base64.Encode(Model.UserB.Email) : Base64.Encode(Model.UserA.Email);
+    string divUID = "relationshipPartialView" + UID.Replace("=", "\\=");
+}
 <div id="relationshipStrenght">
     <span class="label">@Html.LabelFor(model => model.Strenght)</span>
     <span class="value">@Html.ValueFor(model => model.Strenght)</span>
@@ -18,15 +22,16 @@
 
 @using (Ajax.BeginForm("EditAction", "Relationship",
     new { 
-        UserA = SocialGameWebsite.Util.Base64.Encode(Model.UserA.Email),
-        UserB = SocialGameWebsite.Util.Base64.Encode(Model.UserB.Email)
-    }, 
-    new AjaxOptions {
+        UserA = Base64.Encode(Model.UserA.Email),
+        UserB = Base64.Encode(Model.UserB.Email)
+    },
+    new AjaxOptions
+    {
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "relationshipPartialView",
-        OnBegin = "disableBeforePost()"
-    }, new { id = "detailsRelationshipForm" }))
+        UpdateTargetId = @divUID
+    }, 
+    new { id = "detailsRelationshipForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -43,9 +48,9 @@
     {
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "relationshipPartialView",
-        OnBegin = "disableBeforePost()"
-    }, new { id = "detailsRelationshipForm" }))
+        UpdateTargetId = @divUID
+    }, 
+    new { id = "detailsRelationshipForm" }))
 {
     @Html.AntiForgeryToken()
 

@@ -1,18 +1,23 @@
 ﻿@model SocialGameWebsite.Models.EditRelationshipViewModel
-
+@using SocialGameWebsite.Util
+@{
+    string UID = Model.UserA.Equals(User.Identity.Name) ? Base64.Encode(Model.UserB) : Base64.Encode(Model.UserA);
+    string divUID = "relationshipPartialView" + UID.Replace("=", "\\=");
+}
 <script type="text/javascript">
     function disableBeforePost() {
         $("#relationshipTagSelector").prop('disabled', true);
     }
 </script>
 
-@using (Ajax.BeginForm("Create", "Relationship", new AjaxOptions
+@using (Ajax.BeginForm("Create", "Relationship",
+    new AjaxOptions
     {
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "relationshipPartialView",
-        OnBegin = "disableBeforePost()"
-    }, new { id = "createRelationshipForm" }))
+        UpdateTargetId = @divUID
+    },
+    new { id = "createRelationshipForm" }))
 {
     @Html.AntiForgeryToken()
 

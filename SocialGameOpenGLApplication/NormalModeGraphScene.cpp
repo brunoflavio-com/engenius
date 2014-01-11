@@ -6,9 +6,10 @@
 #include "TicTacToeScene.h"
 #include "MazeScene.h"
 
-NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level):GraphScene(client, loginEmail)
+NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level) :GraphScene(client, loginEmail)
 {
 	gameOn = false;
+	this->realUser = realUser;
 	graph = getGraph(loginEmail, level);
 	for each(User * u in graph->users){
 		if (u->graphLevel == level){
@@ -17,6 +18,11 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 			break;
 		}	
 	}
+	ALuint buffer, source;
+	buffer = alutCreateBufferFromFile("./sounds/crowdcheer.wav");
+	alGenSources(1, &source);
+	alSourcei(source, AL_BUFFER, buffer); 
+	alSourcePlay(source);
 }
 
 Graph * NormalModeGraphScene::getGraph(std::string loginEmail, int level){
@@ -33,6 +39,13 @@ void NormalModeGraphScene::DrawOverlay(void){
 
 	if (gameOn) return game->DrawOverlay();
 
+		/*glBegin(GL_TRIANGLE_FAN);
+		glVertex2f(0.5, 0.5);
+		for (int n = 0; n <= 50; ++n) {
+			float const t = 2 * M_PI*(float)n / (float)50;
+			glVertex2f(0.5 + sin(t)*0.2, 0.5 + cos(t)*0.5);
+		}
+		*/
 }
 
 void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
@@ -58,13 +71,13 @@ void NormalModeGraphScene::SpecialKey(int key, int x, int y)
 {
 	if (gameOn) return game->SpecialKey(key, x, y);
 
-	GraphScene::Key(key, x, y);
+	GraphScene::SpecialKey(key, x, y);
 }
 
 void NormalModeGraphScene::SpecialKeyUp(int key, int x, int y)
 {
 	if (gameOn) return game->SpecialKeyUp(key, x, y);
-
+	GraphScene::SpecialKeyUp(key,x,y);
 
 }
 
@@ -76,6 +89,7 @@ void NormalModeGraphScene::Timer(int value){
 		createMessage("Mission Mode");
 		returningToGame = false;
 	}
+	
 }
 
 void NormalModeGraphScene::PassiveMotion(int x, int y) {
@@ -131,8 +145,9 @@ void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
 		//User accepts introduction
 		if (nextUser == targetUser)
 		{
-			createMessage("Yes");
-			isFinished == true;
+			selectedObject = NULL;
+			isFinished = true;
+			returningMessage = "Congratulations you achieved your mission";
 		}
 		else{
 			createMessage("User " + nextUser->email + "has accepted to introduce you");

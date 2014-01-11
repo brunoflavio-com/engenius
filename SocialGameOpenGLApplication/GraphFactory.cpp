@@ -10,15 +10,10 @@
 
 Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 	Graph * graph = new Graph();
-	
-	std::string firstNames[10] = {"carlos", "rui", "sofia", "luis","bruno", "jorge","miguel","ze", "alexandre", "diogo"};
-	
-	vector<User *> users;
-	User * realUser = new User();
-	realUser->email = email;
 
-	users.push_back(realUser);
-	graph->users.push_back(realUser);
+	// Sample Data for random Generation
+	std::string firstNames[10] = {"carlos", "rui", "sofia", "luis","bruno", "jorge","miguel","ze", "alexandre", "diogo"};
+	std::string surnames[10] = { "Teixeira", "Silvino", "Moreira", "Novais", "Flavio", "Pinto", "Lima", "Mota", "Pessegueira", "Pereira" };
 
 	RelationshipTag * family = new RelationshipTag();
 	family->id = 1;
@@ -34,6 +29,48 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		graph->relationShipTags.push_back(relationShipTags[i]);
 	}
 
+
+	UserTag * tag1 = new UserTag();
+	tag1->id = 1;
+	tag1->name = "Animais";
+	UserTag * tag2 = new UserTag();
+	tag2->id = 2;
+	tag2->name = "Programação";
+	UserTag * tag3 = new UserTag();
+	tag3->id = 3;
+	tag3->name = "Poker";
+
+	UserTag * userTags[3] = { tag1, tag2, tag3 };
+
+	for (int i = 0; i < 3; i++){
+		graph->userTags.push_back(userTags[i]);
+	}
+
+	HumorStatus * ustatus1 = new HumorStatus();
+	ustatus1->id = 1;
+	ustatus1->name = "Happy";
+	HumorStatus * ustatus2 = new HumorStatus();
+	ustatus2->id = 2;
+	ustatus2->name = "Normal";
+	HumorStatus * ustatus3 = new HumorStatus();
+	ustatus3->id = 3;
+	ustatus3->name = "Sad";
+
+	HumorStatus * uStatus[3] = { ustatus1, ustatus2, ustatus3 };
+
+	for (int i = 0; i < 3; i++){
+		graph->humorStatus.push_back(uStatus[i]);
+	}
+
+	vector<User *> users;
+	User * realUser = new User();
+	realUser->isCurrentRealUser = true;
+	realUser->email = email;
+	realUser->humor = uStatus[rand() % 3];
+	users.push_back(realUser);
+	graph->users.push_back(realUser);
+
+
 	srand(time(0));
 	//Build Users and Direct RelationShips
 	for(int i = 0; i < graphDepth; i++){
@@ -44,13 +81,25 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 			int directConnections = 1+ rand() % 4 ;
 			for (int y = 0; y < directConnections; y++){
 				User * tempUser = new User();
+				
+				string name = firstNames[rand() % 5];
+				string surname = surnames[rand() % 5];
+				tempUser->email =  name + to_string(rand() % 100) + surname+"@gmail.com";
+				
+				
+				tempUser->name = name;
+				tempUser->surname = surname;
+				tempUser->humor = uStatus[rand() % 3];
+				UserTag * uTag = userTags[rand() % 3];
+				tempUser->userTags.push_back(uTag);
 				tempUsers.push_back(tempUser);
 				graph->users.push_back(tempUser);
-				tempUser->email = firstNames[rand() % 5] + to_string(rand() % 100) + "@test.com";
+				
 				Relationship * relationShip = new Relationship();
 				graph->relationShips.push_back(relationShip);
 				
 				RelationshipTag * relationShipTag = relationShipTags[rand() % 3];
+				
 				relationShip->relationshipTag = relationShipTag;
 				relationShip->strength = 1 + rand() % 5;
 				relationShip->userA = user;
@@ -75,7 +124,7 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		Relationship * relationShip = new Relationship();
 		RelationshipTag * relationShipTag = relationShipTags[rand() % 3];
 		relationShip->strength = 1 + rand() % 5;
-		
+		relationShip->relationshipTag = relationShipTag;
 		User * userB = NULL;
 		User * userA = NULL;
 
@@ -191,8 +240,7 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 		graphObj->relationShips.push_back(relationship);
 	}
 
-	graphObj->user = graphObj->getUser(email);
-	graphObj->user->isCenter = true;
+	
 	int maxUserRelationShips= 0;
 	for (int i = 0; i < graphObj->users.size(); i++){
 		graphObj->users.at(i)->glId = i;
@@ -212,7 +260,8 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 
 	graphObj->maxConnectionStrenght = maxRelationStrength;
 	graphObj->maxUserConnections = maxUserRelationShips;
-
+	graphObj->user = graphObj->getUser(email);
+	graphObj->user->isCenter = true;
 	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength);
 	coordWalker.walk(graphObj->user);
 	return graphObj;

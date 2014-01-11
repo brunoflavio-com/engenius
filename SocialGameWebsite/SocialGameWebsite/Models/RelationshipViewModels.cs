@@ -101,5 +101,17 @@ namespace SocialGameWebsite.Models
         [Required]
         public int RelationshipTag { get; set; }
     }
+
+    public class RequestsViewModel
+    {
+        public IList<UserViewModel> UserMyRequests { get; set; }
+        public IList<UserViewModel> UserNewRequests { get; set; }
+
+        public RequestsViewModel()
+        {
+            UserMyRequests = new List<UserViewModel>();
+            UserNewRequests = new List<UserViewModel>();
+        }
+    }
 }
 

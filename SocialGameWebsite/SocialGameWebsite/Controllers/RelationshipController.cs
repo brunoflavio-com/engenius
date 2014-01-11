@@ -14,6 +14,31 @@ namespace SocialGameWebsite.Controllers
     {
         SocialGameBLLServiceClient Proxy = new SocialGameBLLServiceClient();
 
+        // GET: /Relationship/Requests
+        public ActionResult Requests()
+        {
+            RequestsViewModel RequestsViewModel = new RequestsViewModel();
+
+            ICollection<RelationshipRequest> NewRequests = Proxy.GetPendingRequestsToUser(new User { Email = User.Identity.Name } );
+            ICollection<RelationshipRequest> MyRequests = Proxy.GetUserPendingRequests(new User { Email = User.Identity.Name });
+
+            IList<HumourStatusViewModel> ServiceHumourStatus = HumourStatusViewModel.createList(Proxy.GetAllHumourStatus());
+
+            foreach (RelationshipRequest NewRequest in NewRequests)
+            {
+                UserViewModel user = new UserViewModel(Proxy.GetUser(NewRequest.RequesterEmail), ServiceHumourStatus);
+                RequestsViewModel.UserNewRequests.Add(user);
+            }
+
+            foreach (RelationshipRequest MyRequest in MyRequests)
+            {
+                UserViewModel user = new UserViewModel(Proxy.GetUser(MyRequest.RequestedEmail), ServiceHumourStatus);
+                RequestsViewModel.UserMyRequests.Add(user);
+            }
+
+            return View(RequestsViewModel);
+        }
+
         //
         // GET: /Relationship/Router
         // Routes the request to the correct view.

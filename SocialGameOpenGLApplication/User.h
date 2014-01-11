@@ -5,7 +5,7 @@
 #include "UserTag.h"
 #include "HumorStatus.h"
 #include <vector>
-
+#include <string>
 class Relationship;
 
 using namespace std;
@@ -21,6 +21,7 @@ public:
 	string  surname;
 	float cota;
 	float x, y, z;
+	bool isCurrentRealUser;
 	bool isTarget;
 	bool isCenter;
 	bool canWalkThrough;
@@ -28,6 +29,7 @@ public:
 	vector<UserTag *>  userTags;
 	HumorStatus * humor;
 	int getType();
+	std::string toString();
 	User();
 	~User();
 };

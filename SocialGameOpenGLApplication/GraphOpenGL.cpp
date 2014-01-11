@@ -2,6 +2,7 @@
 #include "AdvanceModeGraphScene.h"
 #include "NormalModeGraphScene.h"
 
+
 #define GAP		25
 
 typedef struct GraphWindows{
@@ -10,7 +11,6 @@ typedef struct GraphWindows{
 }GraphWindows;
 
 GraphWindows Window;
-
 
 GraphOpenGL::GraphOpenGL(){
 }
@@ -42,6 +42,8 @@ void GraphOpenGL::Init(){
 	currentScene->Init();
 
 }
+
+	
 
 void GraphOpenGL::subWindowInit(){
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -119,23 +121,26 @@ void GraphOpenGL::redisplayAll(void)
 }
 
 void GraphOpenGL::Timer(int value){
-	glutTimerFunc(20, Timer, value + 1);
-	
 	if (!advancedMode && currentScene->isFinished){
 		advanceScene->userLevel = normalScene->userLevel;
 		advanceScene->userPoints = normalScene->userPoints;
 		currentScene = advanceScene;
-		delete normalScene;
 		currentScene->returningToGame = true;
+		currentScene->returningMessage = normalScene->returningMessage;
+		delete normalScene;
 		advancedMode = true;
+		
 		currentScene->createMessage("Congratulations you have achived yor mission");
 	}
 	currentScene->Timer(value);
 	redisplayAll();
+	glutTimerFunc(20, Timer, value + 1);
+
 }
 
 
 void GraphOpenGL::PrintKeys(){
+	
 	printf("Up/Down - Zoom in/out\n");
 	printf("Left/Right - rodar para a esquerda/direita\n");
 	printf("Q/q/A/a - subir/descer\n");
@@ -167,7 +172,9 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 {
 	advanceScene = new AdvanceModeGraphScene(client, email);
 	currentScene = advanceScene;
+	advancedMode = true;
 	glutInit(&argc, argv);
+	alutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(800 + GAP * 3, 400 + GAP * 2);
@@ -177,6 +184,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 
 	//Main window
 	Init();
+	glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
 	glutTimerFunc(20, Timer, 0);
 	glutReshapeFunc(Reshape);
 	glutDisplayFunc(Draw);
@@ -190,6 +198,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 	
 	Window.Top = glutCreateSubWindow(Window.Main, GAP, GAP, 200, 200);
 	subWindowInit();
+	glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
 	glutTimerFunc(20, Timer, 1);
 	glutReshapeFunc(ReshapeMinimap);
 	glutDisplayFunc(DrawMinimap);
