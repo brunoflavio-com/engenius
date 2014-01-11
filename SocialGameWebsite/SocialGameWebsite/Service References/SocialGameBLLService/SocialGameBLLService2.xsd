@@ -469,4 +469,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetUserInterests">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q53:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInterestsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetUserInterestsResult" nillable="true" type="q54:ArrayOfInterest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

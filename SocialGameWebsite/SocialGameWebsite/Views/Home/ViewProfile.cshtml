@@ -48,6 +48,6 @@ else
 </div>
 
 <div>
-    @Html.Action("Interests")
+    @Html.Action("Interests", new { email = Base64.Encode(Model.Email)})
 </div>
 

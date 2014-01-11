@@ -55,9 +55,19 @@ namespace SocialGameWebsite.Controllers
 
 
         [Authorize]
-        public ActionResult Interests()
+        public ActionResult Interests(string Email)
         {
-            return PartialView();
+            string UserEmail = Base64.Decode(Email);
+            bool isMyProfile = (User.Identity.Name == UserEmail);
+
+            User ServiceUser = Proxy.GetUser(UserEmail);
+
+            ICollection<Interest> UserInterests = Proxy.GetUserInterests(ServiceUser);
+            ICollection<string> InterestNames = UserInterests.Select(i => i.Name).ToList();
+
+            ViewBag.Interests = InterestNames;
+
+            return PartialView(isMyProfile);
         }
 
         [HttpPost]
@@ -65,9 +75,10 @@ namespace SocialGameWebsite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Interests(string id, string name)
         {
-            string x = id;
-            string y = name;
-            return Json(new { });
+            User ServiceUser = Proxy.GetUser(User.Identity.Name);
+            Interest Interest = Proxy.AddInterestToUser(ServiceUser, new Interest { Name = name }, id);
+            var JsonResult = new { name = Interest.Name };
+            return Json(JsonResult);
         }
 
         [Authorize]

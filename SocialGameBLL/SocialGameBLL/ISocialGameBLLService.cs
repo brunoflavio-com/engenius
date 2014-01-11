@@ -88,6 +88,10 @@ namespace SocialGameBLL
 
         [OperationContract]
         Interest GetInterest(int InterestID);
+
+        [OperationContract]
+        ICollection<Interest> GetUserInterests(User Me);
+
     }
 
 

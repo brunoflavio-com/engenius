@@ -927,6 +927,12 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetInterest", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetInterestResponse")]
         System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.Interest> GetInterestAsync(int InterestID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserInterests", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserInterestsResponse")]
+        SocialGameWebsite.SocialGameBLLService.Interest[] GetUserInterests(SocialGameWebsite.SocialGameBLLService.User Me);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserInterests", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserInterestsResponse")]
+        System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.Interest[]> GetUserInterestsAsync(SocialGameWebsite.SocialGameBLLService.User Me);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1218,6 +1224,14 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.Interest> GetInterestAsync(int InterestID) {
             return base.Channel.GetInterestAsync(InterestID);
+        }
+        
+        public SocialGameWebsite.SocialGameBLLService.Interest[] GetUserInterests(SocialGameWebsite.SocialGameBLLService.User Me) {
+            return base.Channel.GetUserInterests(Me);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.Interest[]> GetUserInterestsAsync(SocialGameWebsite.SocialGameBLLService.User Me) {
+            return base.Channel.GetUserInterestsAsync(Me);
         }
     }
 }
