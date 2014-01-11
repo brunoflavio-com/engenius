@@ -2,6 +2,7 @@
 #include "HangmanScene.h"
 #include "GraphFactory.h"
 #include <gl\freeglut.h>
+#include <gl\GL.h>
 
 
 #ifndef M_PI
@@ -82,56 +83,75 @@ void GraphScene::Draw(void){
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	glOrtho(0, 1, 0, 1, -1.0f, 1.0f);
-
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	
 	glLoadIdentity();
+	//Reshape 2D SPACE
+	float ratio = (float)glutGet(GLUT_WINDOW_WIDTH) / glutGet(GLUT_WINDOW_HEIGHT);
+	float xSpan = 1; 
+	float ySpan = 1; 
 
-	glPushAttrib(GL_DEPTH_TEST);
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_LIGHTING);
+	if (ratio > 1){
+		xSpan *= ratio;
+	}
+	else{
+		ySpan = xSpan / ratio;
+	}
+
+	gluOrtho2D(-1 * xSpan, xSpan, -1 * ySpan, ySpan);
+	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+
 	//Draw Growl Type Message
 	if (isMessageActive)
 	{
-		glPushMatrix();
 		float alpha = 1.0f;
 		if (glTime - messageUpdateTime > MESSAGE_FADEOUT_DURATION)
 		{
 			alpha = ((MESSAGE_DURATION - 2 * MESSAGE_FADEOUT_DURATION) - (glTime - messageUpdateTime)) / MESSAGE_FADEOUT_DURATION;
 		}
 		glColor4f(255.0, 255.0, 255.0, alpha);
-		glRasterPos2d(0.1, 0.1);
+		glRasterPos2d(0, -0.9);
 		unsigned char s[100];
 		strcpy((char*)s, message.c_str());
 		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
-		glPopMatrix();
 	}
 	//End Draw Message
-	
+
 	//Draw Selected Object
-	
-	
+
+
 	if (selectedObject != NULL && selectedObject->selected){
 		unsigned char s[500];
 		string selectedObjectInformation = selectedObject->toString();
-		glPushMatrix();
 		glColor4f(255.0, 255.0, 255.0, 1.f);
-		glRasterPos2d(0.6, 0.9);	
+		glRasterPos2d( 0.6, 0.9);
 		strcpy((char*)s, selectedObjectInformation.c_str());
 		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
-		glPopMatrix();
 	}
 	
-
-	DrawOverlay();
-	glEnable(GL_LIGHTING);
+	//desenha circulo indicativos 
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	
+	
+	float radius = 0.05;
+	for (int y = 0; y < 3; y++){
+		glBegin(GL_POLYGON);
+		for (double i = 0; i < 2 * M_PI; i += M_PI / 50)
+			glVertex2f(-1 + cos(i) * radius, -0.5 -(y*0.13)+ sin(i) * radius);
+		glEnd();
+	}
+	// ropõe estado
 	glDisable(GL_BLEND);
-	glPopAttrib();
-	glMatrixMode(GL_MODELVIEW);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	
+
 	glPopMatrix();
 
 	glMatrixMode(GL_PROJECTION);
