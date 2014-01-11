@@ -184,6 +184,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 
 	//Main window
 	Init();
+	glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
 	glutTimerFunc(20, Timer, 0);
 	glutReshapeFunc(Reshape);
 	glutDisplayFunc(Draw);
@@ -197,6 +198,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 	
 	Window.Top = glutCreateSubWindow(Window.Main, GAP, GAP, 200, 200);
 	subWindowInit();
+	glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
 	glutTimerFunc(20, Timer, 1);
 	glutReshapeFunc(ReshapeMinimap);
 	glutDisplayFunc(DrawMinimap);

@@ -156,6 +156,7 @@ void GraphScene::Draw(void){
 		glutBitmapString(GLUT_BITMAP_HELVETICA_12, textIndications[y]);
 	}
 
+	DrawOverlay();
 	// ropõe estado
 	glDisable(GL_BLEND);
 	glEnable(GL_LIGHTING);
