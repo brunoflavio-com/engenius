@@ -14,7 +14,7 @@
 #define MESSAGE_FADEOUT_DURATION 50.0f
 #define BUFFSIZE 512
 GLuint selecter[BUFFSIZE];
-ISelectable * selectedObject = NULL;
+
 
 
 typedef	GLdouble Vertice[3];
@@ -114,13 +114,13 @@ void GraphScene::Draw(void){
 	
 	//Draw Selected Object
 	
-	string selectedObjectInformation;
+	
 	if (selectedObject != NULL && selectedObject->selected){
 		unsigned char s[500];
 		string selectedObjectInformation = selectedObject->toString();
 		glPushMatrix();
 		glColor4f(255.0, 255.0, 255.0, 1.f);
-		glRasterPos2d(0.7, 0.9);	
+		glRasterPos2d(0.6, 0.9);	
 		strcpy((char*)s, selectedObjectInformation.c_str());
 		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
 		glPopMatrix();
@@ -172,12 +172,13 @@ void GraphScene::CamMovement(void){
 
 void GraphScene::Timer(int value){	
 	glTime = value;
+
+
 	if (isMessageActive)
 	if ( messageUpdateTime + MESSAGE_DURATION < value)
 	{
 		isMessageActive = false;
 	}
-
 	
 		if (KeyStatus.up){
 			PersonCam.vel = 0.1;

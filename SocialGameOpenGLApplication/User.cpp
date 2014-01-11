@@ -6,10 +6,7 @@
 User::User()
 {
 	graphLevel = -1;
-	/*	cota = 0;
-		x = 0;
-		y = 0;
-		z = 0; */
+	isCurrentRealUser = false;
 	isTarget = false;
 	isCenter = false;
 	selected = false;

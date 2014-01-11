@@ -13,6 +13,7 @@ GLfloat white[4] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat red[4] = { 1.0, 0.0, 0.0, 1.0 };
 GLfloat blue[4] = { 0.0, 0.0, 1.0, 1.0 };
 GLfloat green[4] = { 0.0, 1.0, 0.0, 1.0 };
+GLfloat yellow[4] = { 1.0, 1.0, 0.0, 1.0 };
 
 GraphWalkerDraw::GraphWalkerDraw(bool drawUserNames)
 {	
@@ -94,9 +95,13 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	if (glRenderMode)
 		quadric = gluNewQuadric();
 	GLfloat * color = white;
-
+	//Or
 	if (userA->isTarget){
 		color = green;
+	}
+	
+	if (userA->isCurrentRealUser){
+		color = yellow;
 	}
 
 	if (userA->isCenter){

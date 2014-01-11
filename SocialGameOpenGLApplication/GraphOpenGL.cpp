@@ -119,14 +119,15 @@ void GraphOpenGL::redisplayAll(void)
 }
 
 void GraphOpenGL::Timer(int value){
-	
 	if (!advancedMode && currentScene->isFinished){
 		advanceScene->userLevel = normalScene->userLevel;
 		advanceScene->userPoints = normalScene->userPoints;
 		currentScene = advanceScene;
-		delete normalScene;
 		currentScene->returningToGame = true;
+		currentScene->returningMessage = normalScene->returningMessage;
+		delete normalScene;
 		advancedMode = true;
+		
 		currentScene->createMessage("Congratulations you have achived yor mission");
 	}
 	currentScene->Timer(value);
@@ -168,6 +169,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 {
 	advanceScene = new AdvanceModeGraphScene(client, email);
 	currentScene = advanceScene;
+	advancedMode = true;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);

@@ -64,6 +64,7 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 
 	vector<User *> users;
 	User * realUser = new User();
+	realUser->isCurrentRealUser = true;
 	realUser->email = email;
 	realUser->humor = uStatus[rand() % 3];
 	users.push_back(realUser);
@@ -239,8 +240,7 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 		graphObj->relationShips.push_back(relationship);
 	}
 
-	graphObj->user = graphObj->getUser(email);
-	graphObj->user->isCenter = true;
+	
 	int maxUserRelationShips= 0;
 	for (int i = 0; i < graphObj->users.size(); i++){
 		graphObj->users.at(i)->glId = i;
@@ -260,7 +260,8 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 
 	graphObj->maxConnectionStrenght = maxRelationStrength;
 	graphObj->maxUserConnections = maxUserRelationShips;
-
+	graphObj->user = graphObj->getUser(email);
+	graphObj->user->isCenter = true;
 	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength);
 	coordWalker.walk(graphObj->user);
 	return graphObj;

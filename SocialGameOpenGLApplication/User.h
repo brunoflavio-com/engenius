@@ -21,6 +21,7 @@ public:
 	string  surname;
 	float cota;
 	float x, y, z;
+	bool isCurrentRealUser;
 	bool isTarget;
 	bool isCenter;
 	bool canWalkThrough;

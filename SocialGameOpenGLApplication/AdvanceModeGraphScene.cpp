@@ -10,7 +10,8 @@ AdvanceModeGraphScene::AdvanceModeGraphScene(SocialGamePublicAPIClient *client, 
 {
 	getUserPointsAndLevel();
 	graph = getGraph(loginEmail, REMOTE_GRAPH_LEVEL);
-	realUser = graph->user;
+	graph->user->isCurrentRealUser = true;
+	returningMessage = "Advanced Mode";
 }
 
 void AdvanceModeGraphScene::Draw3dObjects(void){
@@ -28,16 +29,25 @@ Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail ,int level){
 }
 
 void AdvanceModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
+	Relationship * relationship = graph->getRelationship(previousUser, nextUser);
+	if (relationship == NULL)
+	{
+		createMessage("Cant go diretly do that user");
+		return;
+	}
+
 	//Get new graph from remote api
 	Graph * tempGraph = graph;
 	graph = getGraph(nextUser->email,REMOTE_GRAPH_LEVEL);
+	User * u = graph->getUser(email);
+	u->isCurrentRealUser = true;
 }
 
 void AdvanceModeGraphScene::Timer(int value){
 	GraphScene::Timer(value);
 	if (returningToGame)
 	{
-		createMessage("Avanced Mode");
+		createMessage(returningMessage);
 		returningToGame = false;
 	}
 }

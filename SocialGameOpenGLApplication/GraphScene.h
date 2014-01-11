@@ -20,14 +20,17 @@ private:
 	int messageUpdateTime;
 	bool isMessageActive;
 	atomic<int> glTime;
+	
 
 protected: 
 	bool isSubWindowsActive;
 	Graph * graph;
+	ISelectable * selectedObject = NULL;
 
 public:
 	bool isFinished;
 	bool returningToGame;
+	string returningMessage;
 	User * realUser;
 	int userLevel;
 	float userPoints;
