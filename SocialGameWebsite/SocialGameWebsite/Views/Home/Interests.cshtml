@@ -1,0 +1,27 @@
+﻿<link href="http://www.gstatic.com/freebase/suggest/4_1/suggest.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://www.gstatic.com/freebase/suggest/4_1/suggest.min.js"></script>
+
+@using(Ajax.BeginForm("Interests","Home",new AjaxOptions{
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        }, new { id = "addInterestForm" }))
+    {
+        @Html.AntiForgeryToken();
+        <input type="text" id="idtext" name="id" hidden/>
+        <input type="text" id="interesttext" name="name"/>
+        <input type="submit" id="interestSubmit" style="display:none;" value="Create" />
+    }
+
+<script type="text/javascript">
+    function makepost(e, data)
+    {
+        $("#idtext").val(data.id);
+        $("#interesttext").val(data.name);
+        $("#interestSubmit").click();
+    }
+    $(function () {
+        $("#interesttext").suggest().bind("fb-select", function (e, data) {
+            makepost(e, data);
+        });
+    });
+</script>

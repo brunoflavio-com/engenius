@@ -55,6 +55,22 @@ namespace SocialGameWebsite.Controllers
 
 
         [Authorize]
+        public ActionResult Interests()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Interests(string id, string name)
+        {
+            string x = id;
+            string y = name;
+            return Json(new { });
+        }
+
+        [Authorize]
         public ActionResult EditProfile()
         {
             SocialGameBLLService.User ServiceUser = Proxy.GetUser(User.Identity.Name);
