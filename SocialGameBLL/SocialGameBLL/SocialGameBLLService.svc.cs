@@ -401,5 +401,17 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public ICollection<Interest> GetUserInterests(User Me)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetUserInterests(Me);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }

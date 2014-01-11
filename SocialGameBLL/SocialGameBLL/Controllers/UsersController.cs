@@ -308,6 +308,19 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public ICollection<Interest> GetUserInterests(User Me)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                ICollection<InterestEntity> InterestEntities = MyEntity.Interests.ToList();
+                return EntityServiceConverter.ConvertToInterestFromInterestEntities(InterestEntities);
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         /*Private helper methods*/
         private void UpdateUserEntity(UserEntity UserEntity, User User)
         {
