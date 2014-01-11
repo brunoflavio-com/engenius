@@ -113,7 +113,7 @@ void GraphWalkerDraw::walkVertice(User * userA){
 
 		if (drawUserNames){
 			glDisable(GL_LIGHTING);
-			glColor3ub(200, 200, 200);
+			glColor3ub(255, 255, 255);
 			glRasterPos3f(-2, 0, 4);
 			unsigned char s[100];
 			strcpy((char*)s, userA->email.c_str());
