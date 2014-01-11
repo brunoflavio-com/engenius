@@ -145,6 +145,9 @@ void GraphScene::Draw(void){
 			glVertex2f(-1 + cos(i) * radius, -0.5 -(y*0.13)+ sin(i) * radius);
 		glEnd();
 	}
+
+	DrawOverlay();
+
 	// ropõe estado
 	glDisable(GL_BLEND);
 	glEnable(GL_LIGHTING);
