@@ -21,5 +21,6 @@ class Relationship :
 	~Relationship();
 	User * getDestinationUser(User * originUser);
 	int getType();
+	string toString();
 };
 

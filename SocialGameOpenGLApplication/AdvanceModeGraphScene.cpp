@@ -10,6 +10,7 @@ AdvanceModeGraphScene::AdvanceModeGraphScene(SocialGamePublicAPIClient *client, 
 {
 	getUserPointsAndLevel();
 	graph = getGraph(loginEmail, REMOTE_GRAPH_LEVEL);
+	realUser = graph->user;
 }
 
 void AdvanceModeGraphScene::Draw3dObjects(void){

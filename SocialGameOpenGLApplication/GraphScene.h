@@ -8,12 +8,14 @@
 #include "User.h"
 #include <GL/glut.h>
 #include "Graph.h"
+#include "ISelectable.h"
 
 class GraphScene :
 	public IBothWindowsScene
 {
 private:
 	ISelectable * pickISelectable( int x, int y);
+	
 	string message;
 	int messageUpdateTime;
 	bool isMessageActive;
@@ -26,9 +28,12 @@ protected:
 public:
 	bool isFinished;
 	bool returningToGame;
+	User * realUser;
 	int userLevel;
 	float userPoints;
 	string email;
+	string name;
+	
 	SocialGamePublicAPIClient * apiClient;
 
 	GraphScene(SocialGamePublicAPIClient *, string loginEmail);

@@ -112,6 +112,22 @@ void GraphScene::Draw(void){
 	}
 	//End Draw Message
 	
+	//Draw Selected Object
+	User * selectedUser;
+	Relationship * selectedRelationship;
+	if (selectedObject != NULL && selectedObject->selected){
+		string selectedObjectInformation = selectedObject->toString();
+		glPushMatrix();
+		glColor4f(255.0, 255.0, 255.0, 1.f);
+		glRasterPos2d(0.7, 0.9);
+		unsigned char s[100];
+		strcpy((char*)s, selectedObjectInformation.c_str());
+		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
+		glPopMatrix();
+	}
+	
+	
+
 	DrawOverlay();
 	glEnable(GL_LIGHTING);
 	glDisable(GL_BLEND);
