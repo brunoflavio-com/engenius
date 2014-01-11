@@ -27,17 +27,47 @@ namespace SocialGameWebsite.Controllers
                 return new EmptyResult();
             }
 
-            if (!Proxy.CheckRelationship(new User { Email = id.UserA }, new User { Email = id.UserB })) //We're not friends (yet):
+            //We're waiting for user to accept request:
+            if (Proxy.CheckPendingRequest(new User { Email = id.UserA }, new User { Email = id.UserB }))
+            {
+                return AssembleOutgoingRequest(id);
+            }
+
+            //Pending request to ourselves:
+            if (Proxy.CheckPendingRequest(new User { Email = id.UserB }, new User { Email = id.UserA }))
+            {
+                return AssembleIncomingRequest(id);
+            }
+
+            //We're not friends (yet):
+            if (!Proxy.CheckRelationship(new User { Email = id.UserA }, new User { Email = id.UserB }))
             {
                 return AssembleCreate(id);
             }
-            else //We're related:
+            else
+            //We're related:
             {
                 Relationship Relationship = Proxy.GetRelationship(new User { Email = id.UserA }, new User { Email = id.UserB });
                 return AssembleDetails(Relationship);
             }
 
+
             return new EmptyResult();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(RelationshipViewModel RelationshipViewModel)
+        {
+            EditRelationshipViewModel id =
+                    new EditRelationshipViewModel
+                    {
+                        UserA = RelationshipViewModel.UserA.Email,
+                        UserB = RelationshipViewModel.UserB.Email,
+                        Strenght = RelationshipViewModel.Strenght,
+                        RelationshipTag = RelationshipViewModel.RelationshipTag.ID
+                    };
+            return AssembleCreate(id);
         }
 
         // POST: /Relationship/Create
@@ -54,10 +84,78 @@ namespace SocialGameWebsite.Controllers
 
                 Proxy.MakeRelationshipRequest(UserA, UserB, RelationshipTagID, Strength);
                 
-                return RedirectToAction("Route");
+                return RedirectToAction("Router", EditRelationshipViewModel );
             }
 
             return new EmptyResult();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAction(string UserA, string UserB)
+        {
+            EditRelationshipViewModel Relationship = new EditRelationshipViewModel();
+            Relationship.UserA = Base64.Decode(UserA);
+            Relationship.UserB = Base64.Decode(UserB);
+
+            return AssembleCreate(Relationship);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Remove(string UserA, string UserB)
+        {
+            string UserAEmail = Base64.Decode(UserA);
+            string UserBEmail = Base64.Decode(UserB);
+
+            if (UserAEmail == User.Identity.Name || UserBEmail == User.Identity.Name) {
+                Proxy.DeleteRelationship(new User { Email = UserAEmail }, new User { Email = UserBEmail });
+            }
+
+            return RedirectToAction("Router", new EditRelationshipViewModel { UserA = UserAEmail, UserB = UserBEmail });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CancelRequest(string UserA, string UserB)
+        {
+            string UserAEmail = Base64.Decode(UserA);
+            string UserBEmail = Base64.Decode(UserB);
+
+            if (UserAEmail == User.Identity.Name)
+            {
+                //Use the reject request method of the BLL to cancel the request.
+                Proxy.RejectRelationshipRequest(new User { Email = UserBEmail }, new User { Email = UserAEmail });
+            }
+            return RedirectToAction("Router", new EditRelationshipViewModel { UserA = UserAEmail, UserB = UserBEmail });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AcceptRequest(string UserA, string UserB)
+        {
+            string UserAEmail = Base64.Decode(UserA);
+            string UserBEmail = Base64.Decode(UserB);
+
+            if (UserAEmail == User.Identity.Name)
+            {
+                Proxy.AcceptRelationshipRequest(new User { Email = UserAEmail }, new User { Email = UserBEmail });
+            }
+            return RedirectToAction("Router", new EditRelationshipViewModel { UserA = UserAEmail, UserB = UserBEmail });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RejectRequest(string UserA, string UserB)
+        {
+            string UserAEmail = Base64.Decode(UserA);
+            string UserBEmail = Base64.Decode(UserB);
+
+            if (UserAEmail == User.Identity.Name)
+            {
+                Proxy.RejectRelationshipRequest(new User { Email = UserAEmail }, new User { Email = UserBEmail });
+            }
+            return RedirectToAction("Router", new EditRelationshipViewModel { UserA = UserAEmail, UserB = UserBEmail });
         }
 
         private ActionResult AssembleCreate(EditRelationshipViewModel id)
@@ -67,6 +165,24 @@ namespace SocialGameWebsite.Controllers
 
             ViewBag.RelationshipTagViewModels = RelationshipTagViewModel.createList(Proxy.GetRelationshipTags());
             return PartialView("Create", id);
+        }
+
+        private ActionResult AssembleIncomingRequest(EditRelationshipViewModel id)
+        {
+            //Ensure we will never make friendship requests as another user:
+            id.UserA = User.Identity.Name;
+
+            ViewBag.RelationshipTagViewModels = RelationshipTagViewModel.createList(Proxy.GetRelationshipTags());
+            return PartialView("AcceptRequest", id);
+        }
+
+        private ActionResult AssembleOutgoingRequest(EditRelationshipViewModel id)
+        {
+            //Ensure we will never make friendship requests as another user:
+            id.UserA = User.Identity.Name;
+
+            ViewBag.RelationshipTagViewModels = RelationshipTagViewModel.createList(Proxy.GetRelationshipTags());
+            return PartialView("CancelRequest", id);
         }
 
         private ActionResult AssembleDetails(Relationship BLLRelationship)

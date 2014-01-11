@@ -3,12 +3,12 @@
 #include <ctype.h>
 
 HangmanScene::HangmanScene(SocialGamePublicAPIClient *client, string loginEmail){
-	//retrieve info (categories/words)
-	//client-> 
 
-	//initialize game engine:
-	word = "felicidade";
-	game = new HangmanPLEngine(3, word.c_str());
+	this->client = client;
+
+	//retrieve info (categories/words)
+	catVec = client->getCategories(5);
+	categorySelectionMode = true;
 
 }
 
@@ -64,6 +64,8 @@ void HangmanScene::Draw3dObjects(void){
 
 void HangmanScene::DrawOverlay(void) {
 
+	if (categorySelectionMode) return showCategories(catVec);
+
 	//Show space of letters
 	drawOutputWord();
 	drawMessage();
@@ -79,11 +81,23 @@ void HangmanScene::Key(unsigned char key, int x, int y)
 		break;	
 	}
 
-	//pass letters to the game engine:
-	if (isalpha(key))
+	if (categorySelectionMode) {
+		//catch integers
+		if (key > '0' && key < '6') {
+
+			selectedCategory = catVec.at((key - 48) - 1);
+			word = client->getWord(catVec.at((key - 48)-1));
+
+			game = new HangmanPLEngine(3, word.c_str());
+			categorySelectionMode = false;
+		}
+	} else if (isalpha(key)) //pass letters to the game engine:
 	{
 		play(key);
 	}
+
+
+
 }
 
 // Special key callback
@@ -119,6 +133,7 @@ void HangmanScene::drawOutputWord()
 	glRasterPos2f(0.4, 0.4);
 
 	unsigned char msg[100];
+	
 	strcpy((char*) msg, guessString().c_str());
 
 	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, msg);
@@ -144,7 +159,7 @@ void HangmanScene::drawMessage(){
 
 string HangmanScene::guessString() 
 {
-	string output = " ";
+	string output = "Category: " + selectedCategory + "\n\n";
 	for (int i = 0; i < word.length(); i++)
 	{
 		char letter = word[i];
@@ -165,6 +180,28 @@ void HangmanScene::play(unsigned char key)
 		letters.push_back(key);
 		game->play(key);
 	
+}
+
+
+void HangmanScene::showCategories(vector<string> categories){
+	// Draw the engine message
+	glPushMatrix();
+	glColor3f(0.0f, 1.0f, 0.0f);
+	//position in the center:
+	glRasterPos2f(0.6f, 0.6f);
+	
+	string scr = "Select one category:\n";
+	//scr = new string[categories.size()];
+	for (int i = 0; i<categories.size(); i++){
+		scr += to_string(i+1) + " " + categories[i] + "\n";//Copy the vector to the string
+	}
+
+	unsigned char msg[512];
+	strcpy((char*) msg, scr.c_str());
+
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
+
+	glPopMatrix();
 }
 
 
