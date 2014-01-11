@@ -183,6 +183,23 @@ namespace SocialGameWebsite.Controllers
             return RedirectToAction("Router", new EditRelationshipViewModel { UserA = UserAEmail, UserB = UserBEmail });
         }
 
+        [Authorize]
+        public ActionResult Suggestions()
+        {
+            User MeBLL = Proxy.GetUser(User.Identity.Name);
+
+            User[] PossibleFriends = Proxy.GetPossibleFriends(MeBLL);
+
+            IList<HumourStatusViewModel> ServiceHumourStatus = HumourStatusViewModel.createList(Proxy.GetAllHumourStatus());
+            ICollection<UserViewModel> PossibleFriendsViewModel = new List<UserViewModel>();
+            foreach (User PossibleFriend in PossibleFriends)
+            {
+                PossibleFriendsViewModel.Add(new UserViewModel(PossibleFriend, ServiceHumourStatus));
+            }
+
+            return PartialView(PossibleFriendsViewModel);
+        }
+
         private ActionResult AssembleCreate(EditRelationshipViewModel id)
         {
             //Ensure we will never make friendship requests as another user:

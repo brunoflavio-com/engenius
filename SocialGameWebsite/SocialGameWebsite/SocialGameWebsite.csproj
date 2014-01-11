@@ -187,6 +187,7 @@
     <Compile Include="Authorization\SocialGameWebSecurity.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NetworkController.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -389,6 +390,8 @@
     <Content Include="Views\Relationship\CancelRequest.cshtml" />
     <Content Include="Views\Relationship\AcceptRequest.cshtml" />
     <Content Include="Views\Relationship\Requests.cshtml" />
+    <Content Include="Views\Network\MyNetwork.cshtml" />
+    <Content Include="Views\Relationship\Suggestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
