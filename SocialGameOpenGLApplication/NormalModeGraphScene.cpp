@@ -17,6 +17,11 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 			break;
 		}	
 	}
+	ALuint buffer, source;
+	buffer = alutCreateBufferFromFile("./sounds/crowdcheer.wav");
+	alGenSources(1, &source);
+	alSourcei(source, AL_BUFFER, buffer); 
+	alSourcePlay(source);
 }
 
 Graph * NormalModeGraphScene::getGraph(std::string loginEmail, int level){
