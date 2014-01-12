@@ -15,6 +15,10 @@ TicTacToeScene::TicTacToeScene(SocialGamePublicAPIClient *client, string loginEm
 	//initialize board (0 is empty)
 	for (int i = 0; i < 9; i++) board[i] = 0;
 
+	this->gameover = false;
+	this->winner = false;
+	this->points = 0;
+
 }
 
 TicTacToeScene::~TicTacToeScene()
@@ -24,7 +28,6 @@ TicTacToeScene::~TicTacToeScene()
 		delete game;
 	}
 }
-
 
 //Initiate Scene
 void TicTacToeScene::Init(void){
@@ -58,7 +61,7 @@ void TicTacToeScene::Draw3dObjects(void)
 	// This causes that translations and rotations on this matrix wont influence others
 	glPushMatrix(); //Save the transformations performed thus far
 
-	glRotatef(g_rotation, 0, 1, 0);
+	//glRotatef(g_rotation, 0, 1, 0);
 
 	// Draw board
 	drawBoard();
@@ -75,7 +78,7 @@ void TicTacToeScene::DrawOverlay(void)
 	glColor3d(1.0, 0.0, 0.0);
 
 	//position in the bottom-center:
-	glRasterPos2f(0.7f, 0.8f);
+	glRasterPos2f(0.6f, 0.5f);
 	
 	unsigned char msg[100];
 	strcpy((char*) msg, game->getMessage().c_str());
@@ -212,11 +215,12 @@ void TicTacToeScene::drawBoard(){
 	//glFlush();
 }
 
-
 // Keyboard callback
 void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pressed, and the current mouse coordenates
 {
-	if (game->getStatus()>0) return;
+	SincroStatus();
+	if (gameover) return;
+	
 
 		switch (key) {
 		case '1':
@@ -285,8 +289,10 @@ void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pre
 			int square = key - 48;
 			// Human Move
 			game->playTTT(square);
-			
-			if (game->getStatus()==-1)
+
+			SincroStatus();
+
+			if (gameover==false)
 			// Computer Move
 			board[game->getComputerMove() - 1] = COMPUTER;
 		}
@@ -317,4 +323,15 @@ void TicTacToeScene::MotionMouse(int x, int y)
 }
 
 
-
+//getStatus(2 - computer wins; 1 - human wins; 0 - draw; -1 - playing)
+void TicTacToeScene::SincroStatus(){
+	int i = game->getStatus();
+	if (i < 0 ) gameover = false;
+	else {
+		if (i == 1) {
+			winner = true;
+			points = 200;
+		}
+		gameover = true;
+	}
+}

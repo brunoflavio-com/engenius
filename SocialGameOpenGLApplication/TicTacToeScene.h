@@ -1,5 +1,6 @@
 #pragma once
 #include "IWindowScene.h"
+#include "IMinigame.h"
 #include "TicTacToePLEngine.h"
 #include "SocialGamePublicAPIClient.h"
 #include <string>
@@ -14,6 +15,11 @@ public:
 
 	TicTacToeScene(SocialGamePublicAPIClient *client, string loginEmail);
 	~TicTacToeScene();
+
+	//Implementation of IMinigame
+	bool isOver();
+	bool isWinner();
+	float getPoints();
 
 	// Initiate Scene
 	void Init(void);
@@ -47,6 +53,9 @@ private:
 	//Game Engine:
 	TicTacToePLEngine * game;
 
+	bool winner;
+	bool gameover;
+	float points;
 
 	// Draw X in Board
 	void drawX(float x, float y);
@@ -56,9 +65,9 @@ private:
 	void drawBoard(void);
 	// Draw Grid
 	void drawGrid(void);
-
-
-	float g_rotation = 0.0;
+	//actualize winner,gameover,points
+	void SincroStatus();
+	//float g_rotation = 0.0;
 
 };
 

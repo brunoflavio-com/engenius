@@ -177,7 +177,7 @@ gameStatus(Status):-
 	game(Board,_),
 	\+availableSquares(Board,_),
 	\+winner(Board,_),
-	Status is 3.
+	Status is 0.
 
 %Computer Wins	
 gameStatus(Status):-
