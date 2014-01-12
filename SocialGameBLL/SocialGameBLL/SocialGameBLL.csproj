@@ -96,6 +96,7 @@
     <Compile Include="Service\HumourStatus.cs" />
     <Compile Include="Service\Interest.cs" />
     <Compile Include="Service\Graph.cs" />
+    <Compile Include="Service\NetworkStatistics.cs" />
     <Compile Include="Service\Relationship.cs" />
     <Compile Include="Service\RelationshipRequest.cs" />
     <Compile Include="Service\RelationshipTag.cs" />
