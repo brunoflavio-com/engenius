@@ -1,0 +1,2 @@
+﻿--THIS SCRIPT CONVERTS THE MAZE MAPS \n SEQUENCE TO THE ACTUAL NEW LINES.
+UPDATE Mazes SET mazeText = replace(mazeText,'\n',char(13)+char(10))

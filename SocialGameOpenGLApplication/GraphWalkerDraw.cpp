@@ -121,13 +121,39 @@ void GraphWalkerDraw::walkVertice(User * userA){
 			glEnable(GL_LIGHTING);
 		}
 	};
-
+	glEnable(GL_TEXTURE_2D);
 	glLoadName((GLuint)ISelectable::USER_TYPE);
 	glPushName((GLuint)userA->glId);
+
+	//glBindTexture(GL_TEXTURE_2D, 0);
+
 	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 	gluQuadricDrawStyle(quadric, GLU_FILL);
+
+	//float modelview[16];
+	//int i, j;
+	//glPushMatrix();
+	//glGetFloatv(GL_MODELVIEW_MATRIX, modelview);
+	//for (i = 0; i<3; i++)
+	//for (j = 0; j<3; j++) {
+	//if (i == j)
+	//modelview[i * 4 + j] = 1.0;
+	//else
+	//modelview[i * 4 + j] = 0.0;
+	//}
+	//glLoadMatrixf(modelview);
+
+	//glPopMatrix();
+
+	//gluQuadricNormals(quadric, GLU_SMOOTH);
+	//gluQuadricTexture(quadric, GL_TRUE);
+
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
+
+	//glPopMatrix();
+
+	gluDeleteQuadric(quadric);
 	glPopAttrib();
 	glPopName();
 	

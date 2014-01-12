@@ -66,7 +66,7 @@ bool MazeMap::isWall(int x, int y)
 			return (this->mapMatrix->at(x)->at(y) == 1) ? true : false;
 		}
 	}
-	return false;
+	return true;
 }
 
 bool MazeMap::isFinalPosition()
