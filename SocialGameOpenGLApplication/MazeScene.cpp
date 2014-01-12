@@ -302,26 +302,23 @@ bool MazeScene::colision()
 	{
 		lineToCheck = (int)(zPosition - (cubeAndSphereSize / 2));
 		columnToCheck = (int)xPosition;
-		return map->isWall(lineToCheck, columnToCheck) && lineToCheck >= 0;
 	}
 	else if (arrowKeys.down)
 	{
 		lineToCheck = (int)(zPosition + (cubeAndSphereSize / 2));
 		columnToCheck = (int)xPosition;
-		return map->isWall(lineToCheck, columnToCheck) && lineToCheck <= map->getHeight();
 	}
 	else if (arrowKeys.right)
 	{
 		lineToCheck = (int)zPosition;
 		columnToCheck = (int)(xPosition + (cubeAndSphereSize / 2));
-		return map->isWall(lineToCheck, columnToCheck) && columnToCheck <= map->getWidth();
 	}
 	else if (arrowKeys.left)
 	{
 		lineToCheck = (int)zPosition;
 		columnToCheck = (int)(xPosition - (cubeAndSphereSize / 2));
-		return map->isWall(lineToCheck, columnToCheck) && columnToCheck >= 0;
 	}
+	return map->isWall(lineToCheck, columnToCheck);
 }
 
 void MazeScene::calculatePoints()
