@@ -3,7 +3,7 @@
 
 <h3>@Model.Title</h3>
 
-<div id="tagCloud" style="height:400px;width:auto;">
+<div id="tagCloud_@Model.GetHashCode()" style="height:400px;width:auto;">
     @foreach (KeyValuePair<string, int> Interest in Model.Data)
     {
         <span data-weight="@Interest.Value">
@@ -14,14 +14,14 @@
 <script>
     var settings = {
         "size": {
-            "grid": 16
+            "grid": 30
         },
         "options": {
             "color": "random-dark",
-            "printMultiplier": 3
+            "printMultiplier": 10
         },
         "font": "Futura, Helvetica, sans-serif",
         "shape": "circle"
     }
-    $("#tagCloud").awesomeCloud(settings);
+    $("#tagCloud_@Model.GetHashCode()").awesomeCloud(settings);
 </script>

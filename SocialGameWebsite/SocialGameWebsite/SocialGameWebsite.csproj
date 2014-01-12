@@ -278,6 +278,8 @@
     <Content Include="Images\wp\2.jpg" />
     <Content Include="Images\wp\3.jpg" />
     <Content Include="Images\wp\4.jpg" />
+    <Content Include="Scripts\jquery.awesomeCloud-0.2.js" />
+    <Content Include="Scripts\jquery.awesomeCloud-0.2.min.js" />
     <Content Include="Scripts\RandomBackground.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />

@@ -945,6 +945,12 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetInterestsTagCloud", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetInterestsTagCloudResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetInterestsTagCloudAsync(SocialGameWebsite.SocialGameBLLService.User Me);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipsTagCloud", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipsTagCloudResponse")]
+        System.Collections.Generic.Dictionary<string, int> GetRelationshipsTagCloud(SocialGameWebsite.SocialGameBLLService.User Me);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetRelationshipsTagCloud", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetRelationshipsTagCloudResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetRelationshipsTagCloudAsync(SocialGameWebsite.SocialGameBLLService.User Me);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1260,6 +1266,14 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetInterestsTagCloudAsync(SocialGameWebsite.SocialGameBLLService.User Me) {
             return base.Channel.GetInterestsTagCloudAsync(Me);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, int> GetRelationshipsTagCloud(SocialGameWebsite.SocialGameBLLService.User Me) {
+            return base.Channel.GetRelationshipsTagCloud(Me);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetRelationshipsTagCloudAsync(SocialGameWebsite.SocialGameBLLService.User Me) {
+            return base.Channel.GetRelationshipsTagCloudAsync(Me);
         }
     }
 }

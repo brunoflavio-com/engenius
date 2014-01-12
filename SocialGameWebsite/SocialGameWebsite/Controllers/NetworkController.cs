@@ -54,5 +54,24 @@ namespace SocialGameWebsite.Controllers
 
             return PartialView("TagCloud", ViewModel);
         }
+
+        public ActionResult RelationshipsTagCloud(bool global = false)
+        {
+            TagCloudViewModel ViewModel = new TagCloudViewModel();
+
+            if (global)
+            {
+                ViewModel.Title = "Global relationships cloud:";
+                ViewModel.Data = Proxy.GetRelationshipsTagCloud(null);
+            }
+            else
+            {
+                ViewModel.Title = "User relationships cloud:";
+                ViewModel.Data = Proxy.GetRelationshipsTagCloud(new User { Email = User.Identity.Name });
+            }
+
+
+            return PartialView("TagCloud", ViewModel);
+        }
     }
 }

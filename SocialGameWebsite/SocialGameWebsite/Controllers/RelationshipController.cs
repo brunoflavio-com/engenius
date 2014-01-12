@@ -222,7 +222,7 @@ namespace SocialGameWebsite.Controllers
 
             IList<HumourStatusViewModel> ServiceHumourStatus = HumourStatusViewModel.createList(Proxy.GetAllHumourStatus());
             ICollection<UserViewModel> PossibleFriendsViewModel = new List<UserViewModel>();
-            foreach (User PossibleFriend in PossibleFriends)
+            foreach (User PossibleFriend in PossibleFriends.Take(4))
             {
                 PossibleFriendsViewModel.Add(new UserViewModel(PossibleFriend, ServiceHumourStatus));
             }
