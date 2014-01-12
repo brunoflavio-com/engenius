@@ -439,5 +439,18 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public IDictionary<string, int> GetInterestsTagCloud(User User)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetInterestsTagCloud(User);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }

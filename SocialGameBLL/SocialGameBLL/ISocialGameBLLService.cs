@@ -95,6 +95,9 @@ namespace SocialGameBLL
         [OperationContract]
         ICollection<Interest> GetUserInterests(User Me);
 
+        [OperationContract]
+        IDictionary<string, int> GetInterestsTagCloud(User Me);
+
     }
 
 

@@ -349,6 +349,57 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public IDictionary<string, int> GetInterestsTagCloud(User Me = null)
+        {
+            try
+            {
+                ICollection<User> Users;
+                if (Me == null) {   //Global Network Interests cloud:
+                    Users = new List<User>();
+
+                    ICollection<UserEntity> UserEntities = db.Users.ToList();
+                    foreach( UserEntity userEntity in UserEntities ) {
+                        Users.Add(EntityServiceConverter.ConvertUserEntityToUser(userEntity));
+                    }
+                } else {            //User Network Interests cloud:
+                    RelationshipsController RelationshipController = new RelationshipsController();
+                    Graph Graph = RelationshipController.GetRelationships(Me, 2);
+                    Users = Graph.Users;
+                }         
+                
+                //Count how many times each interest shows up:
+                Dictionary<int, int> InterestCount = new Dictionary<int,int>();
+                foreach (User user in Users) {
+                    foreach (int interestID in user.InterestsIDs)
+                    {
+                        int count;
+                        if (InterestCount.TryGetValue(interestID, out count))
+                        {
+                            InterestCount[interestID] = count + 1;
+                        }
+                        else
+                        {
+                            InterestCount[interestID] = 1;
+                        }
+                    }
+                }
+
+                //Get the interests from the id:
+                Dictionary<string, int> InterestsCloud = new Dictionary<string, int>();
+                foreach (KeyValuePair<int, int> interestCountEntry in InterestCount)
+                {
+                    InterestEntity InterestEntity = db.Interests.Find(interestCountEntry.Key);
+                    InterestsCloud.Add(InterestEntity.Name, interestCountEntry.Value);
+                }
+
+                return InterestsCloud;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         /*Private helper methods*/
         private void UpdateUserEntity(UserEntity UserEntity, User User)
         {
