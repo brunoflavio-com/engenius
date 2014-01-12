@@ -54,3 +54,7 @@
     white-space: nowrap;
     display: inline-block;
 }
+
+.removeInterest {
+    cursor: pointer;
+}
