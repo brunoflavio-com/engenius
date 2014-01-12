@@ -43,6 +43,16 @@ void GraphOpenGL::Init(){
 
 }
 
+void GraphOpenGL::InitTextures(){
+	/*AUX_RGBImageRec *imagemBMP;
+	imagemBMP = auxDIBImageLoad("./image/Textura.bmp");
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagemBMP->sizeX, imagemBMP->sizeY, GL_RGB, GL_UNSIGNED_BYTE, imagemBMP->data);*/
+}
 	
 
 void GraphOpenGL::subWindowInit(){
@@ -188,6 +198,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 
 	//Main window
 	Init();
+	InitTextures();
 	glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
 	glutTimerFunc(20, Timer, 0);
 	glutReshapeFunc(Reshape);
