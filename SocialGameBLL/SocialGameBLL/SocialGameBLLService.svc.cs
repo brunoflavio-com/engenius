@@ -452,5 +452,18 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public IDictionary<string, int> GetRelationshipsTagCloud(User User)
+        {
+            try
+            {
+                RelationshipsController Controller = new RelationshipsController();
+                return Controller.GetRelationshipsTagCloud(User);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }

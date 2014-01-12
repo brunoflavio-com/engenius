@@ -98,6 +98,8 @@ namespace SocialGameBLL
         [OperationContract]
         IDictionary<string, int> GetInterestsTagCloud(User Me);
 
+        [OperationContract]
+        IDictionary<string, int> GetRelationshipsTagCloud(User Me);
     }
 
 

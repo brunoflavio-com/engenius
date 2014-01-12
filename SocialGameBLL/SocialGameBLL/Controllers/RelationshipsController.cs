@@ -281,6 +281,68 @@ namespace SocialGameBLL.Controllers
             return null;
         }
 
+        public IDictionary<string, int> GetRelationshipsTagCloud(User Me = null)
+        {
+            try
+            {
+                ICollection<Relationship> Relationships = AssembleRelationshipList(Me);
+
+                //Count how many times each relationshipTag shows up:
+                Dictionary<int, int> RelationshipTagCount = new Dictionary<int, int>();
+                foreach (Relationship relationship in Relationships)
+                {
+                    int count;
+                    int relationshipTagID = relationship.RelationshipTagId;
+
+                    if (RelationshipTagCount.TryGetValue(relationshipTagID, out count))
+                    {
+                        RelationshipTagCount[relationshipTagID] = count + 1;
+                    }
+                    else
+                    {
+                        RelationshipTagCount[relationshipTagID] = 1;
+                    }
+                }
+
+                //Get the relationship tag names from the id:
+                Dictionary<string, int> RelationshipsCloud = new Dictionary<string, int>();
+                foreach (KeyValuePair<int, int> relationshipCountEntry in RelationshipTagCount)
+                {
+                    RelationTagEntity RelationshipTagEntity = db.RelationTags.Find(relationshipCountEntry.Key);
+                    RelationshipsCloud.Add(RelationshipTagEntity.Name, relationshipCountEntry.Value);
+                }
+
+                return RelationshipsCloud;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        private ICollection<Relationship> AssembleRelationshipList(User CentralUser = null)
+        {
+            ICollection<Relationship> Relationships;
+            if (CentralUser == null)
+            {   //Global Network Relationships cloud:
+                Relationships = new List<Relationship>();
+
+                ICollection<RelationshipEntity> RelationshipEntities = db.Relationships.ToList();
+                foreach (RelationshipEntity relationshipEntity in RelationshipEntities)
+                {
+                    Relationships.Add(EntityServiceConverter.ConvertRelationshipEntityToRelationship(relationshipEntity));
+                }
+            }
+            else
+            {   //User Network Relationships cloud:
+                RelationshipsController RelationshipController = new RelationshipsController();
+                Graph Graph = RelationshipController.GetRelationships(CentralUser, 2);
+                Relationships = Graph.Relationships;
+            }
+
+            return Relationships;
+        }
+
         private void GetRelatedUsers(int Position, IList<Node> Nodes, IList<RelationshipEntity> Relationships
                                      , IList<InterestEntity> Interests, IList<RelationTagEntity> RelationTags
                                      , IList<HumourStatusEntity> HumourStatus, int Depth)

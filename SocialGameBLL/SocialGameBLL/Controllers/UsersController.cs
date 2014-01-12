@@ -353,20 +353,8 @@ namespace SocialGameBLL.Controllers
         {
             try
             {
-                ICollection<User> Users;
-                if (Me == null) {   //Global Network Interests cloud:
-                    Users = new List<User>();
+                ICollection<User> Users = AssembleUserList(Me);
 
-                    ICollection<UserEntity> UserEntities = db.Users.ToList();
-                    foreach( UserEntity userEntity in UserEntities ) {
-                        Users.Add(EntityServiceConverter.ConvertUserEntityToUser(userEntity));
-                    }
-                } else {            //User Network Interests cloud:
-                    RelationshipsController RelationshipController = new RelationshipsController();
-                    Graph Graph = RelationshipController.GetRelationships(Me, 2);
-                    Users = Graph.Users;
-                }         
-                
                 //Count how many times each interest shows up:
                 Dictionary<int, int> InterestCount = new Dictionary<int,int>();
                 foreach (User user in Users) {
@@ -399,8 +387,31 @@ namespace SocialGameBLL.Controllers
                 throw new Exception(e.Message, e);
             }
         }
-
+       
         /*Private helper methods*/
+        private ICollection<User> AssembleUserList(User CentralUser = null)
+        {
+            ICollection<User> Users;
+            if (CentralUser == null)
+            {   //Global Network Interests cloud:
+                Users = new List<User>();
+
+                ICollection<UserEntity> UserEntities = db.Users.ToList();
+                foreach (UserEntity userEntity in UserEntities)
+                {
+                    Users.Add(EntityServiceConverter.ConvertUserEntityToUser(userEntity));
+                }
+            }
+            else
+            {   //User Network Interests cloud:
+                RelationshipsController RelationshipController = new RelationshipsController();
+                Graph Graph = RelationshipController.GetRelationships(CentralUser, 2);
+                Users = Graph.Users;
+            }
+
+            return Users;
+        }
+
         private void UpdateUserEntity(UserEntity UserEntity, User User)
         {
             UserEntity.Name = User.Name;
