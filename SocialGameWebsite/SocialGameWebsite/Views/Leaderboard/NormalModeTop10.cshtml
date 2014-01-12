@@ -1,0 +1,22 @@
+﻿@using SocialGameWebsite.Models;
+@model SocialGameWebsite.Models.NormalModePointsLeaderBoardViewModel
+
+<h4>Normal Mode Top 10:</h4>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Level</th>
+        <th>Points</th>
+    </tr>
+    @foreach(UserScoreViewModel line in Model.Scores)
+    {
+        <tr>
+            <td>@line.UserName</td>
+            <td>@line.UserSurname</td>
+            <td>@line.UserLevel</td>
+            <td>@line.UserPoints</td>
+        </tr>
+    }
+</table>

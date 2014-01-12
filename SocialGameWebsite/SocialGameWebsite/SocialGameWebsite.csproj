@@ -187,6 +187,7 @@
     <Compile Include="Authorization\SocialGameWebSecurity.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\NetworkController.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -403,6 +404,11 @@
     <Content Include="Views\Home\Interest.cshtml" />
     <Content Include="Views\Network\TagCloud.cshtml" />
     <Content Include="Views\Network\GlobalNetwork.cshtml" />
+    <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.UserScore.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Views\Leaderboard\Index.cshtml" />
+    <Content Include="Views\Leaderboard\NormalModeTop10.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
