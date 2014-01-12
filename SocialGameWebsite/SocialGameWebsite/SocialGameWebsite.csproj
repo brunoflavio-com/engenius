@@ -400,6 +400,7 @@
     </Content>
     <Content Include="Views\Home\Interest.cshtml" />
     <Content Include="Views\Network\TagCloud.cshtml" />
+    <Content Include="Views\Network\GlobalNetwork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

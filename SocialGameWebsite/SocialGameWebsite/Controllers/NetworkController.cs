@@ -20,6 +20,11 @@ namespace SocialGameWebsite.Controllers
 
         public ActionResult Index()
         {
+            return RedirectToAction("GlobalNetwork");
+        }
+
+        public ActionResult GlobalNetwork()
+        {
             return View();
         }
 
@@ -29,6 +34,7 @@ namespace SocialGameWebsite.Controllers
         {
             return View();
         }
+
 
         public ActionResult InterestsTagCloud(bool global = false)
         {
