@@ -1,0 +1,31 @@
+﻿@model KeyValuePair<int, string> 
+@{ KeyValuePair<int, string> Interest = Model; }
+
+<span id="interest_@Interest.Key" class="interest">
+    @Html.ActionLink(Interest.Value, "CommonInterests", "Relationship", new { InterestIDs = Interest.Key }, null)
+    @{
+        string spanID = "interest_" + Interest.Key;
+        string onBegin = "$('#interest_" + Interest.Key + "').remove()";
+        using (Ajax.BeginForm("RemoveInterest", "Home",
+                new
+                {
+                    id = Interest.Key
+                },
+                new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = @spanID,
+                    OnBegin = @onBegin
+                },
+                new
+                {
+                    style = "display: inline"
+                }))
+        {
+            @Html.AntiForgeryToken()
+            <span class="removeInterest" onclick="$('#remove_interest_@Interest.Key').click();">X</span>
+            <input type="submit" id="remove_interest_@Interest.Key" value="Remove" style="display:none" />
+        }
+    }
+</span>

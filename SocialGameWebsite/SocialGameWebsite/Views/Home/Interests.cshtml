@@ -24,9 +24,7 @@
         }
         function afterinsertinterest(data)
         {
-            var interestName = data.name;
-            $("#interesttext").val("");
-            $("#interests").append("<div>" + interestName + "</div>");
+            $("#interests").append(data);
         }
         $(function () {
             $("#interesttext").suggest().bind("fb-select", function (e, data) {
@@ -44,7 +42,7 @@
             @if (Model)
             {
                 string spanID = "interest_" + Interest.Key;
-                string onBegin = "$('#interest_" + Interest.Key + "').hide()";
+                string onBegin = "$('#interest_" + Interest.Key + "').remove()";
                 using (Ajax.BeginForm("RemoveInterest", "Home",
                         new
                         {

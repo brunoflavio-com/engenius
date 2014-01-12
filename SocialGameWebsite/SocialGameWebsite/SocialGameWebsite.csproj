@@ -397,6 +397,7 @@
     <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.Interest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Views\Home\Interest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

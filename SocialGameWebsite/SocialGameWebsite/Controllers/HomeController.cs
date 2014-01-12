@@ -83,8 +83,10 @@ namespace SocialGameWebsite.Controllers
         {
             User ServiceUser = Proxy.GetUser(User.Identity.Name);
             Interest Interest = Proxy.AddInterestToUser(ServiceUser, new Interest { Name = name }, id);
-            var JsonResult = new { name = Interest.Name };
-            return Json(JsonResult);
+            //var JsonResult = new { name = Interest.Name };
+            //return Json(JsonResult);
+            KeyValuePair<int, string> ViewModel = new KeyValuePair<int,string>(Interest.Id, Interest.Name);
+            return PartialView("Interest", ViewModel);
         }
 
         [HttpPost]
