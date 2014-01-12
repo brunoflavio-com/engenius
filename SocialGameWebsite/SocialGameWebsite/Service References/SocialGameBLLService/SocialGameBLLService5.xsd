@@ -100,4 +100,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRelationshipRequest" nillable="true" type="tns:ArrayOfRelationshipRequest" />
+  <xs:complexType name="ArrayOfUserScore">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserScore" nillable="true" type="tns:UserScore" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserScore" nillable="true" type="tns:ArrayOfUserScore" />
+  <xs:complexType name="UserScore">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UserEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserLevel" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserPoints" type="xs:float" />
+      <xs:element minOccurs="0" name="UserSurname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserScore" nillable="true" type="tns:UserScore" />
 </xs:schema>

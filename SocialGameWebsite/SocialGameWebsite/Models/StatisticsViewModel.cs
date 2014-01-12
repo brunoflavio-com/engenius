@@ -18,4 +18,22 @@ namespace SocialGameWebsite.Models
         }
 
     }
+
+    public class UserScoreViewModel
+    {
+        public string UserEmail { get; set; }
+        public string UserName { get; set; }
+        public string UserSurname { get; set; }
+        public int UserLevel { get; set; }
+        public float UserPoints { get; set; }
+    }
+
+    public class NormalModePointsLeaderBoardViewModel
+    {
+        public NormalModePointsLeaderBoardViewModel()
+        {
+            Scores = new List<UserScoreViewModel>();
+        }
+        public ICollection<UserScoreViewModel> Scores { get; set; }
+    }
 }

@@ -524,4 +524,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPaginatedUsersScores">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ElementsPerPage" type="xs:int" />
+        <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaginatedUsersScoresResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetPaginatedUsersScoresResult" nillable="true" type="q61:ArrayOfUserScore" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
