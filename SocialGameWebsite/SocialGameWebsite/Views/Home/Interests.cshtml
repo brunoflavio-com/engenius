@@ -44,16 +44,18 @@
             @if (Model)
             {
                 string spanID = "interest_" + Interest.Key;
+                string onBegin = "$('#interest_" + Interest.Key + "').hide()";
                 using (Ajax.BeginForm("RemoveInterest", "Home",
                         new
                         {
-                            InterestID = Interest.Key
+                            id = Interest.Key
                         },
                         new AjaxOptions
                         {
                             HttpMethod = "Post",
                             InsertionMode = InsertionMode.Replace,
-                            UpdateTargetId = @spanID
+                            UpdateTargetId = @spanID,
+                            OnBegin = @onBegin
                         },
                         new { 
                             style = "display: inline"
