@@ -37,10 +37,14 @@
 }
 
 <div id="interests">
+    
     @foreach (var Interest in ViewBag.Interests)
     {
-        <div>
+        <span class="interest">
             @Interest
-        </div>
+            @if (Model) { 
+                <span class="removeInterest" onclick="alert('remove')">X</span>
+            }
+        </span>
     }
 </div>

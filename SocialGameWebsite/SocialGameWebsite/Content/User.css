@@ -39,3 +39,18 @@
 .relationshipView {
     background-color : lightcoral;
 }
+
+/*   INTERESTS          */
+.interest {
+    color: #3E6D8E;
+    background-color: #ffbbbb;
+    border-bottom: 1px solid #b3cee1;
+    border-right: 1px solid #b3cee1;
+    padding: 3px 4px 3px 4px;
+    margin: 2px 2px 2px 0;
+    text-decoration: none;
+    font-size: 90%;
+    line-height: 1.4;
+    white-space: nowrap;
+    display: inline-block;
+}
