@@ -87,6 +87,16 @@ namespace SocialGameWebsite.Controllers
             return Json(JsonResult);
         }
 
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveInterest(int id)
+        {
+            User ServiceUser = Proxy.GetUser(User.Identity.Name);
+            Proxy.RemoveInterestFromUser(ServiceUser, new Interest { Id = id });
+            return new EmptyResult();
+        }
+
         [Authorize]
         public ActionResult EditProfile()
         {

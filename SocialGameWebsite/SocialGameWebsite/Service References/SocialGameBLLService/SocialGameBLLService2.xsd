@@ -455,6 +455,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RemoveInterestFromUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q52:User" />
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Interest" nillable="true" type="q53:Interest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveInterestFromUserResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetInterest">
     <xs:complexType>
       <xs:sequence>
@@ -465,21 +478,21 @@
   <xs:element name="GetInterestResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetInterestResult" nillable="true" type="q52:Interest" />
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetInterestResult" nillable="true" type="q54:Interest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUserInterests">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q53:User" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q55:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUserInterestsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetUserInterestsResult" nillable="true" type="q54:ArrayOfInterest" />
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetUserInterestsResult" nillable="true" type="q56:ArrayOfInterest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

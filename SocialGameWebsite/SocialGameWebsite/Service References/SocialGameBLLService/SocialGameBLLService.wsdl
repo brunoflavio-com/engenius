@@ -206,6 +206,12 @@
   <wsdl:message name="ISocialGameBLLService_AddInterestToUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddInterestToUserResponse" />
   </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_RemoveInterestFromUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveInterestFromUser" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_RemoveInterestFromUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveInterestFromUserResponse" />
+  </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_GetInterest_InputMessage">
     <wsdl:part name="parameters" element="tns:GetInterest" />
   </wsdl:message>
@@ -347,6 +353,10 @@
     <wsdl:operation name="AddInterestToUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/AddInterestToUser" message="tns:ISocialGameBLLService_AddInterestToUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/AddInterestToUserResponse" message="tns:ISocialGameBLLService_AddInterestToUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveInterestFromUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/RemoveInterestFromUser" message="tns:ISocialGameBLLService_RemoveInterestFromUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/RemoveInterestFromUserResponse" message="tns:ISocialGameBLLService_RemoveInterestFromUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetInterest">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetInterest" message="tns:ISocialGameBLLService_GetInterest_InputMessage" />
@@ -643,6 +653,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddInterestToUser">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/AddInterestToUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveInterestFromUser">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/RemoveInterestFromUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
