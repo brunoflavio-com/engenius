@@ -140,3 +140,22 @@ std::string SocialGamePublicAPIClient::getWord(string category){
 	}
 }
 
+std::string SocialGamePublicAPIClient::getMazeMap(int level){
+
+	if (ready && LoggedIn){
+		ready = false;
+		_ns1__getMaze getMaze;
+		getMaze.Token = &token;
+		getMaze.id = &level;
+		_ns1__getMazeResponse response;
+		proxy.getMaze(&getMaze, &response);
+		string * map = response.getMazeResult;
+		ready = true;
+		return *map;
+	}
+	else{
+
+		throw std::exception();
+	}
+}
+

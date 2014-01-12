@@ -5,6 +5,7 @@
 #include "HangmanScene.h"
 #include "TicTacToeScene.h"
 #include "MazeScene.h"
+#include "IMinigame.h"
 
 NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level) :GraphScene(client, loginEmail)
 {
@@ -61,7 +62,7 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 		gameOn = true;
 	}
 	if (key == 'M' || key == 'm') {
-		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email);
+		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,2);
 		gameOn = true;
 	}
 	GraphScene::Key(key, x, y);
@@ -82,6 +83,20 @@ void NormalModeGraphScene::SpecialKeyUp(int key, int x, int y)
 }
 
 void NormalModeGraphScene::Timer(int value){
+
+	/*Testar o interface IMinigame com o maze*/
+	if (gameOn)
+	{
+		IMinigame* teste = dynamic_cast<IMinigame*>(game);
+		if (teste != 0)
+		{
+			if (bool over = teste->isOver()){
+				bool winner = teste->isWinner();
+				float points = teste->getPoints();
+			}
+		}
+	}
+
 	if (gameOn) return game->Timer(value);
 	GraphScene::Timer(value);
 	if (returningToGame)
@@ -136,7 +151,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
 			case 1:
 				game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
 			case 2:
-				game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email);
+				game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,2);
 		}
 		gameOn = true;
 		break;

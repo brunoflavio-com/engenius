@@ -1,15 +1,16 @@
 #pragma once
 #include "IWindowScene.h"
+#include "IMinigame.h"
 #include "MazeMap.h"
 #include "SocialGamePublicAPIClient.h"
 #include <string>
 
 namespace MinigamesMaze{
 	class MazeScene : 
-		public IWindowScene
+		public IWindowScene, public IMinigame
 	{
 	public:
-		MazeScene(SocialGamePublicAPIClient *client, string loginEmail);
+		MazeScene(SocialGamePublicAPIClient* client, string loginEmail, int level);
 		~MazeScene();
 
 		// Initiate Scene
@@ -17,6 +18,12 @@ namespace MinigamesMaze{
 
 		//Timer Callback
 		void Timer(int value);
+
+		//Implementation of IMinigame
+		bool isOver();
+		bool isWinner();
+		float getPoints();
+
 
 		//Draw Callback
 		void Draw(void);
@@ -37,6 +44,11 @@ namespace MinigamesMaze{
 		void MotionMouse(int x, int y);
 
 	private:
+		//Maximum number of points
+		const float MAX_POINTS = 5000.0f;
+
+		SocialGamePublicAPIClient* client;
+
 		//keys
 		struct{
 			bool up;
@@ -47,6 +59,16 @@ namespace MinigamesMaze{
 
 		// Map
 		MazeMap* map;
+
+		//Current Points
+		float points;
+		int timePoints;
+
+		bool giveUp;
+
+		//Over and Win flags
+		bool over;
+		bool winner;
 
 		//Position
 		float xPosition;
@@ -67,5 +89,6 @@ namespace MinigamesMaze{
 		void drawHint();
 		bool colision();
 
+		void calculatePoints();
 	};
 }

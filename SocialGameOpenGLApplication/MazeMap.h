@@ -39,8 +39,7 @@ namespace MinigamesMaze{
 		//Goal Position
 		int goalLine;
 		int goalColumn;
-
-		void readMapFile(string mapFile);
+		void readMapString(string map);
 	};
 }
 

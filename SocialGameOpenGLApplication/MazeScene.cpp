@@ -4,13 +4,21 @@
 
 using namespace MinigamesMaze;
 
-MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail)
+MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail, int level)
 {
-	this->map = new MazeMap("Map1.txt");
+	string mapString = client->getMazeMap(level);
+	this->map = new MazeMap(mapString);
 	this->xPosition = map->getStartColumn() + this->cubeAndSphereSize / 2;
 	this->zPosition = map->getStartLine() + this->cubeAndSphereSize / 2;
 	this->yPosition = this->cubeAndSphereSize / 2;
 	
+	this->over = false;
+	this->winner = false;
+	this->points = this->MAX_POINTS;
+	this->timePoints = time(0);
+
+	this->giveUp = false;
+
 	arrowKeys.up = false;
 	arrowKeys.down = false;
 	arrowKeys.left = false;
@@ -23,6 +31,7 @@ MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail)
 MazeScene::~MazeScene()
 {
 	delete map;
+	delete client;
 }
 
 void MazeScene::Init(void)
@@ -68,9 +77,16 @@ void MazeScene::Timer(int value)
 
 	if (map->isFinalPosition())
 	{
-		std::cout << "Maze solved" << std::endl;
+		over = true;
+		winner = true;
 	}
 	
+	if (giveUp)
+	{
+		points = 0.0f;
+		over = true;
+		winner = false;
+	}
 }
 
 void MazeScene::Draw(void)
@@ -85,7 +101,7 @@ void MazeScene::Draw3dObjects(void)
 	glLoadIdentity();
 
 	//Define a viewing transformation
-	gluLookAt(0, 4, 0, 0, 0, 0, 0, 0, -1);
+	gluLookAt(0, 5, 0, 0, 0, 0, 0, 0, -1);
 
 	glPushMatrix();
 		glScalef(0.1, 0.1, 0.1);
@@ -110,6 +126,11 @@ void MazeScene::DrawOverlay(void)
 void MazeScene::Key(unsigned char key, int x, int y)
 {
 	switch (key){
+		/*Give Up*/
+	case 'g':
+	case 'G':
+		giveUp = true;
+		/*Hint*/
 	case 'h':
 	case 'H':
 		hintPressed = true;
@@ -154,6 +175,21 @@ void MazeScene::Mouse(int btn, int state, int x, int y)
 void MazeScene::MotionMouse(int x, int y)
 {
 
+}
+
+bool MazeScene::isOver()
+{
+	return over;
+}
+
+bool MazeScene::isWinner()
+{
+	return winner;
+}
+
+float MazeScene::getPoints()
+{
+	return points;
 }
 
 //Private
@@ -266,23 +302,36 @@ bool MazeScene::colision()
 	{
 		lineToCheck = (int)(zPosition - (cubeAndSphereSize / 2));
 		columnToCheck = (int)xPosition;
+		return map->isWall(lineToCheck, columnToCheck) && lineToCheck >= 0;
 	}
 	else if (arrowKeys.down)
 	{
 		lineToCheck = (int)(zPosition + (cubeAndSphereSize / 2));
 		columnToCheck = (int)xPosition;
+		return map->isWall(lineToCheck, columnToCheck) && lineToCheck <= map->getHeight();
 	}
 	else if (arrowKeys.right)
 	{
 		lineToCheck = (int)zPosition;
 		columnToCheck = (int)(xPosition + (cubeAndSphereSize / 2));
+		return map->isWall(lineToCheck, columnToCheck) && columnToCheck <= map->getWidth();
 	}
 	else if (arrowKeys.left)
 	{
 		lineToCheck = (int)zPosition;
 		columnToCheck = (int)(xPosition - (cubeAndSphereSize / 2));
+		return map->isWall(lineToCheck, columnToCheck) && columnToCheck >= 0;
 	}
-
-	return map->isWall(lineToCheck, columnToCheck);
 }
 
+void MazeScene::calculatePoints()
+{
+	int timeNow = time(0);
+	int dif = timeNow - timePoints;
+
+	if (dif > 1)
+	{
+		timePoints = timeNow;
+		points /= 1.1;
+	}
+}

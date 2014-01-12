@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 using namespace MinigamesMaze;
 
@@ -15,7 +16,7 @@ MazeMap::MazeMap(string mapFile){
 	this->game = new MazePlEngine();
 
 	/*This function must be called after the PlEngine be initialized*/
-	this->readMapFile(mapFile);
+	this->readMapString(mapFile);
 }
 
 
@@ -75,40 +76,33 @@ bool MazeMap::isFinalPosition()
 
 /*Private*/
 
-void MazeMap::readMapFile(string mapFile){
-	std::ifstream file;
-	string fileLine;
+void MazeMap::readMapString(string map)
+{
+	std::istringstream sstream(map);
+	string line;
 
-	file.open(mapFile);
-	while (!file.eof())
+	while (std::getline(sstream, line))
 	{
 		vector<char>* matrixLine = new vector<char>();
 		this->mapMatrix->push_back(matrixLine);
 
-		std::getline(file, fileLine);
-		for (int i = 0; i < fileLine.size(); i++){
-			if (fileLine[i] == '*'){
+		for (int i = 0; i < line.size(); i++){
+			if (line[i] == '*'){
 				matrixLine->push_back(1);
 			}
-			else{
+			else
+			{
 				matrixLine->push_back(0);
 				game->setNode(mapMatrix->size() - 1, matrixLine->size() - 1);
-				if (fileLine[i] == '+'){
+				if (line[i] == '+'){
 					startLine = currentLine = mapMatrix->size() - 1;
 					startColumn = currentColumn = matrixLine->size() - 1;
 				}
-				if (fileLine[i] == 'x'){
+				if (line[i] == 'x'){
 					goalLine = mapMatrix->size() - 1;
 					goalColumn = matrixLine->size() - 1;
 				}
 			}
-		}
-	}
-
-	for (int i = 0; i < mapMatrix->size(); i++){
-		vector<char>* line = mapMatrix->at(i);
-		for (int j = 0; j < line->size(); j++){
-			std::cout << (int)line->at(j) << ",";
 		}
 	}
 }

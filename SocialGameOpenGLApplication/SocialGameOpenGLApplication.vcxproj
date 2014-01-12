@@ -100,6 +100,7 @@
     <ClInclude Include="HangmanScene.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="IBothWindowScene.h" />
+    <ClInclude Include="IMinigame.h" />
     <ClInclude Include="InterfaceGL.h" />
     <ClInclude Include="ISelectable.h" />
     <ClInclude Include="MazeMap.h" />

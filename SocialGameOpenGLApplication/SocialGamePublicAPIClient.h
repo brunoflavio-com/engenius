@@ -21,6 +21,7 @@ public:
 	std::future<ns5__Graph * > asyncGetGraph(std::string email, int depth);
 	std::vector<string> getCategories(int numberOfCategories);
 	std::string getWord(string category);
+	std::string getMazeMap(int level);
 	~SocialGamePublicAPIClient();
 };
 
