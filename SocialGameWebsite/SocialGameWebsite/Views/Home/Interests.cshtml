@@ -37,14 +37,33 @@
 }
 
 <div id="interests">
-    
-    @foreach (var Interest in ViewBag.Interests)
-    {
-        <span class="interest">
-            @Interest
-            @if (Model) { 
-                <span class="removeInterest" onclick="alert('remove')">X</span>
+        @foreach (KeyValuePair<int, string> Interest in (Dictionary<int,string>)ViewBag.InterestsMap)
+        {   
+            <span id="interest_@Interest.Key" class="interest">
+                @Html.ActionLink(Interest.Value, "CommonInterests", "Relationship", new { InterestIDs = Interest.Key }, null )     
+            @if (Model)
+            {
+                string spanID = "interest_" + Interest.Key;
+                using (Ajax.BeginForm("RemoveInterest", "Home",
+                        new
+                        {
+                            InterestID = Interest.Key
+                        },
+                        new AjaxOptions
+                        {
+                            HttpMethod = "Post",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = @spanID
+                        },
+                        new { 
+                            style = "display: inline"
+                        }))
+                {
+                    @Html.AntiForgeryToken()
+                        <span class="removeInterest" onclick="$('#remove_interest_@Interest.Key').click();">X</span>
+                        <input type="submit" id="remove_interest_@Interest.Key" value="Remove" style="display:none" />
+                }
             }
-        </span>
-    }
+            </span>
+        }
 </div>

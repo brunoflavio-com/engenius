@@ -63,9 +63,15 @@ namespace SocialGameWebsite.Controllers
             User ServiceUser = Proxy.GetUser(UserEmail);
 
             ICollection<Interest> UserInterests = Proxy.GetUserInterests(ServiceUser);
-            ICollection<string> InterestNames = UserInterests.Select(i => i.Name).ToList();
 
-            ViewBag.Interests = InterestNames;
+            Dictionary<int,String> InterestsMap = new Dictionary<int, string>();
+
+            foreach (Interest Interest in UserInterests)
+            {
+                InterestsMap.Add(Interest.Id, Interest.Name);
+            }
+
+            ViewBag.InterestsMap = InterestsMap;
 
             return PartialView(isMyProfile);
         }
