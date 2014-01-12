@@ -100,6 +100,9 @@ namespace SocialGameBLL
 
         [OperationContract]
         IDictionary<string, int> GetRelationshipsTagCloud(User Me);
+
+        [OperationContract]
+        ICollection<UserScore> GetPaginatedUsersScores(int ElementsPerPage, int PageNumber);
     }
 
 

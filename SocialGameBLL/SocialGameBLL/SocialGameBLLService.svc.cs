@@ -465,5 +465,17 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public ICollection<UserScore> GetPaginatedUsersScores(int ElementsPerPage, int PageNumber)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetPaginatedUsersScores(ElementsPerPage, PageNumber);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }

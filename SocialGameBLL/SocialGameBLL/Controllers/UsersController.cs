@@ -387,6 +387,31 @@ namespace SocialGameBLL.Controllers
                 throw new Exception(e.Message, e);
             }
         }
+
+        public ICollection<UserScore> GetPaginatedUsersScores(int ElementsPerPage, int PageNumber)
+        {
+            ICollection<SimpleModeScoreEntity> OrderedScores = db.Scores.OrderByDescending(s => s.Points).ToList();
+            ICollection<UserScore> RequestedScores = new List<UserScore>();
+
+            int firstPosition = (PageNumber - 1) * ElementsPerPage;
+            for (int i = firstPosition; i < firstPosition + ElementsPerPage; i++ )
+            {
+                if (i < OrderedScores.Count)
+                {
+                    SimpleModeScoreEntity SimpleScore = OrderedScores.ElementAt(i);
+                    UserEntity UserEntity = db.Users.Find(SimpleScore.UserEmail);
+                    RequestedScores.Add(new UserScore
+                    {
+                        UserEmail = SimpleScore.UserEmail,
+                        UserLevel = (SimpleScore.Level == null) ? 0 : (int)SimpleScore.Level,
+                        UserPoints = (SimpleScore.Points == null) ? 0.0f : (float)SimpleScore.Points,
+                        UserName = UserEntity.Name,
+                        UserSurname = UserEntity.Surname
+                    });
+                }
+            }
+            return RequestedScores;
+        }
        
         /*Private helper methods*/
         private ICollection<User> AssembleUserList(User CentralUser = null)
