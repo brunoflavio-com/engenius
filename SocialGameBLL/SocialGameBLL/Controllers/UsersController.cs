@@ -308,6 +308,21 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public void RemoverInterestFromUser(User Me, Interest Interest)
+        {
+            try
+            {
+                UserEntity MyEntity = db.Users.Find(Me.Email);
+                InterestEntity InterestEntity = db.Interests.Find(Interest.Id);
+
+                MyEntity.Interests.Remove(InterestEntity);
+                db.SaveChanges();
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
         public Interest GetInterest(int InterestID)
         {
             InterestEntity InterestEntity;

@@ -402,6 +402,18 @@ namespace SocialGameBLL
             }
         }
 
+        public void RemoveInterestFromUser(User Me, Interest Interest)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                Controller.RemoverInterestFromUser(Me, Interest);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
 
         public Interest GetInterest(int InterestID)
         {
