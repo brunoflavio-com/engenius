@@ -244,9 +244,9 @@ void MazeScene::drawSquare(float x, float y, float z, float side)
 	glBegin(GL_POLYGON);
 	glNormal3f(0, 1, 0);
 	glVertex3f(x, y, z);
-	glVertex3f(x + side, y, z);
-	glVertex3f(x + side, y, z + side);
-	glVertex3f(x, y, z + side);
+	glVertex3f(x, y + side, z + side);
+	glVertex3f(x + side, y + side, z + side);
+	glVertex3f(x + side, y + side, z);
 	glEnd();
 }
 
