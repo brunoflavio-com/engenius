@@ -3,13 +3,16 @@
 #include <ctype.h>
 
 HangmanScene::HangmanScene(SocialGamePublicAPIClient *client, string loginEmail){
-
+	//Soap Proxy to retrieve categories/words
 	this->client = client;
 
-	//retrieve info (categories/words)
+	//retrieve 5 random categories
 	catVec = client->getCategories(5);
 	categorySelectionMode = true;
 
+	points = 0;
+	gameover = false;
+	winner = false;
 }
 
 HangmanScene::~HangmanScene()
@@ -21,6 +24,22 @@ HangmanScene::~HangmanScene()
 	
 }
 
+//verify if gameover
+bool HangmanScene::isOver(){
+	return gameover;
+}
+
+//verify if there is a winner
+bool HangmanScene::isWinner(){
+	return winner;
+}
+
+//return points 
+float HangmanScene::getPoints(){
+
+	return points;
+}
+
 // Initiate scene
 void HangmanScene::Init(void)
 {
@@ -30,7 +49,7 @@ void HangmanScene::Init(void)
 // Timer Callback
 void HangmanScene::Timer(int value)
 {
-	g_rotation += 0.01;
+	//g_rotation += 0.01;
 }
 
 // Draw Callback
@@ -75,28 +94,31 @@ void HangmanScene::DrawOverlay(void) {
 // Keyboard callback
 void HangmanScene::Key(unsigned char key, int x, int y)
 {
-	switch (key) {
-	case 27:
-		//end game on ESC?
-		break;	
-	}
+	if(gameover) return;
 
-	if (categorySelectionMode) {
-		//catch integers
-		if (key > '0' && key < '6') {
-
-			selectedCategory = catVec.at((key - 48) - 1);
-			word = client->getWord(catVec.at((key - 48)-1));
-
-			game = new HangmanPLEngine(3, word.c_str());
-			categorySelectionMode = false;
+		switch (key) {
+		case 27:
+			//end game on ESC?
+			break;
 		}
-	} else if (isalpha(key)) //pass letters to the game engine:
-	{
-		play(key);
-	}
 
+		//Select Categories
+		if (categorySelectionMode) {
+			//catch integers
+			if (key > '0' && key < '6') {
 
+				selectedCategory = catVec.at((key - 48) - 1);
+				word = client->getWord(catVec.at((key - 48) - 1));
+
+				game = new HangmanPLEngine(3, word.c_str());
+				categorySelectionMode = false;
+			}
+		}
+		//Find word mode
+		else if (isalpha(key)) //pass letters to the game engine:
+		{
+			play(key);
+		}
 
 }
 
@@ -130,7 +152,7 @@ void HangmanScene::drawOutputWord()
 	// Draw the engine message
 	glColor3f(1.0f, 1.0f, 1.0);
 	//position in the center:
-	glRasterPos2f(0.4, 0.4);
+	glRasterPos2f(0.0, 0.5);
 
 	unsigned char msg[100];
 	
@@ -142,12 +164,13 @@ void HangmanScene::drawOutputWord()
 
 }
 
+//Draw messages
 void HangmanScene::drawMessage(){
 	// Draw the engine message
 	glPushMatrix();
 	glColor3f(1.0f, 0, 0);
 	//position in the center:
-	glRasterPos2f(0.7f, 0.7f);
+	glRasterPos2f(0.7f, -0.1f);
 
 	unsigned char msg[100];
 	strcpy((char*) msg, game->getMessage().c_str());
@@ -157,6 +180,7 @@ void HangmanScene::drawMessage(){
 	glPopMatrix();
 }
 
+//Show spaces and letters in word
 string HangmanScene::guessString() 
 {
 	string output = "Category: " + selectedCategory + "\n\n";
@@ -175,14 +199,19 @@ string HangmanScene::guessString()
 	return output;
 }
 
+//try letter, verify gameover, winner and points
 void HangmanScene::play(unsigned char key)
 {
 		letters.push_back(key);
 		game->play(key);
+		gameover=game->isGameOver();
+		winner=game->isWinner();
+		if (winner)
+			points = PRIZE-(game->noOfRetries()*100);
 	
 }
 
-
+//Prepare categories and prepare for selection
 void HangmanScene::showCategories(vector<string> categories){
 	// Draw the engine message
 	glPushMatrix();
@@ -203,5 +232,4 @@ void HangmanScene::showCategories(vector<string> categories){
 
 	glPopMatrix();
 }
-
 

@@ -36,7 +36,6 @@ void TicTacToePLEngine::plSetFirstPlayer(char symbol)
 	
 }
 
-
 int TicTacToePLEngine::plHumanPlay(int square)
 {
 	//prepare parameters (Square,ReturnedStatus):
@@ -59,7 +58,7 @@ int TicTacToePLEngine::plComputerPlay()
 	PlQuery play("computerPlay", play_params);
 	play.next_solution();
 
-	status = play_params[1]; //Status is updated
+	//status = play_params[1]; //Status is updated
 	//Read and return output parameter:
 	return play_params[0]; //Best Move
 	
@@ -79,12 +78,11 @@ int TicTacToePLEngine::getComputerMove()
 int TicTacToePLEngine::getStatus()
 {
 	if (status == 3) message = "Nobody won, better luck next time...";
-	else if (status == 1) message = "Congratulations, you won!";
+	else if (status == 1) message = "Congratulations, you won!\n Points: 200! ";
 	else if (status == 2) message = "Computer won, better luck next time...";
 	else message = "playing tic tac toe";
 	return status;
 }
-
 
 void TicTacToePLEngine::playTTT(int square)
 {
