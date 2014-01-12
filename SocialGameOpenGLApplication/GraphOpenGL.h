@@ -27,6 +27,7 @@ public:
 	GraphOpenGL();
 	~GraphOpenGL();
 	void static Init();
+	void static InitTextures();
 	void static subWindowInit();
 	void static PassiveMotion(int x, int y);
 	void static MotionMouse(int x, int y);
