@@ -1,0 +1,12 @@
+﻿@model SocialGameWebsite.Models.StatisticsViewModel
+
+<h3>@Model.Title</h3>
+
+<ul>
+    <li>
+        Number of users: <strong>@Html.ValueFor(m => m.UserCount)</strong>
+    </li>
+    <li>
+        Relationships average strenght: <strong>@Html.ValueFor(m => m.RelationshipStrenghtAverage, "{0:F2}")</strong>
+    </li>
+</ul>

@@ -409,6 +409,10 @@
     </Content>
     <Content Include="Views\Leaderboard\Index.cshtml" />
     <Content Include="Views\Leaderboard\NormalModeTop10.cshtml" />
+    <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.NetworkStatistics.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Views\Network\Statistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

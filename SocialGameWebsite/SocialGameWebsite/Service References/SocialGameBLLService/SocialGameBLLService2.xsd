@@ -421,7 +421,7 @@
   <xs:element name="GetGraphStatsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetGraphStatsResult" nillable="true" type="q46:ArrayOfstring" />
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetGraphStatsResult" nillable="true" type="q46:NetworkStatistics" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
