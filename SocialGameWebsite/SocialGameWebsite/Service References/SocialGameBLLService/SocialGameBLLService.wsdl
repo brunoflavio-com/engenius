@@ -224,6 +224,12 @@
   <wsdl:message name="ISocialGameBLLService_GetUserInterests_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserInterestsResponse" />
   </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetInterestsTagCloud_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInterestsTagCloud" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetInterestsTagCloud_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInterestsTagCloudResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISocialGameBLLService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetData" message="tns:ISocialGameBLLService_GetData_InputMessage" />
@@ -365,6 +371,10 @@
     <wsdl:operation name="GetUserInterests">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserInterests" message="tns:ISocialGameBLLService_GetUserInterests_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserInterestsResponse" message="tns:ISocialGameBLLService_GetUserInterests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInterestsTagCloud">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetInterestsTagCloud" message="tns:ISocialGameBLLService_GetInterestsTagCloud_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetInterestsTagCloudResponse" message="tns:ISocialGameBLLService_GetInterestsTagCloud_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISocialGameBLLService" type="tns:ISocialGameBLLService">
@@ -680,6 +690,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserInterests">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetUserInterests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInterestsTagCloud">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetInterestsTagCloud" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

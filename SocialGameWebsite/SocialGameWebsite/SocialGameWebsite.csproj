@@ -201,6 +201,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\RelationshipViewModels.cs" />
+    <Compile Include="Models\StatisticsViewModel.cs" />
     <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\SocialGameBLLService\Reference.cs">
@@ -398,6 +399,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Views\Home\Interest.cshtml" />
+    <Content Include="Views\Network\TagCloud.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

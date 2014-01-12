@@ -11,6 +11,10 @@ namespace SocialGameWebsite.Controllers
 {
     public class NetworkController : Controller
     {
+
+        SocialGameBLLServiceClient Proxy = new SocialGameBLLServiceClient();
+
+
         //
         // GET: /Network/
 
@@ -26,5 +30,23 @@ namespace SocialGameWebsite.Controllers
             return View();
         }
 
+        public ActionResult InterestsTagCloud(bool global = false)
+        {
+            TagCloudViewModel ViewModel = new TagCloudViewModel();
+
+            if (global)
+            {
+                ViewModel.Title = "Global interests cloud:";
+                ViewModel.Data = Proxy.GetInterestsTagCloud(null);
+            }
+            else
+            {
+                ViewModel.Title = "User interests cloud:";
+                ViewModel.Data = Proxy.GetInterestsTagCloud(new User { Email = User.Identity.Name });
+            }
+            
+
+            return PartialView("TagCloud", ViewModel);
+        }
     }
 }

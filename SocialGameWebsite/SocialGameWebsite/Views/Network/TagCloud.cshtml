@@ -1,0 +1,27 @@
+﻿@model SocialGameWebsite.Models.TagCloudViewModel
+@Scripts.Render("~/bundles/tagcloud")
+
+<h3>@Model.Title</h3>
+
+<div id="tagCloud" style="height:400px;width:auto;">
+    @foreach (KeyValuePair<string, int> Interest in Model.Data)
+    {
+        <span data-weight="@Interest.Value">
+            @Interest.Key
+        </span>        
+    }
+</div>
+<script>
+    var settings = {
+        "size": {
+            "grid": 16
+        },
+        "options": {
+            "color": "random-dark",
+            "printMultiplier": 3
+        },
+        "font": "Futura, Helvetica, sans-serif",
+        "shape": "circle"
+    }
+    $("#tagCloud").awesomeCloud(settings);
+</script>
