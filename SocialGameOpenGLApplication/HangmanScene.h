@@ -1,15 +1,23 @@
 #pragma once
 #include "IWindowScene.h"
+#include "IMinigame.h"
 #include "HangmanPLEngine.h"
 #include "SocialGamePublicAPIClient.h"
 #include <string>
 
+
+
 class HangmanScene :
-	public IWindowScene
+	public IWindowScene, public IMinigame
 {
 public:
 	HangmanScene(SocialGamePublicAPIClient *client, string loginEmail);
 	~HangmanScene();
+
+	//Implementation of IMinigame
+	bool isOver();
+	bool isWinner();
+	float getPoints();
 
 	// Initiate scene
 	void Init(void);
@@ -39,27 +47,28 @@ private:
 	//Game engine:
 	HangmanPLEngine * game;
 
-	bool categorySelectionMode;
-
 	//Soap Proxy to retrieve categories/words
 	SocialGamePublicAPIClient *client;
 
+	//Category selection mode
+	bool categorySelectionMode;
+
 	//Vector with categories
-	std::vector<std::string> catVec;
+	vector<string> catVec;
+
+	//Vector with letters
+	vector<char> letters;
 
 	//Selected Category
 	string selectedCategory;
 
 	//Word to find
 	string word;
-
-	//Vector with letters
-	vector<char> letters;
-
+	
 	//rotation
-	float g_rotation = 0.0;
+	//float g_rotation = 0.0;
 
-	//Draw Board
+	//Draw OutPuts
 	void drawOutputWord();
 	void drawMessage();
 
@@ -71,5 +80,14 @@ private:
 
 	//Send radom categories to output
 	void showCategories(vector<string> categories);
+
+	// Game is Over?
+	bool gameover;
+
+	// Player win?
+	bool winner;
+
+	// Player Points
+	float points;
 };
 
