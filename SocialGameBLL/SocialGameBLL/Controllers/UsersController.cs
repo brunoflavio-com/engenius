@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
+using SocialGameBLL.AdvancedModeScores;
 
 namespace SocialGameBLL.Controllers
 {
@@ -225,18 +226,33 @@ namespace SocialGameBLL.Controllers
             {
 
                 Graph graph = new RelationshipsController().GetRelationships(Me, 2);
-                string Jsongraph = JsonConvert.SerializeObject(graph, Formatting.Indented);
+                if (graph.Relationships.Count == 0)
+                {
+                    var JsonStats = new
+                    {
+                        TotalFriends = 0,
+                        AverageStrength = 0
+                    };
+                    string JsonStatsString = JsonConvert.SerializeObject(JsonStats, Formatting.Indented);
+                    NetworkStatistics Stats = StringToNetworkStatistics(JsonStatsString);
 
-                string AIService = ConfigurationManager.AppSettings["SocialGameAIURL"];
-                CookieContainer CookieJar = new CookieContainer();
+                    return Stats;
+                }
+                else
+                {
+                    string Jsongraph = JsonConvert.SerializeObject(graph, Formatting.Indented);
 
-                string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, Jsongraph, CookieJar);
+                    string AIService = ConfigurationManager.AppSettings["SocialGameAIURL"];
+                    CookieContainer CookieJar = new CookieContainer();
 
-                PostResponse = PrologRequest.MakeJsonGetResquest(PrologRequest.GET_GRAPH_STATS, null, CookieJar);
+                    string PostResponse = PrologRequest.MakeJsonPostRequest(PrologRequest.LOAD_USER_GRAPH, Jsongraph, CookieJar);
 
-                NetworkStatistics Stats = StringToNetworkStatistics(PostResponse);
+                    PostResponse = PrologRequest.MakeJsonGetResquest(PrologRequest.GET_GRAPH_STATS, null, CookieJar);
 
-                return Stats;
+                    NetworkStatistics Stats = StringToNetworkStatistics(PostResponse);
+
+                    return Stats;
+                }
             }
             catch (Exception e)
             {
@@ -427,6 +443,58 @@ namespace SocialGameBLL.Controllers
             }
             return RequestedScores;
         }
+
+        public ICollection<UserNetworkSizeScore> GetPaginatedUsersNetworkSizeScores(int ElementsPerPage, int PageNumber)
+        {
+            AdvancedModeScoresSingleton AdvancedScores = AdvancedModeScoresSingleton.GetInstance();
+            IList<NetworkSizeScore> OrderedSizeScores = AdvancedScores.GetSizeScores().OrderByDescending(s => s.NetworkSize).ToList();
+            ICollection<UserNetworkSizeScore> RequestedScores = new List<UserNetworkSizeScore>();
+
+            int firstPosition = (PageNumber - 1) * ElementsPerPage;
+            for (int i = firstPosition; i < firstPosition + ElementsPerPage; i++)
+            {
+                if (i < OrderedSizeScores.Count)
+                {
+                    NetworkSizeScore SizeScore = OrderedSizeScores.ElementAt(i);
+                    UserEntity UserEntity = db.Users.Find(SizeScore.UserEmail);
+                    RequestedScores.Add(new UserNetworkSizeScore
+                    {
+                        Position = i + 1,
+                        UserEmail = SizeScore.UserEmail,
+                        UserNetworkSize = SizeScore.NetworkSize,
+                        UserName = UserEntity.Name,
+                        UserSurname = UserEntity.Surname
+                    });
+                }
+            }
+            return RequestedScores;
+        }
+
+        public ICollection<UserNetworkStrengthScore> GetPaginatedUsersNetworkStrengthScores(int ElementsPerPage, int PageNumber)
+        {
+            AdvancedModeScoresSingleton AdvancedScores = AdvancedModeScoresSingleton.GetInstance();
+            IList<NetworkStrengthScore> OrderedStrengthScores = AdvancedScores.GetStrengthScores().OrderByDescending(s => s.AvarageStregth).ToList();
+            ICollection<UserNetworkStrengthScore> RequestedScores = new List<UserNetworkStrengthScore>();
+
+            int firstPosition = (PageNumber - 1) * ElementsPerPage;
+            for (int i = firstPosition; i < firstPosition + ElementsPerPage; i++)
+            {
+                if (i < OrderedStrengthScores.Count)
+                {
+                    NetworkStrengthScore StrengthScore = OrderedStrengthScores.ElementAt(i);
+                    UserEntity UserEntity = db.Users.Find(StrengthScore.UserEmail);
+                    RequestedScores.Add(new UserNetworkStrengthScore
+                    {
+                        Position = i + 1,
+                        UserEmail = StrengthScore.UserEmail,
+                        UserNetworkStrength = StrengthScore.AvarageStregth,
+                        UserName = UserEntity.Name,
+                        UserSurname = UserEntity.Surname
+                    });
+                }
+            }
+            return RequestedScores;
+        }
        
         public UserScore GetUserScore(User Me)
         {
@@ -451,6 +519,8 @@ namespace SocialGameBLL.Controllers
                 return null;
             }
         }
+
+
 
         /*Private helper methods*/
         private ICollection<User> AssembleUserList(User CentralUser = null)
