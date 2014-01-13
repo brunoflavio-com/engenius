@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using AuthorizedActionLink;
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -30,10 +31,10 @@
             <div class="content-wrapper">
                 <nav>
                     <ul id="menu">
-                        <li>@Html.ActionLink("My Profile", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Pending Relationships", "Requests", "Relationship")</li>
+                        <li>@Html.AuthorizedActionLink("My Profile", "ViewProfile", "Home")</li>
+                        <li>@Html.AuthorizedActionLink("Pending Relationships", "Requests", "Relationship")</li>
                         <li>@Html.ActionLink("Leaderboards", "Index", "Leaderboard")</li>
-                        <li>@Html.ActionLink("My Network", "MyNetwork", "Network")</li>
+                        <li>@Html.AuthorizedActionLink("My Network", "MyNetwork", "Network")</li>
                         <li>@Html.ActionLink("Global Network", "GlobalNetwork", "Network")</li>
                         <li>@Html.ActionLink("Download App", "Index", "Download")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
