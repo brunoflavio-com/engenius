@@ -8,14 +8,16 @@ class graphCoordWalker :
 	public GraphWalker
 {
 public:
-	graphCoordWalker(int maxUserRelationships, int maxStregth);
+	graphCoordWalker(int maxUserRelationships, int maxStregth, int maxUserTags);
 	~graphCoordWalker();
 	void walkConnection(User * userA, Relationship * relationship, int position, int total);
 	void walkVertice(User * userA);
 	void walk(User * graph);
 	int getMaxConnectionStrenght();
 	int getMaxUserConnections();
+	int getMaxUserTags();
 private:
+	int maxUserTags;
 	int maxStrenght;
 	int maxUserConnections;
 };

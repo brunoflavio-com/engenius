@@ -21,7 +21,7 @@ void Graph::movetoVertice(User * nextUser){
 	relationship->walked = true;
 
 	user = nextUser;
-	graphCoordWalker coordWalker(maxUserConnections,maxConnectionStrenght);
+	graphCoordWalker coordWalker(maxUserConnections,maxConnectionStrenght,maxUserTags);
 	coordWalker.walk(user);
 	user->isCenter = true;
 }

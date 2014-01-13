@@ -156,6 +156,8 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		graph->relationShips.push_back(relationShip);
 		
 	}
+
+	//Get Maximum number of single user relationship number
 	int maxUserRelationShips = 0;
 	for (int i = 0; i < graph->users.size();i++){
 		graph->users.at(i)->glId = i;
@@ -165,11 +167,21 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 
 	}
 
+
+	// GEt Max stregth for relationships
 	int maxRelationStrength = 0;
 	for (int i = 0; i < graph->relationShips.size(); i++){
 		graph->relationShips.at(i)->glId = i;
 		if (maxRelationStrength < graph->relationShips.at(i)->strength){
 			maxRelationStrength = graph->relationShips.at(i)->strength;
+		}
+	}
+
+	// GEt Max number of single user tags
+	int maxUserTags =0;
+	for (int i = 0; i < graph->userTags.size(); i++){
+		if (maxUserTags < graph->userTags.size()){
+			maxUserTags = graph->userTags.size();
 		}
 	}
 
@@ -181,8 +193,9 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 	graph->user = realUser;
 	graph->maxConnectionStrenght = maxRelationStrength;
 	graph->maxUserConnections = maxUserRelationShips;
+	graph->maxUserTags = maxUserTags;
 
-	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength);
+	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);
 	coordWalker.walk(graph->user);
 	graph->user->isCenter = true;
 	return graph;
@@ -228,8 +241,9 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 			user->surname = *ns5__user->Surname;
 		}
 		user->humor = graphObj->getHumorStatus(*ns5__user->HumourStatusId);
-		for (int i = 0; i < graph->Users->User.at(i)->InterestsIDs->int_.size(); i++){
-			UserTag * userTag = graphObj->getUserTag(graph->Users->User.at(i)->InterestsIDs->int_.at(i));
+
+		for (int i = 0; i < ns5__user->InterestsIDs->int_.size(); i++){
+			UserTag * userTag = graphObj->getUserTag(ns5__user->InterestsIDs->int_.at(i));
 			user->userTags.push_back(userTag);
 		}
 
@@ -270,11 +284,19 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 		}
 	}
 
+
+	int maxUserTags = 0;
+	for (int i = 0; i < graphObj->userTags.size(); i++){
+		if (maxUserTags < graphObj->userTags.size()){
+			maxUserTags = graphObj->userTags.size();
+		}
+	}
+
 	graphObj->maxConnectionStrenght = maxRelationStrength;
 	graphObj->maxUserConnections = maxUserRelationShips;
 	graphObj->user = graphObj->getUser(email);
 	graphObj->user->isCenter = true;
-	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength);
+	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);
 	coordWalker.walk(graphObj->user);
 	return graphObj;
 
