@@ -6,6 +6,7 @@
 #include "TicTacToeScene.h"
 #include "MazeScene.h"
 #include "IMinigame.h"
+#include "GraphPLEngine.h"
 
 NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level) :GraphScene(client, loginEmail)
 {
@@ -19,6 +20,18 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 			break;
 		}	
 	}
+
+	////
+	GraphPLEngine * pl = new GraphPLEngine(graph);
+	this->shortestPath =  pl->getShortestPath(graph->user, targetUser);
+	this->strongestPath = pl->getStrongestPath(graph->user, targetUser);
+	delete pl;
+
+	
+	showShortestPath = false;
+	showStrongestPath = false;
+	////
+
 	ALuint buffer, source;
 	buffer = alutCreateBufferFromFile("./sounds/start.wav");
 	alGenSources(1, &source);
@@ -40,18 +53,19 @@ void NormalModeGraphScene::DrawOverlay(void){
 
 	if (gameOn) return game->DrawOverlay();
 
-		/*glBegin(GL_TRIANGLE_FAN);
-		glVertex2f(0.5, 0.5);
-		for (int n = 0; n <= 50; ++n) {
-			float const t = 2 * M_PI*(float)n / (float)50;
-			glVertex2f(0.5 + sin(t)*0.2, 0.5 + cos(t)*0.5);
-		}
-		*/
+	GLfloat colors[3][4] = {
+		{ 1.0, 1.0, 0.0, 0.7 },
+		{ 0.0, 0.0, 1.0, 0.7 },
+		{ 0.0, 1.0, 0.0, 0.7 }
+	};
+
+	unsigned char textIndications[3][20] = { "You", "Current position", "Mission Target" };
+	drawPositionIndications(3, colors, textIndications);
 }
 
 void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	if (gameOn) return game->Key(key, x, y);
-		
+	
 	GraphScene::Key(key, x, y);
 	if (key == 'G') {
 		game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
@@ -64,6 +78,12 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	if (key == 'M' || key == 'm') {
 		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,2);
 		gameOn = true;
+	}
+	if (key == 's') {		
+		toggleShortestPath();
+	}
+	if (key == 'S') {
+		toggleStrongestPath();
 	}
 	GraphScene::Key(key, x, y);
 }
@@ -83,21 +103,32 @@ void NormalModeGraphScene::SpecialKeyUp(int key, int x, int y)
 }
 
 void NormalModeGraphScene::Timer(int value){
-
+	glTime = value;
 	/*Testar o interface IMinigame com o maze*/
 	if (gameOn)
 	{
 		IMinigame* teste = dynamic_cast<IMinigame*>(game);
-		if (teste != 0)
+		if (teste != NULL)
 		{
 			if (bool over = teste->isOver()){
-				bool winner = teste->isWinner();
-				float points = teste->getPoints();
+				gameOn = false;
+				if (teste->isWinner()){
+					float points = (int) teste->getPoints();
+					createMessage("You won the mini-game and got " + to_string((int) points) + " points");
+					userPoints += points;
+					apiClient->setUserLevel(userPoints);
+				}
+				else{
+					createMessage("oh... you lost the mini-game");
+					advanceToNextVertice();
+				}
+				
 			}
 		}
+		return game->Timer(value);
 	}
 
-	if (gameOn) return game->Timer(value);
+	 
 	GraphScene::Timer(value);
 	if (returningToGame)
 	{
@@ -112,7 +143,10 @@ void NormalModeGraphScene::PassiveMotion(int x, int y) {
 	GraphScene::PassiveMotion(x, y);
 }
 
-void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
+void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
+	this->previousUser = previousUser;
+	this->nextUser = nextUser;
+
 	Relationship * relationship = graph->getRelationship(previousUser, nextUser);
 
 	if (relationship == NULL)
@@ -129,7 +163,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
 
 	//generate random user response
 	srand(time(0));
-	int userDecision = rand()%3;
+	int userDecision = rand() % 3;
 	userDecision = 2;
 	int randomGame;
 	switch (userDecision){
@@ -137,39 +171,77 @@ void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
 		//User rejects introduction
 		createMessage("User " + nextUser->email + "has rejected to introduce you");
 		break;
-		
+
 	case 1:
 		//User asks for game to be played in order to accept introduction
 		//Random Game
-		createMessage("User " + nextUser->email + " asked you to play a game");
+		createMessage("User " + nextUser->email + "\nasked you to play a game");
 		//Debug
 		break;
 		randomGame = rand() % 2;
 		switch (randomGame){
-			case 0:
-				game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
-			case 1:
-				game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
-			case 2:
-				game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,2);
+		case 0:
+			game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
+		case 1:
+			game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
+		case 2:
+			game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email, 2);
 		}
 		gameOn = true;
 		break;
-		
+
 	case 2:
 		//User accepts introduction
-		if (nextUser == targetUser)
-		{
-			selectedObject = NULL;
-			isFinished = true;
-			returningMessage = "Congratulations you achieved your mission";
-		}
-		else{
-			createMessage("User " + nextUser->email + "has accepted to introduce you");
-			graph->movetoVertice(nextUser);
-		}
+		advanceToNextVertice();
 		break;
+	}
+}
+
+
+void NormalModeGraphScene::advanceToNextVertice(){
+	if (nextUser == targetUser)
+	{	//Update user Level
+		userLevel++;
+		apiClient->setUserLevel(userLevel);
+		//Return to adnvance mode with congratulations message
+		selectedObject = NULL;
+		isFinished = true;
+		returningMessage = "Congratulations you achieved your mission";
+	}
+	else{
+		createMessage("User " + nextUser->email + "\nhas accepted to introduce you");
+		graph->movetoVertice(nextUser);
+	}
+}
+
+void NormalModeGraphScene::toggleShortestPath() {
+	if (showShortestPath) {
+		showShortestPath = false;
+	}
+	else {		
+		showShortestPath = true;
+		createMessage("Shortest path highlighted.");
+	}
+
+	for each (Relationship * relationship in strongestPath) {
+		relationship->highlightShortest = showShortestPath;
+		relationship->highlightStrongest = false;
 	}
 	
 }
 
+void NormalModeGraphScene::toggleStrongestPath() {
+	
+	if (showStrongestPath) {
+		showStrongestPath = false;
+	}
+	else {
+		showStrongestPath = true;
+		createMessage("Stronger path highlighted.");
+	}
+
+	for each (Relationship * relationship in strongestPath) {
+		relationship->highlightStrongest = showStrongestPath;
+		relationship->highlightShortest = false;
+	}
+}
