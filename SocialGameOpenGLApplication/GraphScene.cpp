@@ -16,6 +16,8 @@
 #define BUFFSIZE 512
 GLuint selecter[BUFFSIZE];
 
+#define MOUSE_SCROLL_UP 3
+#define MOUSE_SCROLL_DOWN 4
 
 
 typedef	GLdouble Vertice[3];
@@ -519,5 +521,36 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 		else{
 			glutMotionFunc(NULL);
 		}
+	}
+	
+	//Manages Scroll events:
+	//Adjusts direction proportionally to the distance from the center.
+	if ((button == MOUSE_SCROLL_UP) || (button == MOUSE_SCROLL_DOWN))
+	{		
+		if (state == GLUT_UP) return;
+		PersonCam.vel = (button == 3) ? 1 : -1;
+
+		float h_center = glutGet(GLUT_WINDOW_WIDTH)/2;
+		float v_center = glutGet(GLUT_WINDOW_HEIGHT) / 2;
+		
+		GLdouble base_dir = M_PI*0.01;
+		if (x < h_center) {
+			PersonCam.dir_long -= base_dir * (x - h_center) / h_center;
+		}
+		else {
+			PersonCam.dir_long += base_dir * (h_center - x) / h_center;
+		}
+
+		if (y < v_center) {
+			PersonCam.dir_lat -= base_dir * (y - v_center) / v_center;
+		}
+		else {
+			PersonCam.dir_lat += base_dir * (v_center - y) / v_center;
+		}
+
+		CamMovement();
+	}
+	else{  // normal button event
+		//printf("Button %s At %d %d\n", (state == GLUT_DOWN) ? "Down" : "Up", x, y);
 	}
 }
