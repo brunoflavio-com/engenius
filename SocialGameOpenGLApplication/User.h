@@ -25,6 +25,7 @@ public:
 	bool isTarget;
 	bool isCenter;
 	bool canWalkThrough;
+	float size;
 	vector<Relationship *>  relationships;
 	vector<UserTag *>  userTags;
 	HumorStatus * humor;

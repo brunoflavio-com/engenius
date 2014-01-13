@@ -70,6 +70,7 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 		if (glRenderMode)
 			quadric = gluNewQuadric();
 		GLfloat * color = white;
+		
 		if (relationship->walked){
 			color = green ;
 		}
@@ -140,6 +141,8 @@ void GraphWalkerDraw::walkVertice(User * userA){
 
 	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+	glPushMatrix();
+	glScalef(userA->size, userA->size, userA->size);
 	gluQuadricDrawStyle(quadric, GLU_FILL);
 
 	float modelview[16];
