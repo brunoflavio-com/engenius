@@ -294,6 +294,7 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 
 	graphObj->maxConnectionStrenght = maxRelationStrength;
 	graphObj->maxUserConnections = maxUserRelationShips;
+	graphObj->maxUserTags = maxUserTags;
 	graphObj->user = graphObj->getUser(email);
 	graphObj->user->isCenter = true;
 	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);

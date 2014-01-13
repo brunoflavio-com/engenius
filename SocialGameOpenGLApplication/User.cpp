@@ -27,6 +27,7 @@ string User::toString(){
 		"Email: " + email + "\n" +
 	    "Name: " + name + "\n" +
 		"Surname: " + surname + "\n" +
+		"Size: " + to_string(size) + "\n" +
 		"Humor status: " + humor->name + "\n" +
 		"Tags: \n";
 	for each(UserTag * tag in userTags){
