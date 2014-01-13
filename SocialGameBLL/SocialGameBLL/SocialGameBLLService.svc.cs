@@ -325,12 +325,22 @@ namespace SocialGameBLL
             }
         }
 
-        public ICollection<string> GetGraphStats(User Me)
+        public NetworkStatistics GetGraphStats(User Me = null)
         {
             try
             {
                 UsersController Controller = new UsersController();
-                return Controller.GetGraphStats(Me);
+                //Global Stats
+                if (Me == null)
+                {
+                    return Controller.GetGraphStats();
+                }
+                //User Stats
+                else 
+                { 
+                    return Controller.GetGraphStats(Me); 
+                }
+                
             }
             catch (Exception e)
             {

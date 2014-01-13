@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace SocialGameWebsite.Models
 {
-  
+    public class StatisticsViewModel
+    {
+        public string Title { get; set; }
+        public int UserCount { get; set; }
+        public double RelationshipStrenghtAverage { get; set; }
+    }
+
     public class TagCloudViewModel
     {
         public string Title { get; set;}

@@ -219,7 +219,7 @@ namespace SocialGameBLL.Controllers
             }
         }
 
-        public ICollection<string> GetGraphStats(User Me)
+        public NetworkStatistics GetGraphStats(User Me)
         {
             try
             {
@@ -234,11 +234,8 @@ namespace SocialGameBLL.Controllers
 
                 PostResponse = PrologRequest.MakeJsonGetResquest(PrologRequest.GET_GRAPH_STATS, null, CookieJar);
 
-                ICollection<string> Stats = new List<string>();
+                NetworkStatistics Stats = StringToNetworkStatistics(PostResponse);
 
-                /** TO DO 
-                 * CHECK THE RETURN
-                 **/
                 return Stats;
             }
             catch (Exception e)
@@ -247,6 +244,23 @@ namespace SocialGameBLL.Controllers
             }
         }
 
+        public NetworkStatistics GetGraphStats()
+        {
+            try
+            {
+                NetworkStatistics NetworkStatistics = new NetworkStatistics
+                {
+                    UserCount = db.Users.Count(),
+                    RelationshipStrenghtAverage = db.Relationships.Select(r => r.Strength).Average()
+                };
+
+                return NetworkStatistics;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
         public ICollection<User> GetPossibleFriends(User Me)
         {
             try
@@ -501,6 +515,17 @@ namespace SocialGameBLL.Controllers
                 returnList.Add(db.Users.Find(email));
             }
             return returnList;
+        }
+
+        private NetworkStatistics StringToNetworkStatistics(string JsonStatistics)
+        {
+            dynamic prologStats = JsonConvert.DeserializeObject<dynamic>(JsonStatistics);
+
+            NetworkStatistics Stats = new NetworkStatistics();
+            Stats.UserCount = prologStats["TotalFriends"];
+            Stats.RelationshipStrenghtAverage = prologStats["AverageStrength"];
+
+            return Stats;
         }
     }
 }

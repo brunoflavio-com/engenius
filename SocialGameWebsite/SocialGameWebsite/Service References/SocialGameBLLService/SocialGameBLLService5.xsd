@@ -100,6 +100,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRelationshipRequest" nillable="true" type="tns:ArrayOfRelationshipRequest" />
+  <xs:complexType name="NetworkStatistics">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RelationshipStrenghtAverage" type="xs:double" />
+      <xs:element minOccurs="0" name="UserCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NetworkStatistics" nillable="true" type="tns:NetworkStatistics" />
   <xs:complexType name="ArrayOfUserScore">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="UserScore" nillable="true" type="tns:UserScore" />

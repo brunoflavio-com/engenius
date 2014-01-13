@@ -78,7 +78,7 @@ namespace SocialGameBLL
         ICollection<User> GetFriendsWithCommonInterests(User Me, ICollection<Interest> Interests);
 
         [OperationContract]
-        ICollection<string> GetGraphStats(User Me);
+        NetworkStatistics GetGraphStats(User Me);
 
         [OperationContract]
         ICollection<User> GetPossibleFriends(User Me);
