@@ -61,6 +61,9 @@ void GraphScene::getUserPointsAndLevel(){
 	int level;
 	float points;
 	apiClient->getUserGameInfo(level, points);
+	if (level == 0){
+		level++;
+	}
 	this->userLevel = level;
 	this->userPoints = points;
 

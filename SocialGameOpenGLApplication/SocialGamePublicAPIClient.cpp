@@ -117,6 +117,7 @@ void SocialGamePublicAPIClient::setUserLevel(int level){
 		ready = false;
 		_ns1__setUserLevel setUserLevel;
 		setUserLevel.Token = &token;
+		setUserLevel.Level = &level;
 		_ns1__setUserLevelResponse response;
 		proxy.setUserLevel(&setUserLevel, &response);
 		ready = true;
