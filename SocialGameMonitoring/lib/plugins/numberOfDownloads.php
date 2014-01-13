@@ -1,6 +1,6 @@
-#! /usr/bin/php
+#!/usr/bin/php
 <?php
-$read=fopen("downloads.txt","r");
+$read=fopen("/tmp/downloads.txt","r");
 $value;
 while(!feof($read))
   {
@@ -13,7 +13,7 @@ $result = $client->GetTotalNumberOfUsers();
 $result->GetTotalNumberOfUsersResult;
 
 if($value != $result->GetTotalNumberOfUsersResult){
-    $write=fopen("downloads.txt","w");
+    $write=fopen("/tmp/downloads.txt","w");
     fwrite($write, $result->GetTotalNumberOfUsersResult);
     fclose($write);
     $total = $result->GetTotalNumberOfUsersResult - $value;
@@ -28,5 +28,6 @@ if($total>5){
 else
     echo "SERVICE STATUS: No downloads in the past hour";
     exit(0);
-
 ?>
+
+
