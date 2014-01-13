@@ -21,7 +21,7 @@ void GraphPLEngine::assertRelationship(string origin, string destination, int st
 	PlTermv plAssertTerms(3);
 	plAssertTerms[0] = PlAtom(origin.c_str());
 	plAssertTerms[1] = PlAtom(destination.c_str());
-	plAssertTerms[2] = PlAtom(strength);
+	plAssertTerms[2] = strength;
 
 
 	PlQuery	plAssert("insert", plAssertTerms);
