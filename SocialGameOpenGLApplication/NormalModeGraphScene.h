@@ -2,6 +2,7 @@
 #include "GraphScene.h"
 #include "SocialGamePublicAPIClient.h"
 #include <string>
+#include <vector>
 
 class NormalModeGraphScene :
 	public GraphScene
@@ -10,8 +11,18 @@ private:
 	bool gameOn;
 	IWindowScene * game;
 	User * targetUser;
+
+	bool showShortestPath;
+	vector<Relationship *> shortestPath;
+	void toggleStrongestPath();
+
+	bool showStrongestPath;
+	vector<Relationship *> strongestPath;
+	void toggleShortestPath();
+
 	User * previousUser;
 	User * nextUser;
+
 public:
 
 	NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level);

@@ -14,7 +14,11 @@ class Relationship :
 	User * userA;
 	User * userB;
 	int strength;
+
+	bool highlightShortest;
+	bool highlightStrongest;
 	bool walked;
+	
 	RelationshipTag * relationshipTag;
 	bool contains(User * user);
 	Relationship();

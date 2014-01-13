@@ -242,6 +242,30 @@
   <wsdl:message name="ISocialGameBLLService_GetPaginatedUsersScores_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPaginatedUsersScoresResponse" />
   </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPaginatedUsersNetworkSizeScores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaginatedUsersNetworkSizeScores" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPaginatedUsersNetworkSizeScores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaginatedUsersNetworkSizeScoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPaginatedUsersNetworkStrengthScores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaginatedUsersNetworkStrengthScores" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetPaginatedUsersNetworkStrengthScores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaginatedUsersNetworkStrengthScoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserNetworkSizeScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserNetworkSizeScore" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserNetworkSizeScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserNetworkSizeScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserNetworkStrengthScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserNetworkStrengthScore" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetUserNetworkStrengthScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserNetworkStrengthScoreResponse" />
+  </wsdl:message>
   <wsdl:message name="ISocialGameBLLService_GetUserScore_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUserScore" />
   </wsdl:message>
@@ -401,6 +425,22 @@
     <wsdl:operation name="GetPaginatedUsersScores">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersScores" message="tns:ISocialGameBLLService_GetPaginatedUsersScores_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersScoresResponse" message="tns:ISocialGameBLLService_GetPaginatedUsersScores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaginatedUsersNetworkSizeScores">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersNetworkSizeScores" message="tns:ISocialGameBLLService_GetPaginatedUsersNetworkSizeScores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersNetworkSizeScoresResponse" message="tns:ISocialGameBLLService_GetPaginatedUsersNetworkSizeScores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaginatedUsersNetworkStrengthScores">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersNetworkStrengthScores" message="tns:ISocialGameBLLService_GetPaginatedUsersNetworkStrengthScores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersNetworkStrengthScoresResponse" message="tns:ISocialGameBLLService_GetPaginatedUsersNetworkStrengthScores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNetworkSizeScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserNetworkSizeScore" message="tns:ISocialGameBLLService_GetUserNetworkSizeScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserNetworkSizeScoreResponse" message="tns:ISocialGameBLLService_GetUserNetworkSizeScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNetworkStrengthScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserNetworkStrengthScore" message="tns:ISocialGameBLLService_GetUserNetworkStrengthScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserNetworkStrengthScoreResponse" message="tns:ISocialGameBLLService_GetUserNetworkStrengthScore_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUserScore">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserScore" message="tns:ISocialGameBLLService_GetUserScore_InputMessage" />
@@ -747,6 +787,42 @@
     </wsdl:operation>
     <wsdl:operation name="GetPaginatedUsersScores">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersScores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaginatedUsersNetworkSizeScores">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersNetworkSizeScores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaginatedUsersNetworkStrengthScores">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersNetworkStrengthScores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNetworkSizeScore">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetUserNetworkSizeScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNetworkStrengthScore">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetUserNetworkStrengthScore" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

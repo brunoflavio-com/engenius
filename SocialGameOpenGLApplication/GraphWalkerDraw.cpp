@@ -66,14 +66,17 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 			glRotatef(rotAngle, rotX, rotY, 0.0);
 		}
 
-		quadric = gluNewQuadric();
+
+		if (glRenderMode)
+			quadric = gluNewQuadric();
 		GLfloat * color = white;
-		
 		if (relationship->walked){
 			color = green ;
 		}
-
-		if (relationship->selected){
+		if (relationship->highlightStrongest){
+			color = yellow;
+		}
+		if (relationship->walked){
 			color = red;
 		}
 		glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
