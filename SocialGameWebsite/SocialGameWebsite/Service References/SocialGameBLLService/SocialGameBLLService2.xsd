@@ -539,4 +539,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetUserScore">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="User" nillable="true" type="q62:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserScoreResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetUserScoreResult" nillable="true" type="q63:UserScore" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

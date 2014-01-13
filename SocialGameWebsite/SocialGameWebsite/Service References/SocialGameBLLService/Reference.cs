@@ -735,6 +735,9 @@ namespace SocialGameWebsite.SocialGameBLLService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PositionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserEmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -756,6 +759,19 @@ namespace SocialGameWebsite.SocialGameBLLService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal int Position {
+            get {
+                return this.PositionField;
+            }
+            set {
+                if ((this.PositionField.Equals(value) != true)) {
+                    this.PositionField = value;
+                    this.RaisePropertyChanged("Position");
+                }
             }
         }
         
@@ -1066,6 +1082,12 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersScores", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetPaginatedUsersScoresResponse")]
         System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.UserScore[]> GetPaginatedUsersScoresAsync(int ElementsPerPage, int PageNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserScore", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserScoreResponse")]
+        SocialGameWebsite.SocialGameBLLService.UserScore GetUserScore(SocialGameWebsite.SocialGameBLLService.User User);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserScore", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserScoreResponse")]
+        System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.UserScore> GetUserScoreAsync(SocialGameWebsite.SocialGameBLLService.User User);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1397,6 +1419,14 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.UserScore[]> GetPaginatedUsersScoresAsync(int ElementsPerPage, int PageNumber) {
             return base.Channel.GetPaginatedUsersScoresAsync(ElementsPerPage, PageNumber);
+        }
+        
+        public SocialGameWebsite.SocialGameBLLService.UserScore GetUserScore(SocialGameWebsite.SocialGameBLLService.User User) {
+            return base.Channel.GetUserScore(User);
+        }
+        
+        public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.UserScore> GetUserScoreAsync(SocialGameWebsite.SocialGameBLLService.User User) {
+            return base.Channel.GetUserScoreAsync(User);
         }
     }
 }

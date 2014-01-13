@@ -24,17 +24,52 @@ namespace SocialGameWebsite.Controllers
         {
             ICollection<UserScore> ServiceScores = Proxy.GetPaginatedUsersScores(10 , Page);
             NormalModePointsLeaderBoardViewModel Top10ViewModel = new NormalModePointsLeaderBoardViewModel();
-        
+
+            Top10ViewModel.IsInTopTen = false;
+
             foreach(UserScore Score in ServiceScores)
             {
-                Top10ViewModel.Scores.Add(new UserScoreViewModel
+                UserScoreViewModel ScoreVM = new UserScoreViewModel
+                {
+                    Position = Score.Position,
+                    UserEmail = Score.UserEmail,
+                    UserName = Score.UserName,
+                    UserSurname = Score.UserSurname,
+                    UserLevel = Score.UserLevel,
+                    UserPoints = Score.UserPoints
+                };
+
+                if (Score.UserEmail == User.Identity.Name)
+                {
+                    Top10ViewModel.IsInTopTen = true;
+                    Top10ViewModel.HasScore = true;
+                    Top10ViewModel.MyScore = ScoreVM;
+                }
+
+                Top10ViewModel.Scores.Add(ScoreVM);
+            }
+
+            if (!Top10ViewModel.IsInTopTen)
+            {
+                UserScore MyScore = Proxy.GetUserScore(new User { Email = User.Identity.Name });
+                if (MyScore != null)
+                {
+                    Top10ViewModel.HasScore = true;
+                    Top10ViewModel.MyScore = new UserScoreViewModel 
                     {
-                        UserEmail = Score.UserEmail,
-                        UserName = Score.UserName,
-                        UserSurname = Score.UserSurname,
-                        UserLevel = Score.UserLevel,
-                        UserPoints = Score.UserPoints
-                    });
+                        Position = MyScore.Position,
+                        UserEmail = MyScore.UserEmail,
+                        UserName = MyScore.UserName,
+                        UserSurname = MyScore.UserSurname,
+                        UserLevel = MyScore.UserLevel,
+                        UserPoints = MyScore.UserPoints
+                    };
+                }
+                else
+                {
+                    Top10ViewModel.HasScore = false;
+                }
+
             }
 
             return PartialView(Top10ViewModel);

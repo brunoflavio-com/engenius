@@ -5,18 +5,71 @@
 
 <table>
     <tr>
+        <th>Postion</th>
         <th>Name</th>
         <th>Surname</th>
         <th>Level</th>
         <th>Points</th>
     </tr>
-    @foreach(UserScoreViewModel line in Model.Scores)
+    @if (User.Identity.IsAuthenticated)
     {
-        <tr>
-            <td>@line.UserName</td>
-            <td>@line.UserSurname</td>
-            <td>@line.UserLevel</td>
-            <td>@line.UserPoints</td>
-        </tr>
+        foreach (UserScoreViewModel line in Model.Scores)
+        {
+            if (line.UserEmail == User.Identity.Name) 
+            { 
+                <tr>
+                    <td><strong>@line.Position</strong></td>
+                    <td><strong>@line.UserName</strong></td>
+                    <td><strong>@line.UserSurname</strong></td>
+                    <td><strong>@line.UserLevel</strong></td>
+                    <td><strong>@line.UserPoints</strong></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>@line.Position</td>
+                    <td>@line.UserName</td>
+                    <td>@line.UserSurname</td>
+                    <td>@line.UserLevel</td>
+                    <td>@line.UserPoints</td>
+                </tr>
+            }
+            if(!Model.IsInTopTen && Model.HasScore)
+            {
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+                <tr>
+                    <td><strong>@Model.MyScore.Position</strong></td>
+                    <td><strong>@Model.MyScore.UserName</strong></td>
+                    <td><strong>@Model.MyScore.UserSurname</strong></td>
+                    <td><strong>@Model.MyScore.UserLevel</strong></td>
+                    <td><strong>@Model.MyScore.UserPoints</strong></td>
+                </tr>
+            }
+            if (!Model.HasScore)
+            {
+                <tr>You don't have a score yet! Start playing now!</tr>
+            }
+        }
+
+    }
+    else
+    {
+        foreach (UserScoreViewModel line in Model.Scores)
+        {
+            <tr>
+                <td>@line.Position</td>
+                <td>@line.UserName</td>
+                <td>@line.UserSurname</td>
+                <td>@line.UserLevel</td>
+                <td>@line.UserPoints</td>
+            </tr>
+        }
     }
 </table>
