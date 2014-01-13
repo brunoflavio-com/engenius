@@ -3,6 +3,8 @@
 
 Relationship::Relationship()
 {
+	highlightShortest = false;
+	highlightStrongest = false;
 	walked = false;
 }
 

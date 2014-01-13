@@ -6,7 +6,9 @@
 #include "TicTacToeScene.h"
 #include "MazeScene.h"
 #include "IMinigame.h"
-
+////
+#include "GraphPLEngine.h"
+////
 NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level) :GraphScene(client, loginEmail)
 {
 	gameOn = false;
@@ -19,6 +21,18 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 			break;
 		}	
 	}
+
+	////
+	GraphPLEngine * pl = new GraphPLEngine(graph);
+	this->shortestPath =  pl->getShortestPath(graph->user, targetUser);
+	this->strongestPath = pl->getStrongestPath(graph->user, targetUser);
+	delete pl;
+
+	
+	showShortestPath = false;
+	showStrongestPath = false;
+	////
+
 	ALuint buffer, source;
 	buffer = alutCreateBufferFromFile("./sounds/start.wav");
 	alGenSources(1, &source);
@@ -51,7 +65,7 @@ void NormalModeGraphScene::DrawOverlay(void){
 
 void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	if (gameOn) return game->Key(key, x, y);
-		
+	
 	GraphScene::Key(key, x, y);
 	if (key == 'G') {
 		game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
@@ -64,6 +78,12 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	if (key == 'M' || key == 'm') {
 		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,2);
 		gameOn = true;
+	}
+	if (key == 's') {		
+		toggleShortestPath();
+	}
+	if (key == 'S') {
+		toggleStrongestPath();
 	}
 	GraphScene::Key(key, x, y);
 }
@@ -173,3 +193,34 @@ void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
 	
 }
 
+void NormalModeGraphScene::toggleShortestPath() {
+	if (showShortestPath) {
+		showShortestPath = false;
+	}
+	else {		
+		showShortestPath = true;
+		createMessage("The shortest path to destination is highlighted.");
+	}
+
+	for each (Relationship * relationship in strongestPath) {
+		relationship->highlightShortest = showShortestPath;
+		relationship->highlightStrongest = false;
+	}
+	
+}
+
+void NormalModeGraphScene::toggleStrongestPath() {
+	
+	if (showStrongestPath) {
+		showStrongestPath = false;
+	}
+	else {
+		showStrongestPath = true;
+		createMessage("The stronger path to destination is highlighted.");
+	}
+
+	for each (Relationship * relationship in strongestPath) {
+		relationship->highlightStrongest = showStrongestPath;
+		relationship->highlightShortest = false;
+	}
+}

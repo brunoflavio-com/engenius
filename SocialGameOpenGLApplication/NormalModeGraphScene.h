@@ -2,6 +2,7 @@
 #include "GraphScene.h"
 #include "SocialGamePublicAPIClient.h"
 #include <string>
+#include <vector>
 
 class NormalModeGraphScene :
 	public GraphScene
@@ -10,6 +11,14 @@ private:
 	bool gameOn;
 	IWindowScene * game;
 	User * targetUser;
+
+	bool showShortestPath;
+	vector<Relationship *> shortestPath;
+	void toggleStrongestPath();
+
+	bool showStrongestPath;
+	vector<Relationship *> strongestPath;
+	void toggleShortestPath();
 
 public:
 
