@@ -539,17 +539,75 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPaginatedUsersNetworkSizeScores">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ElementsPerPage" type="xs:int" />
+        <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaginatedUsersNetworkSizeScoresResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetPaginatedUsersNetworkSizeScoresResult" nillable="true" type="q62:ArrayOfUserNetworkSizeScore" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaginatedUsersNetworkStrengthScores">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ElementsPerPage" type="xs:int" />
+        <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPaginatedUsersNetworkStrengthScoresResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetPaginatedUsersNetworkStrengthScoresResult" nillable="true" type="q63:ArrayOfUserNetworkStrengthScore" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserNetworkSizeScore">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q64:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserNetworkSizeScoreResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetUserNetworkSizeScoreResult" nillable="true" type="q65:UserNetworkSizeScore" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserNetworkStrengthScore">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="Me" nillable="true" type="q66:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserNetworkStrengthScoreResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetUserNetworkStrengthScoreResult" nillable="true" type="q67:UserNetworkStrengthScore" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetUserScore">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="User" nillable="true" type="q62:User" />
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="User" nillable="true" type="q68:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUserScoreResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetUserScoreResult" nillable="true" type="q63:UserScore" />
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/SocialGameBLL.Service" minOccurs="0" name="GetUserScoreResult" nillable="true" type="q69:UserScore" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

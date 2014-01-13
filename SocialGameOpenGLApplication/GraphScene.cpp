@@ -218,6 +218,7 @@ void GraphScene::Timer(int value){
 	{
 		isMessageActive = false;
 	}
+
 	if (glutGet(GLUT_WINDOW_WIDTH)>200){
 		if (KeyStatus.up){
 			PersonCam.vel = 0.3;

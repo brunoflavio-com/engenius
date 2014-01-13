@@ -230,7 +230,7 @@ namespace SocialGameBLL.Controllers
                 {
                     var JsonStats = new
                     {
-                        TotalFriends = 0,
+                        TotalFriends = 1,
                         AverageStrength = 0
                     };
                     string JsonStatsString = JsonConvert.SerializeObject(JsonStats, Formatting.Indented);

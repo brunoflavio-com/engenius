@@ -15,6 +15,7 @@ public:
 	vector<UserTag * > userTags;
 	int maxUserConnections;
 	int maxConnectionStrenght;
+	int maxUserTags;
 	UserTag * getUserTag(int id);
 	User * getUser(string email);
 	HumorStatus *  getHumorStatus(int id);

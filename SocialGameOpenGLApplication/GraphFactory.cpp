@@ -78,14 +78,14 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		while (!users.empty()){
 			User * user = users.back();
 			users.pop_back();
-			int directConnections = 1+ rand() % 4 ;
+			int directConnections = 1+rand() % 3 ;
 			for (int y = 0; y < directConnections; y++){
 				User * tempUser = new User();
 				
 				string name = firstNames[rand() % 5];
 				string surname = surnames[rand() % 5];
 				tempUser->email =  name + to_string(rand() % 100) + surname+"@gmail.com";
-				
+				tempUser->graphLevel = i + 1;
 				
 				tempUser->name = name;
 				tempUser->surname = surname;
@@ -101,7 +101,7 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 				RelationshipTag * relationShipTag = relationShipTags[rand() % 3];
 				
 				relationShip->relationshipTag = relationShipTag;
-				relationShip->strength = 1 + rand() % 5;
+				relationShip->strength = 1 + rand() % 10;
 				relationShip->userA = user;
 				relationShip->userB = tempUser;
 				user->relationships.push_back(relationShip);
@@ -112,28 +112,32 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		users = tempUsers;
 	}
 	int nUsers = graph->users.size();
-	int nonDirectRelationShips = rand() % nUsers;
+	int nRelationships = graph->relationShips.size();
 	int maxConnectionPossible = nUsers*(nUsers - 1) / 2;
+	int nonDirectRelationShips = (rand() % (maxConnectionPossible - nRelationships)) * nRelationships/maxConnectionPossible;
 
 	for (int i = 0; i < nonDirectRelationShips; i++){
-		if (maxConnectionPossible == graph->relationShips.size())
-		{
-			//There cannot be more connections when every user is connected
-			break;
-		}
+		
 		Relationship * relationShip = new Relationship();
 		RelationshipTag * relationShipTag = relationShipTags[rand() % 3];
-		relationShip->strength = 1 + rand() % 5;
+		relationShip->strength = 1 + rand() % 10;
 		relationShip->relationshipTag = relationShipTag;
 		User * userB = NULL;
 		User * userA = NULL;
 
-		
 		while (userB == userA)
 		{ 
 			userA = graph->users.at(rand() % graph->users.size());
 		    userB = graph->users.at(rand() % graph->users.size());
 			//Checking if Relationship already exists
+			
+			if (abs(userA->graphLevel - userB->graphLevel) != 2)
+			{
+				userA = userB = NULL;
+				continue;
+			}
+
+
 			for each(Relationship * r in graph->relationShips){
 				if (r->contains(userA) && r->contains(userB)){
 					userB = NULL;
@@ -141,7 +145,10 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 				}
 				
 			}
+
+			
 		}
+
 		relationShip->userA = userA;
 		relationShip->userB = userB;
 		userA->relationships.push_back(relationShip);
@@ -149,6 +156,8 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		graph->relationShips.push_back(relationShip);
 		
 	}
+
+	//Get Maximum number of single user relationship number
 	int maxUserRelationShips = 0;
 	for (int i = 0; i < graph->users.size();i++){
 		graph->users.at(i)->glId = i;
@@ -158,6 +167,8 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 
 	}
 
+
+	// GEt Max stregth for relationships
 	int maxRelationStrength = 0;
 	for (int i = 0; i < graph->relationShips.size(); i++){
 		graph->relationShips.at(i)->glId = i;
@@ -166,11 +177,25 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		}
 	}
 
+	// GEt Max number of single user tags
+	int maxUserTags =0;
+	for (int i = 0; i < graph->userTags.size(); i++){
+		if (maxUserTags < graph->userTags.size()){
+			maxUserTags = graph->userTags.size();
+		}
+	}
+
+	for (int i = 0; i < graph->users.size(); i++){
+		graph->users.at(i)->graphLevel = -1;
+	
+	}
+
 	graph->user = realUser;
 	graph->maxConnectionStrenght = maxRelationStrength;
 	graph->maxUserConnections = maxUserRelationShips;
+	graph->maxUserTags = maxUserTags;
 
-	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength);
+	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);
 	coordWalker.walk(graph->user);
 	graph->user->isCenter = true;
 	return graph;
@@ -216,8 +241,9 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 			user->surname = *ns5__user->Surname;
 		}
 		user->humor = graphObj->getHumorStatus(*ns5__user->HumourStatusId);
-		for (int i = 0; i < graph->Interests->Interest.size(); i++){
-			UserTag * userTag = graphObj->getUserTag(*graph->Interests->Interest.at(i)->Id);
+
+		for (int i = 0; i < ns5__user->InterestsIDs->int_.size(); i++){
+			UserTag * userTag = graphObj->getUserTag(ns5__user->InterestsIDs->int_.at(i));
 			user->userTags.push_back(userTag);
 		}
 
@@ -258,11 +284,19 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 		}
 	}
 
+
+	int maxUserTags = 0;
+	for (int i = 0; i < graphObj->userTags.size(); i++){
+		if (maxUserTags < graphObj->userTags.size()){
+			maxUserTags = graphObj->userTags.size();
+		}
+	}
+
 	graphObj->maxConnectionStrenght = maxRelationStrength;
 	graphObj->maxUserConnections = maxUserRelationShips;
 	graphObj->user = graphObj->getUser(email);
 	graphObj->user->isCenter = true;
-	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength);
+	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);
 	coordWalker.walk(graphObj->user);
 	return graphObj;
 
