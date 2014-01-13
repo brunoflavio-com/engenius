@@ -488,6 +488,31 @@ namespace SocialGameBLL
             }
         }
 
+        public ICollection<UserNetworkSizeScore> GetPaginatedUsersNetworkSizeScores(int ElementsPerPage, int PageNumber)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetPaginatedUsersNetworkSizeScores(ElementsPerPage, PageNumber);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public ICollection<UserNetworkStrengthScore> GetPaginatedUsersNetworkStrengthScores(int ElementsPerPage, int PageNumber)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetPaginatedUsersNetworkStrengthScores(ElementsPerPage, PageNumber);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public UserScore GetUserScore(User Me)
         {
             try

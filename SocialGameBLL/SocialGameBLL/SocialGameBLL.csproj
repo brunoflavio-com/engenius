@@ -79,6 +79,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvancedModeScores\AdvancedModeScores.cs" />
+    <Compile Include="AdvancedModeScores\NetworkSizeScore.cs" />
+    <Compile Include="AdvancedModeScores\NetworkStrengthScore.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\RelationshipsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -101,6 +104,8 @@
     <Compile Include="Service\RelationshipRequest.cs" />
     <Compile Include="Service\RelationshipTag.cs" />
     <Compile Include="Service\User.cs" />
+    <Compile Include="Service\UserNetworkSizeScore.cs" />
+    <Compile Include="Service\UserNetworkStrengthScore.cs" />
     <Compile Include="Service\UserScore.cs" />
     <Compile Include="SocialGameBLLService.svc.cs">
       <DependentUpon>SocialGameBLLService.svc</DependentUpon>
