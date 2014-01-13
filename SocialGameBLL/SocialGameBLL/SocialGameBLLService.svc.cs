@@ -513,6 +513,32 @@ namespace SocialGameBLL
             }
         }
 
+        public UserNetworkSizeScore GetUserNetworkSizeScore(User Me)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetUserNetworkSizeScore(Me);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public UserNetworkStrengthScore GetUserNetworkStrengthScore(User Me)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetUserNetworkStrengthScore(Me);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
         public UserScore GetUserScore(User Me)
         {
             try

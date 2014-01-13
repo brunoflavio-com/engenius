@@ -216,13 +216,13 @@ void GraphScene::Timer(int value){
 	{
 		isMessageActive = false;
 	}
-
+	if (glutGet(GLUT_WINDOW_WIDTH)>200){
 		if (KeyStatus.up){
-			PersonCam.vel = 0.1;
+			PersonCam.vel = 0.3;
 			CamMovement();
 		}
 		if (KeyStatus.down){
-			PersonCam.vel = -0.1;
+			PersonCam.vel = -0.3;
 			CamMovement();
 		}
 		if (KeyStatus.left){
@@ -231,6 +231,7 @@ void GraphScene::Timer(int value){
 		if (KeyStatus.right){
 			PersonCam.dir_long -= M_PI*0.001;
 		}
+	}
 }
 
 void GraphScene::Key(unsigned char key, int x, int y){
@@ -366,7 +367,7 @@ bool GraphScene::ColisionTest(GLdouble newx, GLdouble newy, GLdouble newz){
 	glLoadIdentity();
 	glGetIntegerv(GL_VIEWPORT, viewport);
 	glLoadIdentity();
-	glOrtho(-2.5, 2.5, -2.5, 2.5, 0.0, 2.5);
+	glOrtho(-2.5, 2.5, -2.5, 2.5, 0.0, 2.0);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

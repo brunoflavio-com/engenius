@@ -496,6 +496,55 @@ namespace SocialGameBLL.Controllers
             return RequestedScores;
         }
        
+        public UserNetworkSizeScore GetUserNetworkSizeScore(User Me)
+        {
+            UserEntity MyEntity = db.Users.Find(Me.Email);
+            AdvancedModeScoresSingleton AdvancedScores = AdvancedModeScoresSingleton.GetInstance();
+            IList<NetworkSizeScore> OrderedSizeScores = AdvancedScores.GetSizeScores().OrderByDescending(s => s.NetworkSize).ToList();
+
+            try
+            {
+                NetworkSizeScore SizeScore = OrderedSizeScores.First(s => s.UserEmail == MyEntity.Email);
+                int i = OrderedSizeScores.IndexOf(SizeScore);
+                return new UserNetworkSizeScore
+                {
+                    Position = i + 1,
+                    UserEmail = SizeScore.UserEmail,
+                    UserNetworkSize = SizeScore.NetworkSize,
+                    UserName = MyEntity.Name,
+                    UserSurname = MyEntity.Surname
+                };
+            }catch(Exception e)
+            {
+                return null;
+            }
+        }
+
+        public UserNetworkStrengthScore GetUserNetworkStrengthScore(User Me)
+        {
+            UserEntity MyEntity = db.Users.Find(Me.Email);
+            AdvancedModeScoresSingleton AdvancedScores = AdvancedModeScoresSingleton.GetInstance();
+            IList<NetworkStrengthScore> OrderedSizeScores = AdvancedScores.GetStrengthScores().OrderByDescending(s => s.AvarageStregth).ToList();
+
+            try
+            {
+                NetworkStrengthScore StrengthScore = OrderedSizeScores.First(s => s.UserEmail == MyEntity.Email);
+                int i = OrderedSizeScores.IndexOf(StrengthScore);
+                return new UserNetworkStrengthScore
+                {
+                    Position = i + 1,
+                    UserEmail = StrengthScore.UserEmail,
+                    UserNetworkStrength = StrengthScore.AvarageStregth,
+                    UserName = MyEntity.Name,
+                    UserSurname = MyEntity.Surname
+                };
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public UserScore GetUserScore(User Me)
         {
             UserEntity MyEntity = db.Users.Find(Me.Email);
