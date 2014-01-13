@@ -402,6 +402,7 @@ namespace SocialGameBLL.Controllers
                     UserEntity UserEntity = db.Users.Find(SimpleScore.UserEmail);
                     RequestedScores.Add(new UserScore
                     {
+                        Position = i + 1,
                         UserEmail = SimpleScore.UserEmail,
                         UserLevel = (SimpleScore.Level == null) ? 0 : (int)SimpleScore.Level,
                         UserPoints = (SimpleScore.Points == null) ? 0.0f : (float)SimpleScore.Points,
@@ -413,6 +414,30 @@ namespace SocialGameBLL.Controllers
             return RequestedScores;
         }
        
+        public UserScore GetUserScore(User Me)
+        {
+            UserEntity MyEntity = db.Users.Find(Me.Email);
+            IList<SimpleModeScoreEntity> OrderedScores = db.Scores.OrderByDescending(s => s.Points).ToList();
+
+            try
+            {
+                SimpleModeScoreEntity Score = OrderedScores.First(s => s.UserEmail == MyEntity.Email);
+                int i = OrderedScores.IndexOf(Score);
+                return new UserScore
+                {
+                    Position = i + 1,
+                    UserEmail = Score.UserEmail,
+                    UserLevel = (Score.Level == null) ? 0 : (int)Score.Level,
+                    UserPoints = (Score.Points == null) ? 0.0f : (float)Score.Points,
+                    UserName = MyEntity.Name,
+                    UserSurname = MyEntity.Surname
+                };
+            }catch(Exception e)
+            {
+                return null;
+            }
+        }
+
         /*Private helper methods*/
         private ICollection<User> AssembleUserList(User CentralUser = null)
         {

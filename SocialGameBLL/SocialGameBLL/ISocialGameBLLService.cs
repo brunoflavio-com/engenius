@@ -103,6 +103,9 @@ namespace SocialGameBLL
 
         [OperationContract]
         ICollection<UserScore> GetPaginatedUsersScores(int ElementsPerPage, int PageNumber);
+
+        [OperationContract]
+        UserScore GetUserScore(User User);
     }
 
 
