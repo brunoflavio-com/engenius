@@ -129,6 +129,9 @@
     <ClInclude Include="IMinigame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GraphPLEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -215,6 +218,9 @@
     <ClCompile Include="graphCoordWalker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GraphPLEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="hangman.pl">
@@ -228,5 +234,6 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="graph.pl" />
   </ItemGroup>
 </Project>

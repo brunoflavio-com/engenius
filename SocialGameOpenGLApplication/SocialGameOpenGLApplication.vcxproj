@@ -93,6 +93,7 @@
     <ClInclude Include="Graph.h" />
     <ClInclude Include="graphCoordWalker.h" />
     <ClInclude Include="GraphOpenGL.h" />
+    <ClInclude Include="GraphPLEngine.h" />
     <ClInclude Include="GraphScene.h" />
     <ClInclude Include="GraphWalker.h" />
     <ClInclude Include="GraphWalkerDraw.h" />
@@ -131,6 +132,7 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="graphCoordWalker.cpp" />
     <ClCompile Include="GraphOpenGL.cpp" />
+    <ClCompile Include="GraphPLEngine.cpp" />
     <ClCompile Include="GraphScene.cpp" />
     <ClCompile Include="GraphWalker.cpp" />
     <ClCompile Include="GraphWalkerDraw.cpp" />
@@ -158,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="graph.pl" />
     <None Include="hangman.pl" />
     <None Include="maze.pl" />
     <None Include="packages.config" />

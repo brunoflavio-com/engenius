@@ -13,10 +13,9 @@
 
 %%ASSERTION METHODS:
 insert(UserA, UserB, Strength):-
-	assert(relationship(UserA, UserB, Strength).
+	assert(relationship(UserA, UserB, Strength)).
 
-%%FASTEST
-
+%%SHORTEST
 find_shortest_path(UserAEmail, UserBEmail, Path):-
   find_shortest_path1([[UserAEmail]], UserBEmail , InvertedPath),
   reverse(InvertedPath, Path).
@@ -48,10 +47,7 @@ find_next_users_shortest(CurrentUser, VisitedUsers, L) :-
 		L
 	  ).
 
-	  
-	  
-%%SHORTEST
-
+%%STRONGEST
 find_strongest_path(UserAEmail, UserBEmail, Path):-
   find_strongest_path1([(0 , [UserAEmail])], UserBEmail , InvertedPath),
   reverse(InvertedPath, Path).
