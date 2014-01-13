@@ -28,6 +28,7 @@ namespace SocialGameWebsite.Models
 
     public class UserScoreViewModel
     {
+        public int Position { get; set; }
         public string UserEmail { get; set; }
         public string UserName { get; set; }
         public string UserSurname { get; set; }
@@ -42,5 +43,9 @@ namespace SocialGameWebsite.Models
             Scores = new List<UserScoreViewModel>();
         }
         public ICollection<UserScoreViewModel> Scores { get; set; }
+
+        public bool HasScore{get; set;}
+        public bool IsInTopTen { get; set; }
+        public UserScoreViewModel MyScore{get;set;}
     }
 }

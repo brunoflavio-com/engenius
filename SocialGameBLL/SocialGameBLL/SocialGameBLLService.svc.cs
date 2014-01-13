@@ -487,5 +487,17 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public UserScore GetUserScore(User Me)
+        {
+            try
+            {
+                UsersController Controller = new UsersController();
+                return Controller.GetUserScore(Me);
+            }catch(Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }

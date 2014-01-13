@@ -10,6 +10,8 @@ namespace SocialGameBLL.Service
     public class UserScore
     {
         [DataMember]
+        public int Position;
+        [DataMember]
         public string UserEmail { get; set; }
         [DataMember]
         public string UserName { get; set; }
