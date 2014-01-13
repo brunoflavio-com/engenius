@@ -413,6 +413,14 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Views\Network\Statistics.cshtml" />
+    <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.UserNetworkSizeScore.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SocialGameBLLService\SocialGameWebsite.SocialGameBLLService.UserNetworkStrengthScore.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Views\Leaderboard\Top10UserNetworkSizeLeaderboard.cshtml" />
+    <Content Include="Views\Leaderboard\Top10UserNetworkStrengthLeaderboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

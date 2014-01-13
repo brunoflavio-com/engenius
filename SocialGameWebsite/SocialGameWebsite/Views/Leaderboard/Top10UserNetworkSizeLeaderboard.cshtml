@@ -1,26 +1,24 @@
 ﻿@using SocialGameWebsite.Models;
-@model SocialGameWebsite.Models.NormalModePointsLeaderBoardViewModel
+@model SocialGameWebsite.Models.Top10UserNetworkSizeLeaderBoardViewModel
 
-<h4>Normal Mode Top 10:</h4>
+<h4>User Network Size Top 10:</h4>
 
 <table>
     <tr>
         <th>Postion</th>
         <th>Name</th>
-        <th>Level</th>
-        <th>Points</th>
+        <th>Network Size</th>
     </tr>
     @if (User.Identity.IsAuthenticated)
     {
-        foreach (UserScoreViewModel line in Model.Scores)
+        foreach (UserNetworkSizeScoreViewModel line in Model.Scores)
         {
-            if (line.UserEmail == User.Identity.Name) 
-            { 
+            if (line.UserEmail == User.Identity.Name)
+            {
                 <tr>
                     <td><strong>@line.Position</strong></td>
                     <td><strong>@line.UserName @line.UserSurname</strong></td>
-                    <td><strong>@line.UserLevel</strong></td>
-                    <td><strong>@line.UserPoints</strong></td>
+                    <td><strong>@line.UserNetworkSize</strong></td>    
                 </tr>
             }
             else
@@ -28,15 +26,13 @@
                 <tr>
                     <td>@line.Position</td>
                     <td>@line.UserName @line.UserSurname</td>
-                    <td>@line.UserLevel</td>
-                    <td>@line.UserPoints</td>
+                    <td>@line.UserNetworkSize</td>
                 </tr>
             }
-        }
-        if(!Model.IsInTopTen && Model.HasScore)
+         }
+        if (!Model.IsInTopTen && Model.HasScore)
         {
             <tr>
-                <td>...</td>
                 <td>...</td>
                 <td>...</td>
                 <td>...</td>
@@ -44,25 +40,23 @@
             <tr>
                 <td><strong>@Model.MyScore.Position</strong></td>
                 <td><strong>@Model.MyScore.UserName @Model.MyScore.UserSurname</strong></td>
-                <td><strong>@Model.MyScore.UserLevel</strong></td>
-                <td><strong>@Model.MyScore.UserPoints</strong></td>
+                <td><strong>@Model.MyScore.UserNetworkSize</strong></td> 
             </tr>
         }
         if (!Model.HasScore)
         {
-            <tr>You don't have a score yet! Start playing now!</tr>
+            <tr>You don't have a score yet!</tr>
         }
 
     }
     else
     {
-        foreach (UserScoreViewModel line in Model.Scores)
+        foreach (UserNetworkSizeScoreViewModel line in Model.Scores)
         {
             <tr>
                 <td>@line.Position</td>
                 <td>@line.UserName @line.UserSurname</td>
-                <td>@line.UserLevel</td>
-                <td>@line.UserPoints</td>
+                <td>@line.UserNetworkSize</td>
             </tr>
         }
     }

@@ -124,4 +124,36 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UserScore" nillable="true" type="tns:UserScore" />
+  <xs:complexType name="ArrayOfUserNetworkSizeScore">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserNetworkSizeScore" nillable="true" type="tns:UserNetworkSizeScore" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserNetworkSizeScore" nillable="true" type="tns:ArrayOfUserNetworkSizeScore" />
+  <xs:complexType name="UserNetworkSizeScore">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Position" type="xs:int" />
+      <xs:element minOccurs="0" name="UserEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserNetworkSize" type="xs:int" />
+      <xs:element minOccurs="0" name="UserSurname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserNetworkSizeScore" nillable="true" type="tns:UserNetworkSizeScore" />
+  <xs:complexType name="ArrayOfUserNetworkStrengthScore">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserNetworkStrengthScore" nillable="true" type="tns:UserNetworkStrengthScore" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserNetworkStrengthScore" nillable="true" type="tns:ArrayOfUserNetworkStrengthScore" />
+  <xs:complexType name="UserNetworkStrengthScore">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Position" type="xs:int" />
+      <xs:element minOccurs="0" name="UserEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserNetworkStrength" type="xs:double" />
+      <xs:element minOccurs="0" name="UserSurname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserNetworkStrengthScore" nillable="true" type="tns:UserNetworkStrengthScore" />
 </xs:schema>

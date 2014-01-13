@@ -49,6 +49,7 @@ void AdvanceModeGraphScene::verticeClicked(User * previousUser, User * nextUser)
 }
 
 void AdvanceModeGraphScene::Timer(int value){
+	glTime = value;
 	GraphScene::Timer(value);
 	if (returningToGame)
 	{

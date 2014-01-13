@@ -75,5 +75,110 @@ namespace SocialGameWebsite.Controllers
             return PartialView(Top10ViewModel);
         }
 
+        public ActionResult Top10UserNetworkSizeLeaderboard()
+        {
+            ICollection<UserNetworkSizeScore> ServiceScores = Proxy.GetPaginatedUsersNetworkSizeScores(10, 1);
+            Top10UserNetworkSizeLeaderBoardViewModel Top10ViewModel = new Top10UserNetworkSizeLeaderBoardViewModel();
+
+            Top10ViewModel.IsInTopTen = false;
+
+            foreach (UserNetworkSizeScore Score in ServiceScores)
+            {
+                UserNetworkSizeScoreViewModel ScoreVM = new UserNetworkSizeScoreViewModel
+                {
+                    Position = Score.Position,
+                    UserEmail = Score.UserEmail,
+                    UserName = Score.UserName,
+                    UserSurname = Score.UserSurname,
+                    UserNetworkSize = Score.UserNetworkSize
+                };
+
+                if (ScoreVM.UserEmail == User.Identity.Name)
+                {
+                    Top10ViewModel.IsInTopTen = true;
+                    Top10ViewModel.HasScore = true;
+                    Top10ViewModel.MyScore = ScoreVM;
+                }
+
+                Top10ViewModel.Scores.Add(ScoreVM);
+            }
+
+            if (!Top10ViewModel.IsInTopTen)
+            {
+                UserNetworkSizeScore MyScore = Proxy.GetUserNetworkSizeScore(new User { Email = User.Identity.Name });
+                if (MyScore != null)
+                {
+                    Top10ViewModel.HasScore = true;
+                    Top10ViewModel.MyScore = new UserNetworkSizeScoreViewModel
+                    {
+                        Position = MyScore.Position,
+                        UserEmail = MyScore.UserEmail,
+                        UserName = MyScore.UserName,
+                        UserSurname = MyScore.UserSurname,
+                        UserNetworkSize = MyScore.UserNetworkSize
+                    };
+                }
+                else
+                {
+                    Top10ViewModel.HasScore = false;
+                }
+
+            }
+
+            return PartialView(Top10ViewModel);
+        }
+
+        public ActionResult Top10UserNetworkStrengthLeaderboard()
+        {
+            ICollection<UserNetworkStrengthScore> ServiceScores = Proxy.GetPaginatedUsersNetworkStrengthScores(10, 1);
+            Top10UserNetworkStrongestLeaderBoardViewModel Top10ViewModel = new Top10UserNetworkStrongestLeaderBoardViewModel();
+
+            Top10ViewModel.IsInTopTen = false;
+
+            foreach (UserNetworkStrengthScore Score in ServiceScores)
+            {
+                UserNetworkStrengthScoreViewModel ScoreVM = new UserNetworkStrengthScoreViewModel
+                {
+                    Position = Score.Position,
+                    UserEmail = Score.UserEmail,
+                    UserName = Score.UserName,
+                    UserSurname = Score.UserSurname,
+                    UserNetworkAverageStrength = Score.UserNetworkStrength
+                };
+
+                if (ScoreVM.UserEmail == User.Identity.Name)
+                {
+                    Top10ViewModel.IsInTopTen = true;
+                    Top10ViewModel.HasScore = true;
+                    Top10ViewModel.MyScore = ScoreVM;
+                }
+
+                Top10ViewModel.Scores.Add(ScoreVM);
+            }
+
+            if (!Top10ViewModel.IsInTopTen)
+            {
+                UserNetworkSizeScore MyScore = Proxy.GetUserNetworkSizeScore(new User { Email = User.Identity.Name });
+                if (MyScore != null)
+                {
+                    Top10ViewModel.HasScore = true;
+                    Top10ViewModel.MyScore = new UserNetworkStrengthScoreViewModel
+                    {
+                        Position = MyScore.Position,
+                        UserEmail = MyScore.UserEmail,
+                        UserName = MyScore.UserName,
+                        UserSurname = MyScore.UserSurname,
+                        UserNetworkAverageStrength = MyScore.UserNetworkSize
+                    };
+                }
+                else
+                {
+                    Top10ViewModel.HasScore = false;
+                }
+
+            }
+
+            return PartialView(Top10ViewModel);
+        }
     }
 }

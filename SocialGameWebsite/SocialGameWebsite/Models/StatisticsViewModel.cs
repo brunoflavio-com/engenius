@@ -48,4 +48,46 @@ namespace SocialGameWebsite.Models
         public bool IsInTopTen { get; set; }
         public UserScoreViewModel MyScore{get;set;}
     }
+
+    public class UserNetworkSizeScoreViewModel
+    {
+        public int Position { get; set; }
+        public string UserEmail { get; set; }
+        public string UserName { get; set; }
+        public string UserSurname { get; set; }
+        public int UserNetworkSize { get; set; }
+    }
+
+    public class Top10UserNetworkSizeLeaderBoardViewModel
+    {
+        public Top10UserNetworkSizeLeaderBoardViewModel()
+        {
+            Scores = new List<UserNetworkSizeScoreViewModel>();
+        }
+        public ICollection<UserNetworkSizeScoreViewModel> Scores { get; set; }
+        public bool HasScore { get; set; }
+        public bool IsInTopTen { get; set; }
+        public UserNetworkSizeScoreViewModel MyScore { get; set; }
+    }
+
+    public class UserNetworkStrengthScoreViewModel
+    {
+        public int Position { get; set; }
+        public string UserEmail { get; set; }
+        public string UserName { get; set; }
+        public string UserSurname { get; set; }
+        public double UserNetworkAverageStrength { get; set; }
+    }
+
+    public class Top10UserNetworkStrongestLeaderBoardViewModel
+    {
+        public Top10UserNetworkStrongestLeaderBoardViewModel()
+        {
+            Scores = new List<UserNetworkStrengthScoreViewModel>();
+        }
+        public ICollection<UserNetworkStrengthScoreViewModel> Scores { get; set; }
+        public bool HasScore { get; set; }
+        public bool IsInTopTen { get; set; }
+        public UserNetworkStrengthScoreViewModel MyScore { get; set; }
+    }
 }
