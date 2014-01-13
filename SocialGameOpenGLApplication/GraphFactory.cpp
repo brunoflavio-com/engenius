@@ -241,8 +241,9 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 			user->surname = *ns5__user->Surname;
 		}
 		user->humor = graphObj->getHumorStatus(*ns5__user->HumourStatusId);
-		for (int i = 0; i < graph->Users->User.at(i)->InterestsIDs->int_.size(); i++){
-			UserTag * userTag = graphObj->getUserTag(graph->Users->User.at(i)->InterestsIDs->int_.at(i));
+
+		for (int i = 0; i < ns5__user->InterestsIDs->int_.size(); i++){
+			UserTag * userTag = graphObj->getUserTag(ns5__user->InterestsIDs->int_.at(i));
 			user->userTags.push_back(userTag);
 		}
 

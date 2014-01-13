@@ -26,7 +26,7 @@ void graphCoordWalker::walk(User * graph){
 }
 
 void graphCoordWalker::walkVertice(User * user){
-	user->size = maxUserTags / user->userTags.size() * SPHERE_RADIUS;
+	user->size = (user->userTags.size() + 1)/(maxUserTags + 1) * SPHERE_RADIUS;
 }
 
 void graphCoordWalker::walkConnection(User * userA, Relationship * relationship, int position, int total){
