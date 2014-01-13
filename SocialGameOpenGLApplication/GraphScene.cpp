@@ -205,7 +205,7 @@ void GraphScene::Timer(int value){
 	{
 		isMessageActive = false;
 	}
-	
+
 		if (KeyStatus.up){
 			PersonCam.vel = 0.1;
 			CamMovement();

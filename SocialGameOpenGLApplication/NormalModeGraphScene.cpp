@@ -7,6 +7,9 @@
 #include "MazeScene.h"
 #include "IMinigame.h"
 
+
+
+
 NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level) :GraphScene(client, loginEmail)
 {
 	gameOn = false;
@@ -84,16 +87,26 @@ void NormalModeGraphScene::SpecialKeyUp(int key, int x, int y)
 }
 
 void NormalModeGraphScene::Timer(int value){
-
+	glTime = value;
 	/*Testar o interface IMinigame com o maze*/
 	if (gameOn)
 	{
 		IMinigame* teste = dynamic_cast<IMinigame*>(game);
-		if (teste != 0)
+		if (teste != NULL)
 		{
 			if (bool over = teste->isOver()){
-				bool winner = teste->isWinner();
-				float points = teste->getPoints();
+				gameOn = false;
+				if (teste->isWinner()){
+					float points = (int) teste->getPoints();
+					createMessage("You won the mini-game and got " + to_string((int) points) + " points");
+					userPoints += points;
+					apiClient->setUserLevel(userPoints);
+				}
+				else{
+					createMessage("oh... you lost the mini-game");
+					advanceToNextVertice();
+				}
+				
 			}
 		}
 	}
@@ -113,7 +126,10 @@ void NormalModeGraphScene::PassiveMotion(int x, int y) {
 	GraphScene::PassiveMotion(x, y);
 }
 
-void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
+void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
+	this->previousUser = previousUser;
+	this->nextUser = nextUser;
+
 	Relationship * relationship = graph->getRelationship(previousUser, nextUser);
 
 	if (relationship == NULL)
@@ -130,7 +146,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
 
 	//generate random user response
 	srand(time(0));
-	int userDecision = rand()%3;
+	int userDecision = rand() % 3;
 	userDecision = 2;
 	int randomGame;
 	switch (userDecision){
@@ -138,7 +154,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
 		//User rejects introduction
 		createMessage("User " + nextUser->email + "has rejected to introduce you");
 		break;
-		
+
 	case 1:
 		//User asks for game to be played in order to accept introduction
 		//Random Game
@@ -147,30 +163,35 @@ void NormalModeGraphScene::verticeClicked(User * previousUser,User * nextUser ){
 		break;
 		randomGame = rand() % 2;
 		switch (randomGame){
-			case 0:
-				game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
-			case 1:
-				game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
-			case 2:
-				game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,2);
+		case 0:
+			game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
+		case 1:
+			game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
+		case 2:
+			game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email, 2);
 		}
 		gameOn = true;
 		break;
-		
+
 	case 2:
 		//User accepts introduction
-		if (nextUser == targetUser)
-		{
-			selectedObject = NULL;
-			isFinished = true;
-			returningMessage = "Congratulations you achieved your mission";
-		}
-		else{
-			createMessage("User " + nextUser->email + "has accepted to introduce you");
-			graph->movetoVertice(nextUser);
-		}
+		advanceToNextVertice();
 		break;
 	}
-	
+}
+void NormalModeGraphScene::advanceToNextVertice(){
+	if (nextUser == targetUser)
+	{	//Update user Level
+		userLevel++;
+		apiClient->setUserLevel(userLevel);
+		//Return to adnvance mode with congratulations message
+		selectedObject = NULL;
+		isFinished = true;
+		returningMessage = "Congratulations you achieved your mission";
+	}
+	else{
+		createMessage("User " + nextUser->email + "has accepted to introduce you");
+		graph->movetoVertice(nextUser);
+	}
 }
 

@@ -21,14 +21,12 @@ private:
 	string message;
 	int messageUpdateTime;
 	bool isMessageActive;
-	atomic<int> glTime;
 	
-
 protected: 
 	bool isSubWindowsActive;
 	Graph * graph;
 	ISelectable * selectedObject = NULL;
-
+	atomic<int> glTime;
 public:
 	bool isFinished;
 	bool returningToGame;
