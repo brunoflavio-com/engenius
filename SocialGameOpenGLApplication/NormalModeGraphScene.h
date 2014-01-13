@@ -20,6 +20,9 @@ private:
 	vector<Relationship *> strongestPath;
 	void toggleShortestPath();
 
+	User * previousUser;
+	User * nextUser;
+
 public:
 
 	NormalModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail, int level);
@@ -35,6 +38,7 @@ public:
 
 	void PassiveMotion(int x, int y);
 	void verticeClicked(User * previousUser, User * nextUser);
+	void advanceToNextVertice();
 
 	Graph * getGraph(std::string loginEmail ,int level);
 

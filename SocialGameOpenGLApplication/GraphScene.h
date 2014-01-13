@@ -14,19 +14,19 @@ class GraphScene :
 	public IBothWindowsScene
 {
 private:
+
+
 	ISelectable * pickISelectable( int x, int y);
 	
 	string message;
 	int messageUpdateTime;
 	bool isMessageActive;
-	atomic<int> glTime;
 	
-
 protected: 
 	bool isSubWindowsActive;
 	Graph * graph;
 	ISelectable * selectedObject = NULL;
-
+	atomic<int> glTime;
 public:
 	bool isFinished;
 	bool returningToGame;
@@ -36,7 +36,6 @@ public:
 	float userPoints;
 	string email;
 	string name;
-	
 	SocialGamePublicAPIClient * apiClient;
 
 	GraphScene(SocialGamePublicAPIClient *, string loginEmail);
@@ -72,7 +71,7 @@ public:
 	void Mouse(int button, int state, int x, int y);
 
 	bool ColisionTest(GLdouble newx, GLdouble newy, GLdouble newz);
-
+	void drawPositionIndications(int numberOfIndications,GLfloat colors[][4], const unsigned char textIndications[][20]);
 	virtual Graph * getGraph(std::string loginEmail, int level) = 0;
 	virtual void verticeClicked(User * previousUser, User * nextUser) = 0;
 	void getUserPointsAndLevel();

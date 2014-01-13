@@ -105,6 +105,18 @@ namespace SocialGameBLL
         ICollection<UserScore> GetPaginatedUsersScores(int ElementsPerPage, int PageNumber);
 
         [OperationContract]
+        ICollection<UserNetworkSizeScore> GetPaginatedUsersNetworkSizeScores(int ElementsPerPage, int PageNumber);
+
+        [OperationContract]
+        ICollection<UserNetworkStrengthScore> GetPaginatedUsersNetworkStrengthScores(int ElementsPerPage, int PageNumber);
+
+        [OperationContract]
+        UserNetworkSizeScore GetUserNetworkSizeScore(User Me);
+
+        [OperationContract]
+        UserNetworkStrengthScore GetUserNetworkStrengthScore(User Me);
+
+        [OperationContract]
         UserScore GetUserScore(User User);
     }
 

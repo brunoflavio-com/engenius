@@ -22,6 +22,8 @@ public:
 	std::vector<string> getCategories(int numberOfCategories);
 	std::string getWord(string category);
 	std::string getMazeMap(int level);
+	void setUserPoints(float points);
+	void setUserLevel(int level);
 	~SocialGamePublicAPIClient();
 };
 

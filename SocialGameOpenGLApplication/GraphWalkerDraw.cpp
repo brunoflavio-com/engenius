@@ -83,7 +83,10 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 		glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 		gluQuadricDrawStyle(quadric, GLU_FILL);
+		//glEnable(GL_BLEND);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		gluCylinder(quadric, relationship->cylinderRadius, relationship->cylinderRadius, distance, 30, 3);
+		//glDisable(GL_BLEND);
 	    glPopAttrib();
 	glPopMatrix();
 
@@ -134,33 +137,45 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	glLoadName((GLuint)ISelectable::USER_TYPE);
 	glPushName((GLuint)userA->glId);
 
-	//glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 	gluQuadricDrawStyle(quadric, GLU_FILL);
 
-	//float modelview[16];
-	//int i, j;
-	//glPushMatrix();
-	//glGetFloatv(GL_MODELVIEW_MATRIX, modelview);
-	//for (i = 0; i<3; i++)
-	//for (j = 0; j<3; j++) {
-	//if (i == j)
-	//modelview[i * 4 + j] = 1.0;
-	//else
-	//modelview[i * 4 + j] = 0.0;
-	//}
-	//glLoadMatrixf(modelview);
+	float modelview[16];
+	int i, j;
+	glPushMatrix();
+	glGetFloatv(GL_MODELVIEW_MATRIX, modelview);
+	for (i = 0; i<3; i++)
+	for (j = 0; j<3; j++) {
+	if (i == j)
+	modelview[i * 4 + j] = 1.0;
+	else
+	modelview[i * 4 + j] = 0.0;
+	}
+	glLoadMatrixf(modelview);
 
 	//glPopMatrix();
-
-	//gluQuadricNormals(quadric, GLU_SMOOTH);
-	//gluQuadricTexture(quadric, GL_TRUE);
+	
+	gluQuadricNormals(quadric, GLU_SMOOTH);
+	gluQuadricTexture(quadric, GL_TRUE);
 
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
 
-	//glPopMatrix();
+	/*glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.0, 0.0, 0.0);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(10.0, 0.0, 0.0);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(10.0, 10.0, 0.0);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(0.0, 10.0, 0.0);
+	glEnd();*/
+
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 
 	gluDeleteQuadric(quadric);
 	glPopAttrib();

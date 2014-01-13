@@ -61,6 +61,9 @@ void GraphScene::getUserPointsAndLevel(){
 	int level;
 	float points;
 	apiClient->getUserGameInfo(level, points);
+	if (level == 0){
+		level++;
+	}
 	this->userLevel = level;
 	this->userPoints = points;
 
@@ -115,7 +118,7 @@ void GraphScene::Draw(void){
 			alpha = ((MESSAGE_DURATION - 2 * MESSAGE_FADEOUT_DURATION) - (glTime - messageUpdateTime)) / MESSAGE_FADEOUT_DURATION;
 		}
 		glColor4f(255.0, 255.0, 255.0, alpha);
-		glRasterPos2d(0, -0.9);
+		glRasterPos2d(0.6, -0.8);
 		unsigned char s[100];
 		strcpy((char*)s, message.c_str());
 		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
@@ -124,37 +127,25 @@ void GraphScene::Draw(void){
 
 	//Draw Selected Object
 
-
 	if (selectedObject != NULL && selectedObject->selected){
 		unsigned char s[500];
 		string selectedObjectInformation = selectedObject->toString();
 		glColor4f(255.0, 255.0, 255.0, 0.7f);
 		glRasterPos2d(0.6, 0.9);
 		strcpy((char*)s, selectedObjectInformation.c_str());
-		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
 	}
 
-	//desenha circulo indicativos 
+	//Draw user game information - points and level
 
-	GLfloat colors[3][4] = {
-		{ 0.0, 0.0, 1.0, 0.7 },
-		{ 0.0, 1.0, 0.0, 0.7 },
-		{ 1.0, 1.0, 0.0, 0.7 },
-		};
-					
-	unsigned char textIndications[3][20] = { "You are here", "Mission Target", "You" };
-	
-	float radius = 0.05;
-	for (int y = 0; y < 3; y++){
-		glBegin(GL_POLYGON);
-		glColor4f(colors[y][0], colors[y][1], colors[y][2], colors[y][3]);
-		for (double i = 0; i < 2 * M_PI; i += M_PI / 50)
-			glVertex2f(-1 + cos(i) * radius, -0.5 -(y*0.13)+ sin(i) * radius);
-		glEnd();
+		unsigned char s[500];
+		string userGameInfo = "Level: " + to_string(userLevel) + "\n" +
+			"Points: " + to_string((int) userPoints);
 		glColor4f(255.0, 255.0, 255.0, 0.7f);
-		glRasterPos2d(-0.9, -0.52 - (y*0.13));
-		glutBitmapString(GLUT_BITMAP_HELVETICA_12, textIndications[y]);
-	}
+		glRasterPos2d(-0.91, 0.9);
+		strcpy((char*)s, userGameInfo.c_str());
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
+	
 
 	DrawOverlay();
 	// ropõe estado
@@ -171,6 +162,20 @@ void GraphScene::Draw(void){
 	glutSwapBuffers();
 	glFlush();
 
+}
+
+void GraphScene::drawPositionIndications(int numberOfIndications, GLfloat colors[][4], const unsigned char textIndications[][20]){
+	float radius = 0.05;
+	for (int y = 0; y < numberOfIndications; y++){
+		glBegin(GL_POLYGON);
+		glColor4f(colors[y][0], colors[y][1], colors[y][2], colors[y][3]);
+		for (double i = 0; i < 2 * M_PI; i += M_PI / 50)
+			glVertex2f(-0.9 + cos(i) * radius, -0.6 - (y*0.13) + sin(i) * radius);
+		glEnd();
+		glColor4f(255.0, 255.0, 255.0, 0.7f);
+		glRasterPos2d(-0.8, -0.62 - (y*0.13));
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, textIndications[y]);
+	}
 }
 
 void GraphScene::createMessage(std::string message){
@@ -211,13 +216,13 @@ void GraphScene::Timer(int value){
 	{
 		isMessageActive = false;
 	}
-	
+	if (glutGet(GLUT_WINDOW_WIDTH)>200){
 		if (KeyStatus.up){
-			PersonCam.vel = 0.1;
+			PersonCam.vel = 0.3;
 			CamMovement();
 		}
 		if (KeyStatus.down){
-			PersonCam.vel = -0.1;
+			PersonCam.vel = -0.3;
 			CamMovement();
 		}
 		if (KeyStatus.left){
@@ -226,6 +231,7 @@ void GraphScene::Timer(int value){
 		if (KeyStatus.right){
 			PersonCam.dir_long -= M_PI*0.001;
 		}
+	}
 }
 
 void GraphScene::Key(unsigned char key, int x, int y){
@@ -361,7 +367,7 @@ bool GraphScene::ColisionTest(GLdouble newx, GLdouble newy, GLdouble newz){
 	glLoadIdentity();
 	glGetIntegerv(GL_VIEWPORT, viewport);
 	glLoadIdentity();
-	glOrtho(-2.5, 2.5, -2.5, 2.5, 0.0, 2.5);
+	glOrtho(-2.5, 2.5, -2.5, 2.5, 0.0, 2.0);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
