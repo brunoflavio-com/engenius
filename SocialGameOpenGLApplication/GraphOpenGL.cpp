@@ -149,7 +149,7 @@ void GraphOpenGL::Timer(int value){
 	}
 	currentScene->Timer(value);
 	redisplayAll();
-	glutTimerFunc(20, Timer, 0);
+	glutTimerFunc(20, Timer, value+1);
 
 }
 
