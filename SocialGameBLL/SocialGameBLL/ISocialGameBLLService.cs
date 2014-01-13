@@ -118,6 +118,12 @@ namespace SocialGameBLL
 
         [OperationContract]
         UserScore GetUserScore(User User);
+
+        [OperationContract]
+        void LogDownload(string UserEmail, string ip);
+
+        [OperationContract]
+        int GetTotalNumberOfDownloads();
     }
 
 

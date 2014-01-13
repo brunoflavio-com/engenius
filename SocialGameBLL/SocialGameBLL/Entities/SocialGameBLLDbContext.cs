@@ -18,6 +18,7 @@ namespace SocialGameBLL.Entities
         public DbSet<InterestEntity> Interests { get; set; }
         public DbSet<HumourStatusEntity> HumourStatus { get; set; }
         public DbSet<RelationTagEntity> RelationTags { get; set; }
+        public DbSet<DownloadLogEntity> Downloads { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
