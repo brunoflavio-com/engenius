@@ -122,7 +122,6 @@ void GraphWalkerDraw::walkVertice(User * userA){
 
 	if (userA->selected) {
 		color = red;
-
 		if (drawUserNames){
 			glDisable(GL_LIGHTING);
 			glColor3ub(255, 255, 255);
@@ -136,8 +135,8 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	glEnable(GL_TEXTURE_2D);
 	glLoadName((GLuint)ISelectable::USER_TYPE);
 	glPushName((GLuint)userA->glId);
-
-	glBindTexture(GL_TEXTURE_2D, 0);
+	
+	glBindTexture(GL_TEXTURE_2D, userA->humor->id);
 
 	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
@@ -156,23 +155,13 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	}
 	glLoadMatrixf(modelview);
 
+	glRotatef(-90, 1, 0, 0); // need to rotate to apply the texture properly on the sphere
 	//glPopMatrix();
 	
 	gluQuadricNormals(quadric, GLU_SMOOTH);
 	gluQuadricTexture(quadric, GL_TRUE);
 
 	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
-
-	/*glBegin(GL_QUADS);
-	glTexCoord2f(0.0, 0.0);
-	glVertex3f(0.0, 0.0, 0.0);
-	glTexCoord2f(1.0, 0.0);
-	glVertex3f(10.0, 0.0, 0.0);
-	glTexCoord2f(1.0, 1.0);
-	glVertex3f(10.0, 10.0, 0.0);
-	glTexCoord2f(0.0, 1.0);
-	glVertex3f(0.0, 10.0, 0.0);
-	glEnd();*/
 
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
