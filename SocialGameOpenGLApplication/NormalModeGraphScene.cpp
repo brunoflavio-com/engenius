@@ -109,9 +109,10 @@ void NormalModeGraphScene::Timer(int value){
 				
 			}
 		}
+		return game->Timer(value);
 	}
 
-	if (gameOn) return game->Timer(value);
+	 
 	GraphScene::Timer(value);
 	if (returningToGame)
 	{
@@ -158,7 +159,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 	case 1:
 		//User asks for game to be played in order to accept introduction
 		//Random Game
-		createMessage("User " + nextUser->email + " asked you to play a game");
+		createMessage("User " + nextUser->email + "\nasked you to play a game");
 		//Debug
 		break;
 		randomGame = rand() % 2;
@@ -179,6 +180,8 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 		break;
 	}
 }
+
+
 void NormalModeGraphScene::advanceToNextVertice(){
 	if (nextUser == targetUser)
 	{	//Update user Level
@@ -190,7 +193,7 @@ void NormalModeGraphScene::advanceToNextVertice(){
 		returningMessage = "Congratulations you achieved your mission";
 	}
 	else{
-		createMessage("User " + nextUser->email + "has accepted to introduce you");
+		createMessage("User " + nextUser->email + "\nhas accepted to introduce you");
 		graph->movetoVertice(nextUser);
 	}
 }

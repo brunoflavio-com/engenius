@@ -118,7 +118,7 @@ void GraphScene::Draw(void){
 			alpha = ((MESSAGE_DURATION - 2 * MESSAGE_FADEOUT_DURATION) - (glTime - messageUpdateTime)) / MESSAGE_FADEOUT_DURATION;
 		}
 		glColor4f(255.0, 255.0, 255.0, alpha);
-		glRasterPos2d(0, -0.9);
+		glRasterPos2d(0.6, -0.8);
 		unsigned char s[100];
 		strcpy((char*)s, message.c_str());
 		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
@@ -127,17 +127,25 @@ void GraphScene::Draw(void){
 
 	//Draw Selected Object
 
-
 	if (selectedObject != NULL && selectedObject->selected){
 		unsigned char s[500];
 		string selectedObjectInformation = selectedObject->toString();
 		glColor4f(255.0, 255.0, 255.0, 0.7f);
 		glRasterPos2d(0.6, 0.9);
 		strcpy((char*)s, selectedObjectInformation.c_str());
-		glutBitmapString(GLUT_BITMAP_HELVETICA_18, s);
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
 	}
 
-	//desenha circulo indicativos 
+	//Draw user game information - points and level
+
+		unsigned char s[500];
+		string userGameInfo = "Level: " + to_string(userLevel) + "\n" +
+			"Points: " + to_string((int) userPoints);
+		glColor4f(255.0, 255.0, 255.0, 0.7f);
+		glRasterPos2d(-0.91, 0.9);
+		strcpy((char*)s, userGameInfo.c_str());
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
+	
 
 	DrawOverlay();
 	// ropõe estado
@@ -162,10 +170,10 @@ void GraphScene::drawPositionIndications(int numberOfIndications, GLfloat colors
 		glBegin(GL_POLYGON);
 		glColor4f(colors[y][0], colors[y][1], colors[y][2], colors[y][3]);
 		for (double i = 0; i < 2 * M_PI; i += M_PI / 50)
-			glVertex2f(-1 + cos(i) * radius, -0.5 - (y*0.13) + sin(i) * radius);
+			glVertex2f(-0.9 + cos(i) * radius, -0.6 - (y*0.13) + sin(i) * radius);
 		glEnd();
 		glColor4f(255.0, 255.0, 255.0, 0.7f);
-		glRasterPos2d(-0.9, -0.52 - (y*0.13));
+		glRasterPos2d(-0.8, -0.62 - (y*0.13));
 		glutBitmapString(GLUT_BITMAP_HELVETICA_12, textIndications[y]);
 	}
 }
