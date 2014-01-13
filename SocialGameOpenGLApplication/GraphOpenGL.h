@@ -12,6 +12,7 @@
 #include "SocialGamePublicAPIClient.h"
 #include "GraphScene.h"
 #include <AL/alut.h>
+#include <AL/GLAux.h>
 
 class GraphScene;
 
