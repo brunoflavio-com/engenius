@@ -19,7 +19,12 @@ void AdvanceModeGraphScene::Draw3dObjects(void){
 }
 
 void AdvanceModeGraphScene::DrawOverlay(void){
-	
+	GLfloat colors[2][4] = {
+		{ 1.0, 1.0, 0.0, 0.7 },
+		{ 0.0, 0.0, 1.0, 0.7 }
+	};
+	unsigned char textIndications[2][20] = { "You", "Current position"};
+	drawPositionIndications(2, colors, textIndications);
 }
 
 Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail ,int level){

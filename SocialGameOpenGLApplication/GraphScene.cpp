@@ -136,26 +136,6 @@ void GraphScene::Draw(void){
 
 	//desenha circulo indicativos 
 
-	GLfloat colors[3][4] = {
-		{ 0.0, 0.0, 1.0, 0.7 },
-		{ 0.0, 1.0, 0.0, 0.7 },
-		{ 1.0, 1.0, 0.0, 0.7 },
-		};
-					
-	unsigned char textIndications[3][20] = { "You are here", "Mission Target", "You" };
-	
-	float radius = 0.05;
-	for (int y = 0; y < 3; y++){
-		glBegin(GL_POLYGON);
-		glColor4f(colors[y][0], colors[y][1], colors[y][2], colors[y][3]);
-		for (double i = 0; i < 2 * M_PI; i += M_PI / 50)
-			glVertex2f(-1 + cos(i) * radius, -0.5 -(y*0.13)+ sin(i) * radius);
-		glEnd();
-		glColor4f(255.0, 255.0, 255.0, 0.7f);
-		glRasterPos2d(-0.9, -0.52 - (y*0.13));
-		glutBitmapString(GLUT_BITMAP_HELVETICA_12, textIndications[y]);
-	}
-
 	DrawOverlay();
 	// ropõe estado
 	glDisable(GL_BLEND);
@@ -171,6 +151,20 @@ void GraphScene::Draw(void){
 	glutSwapBuffers();
 	glFlush();
 
+}
+
+void GraphScene::drawPositionIndications(int numberOfIndications, GLfloat colors[][4], const unsigned char textIndications[][20]){
+	float radius = 0.05;
+	for (int y = 0; y < numberOfIndications; y++){
+		glBegin(GL_POLYGON);
+		glColor4f(colors[y][0], colors[y][1], colors[y][2], colors[y][3]);
+		for (double i = 0; i < 2 * M_PI; i += M_PI / 50)
+			glVertex2f(-1 + cos(i) * radius, -0.5 - (y*0.13) + sin(i) * radius);
+		glEnd();
+		glColor4f(255.0, 255.0, 255.0, 0.7f);
+		glRasterPos2d(-0.9, -0.52 - (y*0.13));
+		glutBitmapString(GLUT_BITMAP_HELVETICA_12, textIndications[y]);
+	}
 }
 
 void GraphScene::createMessage(std::string message){

@@ -40,13 +40,14 @@ void NormalModeGraphScene::DrawOverlay(void){
 
 	if (gameOn) return game->DrawOverlay();
 
-		/*glBegin(GL_TRIANGLE_FAN);
-		glVertex2f(0.5, 0.5);
-		for (int n = 0; n <= 50; ++n) {
-			float const t = 2 * M_PI*(float)n / (float)50;
-			glVertex2f(0.5 + sin(t)*0.2, 0.5 + cos(t)*0.5);
-		}
-		*/
+	GLfloat colors[3][4] = {
+		{ 1.0, 1.0, 0.0, 0.7 },
+		{ 0.0, 0.0, 1.0, 0.7 },
+		{ 0.0, 1.0, 0.0, 0.7 }
+	};
+
+	unsigned char textIndications[3][20] = { "You", "Current position", "Mission Target" };
+	drawPositionIndications(3, colors, textIndications);
 }
 
 void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
