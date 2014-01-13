@@ -1395,6 +1395,18 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetUserScore", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetUserScoreResponse")]
         System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.UserScore> GetUserScoreAsync(SocialGameWebsite.SocialGameBLLService.User User);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/LogDownload", ReplyAction="http://tempuri.org/ISocialGameBLLService/LogDownloadResponse")]
+        void LogDownload(string UserEmail, string ip);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/LogDownload", ReplyAction="http://tempuri.org/ISocialGameBLLService/LogDownloadResponse")]
+        System.Threading.Tasks.Task LogDownloadAsync(string UserEmail, string ip);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfDownloads", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfDownloadsResponse")]
+        int GetTotalNumberOfDownloads();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfDownloads", ReplyAction="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfDownloadsResponse")]
+        System.Threading.Tasks.Task<int> GetTotalNumberOfDownloadsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1766,6 +1778,22 @@ namespace SocialGameWebsite.SocialGameBLLService {
         
         public System.Threading.Tasks.Task<SocialGameWebsite.SocialGameBLLService.UserScore> GetUserScoreAsync(SocialGameWebsite.SocialGameBLLService.User User) {
             return base.Channel.GetUserScoreAsync(User);
+        }
+        
+        public void LogDownload(string UserEmail, string ip) {
+            base.Channel.LogDownload(UserEmail, ip);
+        }
+        
+        public System.Threading.Tasks.Task LogDownloadAsync(string UserEmail, string ip) {
+            return base.Channel.LogDownloadAsync(UserEmail, ip);
+        }
+        
+        public int GetTotalNumberOfDownloads() {
+            return base.Channel.GetTotalNumberOfDownloads();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetTotalNumberOfDownloadsAsync() {
+            return base.Channel.GetTotalNumberOfDownloadsAsync();
         }
     }
 }
