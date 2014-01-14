@@ -131,11 +131,11 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		    userB = graph->users.at(rand() % graph->users.size());
 			//Checking if Relationship already exists
 			
-			if (abs(userA->graphLevel - userB->graphLevel) != 2)
+			/*if (abs(userA->graphLevel - userB->graphLevel) != 2)
 			{
 				userA = userB = NULL;
 				continue;
-			}
+			}*/
 
 
 			for each(Relationship * r in graph->relationShips){

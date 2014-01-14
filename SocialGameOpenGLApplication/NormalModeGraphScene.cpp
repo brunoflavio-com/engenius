@@ -117,10 +117,11 @@ void NormalModeGraphScene::Timer(int value){
 				else{
 					createMessage("oh... you lost the mini-game");					
 				}
-				//delete teste;
+			}
+			else {
+				game->Timer(value);
 			}
 		}
-		return game->Timer(value);
 	}
 
 	 

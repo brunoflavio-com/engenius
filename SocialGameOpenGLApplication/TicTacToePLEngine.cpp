@@ -5,6 +5,7 @@
 TicTacToePLEngine::TicTacToePLEngine(char symbolFirstPlayer)
 {
 	prolog = this->prolog = PrologEngine::getInstance().getEngine();
+	clear();
 
 	plSetFirstPlayer(symbolFirstPlayer);
 	status = -1;
