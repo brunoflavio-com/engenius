@@ -3,7 +3,7 @@
 
 PrologEngine::PrologEngine()
 {
-	char* argv[] = { "libswipl.dll", "-s", "graph.pl", NULL };
+	char* argv[] = { "libswipl.dll", "-s", "SocialGameClient.pl", NULL };
 	swiprolog = new PlEngine(3, argv);
 }
 

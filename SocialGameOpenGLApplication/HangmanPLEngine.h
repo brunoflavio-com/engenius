@@ -26,6 +26,8 @@ public:
 	//play guess 
 	void play(char attempt);
 
+	//clear data
+	void clear();
 
 private:
 	PlEngine * prolog;

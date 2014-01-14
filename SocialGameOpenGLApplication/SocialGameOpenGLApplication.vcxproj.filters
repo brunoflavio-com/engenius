@@ -240,6 +240,11 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="graph.pl" />
+    <None Include="graph.pl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SocialGameClient.pl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

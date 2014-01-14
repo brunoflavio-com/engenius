@@ -21,7 +21,7 @@ void GraphPLEngine::loadGraph(Graph * graph)
 
 void GraphPLEngine::clearRelationships() {
 	
-	PlQuery	plClear("clear", NULL);
+	PlQuery	plClear("cleargraph", NULL);
 	plClear.next_solution();
 
 }

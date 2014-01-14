@@ -1,3 +1,6 @@
+:-dynamic(node/2).
+
+clearmaze:-retractall((node(_,_)).
 
 set_node(L,C):-assertz(node(L,C)).
 

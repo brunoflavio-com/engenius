@@ -1,9 +1,9 @@
 #include "HangmanPLEngine.h"
+#include "PrologEngine.h"
 
 HangmanPLEngine::HangmanPLEngine(int maxRetries, string word)
 {
-	char* argv[] = { "libswipl.dll", "-s", "hangman.pl", NULL };
-	prolog = new PlEngine (3, argv);
+	prolog = this->prolog = PrologEngine::getInstance().getEngine();
 
 	this->maxRetries = maxRetries;
 	setWord(word);
@@ -15,7 +15,14 @@ HangmanPLEngine::HangmanPLEngine(int maxRetries, string word)
 
 HangmanPLEngine::~HangmanPLEngine()
 {
-	delete prolog;
+	clear();
+}
+
+void HangmanPLEngine::clear() {
+
+	PlQuery	plClear("clearhangman", NULL);
+	plClear.next_solution();
+
 }
 
 //play guess and retrive information
