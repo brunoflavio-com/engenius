@@ -1,24 +1,30 @@
 #include "GraphPLEngine.h"
+#include "PrologEngine.h"
 
-
-GraphPLEngine::GraphPLEngine(Graph * graph)
-{
-	char* argv[] = { "libswipl.dll", "-s", "graph.pl", NULL };
-	prolog = new PlEngine(3, argv);
-
-	this->graph = graph;
-
-	for each(Relationship * r in graph->relationShips) {
-		assertRelationship(r->userA->email, r->userB->email, r->strength);
-	}
-	
+GraphPLEngine::GraphPLEngine()
+{	
+	this->prolog = PrologEngine::getInstance().getEngine();	
 }
 
 GraphPLEngine::~GraphPLEngine()
 {
-	delete prolog;
 }
 
+void GraphPLEngine::loadGraph(Graph * graph)
+{
+	clearRelationships();
+	this->graph = graph;
+	for each(Relationship * r in graph->relationShips) {
+		assertRelationship(r->userA->email, r->userB->email, r->strength);
+	}
+}
+
+void GraphPLEngine::clearRelationships() {
+	
+	PlQuery	plClear("cleargraph", NULL);
+	plClear.next_solution();
+
+}
 
 void GraphPLEngine::assertRelationship(string origin, string destination, int strength){
 
@@ -75,8 +81,9 @@ vector<string> GraphPLEngine::getPath(string origin, string destination, string 
 	plFindPath.next_solution();
 
 	vector<string> path;
-	PlTail plPath(plFindPathTerms[2]);
+	PlTail plPath(plFindPathTerms[2]);	
 	PlTerm plNode;
+
 	while (plPath.next(plNode)){
 		path.push_back((char *)plNode);
 	}

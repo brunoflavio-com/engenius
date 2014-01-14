@@ -3,11 +3,14 @@
 #include "SocialGamePublicAPIClient.h"
 #include <string>
 #include <vector>
+#include "GraphPLEngine.h"
 
 class NormalModeGraphScene :
 	public GraphScene
 {
 private:
+	GraphPLEngine pl;
+
 	bool gameOn;
 	IWindowScene * game;
 	User * targetUser;

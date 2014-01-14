@@ -11,9 +11,13 @@
 #define MAX_HEIGHT 5
 GLfloat white[4] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat red[4] = { 1.0, 0.0, 0.0, 1.0 };
+GLfloat violet[4] = { 0.59, 0.37, 1.0, 1.0 };
 GLfloat blue[4] = { 0.0, 0.0, 1.0, 1.0 };
 GLfloat green[4] = { 0.0, 1.0, 0.0, 1.0 };
 GLfloat yellow[4] = { 1.0, 1.0, 0.0, 1.0 };
+GLfloat orange1[4] = { 1.0, 0.2, 0.0, 0.5 };
+GLfloat orange2[4] = { 1.0, 0.5, 0.0, 0.5 };
+GLfloat orange3[4] = { 1.0, 0.33, 0.33, 0.5 };
 
 GraphWalkerDraw::GraphWalkerDraw(bool drawUserNames)
 {	
@@ -71,14 +75,20 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 			quadric = gluNewQuadric();
 		GLfloat * color = white;
 		
-		if (relationship->walked){
-			color = green ;
+		if (relationship->highlightShortest &&
+			relationship->highlightStrongest) {
+			color = orange3;
 		}
-		if (relationship->highlightStrongest){
-			color = yellow;
+		else {
+			if (relationship->highlightShortest){
+				color = orange1;
+			}
+			if (relationship->highlightStrongest){
+				color = orange2;
+			}
 		}
 		if (relationship->walked){
-			color = red;
+			color = violet;
 		}
 		glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);

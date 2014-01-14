@@ -1,11 +1,11 @@
 #include "TicTacToePLEngine.h"
+#include "PrologEngine.h"
 
 
 TicTacToePLEngine::TicTacToePLEngine(char symbolFirstPlayer)
 {
-	char* argv [] = { "libswipl.dll", "-s", "tictactoe.pl", NULL };
+	prolog = this->prolog = PrologEngine::getInstance().getEngine();
 
-	prolog = new PlEngine(3, argv);
 	plSetFirstPlayer(symbolFirstPlayer);
 	status = -1;
 
@@ -19,7 +19,15 @@ TicTacToePLEngine::TicTacToePLEngine(char symbolFirstPlayer)
 
 TicTacToePLEngine::~TicTacToePLEngine()
 {
-	delete prolog;
+	clear();
+}
+
+
+void TicTacToePLEngine::clear() {
+
+	PlQuery	plClear("cleartictactoe", NULL);
+	plClear.next_solution();
+
 }
 
 void TicTacToePLEngine::plSetFirstPlayer(char symbol)

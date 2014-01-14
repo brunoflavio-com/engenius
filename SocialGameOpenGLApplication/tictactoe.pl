@@ -5,6 +5,8 @@
 %% clean the discovered facts out of the database
 :- retractall(game(_,_)). 
 
+cleartictactoe:-rectractall(game(_,_)).
+
 %% set player that will start the game and initialize the board
 %% to represent the game:
 % game([Board,Player]) 

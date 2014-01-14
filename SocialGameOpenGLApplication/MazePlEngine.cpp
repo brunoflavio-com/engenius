@@ -1,19 +1,28 @@
 #include "MazePlEngine.h"
+#include "PrologEngine.h"
 #include <iostream>
 
 using namespace MinigamesMaze;
 
 MazePlEngine::MazePlEngine()
 {
-	char* argv[] = { "libswipl.dll", "-s", "maze.pl", NULL};
-	prolog = new PlEngine(3, argv);
+	prolog = this->prolog = PrologEngine::getInstance().getEngine();
 }
 
 
 MazePlEngine::~MazePlEngine()
 {
-	delete prolog;
+	clear();
 }
+
+
+void MazePlEngine::clear() {
+
+	PlQuery	plClear("clearmaze", NULL);
+	plClear.next_solution();
+
+}
+
 
 void MazePlEngine::setNode(int line, int column)
 {

@@ -132,6 +132,9 @@
     <ClInclude Include="GraphPLEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PrologEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -221,6 +224,9 @@
     <ClCompile Include="GraphPLEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PrologEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="hangman.pl">
@@ -234,6 +240,11 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="graph.pl" />
+    <None Include="graph.pl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SocialGameClient.pl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

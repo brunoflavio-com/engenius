@@ -38,43 +38,41 @@ void GraphOpenGL::Init(){
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
-	
+
 	currentScene->Init();
 
 }
 
 void GraphOpenGL::InitTextures(){
+	string emotionimages[] = { "./images/normal.bmp", "./images/smile.bmp", "./images/sad.bmp" };
+	string skyboximages[] = { "./images/gardenbk.bmp", "./images/gardenlf.bmp", "./images/gardenft.bmp",
+		"./images/gardenrt.bmp", "./images/gardenup.bmp", "./images/gardendn.bmp" };
+
 	AUX_RGBImageRec *imagemBMP;
 
-	imagemBMP = auxDIBImageLoad("./images/normal.bmp");
-	glBindTexture(GL_TEXTURE_2D, 1);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagemBMP->sizeX, imagemBMP->sizeY, GL_RGB, GL_UNSIGNED_BYTE, imagemBMP->data);
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	for (int i = 0; i < 3; i++){
+		imagemBMP = auxDIBImageLoad(emotionimages[i].c_str());
+		glBindTexture(GL_TEXTURE_2D, i + 1);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagemBMP->sizeX, imagemBMP->sizeY, GL_RGB, GL_UNSIGNED_BYTE, imagemBMP->data);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	}
 
-	imagemBMP = auxDIBImageLoad("./images/smile.bmp");
-	glBindTexture(GL_TEXTURE_2D, 2);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagemBMP->sizeX, imagemBMP->sizeY, GL_RGB, GL_UNSIGNED_BYTE, imagemBMP->data);
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
-	imagemBMP = auxDIBImageLoad("./images/sad.bmp");
-	glBindTexture(GL_TEXTURE_2D, 3);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagemBMP->sizeX, imagemBMP->sizeY, GL_RGB, GL_UNSIGNED_BYTE, imagemBMP->data);
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glDisable(GL_TEXTURE_2D);
+	for (int i = 0; i < 6; i++){
+		imagemBMP = auxDIBImageLoad(skyboximages[i].c_str());
+		glBindTexture(GL_TEXTURE_2D, i + 10);
+		glTexParameteri(GL_TEXTURE_BORDER, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_BORDER, GL_TEXTURE_WRAP_T, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, imagemBMP->sizeX, imagemBMP->sizeY, GL_RGB, GL_UNSIGNED_BYTE, imagemBMP->data);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	}
 }
-	
+
 
 void GraphOpenGL::subWindowInit(){
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -132,7 +130,7 @@ void GraphOpenGL::DrawMinimap(){
 
 void GraphOpenGL::Draw(){
 	currentScene->Draw();
-	
+
 }
 
 void GraphOpenGL::redisplayAll(void)
@@ -140,7 +138,7 @@ void GraphOpenGL::redisplayAll(void)
 	glutSetWindow(Window.Main);
 	glutPostRedisplay();
 	glutSetWindow(Window.Top);
-	
+
 	if (currentScene->isSubWindowActive()){
 		glutShowWindow();
 	}
@@ -169,13 +167,13 @@ void GraphOpenGL::Timer(int value){
 	}
 	currentScene->Timer(value);
 	redisplayAll();
-	glutTimerFunc(20, Timer, value+1);
+	glutTimerFunc(20, Timer, value + 1);
 
 }
 
 
 void GraphOpenGL::PrintKeys(){
-	
+
 	printf("Up/Down - Zoom in/out\n");
 	printf("Left/Right - rodar para a esquerda/direita\n");
 	printf("Q/q/A/a - subir/descer\n");
@@ -185,13 +183,13 @@ void GraphOpenGL::PrintKeys(){
 void GraphOpenGL::Key(unsigned char key, int x, int y){
 	if (key == 'c'){
 		//Start Mission
-			normalScene = new NormalModeGraphScene(advanceScene->apiClient, advanceScene->email, advanceScene->userLevel);
-			normalScene->userLevel = advanceScene->userLevel;
-			normalScene->userPoints = advanceScene->userPoints;
-			currentScene = normalScene;
-			currentScene->returningToGame = true;
-			advancedMode = false;
-		}
+		normalScene = new NormalModeGraphScene(advanceScene->apiClient, advanceScene->email, advanceScene->userLevel);
+		normalScene->userLevel = advanceScene->userLevel;
+		normalScene->userPoints = advanceScene->userPoints;
+		currentScene = normalScene;
+		currentScene->returningToGame = true;
+		advancedMode = false;
+	}
 	currentScene->Key(key, x, y);
 }
 
@@ -231,7 +229,7 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 	glutPassiveMotionFunc(PassiveMotion);
 
 	//Minimap Subwindow
-	
+
 	Window.Top = glutCreateSubWindow(Window.Main, GAP, GAP, 200, 200);
 	subWindowInit();
 	glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
@@ -243,5 +241,5 @@ void GraphOpenGL::Run(int argc, char **argv, SocialGamePublicAPIClient * client,
 	glutSpecialUpFunc(SpecialKeyUp);
 	glutMouseFunc(Mouse);
 	glutMainLoop();
-	
+
 }

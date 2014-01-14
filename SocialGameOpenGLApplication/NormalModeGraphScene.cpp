@@ -22,12 +22,10 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 	}
 
 	////
-	GraphPLEngine * pl = new GraphPLEngine(graph);
-	this->shortestPath =  pl->getShortestPath(graph->user, targetUser);
-	this->strongestPath = pl->getStrongestPath(graph->user, targetUser);
-	delete pl;
+	pl.loadGraph(graph);
+	this->shortestPath =  pl.getShortestPath(graph->user, targetUser);
+	this->strongestPath = pl.getStrongestPath(graph->user, targetUser);
 
-	
 	showShortestPath = false;
 	showStrongestPath = false;
 	////
