@@ -131,11 +131,11 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 		    userB = graph->users.at(rand() % graph->users.size());
 			//Checking if Relationship already exists
 			
-			if (abs(userA->graphLevel - userB->graphLevel) != 2)
+			/*if (abs(userA->graphLevel - userB->graphLevel) != 2)
 			{
 				userA = userB = NULL;
 				continue;
-			}
+			}*/
 
 
 			for each(Relationship * r in graph->relationShips){
@@ -294,6 +294,7 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 
 	graphObj->maxConnectionStrenght = maxRelationStrength;
 	graphObj->maxUserConnections = maxUserRelationShips;
+	graphObj->maxUserTags = maxUserTags;
 	graphObj->user = graphObj->getUser(email);
 	graphObj->user->isCenter = true;
 	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);

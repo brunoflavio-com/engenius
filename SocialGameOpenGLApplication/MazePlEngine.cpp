@@ -7,6 +7,7 @@ using namespace MinigamesMaze;
 MazePlEngine::MazePlEngine()
 {
 	prolog = this->prolog = PrologEngine::getInstance().getEngine();
+	clear();
 }
 
 

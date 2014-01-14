@@ -12,10 +12,7 @@ private:
 
 	ISelectable * previousSelectable;
 
-	bool showShortestPath;
 	vector<Relationship *> shortestPath;
-
-	bool showStrongestPath;
 	vector<Relationship *> strongestPath;
 
 	void highlight(bool value);
@@ -30,5 +27,8 @@ public:
 	void Timer(int value);
 	
 	void PassiveMotion(int newx, int newy);
+
+	bool showShortestPath;
+	bool showStrongestPath;
 };
 
