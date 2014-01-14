@@ -91,7 +91,7 @@
   <ItemGroup>
     <ClInclude Include="AdvanceModeGraphScene.h" />
     <ClInclude Include="Graph.h" />
-    <ClInclude Include="graphCoordWalker.h" />
+    <ClInclude Include="GraphPositionWalker.h" />
     <ClInclude Include="GraphOpenGL.h" />
     <ClInclude Include="GraphPLEngine.h" />
     <ClInclude Include="GraphScene.h" />
@@ -99,7 +99,6 @@
     <ClInclude Include="GraphWalkerDraw.h" />
     <ClInclude Include="HangmanPLEngine.h" />
     <ClInclude Include="HangmanScene.h" />
-    <ClInclude Include="Header.h" />
     <ClInclude Include="IBothWindowScene.h" />
     <ClInclude Include="IMinigame.h" />
     <ClInclude Include="InterfaceGL.h" />
@@ -131,7 +130,7 @@
   <ItemGroup>
     <ClCompile Include="AdvanceModeGraphScene.cpp" />
     <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="graphCoordWalker.cpp" />
+    <ClCompile Include="GraphPositionWalker.cpp" />
     <ClCompile Include="GraphOpenGL.cpp" />
     <ClCompile Include="GraphPLEngine.cpp" />
     <ClCompile Include="GraphScene.cpp" />
@@ -162,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram.cd" />
     <None Include="graph.pl" />
     <None Include="hangman.pl" />
     <None Include="maze.pl" />

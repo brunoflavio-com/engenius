@@ -1,7 +1,7 @@
 #pragma once
 #include "IBothWindowScene.h"
 #include "SocialGamePublicAPIClient.h"
-#include "graphCoordWalker.h"
+#include "GraphPositionWalker.h"
 #include "GraphWalkerDraw.h"
 #include "GraphOpenGL.h"
 #include <string>
