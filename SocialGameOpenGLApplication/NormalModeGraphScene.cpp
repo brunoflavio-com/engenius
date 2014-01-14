@@ -117,12 +117,11 @@ void NormalModeGraphScene::Timer(int value){
 					createMessage("You won the mini-game and got " + to_string((int) points) + " points");
 					userPoints += points;
 					apiClient->setUserLevel(userPoints);
+					advanceToNextVertice();
 				}
 				else{
 					createMessage("oh... you lost the mini-game");
-					advanceToNextVertice();
 				}
-				
 			}
 		}
 		return game->Timer(value);
