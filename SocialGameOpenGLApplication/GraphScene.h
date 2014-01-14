@@ -48,6 +48,7 @@ public:
 
 	// Callback de desenho
 	void Draw(void);
+	void DrawSkybox(GLdouble x, GLdouble y, GLdouble z);
 
 	// Callback para interacção via teclado (carregar na tecla)
 	void Key(unsigned char key, int x, int y);
