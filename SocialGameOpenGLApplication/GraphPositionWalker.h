@@ -4,12 +4,12 @@
 #endif
 
 #include "GraphWalker.h"
-class graphCoordWalker :
+class GraphPositionWalker :
 	public GraphWalker
 {
 public:
-	graphCoordWalker(int maxUserRelationships, int maxStregth, int maxUserTags);
-	~graphCoordWalker();
+	GraphPositionWalker(int maxUserRelationships, int maxStregth, int maxUserTags);
+	~GraphPositionWalker();
 	void walkConnection(User * userA, Relationship * relationship, int position, int total);
 	void walkVertice(User * userA);
 	void walk(User * graph);

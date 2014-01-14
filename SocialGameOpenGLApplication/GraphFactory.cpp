@@ -3,7 +3,7 @@
 #include "RelationShip.h"
 #include "RelationShipTag.h"
 #include <vector>
-#include "graphCoordWalker.h"
+#include "GraphPositionWalker.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -195,7 +195,7 @@ Graph * GraphFactory::buildRandomGraph(int graphDepth, std::string email){
 	graph->maxUserConnections = maxUserRelationShips;
 	graph->maxUserTags = maxUserTags;
 
-	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);
+	GraphPositionWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);
 	coordWalker.walk(graph->user);
 	graph->user->isCenter = true;
 	return graph;
@@ -297,7 +297,7 @@ Graph * GraphFactory::convertGraph(ns5__Graph * graph, string email){
 	graphObj->maxUserTags = maxUserTags;
 	graphObj->user = graphObj->getUser(email);
 	graphObj->user->isCenter = true;
-	graphCoordWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);
+	GraphPositionWalker coordWalker(maxUserRelationShips, maxRelationStrength,maxUserTags);
 	coordWalker.walk(graphObj->user);
 	return graphObj;
 

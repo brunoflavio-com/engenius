@@ -69,9 +69,6 @@
     <ClInclude Include="GraphScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="graphCoordWalker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GraphWalker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -97,9 +94,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IWindowScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IBothWindowScene.h">
@@ -133,6 +127,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PrologEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphPositionWalker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -218,13 +215,13 @@
     <ClCompile Include="ISelectable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="graphCoordWalker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GraphPLEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PrologEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphPositionWalker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -246,5 +243,6 @@
     <None Include="SocialGameClient.pl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

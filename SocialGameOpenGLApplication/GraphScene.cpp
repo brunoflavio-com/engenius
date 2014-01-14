@@ -80,7 +80,7 @@ void GraphScene::DrawSkybox(GLdouble x, GLdouble y, GLdouble z){
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, 11);
+	glBindTexture(GL_TEXTURE_2D, 13);
 	glBegin(GL_QUADS);
 	//back face
 	glTexCoord2f(0, 0);
@@ -104,7 +104,7 @@ void GraphScene::DrawSkybox(GLdouble x, GLdouble y, GLdouble z){
 	glTexCoord2f(0, 1);
 	glVertex3f(x - 2, y - 2, z + 2);
 	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 13);
+	glBindTexture(GL_TEXTURE_2D, 11);
 	glBegin(GL_QUADS);
 	//front face
 	glTexCoord2f(0, 0);

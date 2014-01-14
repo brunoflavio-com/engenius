@@ -1,11 +1,11 @@
-#include "graphCoordWalker.h"
+#include "GraphPositionWalker.h"
 #include <iostream>
 
 #define MIN_DIST 7.5
 #define SPHERE_RADIUS 2
 #define MAX_HEIGHT 10
 
-graphCoordWalker::graphCoordWalker(int maxUserRelationships, int maxStregth, int maxUserTags)
+GraphPositionWalker::GraphPositionWalker(int maxUserRelationships, int maxStregth, int maxUserTags)
 {
 	this->maxUserConnections = maxUserRelationships;
 	this->maxStrenght = maxStregth;
@@ -13,11 +13,11 @@ graphCoordWalker::graphCoordWalker(int maxUserRelationships, int maxStregth, int
 }
 
 
-graphCoordWalker::~graphCoordWalker()
+GraphPositionWalker::~GraphPositionWalker()
 {
 }
 
-void graphCoordWalker::walk(User * graph){
+void GraphPositionWalker::walk(User * graph){
 	graph->graphLevel = 0;
 	graph->x = 0;
 	graph->y = 0;
@@ -26,11 +26,11 @@ void graphCoordWalker::walk(User * graph){
 	GraphWalker::walk(graph,-1);
 }
 
-void graphCoordWalker::walkVertice(User * user){
+void GraphPositionWalker::walkVertice(User * user){
 	
 }
 
-void graphCoordWalker::walkConnection(User * userA, Relationship * relationship, int position, int total){
+void GraphPositionWalker::walkConnection(User * userA, Relationship * relationship, int position, int total){
 	User * userB = relationship->getDestinationUser(userA);
 	if (userB->graphLevel == -1){
 		userB->graphLevel = userA->graphLevel + 1;
@@ -62,10 +62,10 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 	relationship->cylinderRadius = SPHERE_RADIUS * 0.75 * relationship->strength / maxStrenght;
 }
 
-int graphCoordWalker::getMaxConnectionStrenght() {
+int GraphPositionWalker::getMaxConnectionStrenght() {
 	return maxStrenght;
 }
 
-int graphCoordWalker::getMaxUserConnections() {
+int GraphPositionWalker::getMaxUserConnections() {
 	return maxUserConnections;
 }
