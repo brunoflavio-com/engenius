@@ -26,8 +26,7 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 	this->shortestPath =  pl.getShortestPath(graph->user, targetUser);
 	this->strongestPath = pl.getStrongestPath(graph->user, targetUser);
 
-	showShortestPath = false;
-	showStrongestPath = false;
+	highlightPath = 0;
 	////
 
 	ALuint buffer, source;
@@ -77,12 +76,10 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,2);
 		gameOn = true;
 	}
-	if (key == 's') {		
-		toggleShortestPath();
+	if (key == 's' || key == 's') {		
+		togglePath();
 	}
-	if (key == 'S') {
-		toggleStrongestPath();
-	}
+
 	GraphScene::Key(key, x, y);
 }
 
@@ -174,8 +171,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 		//User asks for game to be played in order to accept introduction
 
 		this->selectedObject = NULL;
-		this->showShortestPath = false;
-		this->showStrongestPath = false;
+		this->highlightPath = 0;
 
 		//Random Game
 		createMessage("User " + nextUser->email + "\nasked you to play a game");
@@ -221,34 +217,35 @@ void NormalModeGraphScene::advanceToNextVertice(){
 	}
 }
 
-void NormalModeGraphScene::toggleShortestPath() {
-	if (showShortestPath) {
-		showShortestPath = false;
-	}
-	else {		
-		showShortestPath = true;
+void NormalModeGraphScene::togglePath() {
+	highlightPath++;
+	if (highlightPath > 2) highlightPath = 0;
+
+	switch (highlightPath) {
+	default:
+	case 0:
+		for each (Relationship * relationship in strongestPath) {
+			relationship->highlightStrongest = false;
+			createMessage(" ");
+		}
+		break;
+	case 1:
+		for each (Relationship * relationship in shortestPath) {
+			relationship->highlightShortest = true;
+		}
+		for each (Relationship * relationship in strongestPath) {
+			relationship->highlightStrongest = false;
+		}
 		createMessage("Shortest path highlighted.");
-	}
-
-	for each (Relationship * relationship in strongestPath) {
-		relationship->highlightShortest = showShortestPath;
-		relationship->highlightStrongest = false;
-	}
-	
-}
-
-void NormalModeGraphScene::toggleStrongestPath() {
-	
-	if (showStrongestPath) {
-		showStrongestPath = false;
-	}
-	else {
-		showStrongestPath = true;
+		break;
+	case 2:
+		for each (Relationship * relationship in shortestPath) {
+			relationship->highlightShortest = false;
+		}
+		for each (Relationship * relationship in strongestPath) {
+			relationship->highlightStrongest = true;
+		}
 		createMessage("Strongest path highlighted.");
-	}
-
-	for each (Relationship * relationship in strongestPath) {
-		relationship->highlightStrongest = showStrongestPath;
-		relationship->highlightShortest = false;
+		break;
 	}
 }
