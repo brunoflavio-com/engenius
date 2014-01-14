@@ -476,8 +476,7 @@ bool GraphScene::ColisionTest(GLdouble newx, GLdouble newy, GLdouble newz){
 		printf("colisao\n");
 		return true;
 	}
-	else
-		printf("não colisao\n");
+	
 	return false;
 }
 

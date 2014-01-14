@@ -4,6 +4,7 @@
 HangmanPLEngine::HangmanPLEngine(int maxRetries, string word)
 {
 	prolog = this->prolog = PrologEngine::getInstance().getEngine();
+	clear();
 
 	this->maxRetries = maxRetries;
 	setWord(word);
