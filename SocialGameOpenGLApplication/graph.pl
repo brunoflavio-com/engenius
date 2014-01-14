@@ -15,6 +15,8 @@
 insert(UserA, UserB, Strength):-
 	assert(relationship(UserA, UserB, Strength)).
 
+clear:-retractall(relationship(_,_,_)).
+
 %%SHORTEST
 find_shortest_path(UserAEmail, UserBEmail, Path):-
   find_shortest_path1([[UserAEmail]], UserBEmail , InvertedPath),

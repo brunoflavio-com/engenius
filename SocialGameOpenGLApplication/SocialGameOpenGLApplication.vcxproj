@@ -109,6 +109,7 @@
     <ClInclude Include="MazeScene.h" />
     <ClInclude Include="NormalModeGraphScene.h" />
     <ClInclude Include="GraphFactory.h" />
+    <ClInclude Include="PrologEngine.h" />
     <ClInclude Include="RelationShip.h" />
     <ClInclude Include="RelationshipTag.h" />
     <ClInclude Include="gsoapAPIClient\Service1.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="MazeScene.cpp" />
     <ClCompile Include="NormalModeGraphScene.cpp" />
     <ClCompile Include="GraphFactory.cpp" />
+    <ClCompile Include="PrologEngine.cpp" />
     <ClCompile Include="RelationShip.cpp" />
     <ClCompile Include="RelationShipTag.cpp" />
     <ClCompile Include="gsoapAPIClient\soapBasicHttpBinding_USCOREISocialGameServiceProxy.cpp" />
