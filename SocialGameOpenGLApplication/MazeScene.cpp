@@ -43,26 +43,28 @@ void MazeScene::Timer(int value)
 {
 	int newLine;
 	int newColumn;
+	float step = 0.2;
+
 	if (arrowKeys.up && !colision()){
-		zPosition -= 0.05;
+		zPosition -= step;
 		newLine = (int)(zPosition - (cubeAndSphereSize / 2));
 		newColumn = (int)xPosition;
 		map->setCurrentPosition(newLine, newColumn);
 	}
 	if (arrowKeys.down && !colision()){
-		zPosition += 0.05;
+		zPosition += step;
 		newLine = (int)(zPosition + (cubeAndSphereSize / 2));
 		newColumn = (int)xPosition;
 		map->setCurrentPosition(newLine, newColumn);
 	}
 	if (arrowKeys.left && !colision()){
-		xPosition -= 0.05;
+		xPosition -= step;
 		newLine = (int)zPosition;
 		newColumn = (int)(xPosition + (cubeAndSphereSize / 2));
 		map->setCurrentPosition(newLine, newColumn);
 	}
 	if (arrowKeys.right && !colision()){
-		xPosition += 0.05;
+		xPosition += step;
 		newLine = (int)zPosition;
 		newColumn = (int)(xPosition - (cubeAndSphereSize / 2));
 		map->setCurrentPosition(newLine, newColumn);

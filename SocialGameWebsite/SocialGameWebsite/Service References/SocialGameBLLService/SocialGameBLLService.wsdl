@@ -272,6 +272,18 @@
   <wsdl:message name="ISocialGameBLLService_GetUserScore_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserScoreResponse" />
   </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_LogDownload_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogDownload" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_LogDownload_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogDownloadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetTotalNumberOfDownloads_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalNumberOfDownloads" />
+  </wsdl:message>
+  <wsdl:message name="ISocialGameBLLService_GetTotalNumberOfDownloads_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalNumberOfDownloadsResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISocialGameBLLService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetData" message="tns:ISocialGameBLLService_GetData_InputMessage" />
@@ -445,6 +457,14 @@
     <wsdl:operation name="GetUserScore">
       <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserScore" message="tns:ISocialGameBLLService_GetUserScore_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetUserScoreResponse" message="tns:ISocialGameBLLService_GetUserScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogDownload">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/LogDownload" message="tns:ISocialGameBLLService_LogDownload_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/LogDownloadResponse" message="tns:ISocialGameBLLService_LogDownload_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalNumberOfDownloads">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfDownloads" message="tns:ISocialGameBLLService_GetTotalNumberOfDownloads_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfDownloadsResponse" message="tns:ISocialGameBLLService_GetTotalNumberOfDownloads_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISocialGameBLLService" type="tns:ISocialGameBLLService">
@@ -832,6 +852,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserScore">
       <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetUserScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogDownload">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/LogDownload" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalNumberOfDownloads">
+      <soap:operation soapAction="http://tempuri.org/ISocialGameBLLService/GetTotalNumberOfDownloads" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

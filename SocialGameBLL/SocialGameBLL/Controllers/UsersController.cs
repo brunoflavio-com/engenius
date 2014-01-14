@@ -294,6 +294,12 @@ namespace SocialGameBLL.Controllers
                 PostResponse = PrologRequest.MakeJsonGetResquest(PrologRequest.GET_POSSIBLE_FRIENDS, param, CookieJar);
 
                 ICollection<UserEntity> Entities = StringToUserEntity(PostResponse);
+
+                if (Entities.Count == 0)
+                {
+                    Entities = db.Users.OrderByDescending(u => u.Interests.Count).Take(5).ToList();
+                }
+
                 ICollection<User> Users = new List<User>();
 
                 foreach (UserEntity entity in Entities)

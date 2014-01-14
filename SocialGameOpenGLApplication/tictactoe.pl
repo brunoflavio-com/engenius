@@ -5,6 +5,8 @@
 %% clean the discovered facts out of the database
 :- retractall(game(_,_)). 
 
+cleartictactoe:-rectractall(game(_,_)).
+
 %% set player that will start the game and initialize the board
 %% to represent the game:
 % game([Board,Player]) 
@@ -83,8 +85,8 @@ value(Board,V) :- win(Board,x),V = 1,!.
 value(Board,V) :- win(Board,o),V = (-1),!.
 value(Board,V) :- V = 0.
 
-maximazing('x').       
-minimazing('o').        
+maximazing('o').       
+minimazing('x').        
 	
 %%% minimax(Board,Player,Move,Value)
 % Move is the best move and Value is the value of that move, the best value from the point 

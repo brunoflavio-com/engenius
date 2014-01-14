@@ -39,7 +39,7 @@ void graphCoordWalker::walkConnection(User * userA, Relationship * relationship,
 		int totalRelationships = userA->relationships.size();
 		float distance, sx, sy;
 
-		distance = MIN_DIST - ((3 * 2 * SPHERE_RADIUS) + totalRelationships *(2 * SPHERE_RADIUS)) / (2 * M_PI);
+		distance = ((3 * 2 * SPHERE_RADIUS) + totalRelationships *(2 * SPHERE_RADIUS)) / (2 * M_PI);
 
 		if (userB->graphLevel >= 2){ // Level 2 positions
 			double prevAngle;

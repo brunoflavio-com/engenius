@@ -20,6 +20,8 @@ public:
 	int getComputerMove();
 	int getStatus();
 	void setHumanMove(int square);
+
+	void clear();
 	
 private:
 	PlEngine * prolog;

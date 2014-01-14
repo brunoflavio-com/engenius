@@ -3,22 +3,22 @@
 #include "SocialGamePublicAPIClient.h"
 #include <string>
 #include <vector>
+#include "GraphPLEngine.h"
 
 class NormalModeGraphScene :
 	public GraphScene
 {
 private:
+	GraphPLEngine pl;
+
 	bool gameOn;
 	IWindowScene * game;
 	User * targetUser;
 
-	bool showShortestPath;
+	int highlightPath;
 	vector<Relationship *> shortestPath;
-	void toggleStrongestPath();
-
-	bool showStrongestPath;
 	vector<Relationship *> strongestPath;
-	void toggleShortestPath();
+	void togglePath();
 
 	User * previousUser;
 	User * nextUser;

@@ -29,6 +29,7 @@ namespace SocialGameWebsite.Controllers
         }
 
 
+        [Authorize]
         // Get: /Network/MyNetwork
         public ActionResult MyNetwork()
         {

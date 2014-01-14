@@ -13,6 +13,7 @@ namespace MinigamesMaze{
 
 		void getSuggestion(int originLine, int originColumn, int destinyLine, int destinyColumn, int& SugLine, int& SugColumn);
 
+		void clear();
 	private:
 		PlEngine* prolog;
 

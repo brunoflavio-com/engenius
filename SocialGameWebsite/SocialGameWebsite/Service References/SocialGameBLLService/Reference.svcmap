@@ -25,7 +25,6 @@
       <ReferencedAssembly AssemblyName="System.Core" />
       <ReferencedAssembly AssemblyName="System.Data" />
       <ReferencedAssembly AssemblyName="System.Data.DataSetExtensions" />
-      <ReferencedAssembly AssemblyName="System.Data.Entity" />
       <ReferencedAssembly AssemblyName="System.Drawing" />
       <ReferencedAssembly AssemblyName="System.EnterpriseServices" />
       <ReferencedAssembly AssemblyName="System.Net.Http" />
@@ -66,15 +65,15 @@
     <MetadataSource Address="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SocialGameBLLService.wsdl" MetadataType="Wsdl" ID="635bed80-535a-4af7-bbbb-e39c468d499d" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?wsdl" />
-    <MetadataFile FileName="SocialGameBLLService.xsd" MetadataType="Schema" ID="322aa866-eaaf-4197-b842-eae2153088c4" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd2" />
-    <MetadataFile FileName="SocialGameBLLService1.xsd" MetadataType="Schema" ID="95f1319e-7605-4588-a52e-41d7c007427d" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd5" />
-    <MetadataFile FileName="SocialGameBLLService2.xsd" MetadataType="Schema" ID="7bae6ba4-e2c3-47b2-b114-37c3d4b2e921" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd0" />
-    <MetadataFile FileName="SocialGameBLLService.disco" MetadataType="Disco" ID="ca19c27e-f05a-4df1-ab72-f6834e7fc957" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?disco" />
-    <MetadataFile FileName="SocialGameBLLService3.xsd" MetadataType="Schema" ID="903f4a7e-c342-44a4-b3d9-c878e97861a0" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd6" />
-    <MetadataFile FileName="SocialGameBLLService4.xsd" MetadataType="Schema" ID="d187d6b3-d050-484b-bb05-ee932009790a" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd4" />
-    <MetadataFile FileName="SocialGameBLLService5.xsd" MetadataType="Schema" ID="9b9c559b-10cf-4cae-bc7c-4c99c2099640" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd3" />
-    <MetadataFile FileName="SocialGameBLLService6.xsd" MetadataType="Schema" ID="73f41c96-a044-44c1-b993-0a9aee88a44f" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SocialGameBLLService.wsdl" MetadataType="Wsdl" ID="f6da9216-3be9-45af-b298-7c5355aa05ea" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?wsdl" />
+    <MetadataFile FileName="SocialGameBLLService.xsd" MetadataType="Schema" ID="d41f4301-9bb6-4687-ba7f-c21b71b3b35e" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SocialGameBLLService1.xsd" MetadataType="Schema" ID="c8d09b55-2661-493b-97db-54e881cc0a40" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd5" />
+    <MetadataFile FileName="SocialGameBLLService2.xsd" MetadataType="Schema" ID="72afbd3f-ccb9-4073-aace-9cc5a191c4e1" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SocialGameBLLService.disco" MetadataType="Disco" ID="1143e101-6453-4c65-9f94-71589521c7e2" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?disco" />
+    <MetadataFile FileName="SocialGameBLLService3.xsd" MetadataType="Schema" ID="9521d067-9f4c-4c58-bc6a-6c569a68074c" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd6" />
+    <MetadataFile FileName="SocialGameBLLService4.xsd" MetadataType="Schema" ID="7518afc1-c228-4921-8112-bb146c1db5cc" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd4" />
+    <MetadataFile FileName="SocialGameBLLService5.xsd" MetadataType="Schema" ID="6fd7429d-7cde-4f70-a6db-4d6c1b0f29e7" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SocialGameBLLService6.xsd" MetadataType="Schema" ID="d1ff4953-bbb7-4cf6-8fbc-cd442d6024df" SourceId="1" SourceUrl="http://wvm008.dei.isep.ipp.pt:8000/SocialGameBLLService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

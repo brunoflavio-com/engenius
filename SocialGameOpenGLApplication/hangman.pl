@@ -9,6 +9,8 @@
 :- dynamic word/1.
 :- dynamic used/1.
 
+clearhangman:-retractall(word(_)), retractall(used(_)).
+
 %already used characters knowledge base example
 %used(a).
 %used(b).
