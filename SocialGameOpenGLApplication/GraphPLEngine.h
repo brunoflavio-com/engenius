@@ -10,10 +10,12 @@ class GraphPLEngine
 {
 public:
 
-	GraphPLEngine(Graph * graph);
+	GraphPLEngine();
 	~GraphPLEngine();
 
+	void loadGraph(Graph * graph);
 	void assertRelationship(string origin, string destination, int strenght);
+	void clearRelationships();
 
 	vector<Relationship *> getShortestPath(User * origin, User * destination);
 	vector<Relationship *> getStrongestPath(User * origin, User * destination);

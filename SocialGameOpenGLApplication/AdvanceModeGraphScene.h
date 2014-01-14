@@ -1,11 +1,25 @@
 #pragma once
 #include "GraphScene.h"
+#include "GraphPLEngine.h"
 #include "SocialGamePublicAPIClient.h"
 #include <string>
 
 class AdvanceModeGraphScene :
 	public GraphScene
 {
+private:
+	GraphPLEngine pl;
+
+	ISelectable * previousSelectable;
+
+	bool showShortestPath;
+	vector<Relationship *> shortestPath;
+
+	bool showStrongestPath;
+	vector<Relationship *> strongestPath;
+
+	void highlight(bool value);
+
 public:
 	AdvanceModeGraphScene(SocialGamePublicAPIClient *client, std::string loginEmail);
 	void DrawOverlay(void);
@@ -14,6 +28,7 @@ public:
 	Graph * getGraph(std::string loginEmail, int level);
 	void verticeClicked(User * previousUser, User * nextUser);
 	void Timer(int value);
-
+	
+	void PassiveMotion(int newx, int newy);
 };
 
