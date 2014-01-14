@@ -15,13 +15,10 @@ private:
 	IWindowScene * game;
 	User * targetUser;
 
-	bool showShortestPath;
+	int highlightPath;
 	vector<Relationship *> shortestPath;
-	void toggleStrongestPath();
-
-	bool showStrongestPath;
 	vector<Relationship *> strongestPath;
-	void toggleShortestPath();
+	void togglePath();
 
 	User * previousUser;
 	User * nextUser;
