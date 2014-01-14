@@ -80,7 +80,6 @@ void TicTacToeScene::Draw3dObjects(void)
 	
 	glPopMatrix();
 
-	glutSwapBuffers();//Send the 3D scene to the screen
 }
 
 void TicTacToeScene::DrawOverlay(void)
