@@ -102,11 +102,10 @@ void MazeScene::Draw3dObjects(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	//Define a viewing transformation
-	gluLookAt(0, 5, 0, 0, 0, 0, 0, 0, -1);
 
 	glPushMatrix();
 		glScalef(0.1, 0.1, 0.1);
+		gluLookAt(map->getWidth() / 2.0, 50, map->getHeight() / 2.0, map->getWidth() / 2.0, 0, map->getHeight() / 2.0, 0,0,-1);
 		this->drawMap();
 		if (hintStart != -1 && ((currTime - hintStart) < maxHintSeconds)){
 			drawHint();
@@ -117,7 +116,9 @@ void MazeScene::Draw3dObjects(void)
 		glPushMatrix();
 			this->drawSphere(xPosition, yPosition, zPosition, cubeAndSphereSize / 2);
 		glPopMatrix();
+		
 	glPopMatrix();
+
 }
 
 void MazeScene::DrawOverlay(void)
@@ -128,9 +129,8 @@ void MazeScene::DrawOverlay(void)
 void MazeScene::Key(unsigned char key, int x, int y)
 {
 	switch (key){
-		/*Give Up*/
-	case 'g':
-	case 'G':
+		/*Give Up*/	
+	case 27:
 		giveUp = true;
 		/*Hint*/
 	case 'h':
