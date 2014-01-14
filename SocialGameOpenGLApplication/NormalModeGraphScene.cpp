@@ -114,13 +114,13 @@ void NormalModeGraphScene::Timer(int value){
 					float points = (int) teste->getPoints();
 					createMessage("You won the mini-game and got " + to_string((int) points) + " points");
 					userPoints += points;
-					apiClient->setUserLevel(userPoints);
-				}
-				else{
-					createMessage("oh... you lost the mini-game");
+					apiClient->setUserPoints(points);
 					advanceToNextVertice();
 				}
-				
+				else{
+					createMessage("oh... you lost the mini-game");					
+				}
+				//delete teste;
 			}
 		}
 		return game->Timer(value);
@@ -162,7 +162,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 	//generate random user response
 	srand(time(0));
 	int userDecision = rand() % 3;
-	userDecision = 2;
+	//userDecision = 2;
 	int randomGame;
 	switch (userDecision){
 	case 0:
@@ -172,18 +172,27 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 
 	case 1:
 		//User asks for game to be played in order to accept introduction
+
+		this->selectedObject = NULL;
+		this->showShortestPath = false;
+		this->showStrongestPath = false;
+
 		//Random Game
 		createMessage("User " + nextUser->email + "\nasked you to play a game");
-		//Debug
-		break;
+		
 		randomGame = rand() % 2;
+		/*DEBUG:*/
+		//randomGame = 2;
 		switch (randomGame){
 		case 0:
 			game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
+			break;
 		case 1:
 			game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
+			break;
 		case 2:
 			game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email, 2);
+			break;
 		}
 		gameOn = true;
 		break;
@@ -235,7 +244,7 @@ void NormalModeGraphScene::toggleStrongestPath() {
 	}
 	else {
 		showStrongestPath = true;
-		createMessage("Stronger path highlighted.");
+		createMessage("Strongest path highlighted.");
 	}
 
 	for each (Relationship * relationship in strongestPath) {

@@ -9,7 +9,7 @@
 #define COMPUTER 2 
 
 class TicTacToeScene :
-	public IWindowScene
+	public IWindowScene, public IMinigame
 {
 public:
 

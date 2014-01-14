@@ -29,6 +29,18 @@ TicTacToeScene::~TicTacToeScene()
 	}
 }
 
+bool TicTacToeScene::isOver(){
+	return gameover;
+}
+
+bool TicTacToeScene::isWinner() {
+	return winner;
+}
+
+float TicTacToeScene::getPoints(){
+	return points;
+}
+
 //Initiate Scene
 void TicTacToeScene::Init(void){
 
