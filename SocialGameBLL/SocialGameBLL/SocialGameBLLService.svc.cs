@@ -550,5 +550,31 @@ namespace SocialGameBLL
                 throw new FaultException(e.Message);
             }
         }
+
+        public void LogDownload(string UserEmail, string Ip)
+        {
+            try
+            {
+                DownloadsController Controller = new DownloadsController();
+                Controller.LogDownload(UserEmail, Ip);
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
+
+        public int GetTotalNumberOfDownloads()
+        {
+            try
+            {
+                DownloadsController Controller = new DownloadsController();
+                return Controller.GetTotalNumberOfDownloads();
+            }
+            catch (Exception e)
+            {
+                throw new FaultException(e.Message);
+            }
+        }
     }
 }

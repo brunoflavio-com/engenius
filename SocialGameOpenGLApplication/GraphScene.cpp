@@ -76,13 +76,95 @@ GraphScene::~GraphScene()
 	delete graph;
 }
 
+void GraphScene::DrawSkybox(GLdouble x, GLdouble y, GLdouble z){
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, 11);
+	glBegin(GL_QUADS);
+	//back face
+	glTexCoord2f(0, 0);
+	glVertex3f(x + 2, y - 2, z - 2);
+	glTexCoord2f(1, 0);
+	glVertex3f(x - 2, y - 2, z - 2);
+	glTexCoord2f(1, 1);
+	glVertex3f(x - 2, y - 2, z + 2);
+	glTexCoord2f(0, 1);
+	glVertex3f(x + 2, y - 2, z + 2);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 10);
+	glBegin(GL_QUADS);
+	//left face
+	glTexCoord2f(0, 0);
+	glVertex3f(x - 2, y - 2, z - 2);
+	glTexCoord2f(1, 0);
+	glVertex3f(x - 2, y + 2, z - 2);
+	glTexCoord2f(1, 1);
+	glVertex3f(x - 2, y + 2, z + 2);
+	glTexCoord2f(0, 1);
+	glVertex3f(x - 2, y - 2, z + 2);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 13);
+	glBegin(GL_QUADS);
+	//front face
+	glTexCoord2f(0, 0);
+	glVertex3f(x - 2, y + 2, z - 2);
+	glTexCoord2f(1, 0);
+	glVertex3f(x + 2, y + 2, z - 2);
+	glTexCoord2f(1, 1);
+	glVertex3f(x + 2, y + 2, z + 2);
+	glTexCoord2f(0, 1);
+	glVertex3f(x - 2, y + 2, z + 2);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 12);
+	glBegin(GL_QUADS);
+	//right face
+	glTexCoord2f(0, 0);
+	glVertex3f(x + 2, y + 2, z - 2);
+	glTexCoord2f(1, 0);
+	glVertex3f(x + 2, y - 2, z - 2);
+	glTexCoord2f(1, 1);
+	glVertex3f(x + 2, y - 2, z + 2);
+	glTexCoord2f(0, 1);
+	glVertex3f(x + 2, y + 2, z + 2);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 15);
+	glBegin(GL_QUADS);
+	//top face
+	glTexCoord2f(1, 0);
+	glVertex3f(x - 2, y - 2, z - 2);
+	glTexCoord2f(0, 0);
+	glVertex3f(x + 2, y - 2, z - 2);
+	glTexCoord2f(0, 1);
+	glVertex3f(x + 2, y + 2, z - 2);
+	glTexCoord2f(1, 1);
+	glVertex3f(x - 2, y + 2, z - 2);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 14);
+	glBegin(GL_QUADS);
+	//bottom face
+	glTexCoord2f(1, 1);
+	glVertex3f(x + 2, y - 2, z + 2);
+	glTexCoord2f(0, 1);
+	glVertex3f(x - 2, y - 2, z + 2);
+	glTexCoord2f(0, 0);
+	glVertex3f(x - 2, y + 2, z + 2);
+	glTexCoord2f(1, 0);
+	glVertex3f(x + 2, y + 2, z + 2);
+	glEnd();
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_TEXTURE_2D);
+}
+
 void GraphScene::Draw(void){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	CamLookAt();
-
+	DrawSkybox(PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2]);
 	Draw3dObjects();
 
 	glMatrixMode(GL_PROJECTION);
@@ -92,6 +174,7 @@ void GraphScene::Draw(void){
 	glPushMatrix();
 
 	glLoadIdentity();
+
 	//Reshape 2D SPACE
 	float ratio = (float)glutGet(GLUT_WINDOW_WIDTH) / glutGet(GLUT_WINDOW_HEIGHT);
 	float xSpan = 1;
@@ -140,14 +223,14 @@ void GraphScene::Draw(void){
 
 	//Draw user game information - points and level
 
-		unsigned char s[500];
-		string userGameInfo = "Level: " + to_string(userLevel) + "\n" +
-			"Points: " + to_string((int) userPoints);
-		glColor4f(255.0, 255.0, 255.0, 0.7f);
-		glRasterPos2d(-0.91, 0.9);
-		strcpy((char*)s, userGameInfo.c_str());
-		glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
-	
+	unsigned char s[500];
+	string userGameInfo = "Level: " + to_string(userLevel) + "\n" +
+		"Points: " + to_string((int)userPoints);
+	glColor4f(255.0, 255.0, 255.0, 0.7f);
+	glRasterPos2d(-0.91, 0.9);
+	strcpy((char*)s, userGameInfo.c_str());
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, s);
+
 
 	DrawOverlay();
 	// ropõe estado
@@ -155,14 +238,14 @@ void GraphScene::Draw(void){
 	glEnable(GL_LIGHTING);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	
+
 
 	glPopMatrix();
 
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glutSwapBuffers();
-	glFlush();
+	//glFlush();
 
 }
 
@@ -193,28 +276,28 @@ void GraphScene::Init(void){
 }
 
 void GraphScene::subWindowInit(void){
-	
+
 	StartCam();
 }
 
 void GraphScene::CamMovement(void){
-		GLdouble x = PersonCam.eye[0] + PersonCam.vel*cos(PersonCam.dir_long);
-		GLdouble y = PersonCam.eye[1] + PersonCam.vel*sin(PersonCam.dir_long);
-		GLdouble z = PersonCam.eye[2] + PersonCam.vel*sin(PersonCam.dir_lat);
-		if (!ColisionTest(x, y, z)){
-			PersonCam.eye[0] = x;
-			PersonCam.eye[1] = y;
-			PersonCam.eye[2] = z;
-		}
+	GLdouble x = PersonCam.eye[0] + PersonCam.vel*cos(PersonCam.dir_long);
+	GLdouble y = PersonCam.eye[1] + PersonCam.vel*sin(PersonCam.dir_long);
+	GLdouble z = PersonCam.eye[2] + PersonCam.vel*sin(PersonCam.dir_lat);
+	if (!ColisionTest(x, y, z)){
+		PersonCam.eye[0] = x;
+		PersonCam.eye[1] = y;
+		PersonCam.eye[2] = z;
+	}
 }
 
 
-void GraphScene::Timer(int value){	
+void GraphScene::Timer(int value){
 	glTime = value;
 
 
 	if (isMessageActive)
-	if ( messageUpdateTime + MESSAGE_DURATION < value)
+	if (messageUpdateTime + MESSAGE_DURATION < value)
 	{
 		isMessageActive = false;
 	}
@@ -223,22 +306,26 @@ void GraphScene::Timer(int value){
 		if (KeyStatus.up){
 			PersonCam.vel = 0.3;
 			CamMovement();
+			glutPostRedisplay();
 		}
 		if (KeyStatus.down){
 			PersonCam.vel = -0.3;
 			CamMovement();
+			glutPostRedisplay();
 		}
 		if (KeyStatus.left){
 			PersonCam.dir_long += M_PI*0.001;
+			glutPostRedisplay();
 		}
 		if (KeyStatus.right){
 			PersonCam.dir_long -= M_PI*0.001;
+			glutPostRedisplay();
 		}
 	}
 }
 
 void GraphScene::Key(unsigned char key, int x, int y){
-	
+
 	switch (key) {
 	case 27:
 		exit(1);
@@ -259,7 +346,7 @@ void GraphScene::Key(unsigned char key, int x, int y){
 }
 
 void GraphScene::SpecialKey(int key, int x, int y){
-	
+
 	switch (key){
 	case GLUT_KEY_UP: KeyStatus.up = GL_TRUE;
 		break;
@@ -273,7 +360,7 @@ void GraphScene::SpecialKey(int key, int x, int y){
 }
 
 void GraphScene::SpecialKeyUp(int key, int x, int y){
-	
+
 	switch (key) {
 	case GLUT_KEY_UP: KeyStatus.up = GL_FALSE;
 		break;
@@ -291,10 +378,11 @@ void GraphScene::drawSubWindow(){
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	TopCamLookAt();
+	//DrawSkybox(PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2]);
 	//draw subscene
 	graph->draw(false);
 	glutSwapBuffers();
-	glFlush();
+	//glFlush();
 }
 
 bool GraphScene::isSubWindowActive(){
@@ -302,8 +390,8 @@ bool GraphScene::isSubWindowActive(){
 }
 
 void GraphScene::StartCam(){
-	PersonCam.dir_lat = -M_PI/4;
-	PersonCam.dir_long = -M_PI/4;
+	PersonCam.dir_lat = -M_PI / 4;
+	PersonCam.dir_long = -M_PI / 4;
 	PersonCam.height = 0;
 	PersonCam.dist = 40;
 	PersonCam.center[0] = 0;
@@ -320,7 +408,7 @@ void GraphScene::StartCam(){
 }
 
 void GraphScene::CamLookAt(){
-	
+
 	PersonCam.center[0] = PersonCam.eye[0] + PersonCam.dist*cos(PersonCam.dir_long)*cos(PersonCam.dir_lat);
 	PersonCam.center[1] = PersonCam.eye[1] + PersonCam.dist*sin(PersonCam.dir_long)*cos(PersonCam.dir_lat);
 	PersonCam.center[2] = PersonCam.eye[2] + PersonCam.dist*sin(PersonCam.dir_lat);
@@ -347,7 +435,7 @@ void GraphScene::PassiveMotion(int newx, int newy){
 	if (selectedObject != NULL)
 		selectedObject->selected = false;
 
-	if ((object = pickISelectable(newx, newy)) != NULL ) {
+	if ((object = pickISelectable(newx, newy)) != NULL) {
 		selectedObject = object;
 		selectedObject->selected = true;
 	}
@@ -375,10 +463,10 @@ bool GraphScene::ColisionTest(GLdouble newx, GLdouble newy, GLdouble newz){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glRotatef(GRAUS(-M_PI / 2 - PersonCam.dir_lat), 1, 0, 0);
-	glRotatef(GRAUS(M_PI / 2 -PersonCam.dir_long), 0, 0, 1);	
-	glTranslatef(-newx,-newy,-newz);
+	glRotatef(GRAUS(M_PI / 2 - PersonCam.dir_long), 0, 0, 1);
+	glTranslatef(-newx, -newy, -newz);
 	Draw3dObjects();
-	
+
 	hits = glRenderMode(GL_RENDER);
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
@@ -415,15 +503,15 @@ ISelectable * GraphScene::pickISelectable(int newx, int newy) {
 	hits = glRenderMode(GL_RENDER);
 
 	if (hits > 0) {
-	    // if glut detects items, gets the name
+		// if glut detects items, gets the name
 		GLuint depth = (GLuint)~0;
 		unsigned int getThisName;
 		GLint i;
 		GLuint names, pos, *ptr;
-		GLuint selectableObjectType = -1, selectableObjectId =-1;
+		GLuint selectableObjectType = -1, selectableObjectId = -1;
 
 		ptr = (GLuint *)selecter;
-		
+
 		for (i = 0; i < hits; i++) {
 			getThisName = 0;
 			names = *ptr;
@@ -449,13 +537,13 @@ ISelectable * GraphScene::pickISelectable(int newx, int newy) {
 				ptr += 2;
 			}
 		}
-		
+
 		switch (selectableObjectType)
 		{
 		case ISelectable::USER_TYPE:
 			//User mouseOver
-			if (selectableObjectId < graph->users.size() ){
-				 return (ISelectable*)graph->users.at(selectableObjectId);
+			if (selectableObjectId < graph->users.size()){
+				return (ISelectable*)graph->users.at(selectableObjectId);
 			}
 
 			break;
@@ -466,7 +554,7 @@ ISelectable * GraphScene::pickISelectable(int newx, int newy) {
 			}
 			break;
 		}
-		
+
 	}
 	return NULL;
 }
@@ -505,16 +593,16 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 			MouseStatus.yMouse = y;
 			glutMotionFunc(GraphOpenGL::MotionMouse);
 
-			ISelectable * object;			
+			ISelectable * object;
 			if ((object = pickISelectable(x, y)) != NULL) {
 				if (object->getType() == ISelectable::USER_TYPE){
-				User * nextUser = (User *)object;
-				ALuint buffer, source;
-				buffer = alutCreateBufferFromFile("./sounds/mouseclick.wav");
-				alGenSources(1, &source);
-				alSourcei(source, AL_BUFFER, buffer);
-				alSourcePlay(source);
-				verticeClicked(graph->user, nextUser);
+					User * nextUser = (User *)object;
+					ALuint buffer, source;
+					buffer = alutCreateBufferFromFile("./sounds/mouseclick.wav");
+					alGenSources(1, &source);
+					alSourcei(source, AL_BUFFER, buffer);
+					alSourcePlay(source);
+					verticeClicked(graph->user, nextUser);
 				}
 			}
 
@@ -523,17 +611,17 @@ void GraphScene::Mouse(int button, int state, int x, int y){
 			glutMotionFunc(NULL);
 		}
 	}
-	
+
 	//Manages Scroll events:
 	//Adjusts direction proportionally to the distance from the center.
 	if ((button == MOUSE_SCROLL_UP) || (button == MOUSE_SCROLL_DOWN))
-	{		
+	{
 		if (state == GLUT_UP) return;
 		PersonCam.vel = (button == 3) ? 1 : -1;
 
-		float h_center = glutGet(GLUT_WINDOW_WIDTH)/2;
+		float h_center = glutGet(GLUT_WINDOW_WIDTH) / 2;
 		float v_center = glutGet(GLUT_WINDOW_HEIGHT) / 2;
-		
+
 		GLdouble base_dir = M_PI*0.01;
 		if (x < h_center) {
 			PersonCam.dir_long -= base_dir * (x - h_center) / h_center;
