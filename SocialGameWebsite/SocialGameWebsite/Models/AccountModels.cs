@@ -88,7 +88,7 @@ namespace SocialGameWebsite.Models
         public string Surname { get; set; }
 
         [Required]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthdate { get; set; }
 
         [Required]
