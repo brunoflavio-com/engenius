@@ -88,8 +88,8 @@ namespace SocialGameWebsite.Models
         public string Surname { get; set; }
 
         [Required]
-        [Display(Name = "Birthdate")]
-        public DateTime Birthdate;
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime Birthdate { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
