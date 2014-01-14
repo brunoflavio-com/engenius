@@ -96,10 +96,6 @@
     <Compile Include="Entities\SocialGameBLLDbContext.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Entities\UserSecurity.cs" />
-    <Compile Include="Migrations\201401132148530_DownloadLogTable.cs" />
-    <Compile Include="Migrations\201401132148530_DownloadLogTable.Designer.cs">
-      <DependentUpon>201401132148530_DownloadLogTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Security\SecurityService.cs" />
     <Compile Include="Service\HumourStatus.cs" />
@@ -150,9 +146,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Documentation\RegisterUser.sequencediagram.layout">
       <DependentUpon>RegisterUser.sequencediagram</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201401132148530_DownloadLogTable.resx">
-      <DependentUpon>201401132148530_DownloadLogTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

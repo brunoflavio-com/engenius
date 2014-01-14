@@ -1,7 +1,14 @@
 ﻿@model SocialGameWebsite.Models.UserViewModel
+
 @{
     ViewBag.Title = "Edit Profile";
 }
+
+<script>
+    $(function () {
+        $(".datefield").datepicker();
+    });
+</script>
 
 <section id="editForm">
     <h2>Edit your profile!</h2>
@@ -27,7 +34,7 @@
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Birthdate)
-                    @Html.EditorFor(m => m.Birthdate)
+                    @Html.TextBox("Birthdate", "", String.Format("{0:yyyy-MM-dd}", ((DateTime)Model.Birthdate).ToShortDateString()), new { @class = "datefield", type = "date" })
                     @Html.ValidationMessageFor(m => m.Birthdate)
                 </li>
                 <li>

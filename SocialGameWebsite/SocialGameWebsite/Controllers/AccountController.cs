@@ -64,7 +64,7 @@ namespace SocialGameWebsite.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return PartialView();
+            return PartialView(new RegisterModel());
         }
 
         //
