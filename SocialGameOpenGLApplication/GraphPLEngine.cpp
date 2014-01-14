@@ -14,7 +14,7 @@ void GraphPLEngine::loadGraph(Graph * graph)
 {
 	clearRelationships();
 	this->graph = graph;
-	for each(Relationship * r in graph->relationShips) {
+	for each(Relationship * r in this->graph->relationShips) {
 		if (r == NULL) {
 			continue;
 		}
@@ -69,7 +69,7 @@ vector<Relationship *> GraphPLEngine::getRelationships(vector<string> path_user_
 		User * userA = graph->getUser(path_user_email.at(i));
 		User * userB = graph->getUser(path_user_email.at(i + 1));
 		Relationship * relationship = graph->getRelationship(userA, userB);
-		path.push_back(relationship);
+		if (relationship != NULL) path.push_back(relationship);
 	}
 
 	return path;

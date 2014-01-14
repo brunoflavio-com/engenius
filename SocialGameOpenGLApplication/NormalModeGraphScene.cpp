@@ -13,13 +13,15 @@ NormalModeGraphScene::NormalModeGraphScene(SocialGamePublicAPIClient *client, st
 	gameOn = false;
 	this->realUser = realUser;
 	graph = getGraph(loginEmail, level);
+
+	int highestLevel = 0;
 	for each(User * u in graph->users){
-		if (u->graphLevel == level){
-			targetUser = u;
-			targetUser->isTarget = true;
-			break;
+		if (u->graphLevel >= highestLevel){			
+			targetUser = u;			
+			highestLevel = u->graphLevel;
 		}	
 	}
+	targetUser->isTarget = true;
 
 	////
 	pl.loadGraph(graph);
@@ -177,7 +179,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 		//Random Game
 		createMessage("User " + nextUser->email + "\nasked you to play a game");
 		
-		randomGame = rand() % 2;
+		randomGame = rand() % 3;
 		/*DEBUG:*/
 		//randomGame = 2;
 		switch (randomGame){
@@ -188,7 +190,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 			game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
 			break;
 		case 2:
-			game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email, 2);
+			game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email, 3);
 			break;
 		}
 		gameOn = true;
