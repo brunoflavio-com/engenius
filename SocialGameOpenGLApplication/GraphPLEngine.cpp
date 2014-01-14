@@ -15,6 +15,9 @@ void GraphPLEngine::loadGraph(Graph * graph)
 	clearRelationships();
 	this->graph = graph;
 	for each(Relationship * r in graph->relationShips) {
+		if (r == NULL) {
+			continue;
+		}
 		assertRelationship(r->userA->email, r->userB->email, r->strength);
 	}
 }
@@ -49,11 +52,13 @@ vector<string> GraphPLEngine::getStrongestPath_user_email(string origin, string 
 
 
 vector<Relationship *> GraphPLEngine::getShortestPath(User * origin, User * destination){
+	if (origin == NULL || destination == NULL) return vector<Relationship *>();
+
 	return getRelationships(getShortestPath_user_email(origin->email, destination->email));
 }
 
 vector<Relationship *> GraphPLEngine::getStrongestPath(User * origin, User * destination){
-	
+	if (origin == NULL || destination == NULL) return vector<Relationship *>();
 	return getRelationships(getStrongestPath_user_email(origin->email, destination->email));
 }
 

@@ -111,16 +111,17 @@ void NormalModeGraphScene::Timer(int value){
 					float points = (int) teste->getPoints();
 					createMessage("You won the mini-game and got " + to_string((int) points) + " points");
 					userPoints += points;
-					apiClient->setUserLevel(userPoints);
-				}
-				else{
-					createMessage("oh... you lost the mini-game");
+					apiClient->setUserPoints(userPoints);
 					advanceToNextVertice();
 				}
-				
+				else{
+					createMessage("oh... you lost the mini-game");					
+				}
+			}
+			else {
+				game->Timer(value);
 			}
 		}
-		return game->Timer(value);
 	}
 
 	 
