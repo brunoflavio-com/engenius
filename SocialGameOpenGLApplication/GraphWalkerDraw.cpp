@@ -61,7 +61,7 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 
 	glPushMatrix();
 		glTranslatef(userA->x, userA->y, userA->z);
-
+	
 		if (fabs(deltaZ) <= 0.001)  {
 			glRotatef(90.0, 0 , 1, 0.0);
 			glRotatef(rotAngle, -1.0, 0.0, 0.0);
@@ -150,13 +150,12 @@ void GraphWalkerDraw::walkVertice(User * userA){
 
 	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-	glPushMatrix();
-	glScalef(userA->size, userA->size, userA->size);
-	gluQuadricDrawStyle(quadric, GLU_FILL);
-
+			gluQuadricDrawStyle(quadric, GLU_FILL);
 	float modelview[16];
 	int i, j;
 	glPushMatrix();
+	
+
 	glGetFloatv(GL_MODELVIEW_MATRIX, modelview);
 	for (i = 0; i<3; i++)
 	for (j = 0; j<3; j++) {
@@ -173,7 +172,7 @@ void GraphWalkerDraw::walkVertice(User * userA){
 	gluQuadricNormals(quadric, GLU_SMOOTH);
 	gluQuadricTexture(quadric, GL_TRUE);
 
-	gluSphere(quadric, SPHERE_RADIUS, 30, 10);
+	gluSphere(quadric, SPHERE_RADIUS + 2 * userA->size, 30, 10);
 
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);

@@ -45,8 +45,8 @@ void GraphOpenGL::Init(){
 
 void GraphOpenGL::InitTextures(){
 	string emotionimages[] = { "./images/normal.bmp", "./images/smile.bmp", "./images/sad.bmp" };
-	string skyboximages[] = { "./images/gardenbk.bmp", "./images/gardenlf.bmp", "./images/gardenft.bmp",
-		"./images/gardenrt.bmp", "./images/gardenup.bmp", "./images/gardendn.bmp" };
+	string skyboximages[] = { "./images/stars_back.bmp", "./images/stars_left.bmp", "./images/stars_front.bmp",
+		"./images/stars_right.bmp", "./images/stars_top.bmp", "./images/stars_top.bmp" };
 
 	AUX_RGBImageRec *imagemBMP;
 
@@ -181,7 +181,12 @@ void GraphOpenGL::PrintKeys(){
 }
 
 void GraphOpenGL::Key(unsigned char key, int x, int y){
-	if (key == 'c'){
+	if (key == 'c' && advancedMode == true){
+		AdvanceModeGraphScene * advScene = dynamic_cast<AdvanceModeGraphScene *>(currentScene);
+		if (advScene != NULL) {
+			advScene->showShortestPath = false;
+			advScene->showStrongestPath = false;
+		}
 		//Start Mission
 		normalScene = new NormalModeGraphScene(advanceScene->apiClient, advanceScene->email, advanceScene->userLevel);
 		normalScene->userLevel = advanceScene->userLevel;

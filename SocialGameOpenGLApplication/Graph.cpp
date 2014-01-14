@@ -1,5 +1,5 @@
 #include "Graph.h"
-#include "graphCoordWalker.h"
+#include "GraphPositionWalker.h"
 #include "GraphWalkerDraw.h"
 
 Graph::Graph()
@@ -21,7 +21,7 @@ void Graph::movetoVertice(User * nextUser){
 	relationship->walked = true;
 
 	user = nextUser;
-	graphCoordWalker coordWalker(maxUserConnections,maxConnectionStrenght,maxUserTags);
+	GraphPositionWalker coordWalker(maxUserConnections,maxConnectionStrenght,maxUserTags);
 	coordWalker.walk(user);
 	user->isCenter = true;
 }
