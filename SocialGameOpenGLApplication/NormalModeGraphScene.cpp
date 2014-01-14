@@ -109,7 +109,7 @@ void NormalModeGraphScene::Timer(int value){
 				gameOn = false;
 				if (teste->isWinner()){
 					float points = (int) teste->getPoints();
-					createMessage("You won the mini-game and got " + to_string((int) points) + " points");
+					createMessage("You won the mini-game and got \n" + to_string((int) points) + " points");
 					userPoints += points;
 					apiClient->setUserPoints(userPoints);
 					advanceToNextVertice();
@@ -165,7 +165,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 	switch (userDecision){
 	case 0:
 		//User rejects introduction
-		createMessage("User " + nextUser->email + "has rejected to introduce you");
+		createMessage("User " + nextUser->email + "\nhas rejected to introduce you");
 		break;
 
 	case 1:
