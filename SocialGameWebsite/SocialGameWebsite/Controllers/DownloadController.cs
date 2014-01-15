@@ -28,7 +28,7 @@ namespace SocialGameWebsite.Controllers
             Proxy.LogDownload(UserEmail, ClientIp);
 
             string FilePath =  ConfigurationManager.AppSettings[FILE_PATH_KEY];
-            return File(FilePath, "application/octet-stream", "SocialGameApplication");
+            return File(FilePath, "application/octet-stream", "SocialGameApplication.exe");
         }
 
     }
