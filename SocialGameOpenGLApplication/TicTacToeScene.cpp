@@ -289,7 +289,9 @@ void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pre
 			else return;
 			break;
 		case 27:
-			//end game on ESC?
+			winner = false;
+			points = 0;
+			gameover = true;
 			break;
 		}
 
