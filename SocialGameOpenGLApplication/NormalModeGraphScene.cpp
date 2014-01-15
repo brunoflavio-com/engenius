@@ -64,13 +64,18 @@ void NormalModeGraphScene::DrawOverlay(void){
 
 void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	if (gameOn) return game->Key(key, x, y);
+	if (key == 27) {
+		selectedObject = NULL;
+		isFinished = true;
+		returningMessage = "Mission canceled";
+		return;
+	}
 	
-	GraphScene::Key(key, x, y);
-	if (key == 'G') {
+	if (key == 'H' || key == 'h') {
 		game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
 	}
-	if (key == 'T') {
+	if (key == 'T' || key == 't') {
 		game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
 	}
@@ -80,7 +85,7 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	}
 	if (key == 's' || key == 's') {		
 		togglePath();
-	}
+	}	
 
 	GraphScene::Key(key, x, y);
 }
