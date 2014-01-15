@@ -104,30 +104,29 @@ void HangmanScene::Key(unsigned char key, int x, int y)
 {
 	if(gameover) return;
 
-		switch (key) {
-		case 27:
-			//end game on ESC?
-			break;
+	if (key == 27){
+		winner = false;
+		points = 0;
+		gameover = true;
+	}
+
+	//Select Categories
+	if (categorySelectionMode) {
+		//catch integers
+		if (key > '0' && key < '6') {
+
+			selectedCategory = catVec.at((key - 48) - 1);
+			word = client->getWord(catVec.at((key - 48) - 1));
+
+			game = new HangmanPLEngine(3, word.c_str());
+			categorySelectionMode = false;
 		}
-
-		//Select Categories
-		if (categorySelectionMode) {
-			//catch integers
-			if (key > '0' && key < '6') {
-
-				selectedCategory = catVec.at((key - 48) - 1);
-				word = client->getWord(catVec.at((key - 48) - 1));
-
-				game = new HangmanPLEngine(3, word.c_str());
-				categorySelectionMode = false;
-			}
-		}
-		//Find word mode
-		else if (isalpha(key)) //pass letters to the game engine:
-		{
-			play(key);
-		}
-
+	}
+	//Find word mode
+	else if (isalpha(key)) //pass letters to the game engine:
+	{
+		play(key);
+	}
 }
 
 // Special key callback
