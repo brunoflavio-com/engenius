@@ -12,6 +12,7 @@ MazeScene::MazeScene(SocialGamePublicAPIClient* client, string loginEmail, int l
 	this->zPosition = map->getStartLine() + this->cubeAndSphereSize / 2;
 	this->yPosition = this->cubeAndSphereSize / 2;
 	
+	this->level = level;
 	this->over = false;
 	this->winner = false;
 	this->points = this->MAX_POINTS;
@@ -83,6 +84,8 @@ void MazeScene::Timer(int value)
 		winner = true;
 	}
 	
+	calculatePoints();
+
 	if (giveUp)
 	{
 		points = 0.0f;
@@ -106,7 +109,9 @@ void MazeScene::Draw3dObjects(void)
 	glPushMatrix();
 		glScalef(0.1, 0.1, 0.1);
 		gluLookAt(map->getWidth() / 2.0, 50, map->getHeight() / 2.0, map->getWidth() / 2.0, 0, map->getHeight() / 2.0, 0,0,-1);
+		
 		this->drawMap();
+		
 		if (hintStart != -1 && ((currTime - hintStart) < maxHintSeconds)){
 			drawHint();
 		}
@@ -114,9 +119,12 @@ void MazeScene::Draw3dObjects(void)
 			hintStart = -1;
 		}
 		glPushMatrix();
+			GLfloat red[4] = { 1.0, 0.0, 0.0, 1.0 };
+			glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
+			glMaterialfv(GL_FRONT, GL_DIFFUSE, red);
 			this->drawSphere(xPosition, yPosition, zPosition, cubeAndSphereSize / 2);
+			glPopAttrib();
 		glPopMatrix();
-		
 	glPopMatrix();
 
 }
@@ -221,6 +229,9 @@ void MazeScene::drawMap(void)
 
 void MazeScene::drawCube(float x, float y, float z, float side)
 {
+	GLfloat grey[4] = { 0.7, 0.7, 0.7, 1.0 };
+	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, grey);
 	//d
 	glBegin(GL_POLYGON);
 	glNormal3f(0, -1, 0);
@@ -269,6 +280,7 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 	glVertex3f(x + side, y + side, z + side);
 	glVertex3f(x + side, y, z + side);
 	glEnd();
+	glPopAttrib();
 }
 
 void MazeScene::drawSphere(float x, float y, float z, float radius)
