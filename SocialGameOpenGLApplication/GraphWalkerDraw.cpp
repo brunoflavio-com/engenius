@@ -92,11 +92,11 @@ void GraphWalkerDraw::walkConnection(User * userA, Relationship * relationship, 
 		}
 		glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-		gluQuadricDrawStyle(quadric, GLU_FILL);
-		//glEnable(GL_BLEND);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		gluQuadricDrawStyle(quadric, GLU_LINE);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		gluCylinder(quadric, relationship->cylinderRadius, relationship->cylinderRadius, distance, 30, 3);
-		//glDisable(GL_BLEND);
+		glDisable(GL_BLEND);
 	    glPopAttrib();
 	glPopMatrix();
 
