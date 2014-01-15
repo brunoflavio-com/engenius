@@ -89,5 +89,7 @@ private:
 
 	// Player Points
 	float points;
+
+	long currTime, startTime, gameoverDelay;
 };
 

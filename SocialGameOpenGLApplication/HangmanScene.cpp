@@ -13,6 +13,8 @@ HangmanScene::HangmanScene(SocialGamePublicAPIClient *client, string loginEmail)
 	points = 0;
 	gameover = false;
 	winner = false;
+	
+	gameoverDelay = 0;
 }
 
 HangmanScene::~HangmanScene()
@@ -49,7 +51,13 @@ void HangmanScene::Init(void)
 // Timer Callback
 void HangmanScene::Timer(int value)
 {
-	//g_rotation += 0.01;
+	currTime = time(0);
+
+	if (currTime - startTime > gameoverDelay) {		
+		gameover = true;
+		startTime = 0;
+		gameoverDelay = 0;
+	}
 }
 
 // Draw Callback
@@ -204,7 +212,11 @@ void HangmanScene::play(unsigned char key)
 {
 		letters.push_back(key);
 		game->play(key);
-		gameover=game->isGameOver();
+		if (game->isGameOver()) {
+			gameoverDelay = 5;
+			startTime = time(0);
+		}
+		//gameover=game->isGameOver();
 		winner=game->isWinner();
 		if (winner)
 			points = PRIZE-(game->noOfRetries()*100);
