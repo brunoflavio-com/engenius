@@ -18,7 +18,6 @@ TicTacToeScene::TicTacToeScene(SocialGamePublicAPIClient *client, string loginEm
 	this->gameover = false;
 	this->winner = false;
 	this->points = 0;
-
 }
 
 TicTacToeScene::~TicTacToeScene()
@@ -138,7 +137,7 @@ void TicTacToeScene::drawX(float x, float y)
 {
 	float w = 1.0f;
 	float h = sqrt((w*w) * 2.0f);
-
+	glDisable(GL_LIGHTING);
 	glPushMatrix();
 	glColor3f(0.0f, 0.0f, 1.0f);
 	glTranslatef(w / -2.0f, w / 2.0f, 0.0f);
@@ -155,6 +154,7 @@ void TicTacToeScene::drawX(float x, float y)
 	glTranslatef(w, 0.0f, 0.0f);
 	glRotatef(-45, 0.0f, 1.0f, 0.0f);
 	glutSolidCylinder(0.1f, h, 10, 10);
+	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -167,11 +167,11 @@ void TicTacToeScene::drawO(float x, float y)
 	int n = 20;
 
 	glPushMatrix();
-
+	glDisable(GL_LIGHTING);
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glTranslatef(x, y, 0.0);
 	glutSolidSphere(r, n, n);
-
+	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
 }
@@ -289,7 +289,9 @@ void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pre
 			else return;
 			break;
 		case 27:
-			//end game on ESC?
+			winner = false;
+			points = 0;
+			gameover = true;
 			break;
 		}
 
@@ -307,7 +309,6 @@ void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pre
 			// Computer Move
 			board[game->getComputerMove() - 1] = COMPUTER;
 		}
-		
 }
 
 // Special key callback
@@ -342,6 +343,10 @@ void TicTacToeScene::SincroStatus(){
 		if (i == 1) {
 			winner = true;
 			points = 200;
+		}
+		else {
+			winner = false;
+			points = 0;
 		}
 		gameover = true;
 	}

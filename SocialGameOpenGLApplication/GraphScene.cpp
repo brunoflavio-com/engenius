@@ -249,16 +249,16 @@ void GraphScene::Draw(void){
 
 }
 
-void GraphScene::drawPositionIndications(int numberOfIndications, GLfloat colors[][4], const unsigned char textIndications[][20]){
+void GraphScene::drawPositionIndications(int numberOfIndications, GLfloat colors[][4], const unsigned char textIndications[][30]){
 	float radius = 0.05;
 	for (int y = 0; y < numberOfIndications; y++){
 		glBegin(GL_POLYGON);
 		glColor4f(colors[y][0], colors[y][1], colors[y][2], colors[y][3]);
 		for (double i = 0; i < 2 * M_PI; i += M_PI / 50)
-			glVertex2f(-0.9 + cos(i) * radius, -0.6 - (y*0.13) + sin(i) * radius);
+			glVertex2f(-1.8 + cos(i) * radius, -0.25 - (y*0.13) + sin(i) * radius);
 		glEnd();
 		glColor4f(255.0, 255.0, 255.0, 0.7f);
-		glRasterPos2d(-0.8, -0.62 - (y*0.13));
+		glRasterPos2d(-1.7, -0.27 - (y*0.13));
 		glutBitmapString(GLUT_BITMAP_HELVETICA_12, textIndications[y]);
 	}
 }
@@ -332,14 +332,16 @@ void GraphScene::Key(unsigned char key, int x, int y){
 		break;
 	case 'q':
 	case 'Q':
-		PersonCam.height += 0.1;
-		CamMovement();
+		if (!ColisionTest(PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2]+0.1)){
+			PersonCam.eye[2] += 0.1;
+		}
 		glutPostRedisplay();
 		break;
 	case 'a':
 	case 'A':
-		PersonCam.height -= 0.1;
-		CamMovement();
+		if (!ColisionTest(PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2] - 0.1)){
+			PersonCam.eye[2] -= 0.1;
+		}
 		glutPostRedisplay();
 		break;
 	}

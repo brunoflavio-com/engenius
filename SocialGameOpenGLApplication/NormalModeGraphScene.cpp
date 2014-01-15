@@ -52,35 +52,56 @@ void NormalModeGraphScene::DrawOverlay(void){
 
 	if (gameOn) return game->DrawOverlay();
 
-	GLfloat colors[3][4] = {
+	GLfloat colors[4][4] = {
 		{ 1.0, 1.0, 0.0, 0.7 },
 		{ 0.0, 0.0, 1.0, 0.7 },
-		{ 0.0, 1.0, 0.0, 0.7 }
+		{ 0.0, 1.0, 0.0, 0.7 },
+		{ 1.0, 1.0, 1.0, 0.1 },
 	};
 
-	unsigned char textIndications[3][20] = { "You", "Current position", "Mission Target" };
-	drawPositionIndications(3, colors, textIndications);
+	unsigned char textIndications[4][30] = { 
+		"You", 
+		"Current position", 
+		"Mission Target",
+		"'S' to toggle paths."};
+	drawPositionIndications(4, colors, textIndications);
 }
 
 void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 	if (gameOn) return game->Key(key, x, y);
+	if (key == 27) {
+		selectedObject = NULL;
+		isFinished = true;
+		returningMessage = "Mission canceled";
+		return;
+	}
 	
-	GraphScene::Key(key, x, y);
-	if (key == 'G') {
+	if (key == 's' || key == 'S') {
+		togglePath();
+	}
+
+	//to manually attempt minigame:
+	if (key == '1') {
+		this->selectedObject = NULL;
+		this->highlightPath = 0;
+		this->nextUser = graph->user;
 		game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
 	}
-	if (key == 'T') {
+	if (key == '2') {
+		this->selectedObject = NULL;
+		this->highlightPath = 0;
+		this->nextUser = graph->user;
 		game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
 	}
-	if (key == 'M' || key == 'm') {
+	if (key == '3') {
+		this->selectedObject = NULL;
+		this->highlightPath = 0;
+		this->nextUser = graph->user;
 		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,3);
 		gameOn = true;
-	}
-	if (key == 's' || key == 's') {		
-		togglePath();
-	}
+	}		
 
 	GraphScene::Key(key, x, y);
 }

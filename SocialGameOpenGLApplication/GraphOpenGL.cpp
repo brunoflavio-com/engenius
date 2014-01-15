@@ -181,7 +181,7 @@ void GraphOpenGL::PrintKeys(){
 }
 
 void GraphOpenGL::Key(unsigned char key, int x, int y){
-	if (key == 'c' && advancedMode == true){
+	if ((key == 'm' || key == 'M') && advancedMode == true){
 		AdvanceModeGraphScene * advScene = dynamic_cast<AdvanceModeGraphScene *>(currentScene);
 		if (advScene != NULL) {
 			advScene->showShortestPath = false;

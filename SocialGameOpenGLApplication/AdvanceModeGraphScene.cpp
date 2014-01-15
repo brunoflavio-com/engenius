@@ -29,12 +29,22 @@ void AdvanceModeGraphScene::Draw3dObjects(void){
 }
 
 void AdvanceModeGraphScene::DrawOverlay(void){
-	GLfloat colors[2][4] = {
+	GLfloat colors[7][4] = {
 		{ 1.0, 1.0, 0.0, 0.7 },
-		{ 0.0, 0.0, 1.0, 0.7 }
+		{ 0.0, 0.0, 1.0, 0.7 },
+		{ 1.0, 0.2, 0.0, 0.5 },
+		{ 1.0, 0.5, 0.0, 0.5 },
+		{ 1.0, 0.33, 0.33, 0.5 },
+		{ 1.0, 1.0, 1.0, 0.1 }
 	};
-	unsigned char textIndications[2][20] = { "You", "Current position"};
-	drawPositionIndications(2, colors, textIndications);
+	unsigned char textIndications[7][30] = { "You",
+		"Current position",
+		"Shortest Path",
+		"Strongest Path",
+		"Both paths",
+		"'M' to start mission."};
+
+	drawPositionIndications(7, colors, textIndications);
 }
 
 Graph * AdvanceModeGraphScene::getGraph(std::string loginEmail ,int level){
