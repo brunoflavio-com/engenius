@@ -332,14 +332,16 @@ void GraphScene::Key(unsigned char key, int x, int y){
 		break;
 	case 'q':
 	case 'Q':
-		PersonCam.height += 0.1;
-		CamMovement();
+		if (!ColisionTest(PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2]+0.1)){
+			PersonCam.eye[2] += 0.1;
+		}
 		glutPostRedisplay();
 		break;
 	case 'a':
 	case 'A':
-		PersonCam.height -= 0.1;
-		CamMovement();
+		if (!ColisionTest(PersonCam.eye[0], PersonCam.eye[1], PersonCam.eye[2] - 0.1)){
+			PersonCam.eye[2] -= 0.1;
+		}
 		glutPostRedisplay();
 		break;
 	}
