@@ -232,6 +232,8 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 	GLfloat grey[4] = { 0.7, 0.7, 0.7, 1.0 };
 	glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, grey);
+	glDisable(GL_LIGHTING);
+	glColor3f(0.0f, 0.0f, 0.0f);
 	//d
 	glBegin(GL_POLYGON);
 	glNormal3f(0, -1, 0);
@@ -280,6 +282,7 @@ void MazeScene::drawCube(float x, float y, float z, float side)
 	glVertex3f(x + side, y + side, z + side);
 	glVertex3f(x + side, y, z + side);
 	glEnd();
+	glEnable(GL_LIGHTING);
 	glPopAttrib();
 }
 
