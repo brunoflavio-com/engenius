@@ -17,8 +17,8 @@ int _tmain(int argc, char* argv[])
 	std::cout << "Username:";
 	std::getline(std::cin, password);
 	*/
-	email = "test@test.com";
-	password = "123456";
+	email = "bmflavio@gmail.com";
+	password = "jafcjafc";
 	
 	SocialGamePublicAPIClient * client = new SocialGamePublicAPIClient();
 	bool login = client->Login(email, password);
