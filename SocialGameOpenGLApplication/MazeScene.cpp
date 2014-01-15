@@ -131,7 +131,15 @@ void MazeScene::Draw3dObjects(void)
 
 void MazeScene::DrawOverlay(void)
 {
+	glPushMatrix();
+	glColor3d(1.0, 1.0, 1.0);
 
+	glRasterPos2f(-0.3f, 0.9f);
+
+	unsigned char msg[100] = "Need help? Press 'h' and follow the hint.";
+	glutBitmapString(GLUT_BITMAP_HELVETICA_12, msg);
+
+	glPopMatrix();
 }
 
 void MazeScene::Key(unsigned char key, int x, int y)
