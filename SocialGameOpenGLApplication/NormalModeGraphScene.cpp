@@ -76,21 +76,32 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 		return;
 	}
 	
+	if (key == 's' || key == 'S') {
+		togglePath();
+	}
+
+	//to manually attempt minigame:
 	if (key == '1') {
+		this->selectedObject = NULL;
+		this->highlightPath = 0;
+		this->nextUser = graph->user;
 		game = new HangmanScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
 	}
 	if (key == '2') {
+		this->selectedObject = NULL;
+		this->highlightPath = 0;
+		this->nextUser = graph->user;
 		game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
 		gameOn = true;
 	}
 	if (key == '3') {
+		this->selectedObject = NULL;
+		this->highlightPath = 0;
+		this->nextUser = graph->user;
 		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,3);
 		gameOn = true;
-	}
-	if (key == 's' || key == 's') {		
-		togglePath();
-	}	
+	}		
 
 	GraphScene::Key(key, x, y);
 }
