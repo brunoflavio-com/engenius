@@ -10,18 +10,29 @@ int _tmain(int argc, char* argv[])
 {
 	string email;
 	string password;
-	/*
-	std::cout << "Welcome to SocialGame\n";
-	std::cout << "Username:";
-	std::getline(std::cin, email);
-	std::cout << "Username:";
-	std::getline(std::cin, password);
-	*/
-	email = "test@test.com";
-	password = "123456";
-	
+	bool login = false;
 	SocialGamePublicAPIClient * client = new SocialGamePublicAPIClient();
-	bool login = client->Login(email, password);
+
+	while (!login) {
+		std::cout << endl << endl << "Welcome to SocialGame";
+		std::cout << endl << "Username:";
+		std::getline(std::cin, email);
+		std::cout << "Password:";
+
+		//hide user input:
+		HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
+		DWORD mode = 0;
+		GetConsoleMode(hStdin, &mode);
+		SetConsoleMode(hStdin, mode & (~ENABLE_ECHO_INPUT));
+
+		//read password
+		std::getline(std::cin, password);
+
+		//restore user input:
+		SetConsoleMode(hStdin, mode);
+		
+		login = client->Login(email, password);
+	}
 
 	GraphOpenGL::Run(argc, argv, client, email);
 
