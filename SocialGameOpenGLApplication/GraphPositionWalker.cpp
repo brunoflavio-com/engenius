@@ -7,7 +7,7 @@
 
 GraphPositionWalker::GraphPositionWalker(int maxUserRelationships, int maxStregth, int maxUserTags)
 {
-	this->maxUserConnections = maxUserRelationships;
+	this->maxUserConnections = maxUserRelationships > 0 ? maxUserRelationships : 1;
 	this->maxStrenght = maxStregth;
 	this->maxUserTags = maxUserTags;
 }
