@@ -18,7 +18,6 @@ TicTacToeScene::TicTacToeScene(SocialGamePublicAPIClient *client, string loginEm
 	this->gameover = false;
 	this->winner = false;
 	this->points = 0;
-
 }
 
 TicTacToeScene::~TicTacToeScene()
@@ -308,7 +307,6 @@ void TicTacToeScene::Key(unsigned char key, int x, int y) //The key that was pre
 			// Computer Move
 			board[game->getComputerMove() - 1] = COMPUTER;
 		}
-		
 }
 
 // Special key callback
@@ -343,6 +341,10 @@ void TicTacToeScene::SincroStatus(){
 		if (i == 1) {
 			winner = true;
 			points = 200;
+		}
+		else {
+			winner = false;
+			points = 0;
 		}
 		gameover = true;
 	}

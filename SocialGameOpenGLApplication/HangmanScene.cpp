@@ -14,7 +14,7 @@ HangmanScene::HangmanScene(SocialGamePublicAPIClient *client, string loginEmail)
 	gameover = false;
 	winner = false;
 	
-	gameoverDelay = 0;
+	gameoverDelay = -1;
 }
 
 HangmanScene::~HangmanScene()
@@ -56,7 +56,7 @@ void HangmanScene::Timer(int value)
 	if (currTime - startTime > gameoverDelay) {		
 		gameover = true;
 		startTime = 0;
-		gameoverDelay = 0;
+		gameoverDelay = -1;
 	}
 }
 
