@@ -158,7 +158,7 @@ namespace SocialGameWebsite.Controllers
 
             if (!Top10ViewModel.IsInTopTen)
             {
-                UserNetworkSizeScore MyScore = Proxy.GetUserNetworkSizeScore(new User { Email = User.Identity.Name });
+                UserNetworkStrengthScore MyScore = Proxy.GetUserNetworkStrengthScore(new User { Email = User.Identity.Name });
                 if (MyScore != null)
                 {
                     Top10ViewModel.HasScore = true;
@@ -168,7 +168,7 @@ namespace SocialGameWebsite.Controllers
                         UserEmail = MyScore.UserEmail,
                         UserName = MyScore.UserName,
                         UserSurname = MyScore.UserSurname,
-                        UserNetworkAverageStrength = MyScore.UserNetworkSize
+                        UserNetworkAverageStrength = MyScore.UserNetworkStrength
                     };
                 }
                 else
