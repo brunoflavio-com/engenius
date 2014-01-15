@@ -75,7 +75,7 @@ void NormalModeGraphScene::Key(unsigned char key, int x, int y) {
 		gameOn = true;
 	}
 	if (key == 'M' || key == 'm') {
-		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,2);
+		game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email,3);
 		gameOn = true;
 	}
 	if (key == 's' || key == 's') {		
@@ -190,7 +190,7 @@ void NormalModeGraphScene::verticeClicked(User * previousUser, User * nextUser){
 			game = new TicTacToeScene(GraphScene::apiClient, GraphScene::email);
 			break;
 		case 2:
-			game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email, 3);
+			game = new MinigamesMaze::MazeScene(GraphScene::apiClient, GraphScene::email, (rand() % 3 + 1));
 			break;
 		}
 		gameOn = true;

@@ -79,6 +79,7 @@ namespace MinigamesMaze{
 		int maxHintSeconds = 2;
 		long currTime;
 		long hintStart;
+		int level;
 
 		float cubeAndSphereSize = 1.0f;
 

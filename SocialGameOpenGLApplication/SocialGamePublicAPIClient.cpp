@@ -101,6 +101,7 @@ void SocialGamePublicAPIClient::setUserPoints(float points){
 		ready = false;
 		_ns1__setUserPoints setUserPoints;
 		setUserPoints.Token = &token;
+		setUserPoints.Points = &points;
 		_ns1__setUserPointsResponse response;
 		proxy.setUserPoints(&setUserPoints, &response);
 		ready = true;
