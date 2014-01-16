@@ -85,8 +85,8 @@ value(Board,V) :- win(Board,x),V = 1,!.
 value(Board,V) :- win(Board,o),V = (-1),!.
 value(Board,V) :- V = 0.
 
-maximazing('o').       
-minimazing('x').        
+maximazing('x').       
+minimazing('o').        
 	
 %%% minimax(Board,Player,Move,Value)
 % Move is the best move and Value is the value of that move, the best value from the point 
@@ -114,9 +114,9 @@ best(Board,Player,[X],Square,Value):-
 best(Board,Player,[X|T],Square,BestValue):- 
 	mark(Player,Board,B2,X), % apply the first move X to the board
 	nextPlayer(Player,NextPlayer),!,
-	minimax(B2,NextPlayer,_,Value), % recursively search for the utility value of that move
-	best(Board,Player,T,Move,BestValue), % determine the best move of the remaining moves
-	better(Player,X,Value,Move,BestValue,Square,BestValue).
+	minimax(B2,NextPlayer,_,Value1), % recursively search for the utility value of that move
+	best(Board,Player,T,Move2,Value2), % determine the best move of the remaining moves
+	better(Player,X,Value1,Move2,Value2,Square,BestValue).
 	
 
 % find the best one for Player (x - max, o - min).
